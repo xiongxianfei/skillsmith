@@ -9,3 +9,16 @@ Thumbs.db
 
 # Local dev overrides
 *.local.md
+
+# Local AI agent configs / workspace state
+/.codex/
+/.agents/
+/.claude/
+/.cursor/
+/windsurf/
+/.gemini/
+
+# Local environment
+.env
+.env.*
+!.env.example
