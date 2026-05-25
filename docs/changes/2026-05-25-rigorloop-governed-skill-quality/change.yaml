@@ -1,0 +1,100 @@
+id: 2026-05-25-rigorloop-governed-skill-quality
+title: RigorLoop-governed skill quality system
+status: active
+current_stage: verify
+current_milestone: none
+next_stage: pr
+artifacts:
+  proposal: docs/proposals/2026-05-25-rigorloop-governed-skill-quality.md
+  spec: specs/skill-quality-standard.md
+  test_spec: specs/skill-quality-standard.test.md
+  plan: docs/plans/2026-05-25-skill-quality-standard.md
+  review_log: docs/changes/2026-05-25-rigorloop-governed-skill-quality/review-log.md
+validation:
+  - command: >-
+      python tests/validate_skills.py
+    status: passed
+    evidence: 10 skills checked; all passed
+  - command: >-
+      rg -n "effort: high|required.*effort|\.claude-plugin|ai-skills" AGENTS.md CLAUDE.md CONTRIBUTING.md README.md CONSTITUTION.md .github || true
+    status: passed
+    evidence: no stale required-effort, plugin, or old-name matches in M1-owned guidance surfaces
+  - command: >-
+      python -m unittest discover tests
+    status: passed
+    evidence: 13 validator tests ran and passed after F-CODE-M2-001 resolution
+  - command: >-
+      python -m unittest tests/test_validate_skills.py
+    status: passed
+    evidence: 13 validator tests ran and passed
+  - command: >-
+      git diff --check
+    status: passed
+    evidence: no whitespace errors
+  - command: >-
+      python -m unittest tests/test_eval_fixtures.py
+    status: passed
+    evidence: 8 eval fixture and grandfathering tests ran and passed
+  - command: >-
+      python -m unittest discover tests
+    status: passed
+    evidence: 21 tests ran and passed after M3 implementation
+  - command: >-
+      python tests/validate_skills.py
+    status: passed
+    evidence: 10 skills checked; all passed with one aggregate grandfathering warning
+  - command: >-
+      python -m unittest tests/test_check_readme_sync.py
+    status: passed
+    evidence: 7 README sync helper tests ran and passed
+  - command: >-
+      python -m unittest discover tests
+    status: passed
+    evidence: 29 tests ran and passed after M4 implementation
+  - command: >-
+      python tests/check_readme_sync.py
+    status: passed
+    evidence: real README sync check passed
+  - command: >-
+      python -m unittest tests/test_ci_contract.py
+    status: passed
+    evidence: 2 CI contract tests ran and passed
+  - command: >-
+      python -m unittest discover tests
+    status: passed
+    evidence: 31 tests ran and passed after M5 implementation
+  - command: >-
+      bash install.sh --target "$(mktemp -d)"
+    status: passed
+    evidence: install smoke installed all 10 skills; each target skill contained SKILL.md
+  - command: >-
+      python -m unittest tests/test_validate_skills.py && python -m unittest tests/test_eval_fixtures.py && python -m unittest tests/test_check_readme_sync.py && python -m unittest tests/test_ci_contract.py && python -m unittest discover tests
+    status: passed
+    evidence: final verify targeted and broad unit tests passed; 31 tests in broad discovery
+  - command: >-
+      python tests/check_readme_sync.py && python tests/validate_skills.py
+    status: passed
+    evidence: final verify README sync passed; 10 skills validated with one expected grandfathering warning
+  - command: >-
+      rg -n "effort: high|required.*effort|\.claude-plugin|ai-skills" AGENTS.md CLAUDE.md CONTRIBUTING.md README.md CONSTITUTION.md .github || true
+    status: passed
+    evidence: final verify found no stale required-effort, plugin, or old-name matches
+notes:
+  - M1 aligns governance and contributor docs with optional effort and eval-first review evidence.
+  - Code-review M1 R1 returned clean-with-notes and closed M1.
+  - M2 implementation started for per-skill validator rule updates.
+  - M2 proof-before-fix failed because the old validator returned no per-skill result object and did not expose the approved checks to tests.
+  - Code-review M2 R1 requested changes for F-CODE-M2-001.
+  - F-CODE-M2-001 resolved pending re-review by adding direct tests for the missing T2 fixture cases.
+  - Code-review M2 R2 returned clean-with-notes and closed M2.
+  - M3 implementation added static eval fixture validation, grandfathering baseline checks, and contributor-facing cases.yaml guidance.
+  - Code-review M3 R1 requested changes for F-CODE-M3-001.
+  - F-CODE-M3-001 resolved pending re-review by validating baseline entry types before sortedness checks.
+  - Code-review M3 R2 returned clean-with-notes and closed M3.
+  - M4 implementation added a report-only README sync helper for skill table, slash-command, and install instruction drift.
+  - Code-review M4 R1 returned clean-with-notes and closed M4.
+  - M5 implementation wired deterministic checks into CI and recorded full-slice local validation evidence.
+  - Code-review M5 R1 returned clean-with-notes and closed M5.
+  - All implementation milestones are closed.
+  - Explain-change completed and final verify passed.
+  - Branch-ready; PR handoff is next.
