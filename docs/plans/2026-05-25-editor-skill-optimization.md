@@ -7,7 +7,11 @@
 
 ## Purpose / big picture
 
-This plan sequences the accepted `editor` skill optimization into reviewable implementation work. The change must prove current behavior first, add the required eval fixture, then update only `skills/editor/SKILL.md` so the skill returns concise, intent-sensitive editing and translation outputs without a fixed three-stage report.
+This plan tracks the accepted `editor` skill optimization and the 2026-05-25 user amendment that changed the desired output contract to a required three-stage workflow:
+
+1. optimize the input and provide optimization reasons;
+2. review language quality before translation;
+3. translate the optimized text into Chinese and English.
 
 ## Source artifacts
 
@@ -15,280 +19,131 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - Spec: `specs/editor-skill-optimization.md`
 - Architecture: not-required; no runtime boundaries, dependencies, generated assets, data flow, or installer behavior change
 - Test spec: `specs/editor-skill-optimization.test.md`
+- Explain change: `docs/changes/2026-05-25-editor-skill-optimization/explain-change.md`
+- Verify report: `docs/changes/2026-05-25-editor-skill-optimization/verify-report.md`
 - Reviews:
   - `docs/changes/2026-05-25-editor-skill-optimization/reviews/proposal-review-r2.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/reviews/spec-review-r2.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/reviews/plan-review-r1.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/reviews/test-spec-approval-r1.md`
-
-## Upstream status settlement
-
-- Upstream artifact: `specs/editor-skill-optimization.md`
-- Review evidence: spec-review R2 approved with no material findings; review log records `spec approved`
-- Previous status: draft
-- New status: approved
-- Settlement result: updated
-- Settlement blocker: none
-
-## Context and orientation
-
-- The behavior owner is `skills/editor/SKILL.md`.
-- The eval evidence owner is `tests/evals/skills/editor/cases.yaml`.
-- Change lifecycle evidence lives under `docs/changes/2026-05-25-editor-skill-optimization/`.
-- The current `editor` prompt is a pure Markdown prompt with YAML frontmatter, `$ARGUMENTS`, and `## Output Format`.
-- The current prompt forces a Chinese-language three-stage flow: deep text optimization, language-quality assessment, and Chinese-English bilingual translation.
-- The approved spec requires conditional output modes, no default notes for simple edits, no automatic Chinese-English bilingual output, targeted Russian translation behavior, and integrity-boundary handling.
-- `editor` is in the grandfathering baseline, but this material prompt change requires `tests/evals/skills/editor/cases.yaml` before merge.
-
-## Non-goals
-
-- Do not optimize any skill other than `editor`.
-- Do not modify high-risk skills such as `doctor` or `oscp-coach`.
-- Do not add live model CI, runtime tools, scripts, generated prompt assets, or external dependencies.
-- Do not rename `editor`.
-- Do not remove translation support.
-- Do not change repository-wide validator behavior unless implementation proves the existing eval-fixture path cannot represent this material skill change.
-- Do not proceed to implementation before plan review and test spec are complete.
-
-## Requirements covered
-
-- R1-R4: M2
-- R5-R18: M2, with fixture coverage from M1 and test-spec traceability
-- R19-R20: M2 and M3
-- R21-R23: M1
-- R24-R25: M1 and M3
-- R26-R28: M1-M3 scope checks
-- AC1: already satisfied by spec
-- AC2: M1
-- AC3: M1
-- AC4: M3
-- AC5-AC10: M2 and M3
-- AC11: M2 and M3
-- AC12-AC15: M3
+  - `docs/changes/2026-05-25-editor-skill-optimization/reviews/code-review-m1-r1.md`
+  - `docs/changes/2026-05-25-editor-skill-optimization/reviews/code-review-m2-r1.md`
+  - `docs/changes/2026-05-25-editor-skill-optimization/reviews/code-review-m3-r1.md`
 
 ## Current Handoff Summary
 
-- Current milestone: final closeout
-- Current milestone state: ready-to-start
+- Current milestone: amendment update
+- Current milestone state: implementation-updated
 - Last reviewed milestone: M3
-- Review status: code-review M3 R1 returned clean-with-notes and closed M3
-- Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: branch-ready
-- Reason final closeout is or is not ready: all in-scope implementation milestones are closed, no review-resolution is required, explain-change is complete, and final verify passed; PR handoff remains.
+- Review status: prior M1-M3 code reviews are recorded, but the post-PR amendment changes the prompt contract and needs renewed review/verification
+- Remaining in-scope implementation milestones: amendment review and verification
+- Next stage: code-review amendment
+- Final closeout readiness: not ready
+- Reason final closeout is or is not ready: the prompt, spec, test spec, evidence, and lifecycle docs were updated after the previous verify/PR handoff; code review and final verification need to be rerun for the amended contract.
 
-## Milestones
+## Requirements covered
+
+- R1-R4: editor metadata, pure-prompt boundary, `$ARGUMENTS`, and `## Output Format`
+- R5-R12: three-stage workflow with optimization reasons, language-quality assessment, and Chinese/English translations
+- R13-R18: supported editing modes, ambiguity behavior, and integrity boundary
+- R19: prompt line-count and concision
+- R20-R24: eval fixture plus baseline and post-change evidence
+- R25-R27: no live model CI, no validator behavior change, no unrelated skill optimization
+- AC1-AC15: acceptance criteria in `specs/editor-skill-optimization.md`
+
+## Milestone history
 
 ### M1. Eval fixture and baseline evidence
 
 - Milestone state: closed
-- Goal: Add the required `editor` eval fixture and record baseline behavior before modifying the skill prompt.
-- Requirements: R21, R22, R23, R24, R26, R28, AC2, AC3, AC11
-- Files/components likely touched:
-  - `tests/evals/skills/editor/cases.yaml`
-  - `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`
-  - `docs/changes/2026-05-25-editor-skill-optimization/review-log.md`
-- Dependencies:
-  - Approved spec
-  - Approved plan
-  - Approved test spec
-- Tests to add/update:
-  - Static eval fixture with scenarios for proofreading, indirect PR-description editing, integrity-boundary misuse, and targeted Russian translation
-  - Baseline evidence for the current prompt on those same scenarios
-- Implementation steps:
-  - Create `tests/evals/skills/editor/cases.yaml` using the scenarios from the proposal/spec.
-  - Record current `skills/editor/SKILL.md` behavior against each scenario before editing the skill prompt.
-  - Confirm the fixture categories satisfy the skill-quality validator: normal, indirect-trigger, and misuse coverage.
-- Validation commands:
-  - `python tests/validate_skills.py`
-  - `python -m unittest tests/test_eval_fixtures.py`
-  - `git diff --check`
-- Expected observable result: The repository has concrete eval evidence for the material `editor` change before the prompt is modified.
-- Commit message: `M1: add editor eval fixture and baseline evidence`
-- Milestone closeout:
-  - validation passed
-  - progress updated
-  - decision log updated if needed
-  - validation notes updated
-  - milestone committed
-- Risks:
-  - Baseline evidence could accidentally describe desired behavior rather than current behavior.
-  - Fixture expectations could drift from the approved spec.
-- Rollback/recovery:
-  - Revert `tests/evals/skills/editor/cases.yaml` and baseline evidence if the fixture shape or scenarios are rejected during review.
 - Result:
   - Added `tests/evals/skills/editor/cases.yaml`.
   - Added `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`.
   - Confirmed `skills/editor/SKILL.md` was not edited in M1.
-  - Validation passed and M1 is ready for code review.
   - Code-review M1 R1 returned clean-with-notes and closed M1.
 
 ### M2. Editor prompt optimization
 
-- Milestone state: closed
-- Goal: Update only `skills/editor/SKILL.md` to satisfy the approved output contract while keeping the skill concise and portable.
-- Requirements: R1-R20, R26, R27, R28, AC5, AC6, AC7, AC8, AC9, AC10, AC11
-- Files/components likely touched:
-  - `skills/editor/SKILL.md`
-  - `docs/changes/2026-05-25-editor-skill-optimization/review-log.md`
-- Dependencies:
-  - M1 closed
-- Tests to add/update:
-  - No executable test changes expected beyond the M1 fixture unless implementation exposes a validator gap
-  - Manual comparison against M1 baseline scenarios
-- Implementation steps:
-  - Preserve `name: editor`, `$ARGUMENTS`, `allowed-tools: ""`, and `## Output Format`.
-  - Rewrite the workflow into conditional output modes: proofread/polish, rewrite, targeted translation, requested notes, and integrity-boundary handling.
-  - Remove the mandatory deep optimization, language-quality assessment, and Chinese-English bilingual translation pipeline.
-  - Keep translation support for Chinese, English, and Russian, with targeted translation returning only the requested language by default.
-  - Keep change notes conditional and concise.
-  - Check line count against the current prompt and record whether the optimized prompt is shorter.
-- Validation commands:
-  - `python tests/validate_skills.py`
-  - `python -m unittest discover tests`
-  - `git diff --check`
-- Expected observable result: The `editor` skill prompt matches the spec contract and stays pure prompt without touching unrelated skills or validator behavior.
-- Commit message: `M2: optimize editor skill prompt`
-- Milestone closeout:
-  - validation passed
-  - progress updated
-  - decision log updated if needed
-  - validation notes updated
-  - milestone committed
-- Risks:
-  - The prompt could become too terse and lose helpful translation or edit-quality behavior.
-  - The description could be changed unnecessarily and alter trigger behavior outside the slice.
-  - The rewrite could accidentally broaden unsupported-language behavior beyond the accepted contract.
-- Rollback/recovery:
-  - Revert `skills/editor/SKILL.md` to the pre-M2 version while keeping M1 fixture evidence available for another prompt revision.
+- Milestone state: superseded-by-amendment
 - Result:
-  - Rewrote only `skills/editor/SKILL.md`.
-  - Preserved `name: editor`, `$ARGUMENTS`, `allowed-tools: ""`, `effort: high`, and `## Output Format`.
-  - Replaced the fixed deep optimization, language-quality assessment, and Chinese-English bilingual translation pipeline with conditional output modes.
-  - Added explicit integrity and translation boundaries.
-  - Reduced prompt length from 92 to 74 lines.
-  - Validation passed and M2 is ready for code review.
+  - Rewrote `skills/editor/SKILL.md` into a conditional, narrow-output prompt.
   - Code-review M2 R1 returned clean-with-notes and closed M2.
+  - This M2 contract was later superseded by the user's amended three-stage workflow request.
 
 ### M3. Post-change evidence and final implementation validation
 
-- Milestone state: closed
-- Goal: Compare optimized behavior against the same scenarios, update durable evidence, and prepare for code review.
-- Requirements: R19, R20, R25, R26, R27, R28, AC4, AC10, AC11, AC12, AC13, AC14, AC15
-- Files/components likely touched:
+- Milestone state: superseded-by-amendment
+- Result:
+  - Added post-change evidence for the earlier narrow-output contract.
+  - Code-review M3 R1 returned clean-with-notes and closed M3.
+  - Final verify previously passed for the earlier contract, then became stale when the user amended the workflow.
+
+### Amendment update. Three-stage editor workflow
+
+- Milestone state: implementation-updated
+- Goal: Update the skill and related docs to the amended three-stage workflow.
+- Requirements: R1-R27, AC1-AC15
+- Files/components touched:
+  - `skills/editor/SKILL.md`
+  - `tests/evals/skills/editor/cases.yaml`
+  - `docs/proposals/2026-05-25-editor-skill-optimization.md`
+  - `specs/editor-skill-optimization.md`
+  - `specs/editor-skill-optimization.test.md`
+  - `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`
-  - `docs/changes/2026-05-25-editor-skill-optimization/review-log.md`
-  - `docs/plans/2026-05-25-editor-skill-optimization.md`
-  - `docs/plan.md`
-- Dependencies:
-  - M2 closed
-- Tests to add/update:
-  - Post-change scenario evidence for the same M1 fixture cases
-  - Validation notes covering required local commands
+  - lifecycle artifacts under `docs/changes/2026-05-25-editor-skill-optimization/`
 - Implementation steps:
-  - Record optimized behavior on each M1 scenario.
-  - Compare optimized behavior to baseline evidence and call out behavior improvements or residual risks.
-  - Record prompt length result and any length justification if needed.
-  - Run full required validation commands.
-  - Update the current handoff summary to `review-requested` for code review.
+  - Update the skill prompt to require optimization reasons, language-quality assessment, and Chinese/English translation.
+  - Update eval scenarios to assert the amended behavior.
+  - Update spec and test spec to remove the stale narrow-output contract.
+  - Update baseline and post-change evidence to compare the previous branch behavior with the amended contract.
+  - Run deterministic validation.
 - Validation commands:
   - `python tests/validate_skills.py`
   - `python -m unittest discover tests`
   - `python tests/check_readme_sync.py`
   - `git diff --check`
-- Expected observable result: Reviewers can compare baseline and optimized behavior, validation passes, and M3 is ready for code review.
-- Commit message: `M3: record editor optimization evidence`
-- Milestone closeout:
-  - validation passed
-  - progress updated
-  - decision log updated if needed
-  - validation notes updated
-  - milestone committed
-- Risks:
-  - Post-change evidence could show the prompt still over-produces.
-  - README sync could unexpectedly fail if metadata changed.
-- Rollback/recovery:
-  - Reopen M2 for prompt adjustment if evidence does not satisfy the spec.
-  - Revert M3 evidence-only files if they are incomplete or inaccurate.
+  - `wc -l skills/editor/SKILL.md`
 - Result:
-  - Added `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`.
-  - Compared optimized prompt-contract behavior against the same four M1 fixture scenarios.
-  - Recorded supplemental evidence for requested notes, explicit bilingual output, non-obvious ambiguity, ambiguous pasted text, and unsupported target-language behavior.
-  - Confirmed no other skill prompt, live model CI, runtime tool, dependency, installer behavior, generated asset, or validator behavior was changed.
-  - Confirmed optimized prompt length is 74 lines versus the 92-line baseline.
-  - Validation passed and M3 is ready for code review.
-  - Code-review M3 R1 returned clean-with-notes and closed M3.
+  - Implementation updated for the amended workflow.
+  - Prompt line count is 73 lines.
+  - Validation passed locally.
+  - Ready for renewed code review of the amendment.
 
 ## Validation plan
 
 - `python tests/validate_skills.py`: required repository skill validation and eval-fixture checks.
-- `python -m unittest tests/test_eval_fixtures.py`: targeted eval fixture validator coverage after M1.
+- `python -m unittest tests/test_eval_fixtures.py`: targeted eval fixture validator coverage.
 - `python -m unittest discover tests`: full repository test suite after prompt/evidence changes.
-- `python tests/check_readme_sync.py`: README sync check if helper exists; it exists on this branch.
+- `python tests/check_readme_sync.py`: README sync check because the helper exists on this branch.
 - `git diff --check`: whitespace and patch hygiene.
-- Manual scenario comparison: required baseline and post-change evidence for the four approved editor scenarios.
-- Line-count check for `skills/editor/SKILL.md`: prove the prompt is shorter or justify any length increase.
+- Manual scenario comparison: baseline and post-change evidence for the amended three-stage workflow.
+- Line-count check for `skills/editor/SKILL.md`: prove the prompt remains under the hard limit.
 
 ## Risks and recovery
 
-- Risk: The baseline-first process becomes too heavy for one skill.
-  - Recovery: Keep evidence files concise and tied only to the four approved scenarios.
-- Risk: The optimized prompt under-explains substantial edits.
-  - Recovery: Adjust conditional notes behavior within R13-R14 rather than reintroducing default notes.
-- Risk: Translation support regresses.
-  - Recovery: Use the targeted Russian scenario as a hard review signal and add another scenario only if plan review or test spec requires it.
-- Risk: The implementation touches validator behavior or unrelated skills.
-  - Recovery: Revert unrelated changes and keep scope to `editor`, its fixture, and evidence files.
-- Risk: Prompt length increases.
-  - Recovery: Either simplify the prompt or record a concrete behavior-based justification before review.
+- Risk: The amended workflow may over-produce for simple edits.
+  - Recovery: This is now intentional user-directed behavior; keep reasons and assessments concise.
+- Risk: Translation support narrows to Chinese and English output.
+  - Recovery: Preserve the metadata trigger for Chinese, English, and Russian source/translation work, but make the default output Chinese and English as requested.
+- Risk: Previous code-review and verify records refer to the superseded narrow-output contract.
+  - Recovery: Keep them as historical records, mark the current handoff as requiring renewed review/verification, and update current artifacts to the amended contract.
 
-## Dependencies
+## Progress notes
 
-- Approved proposal and proposal-review evidence are present.
-- Approved spec and spec-review evidence are present.
-- Plan-review must approve this plan before test-spec.
-- Test spec must exist before implementation.
-- No architecture artifact is required unless plan-review identifies a long-lived design or boundary issue.
-
-## Progress
-
-- 2026-05-25: Created execution plan after spec-review R2 approved the spec.
-- 2026-05-25: Plan-review R1 approved the plan; drafted `specs/editor-skill-optimization.test.md`.
-- 2026-05-25: Owner approved `specs/editor-skill-optimization.test.md` as active proof surface.
-- 2026-05-25: Implemented M1 by adding the editor eval fixture and baseline evidence before prompt edits.
-- 2026-05-25: Code-review M1 R1 returned clean-with-notes and closed M1.
-- 2026-05-25: Implemented M2 by rewriting `skills/editor/SKILL.md` into a conditional, shorter editor prompt.
+- 2026-05-25: Proposal, spec, plan, and test spec were originally accepted for a narrow-output optimization.
+- 2026-05-25: M1-M3 were implemented, reviewed, explained, verified, and opened as PR #26.
+- 2026-05-25: User amended the desired `editor` workflow to a required three-stage process.
+- 2026-05-25: Skill, eval fixture, spec, test spec, evidence, and lifecycle docs were updated to the amended workflow.
 
 ## Decision log
 
 | Date | Decision | Reason | Alternatives rejected |
-| --- | --- | --- | --- |
-| 2026-05-25 | Use three implementation milestones | Separates baseline evidence, prompt change, and post-change comparison so reviewers can verify the quality process. | Single combined implementation milestone |
-| 2026-05-25 | Do not require a separate architecture artifact | The change is a pure prompt and static eval fixture update with no runtime boundary, dependency, installer, or data-flow change. | Add architecture stage by default |
-| 2026-05-25 | Keep test-spec after plan-review | Matches the corrected workflow and lets the test spec trace requirements to planned milestones. | Write test-spec immediately after spec-review |
+|---|---|---|---|
+| 2026-05-25 | Start with `editor` alone | Low-risk skill suitable for proving the quality path | Batch with high-risk skills |
+| 2026-05-25 | Keep live model calls out of CI | Prompt behavior is reviewed through deterministic fixtures and manual evidence | Live model CI |
+| 2026-05-25 | Amend output contract to mandatory three-stage workflow | Explicit user direction after PR handoff | Narrow edited-text-only default |
 
-## Surprises and discoveries
+## Current handoff
 
-- None yet.
-
-## Validation notes
-
-- `python tests/validate_skills.py` passed after test spec approval metadata update.
-- `git diff --check` passed after test spec approval metadata update.
-- `python tests/validate_skills.py` passed for M1; 10 skills checked, and the remaining eval warning now excludes `editor`.
-- `python -m unittest tests/test_eval_fixtures.py` passed for M1; 9 tests ran.
-- `git diff --check` passed for M1.
-- Code-review M1 R1 reran `python tests/validate_skills.py`, `python -m unittest tests/test_eval_fixtures.py`, and `git diff --check HEAD~1..HEAD`; all passed.
-- `python tests/validate_skills.py` passed for M2; 10 skills checked with the expected warning for other grandfathered skills.
-- `python -m unittest discover tests` passed for M2; 31 tests ran.
-- `git diff --check` passed for M2.
-- `wc -l skills/editor/SKILL.md` reported 74 lines after M2, down from the 92-line baseline.
-
-## Outcome and retrospective
-
-- Pending implementation and downstream closeout.
-
-## Readiness
-
-- See `Current Handoff Summary`.
-- Ready for `code-review M2`; not ready for M3, final closeout, verification, or PR.
+Ready for `code-review amendment`.

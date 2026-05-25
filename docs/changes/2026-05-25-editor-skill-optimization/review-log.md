@@ -2,7 +2,7 @@
 
 ## Current status
 
-Final verify passed; PR handoff is next.
+Post-PR user amendment implemented; renewed code review is next.
 
 ## Reviews
 
@@ -20,4 +20,4 @@ Final verify passed; PR handoff is next.
 
 ## Next stage
 
-`pr`
+`code-review amendment`

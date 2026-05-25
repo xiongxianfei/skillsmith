@@ -90,7 +90,7 @@ accepted
 Disposition: accepted
 
 Resolution:
-`EC9` was revised to bound unsupported target-language behavior. The accepted translation contract for this slice remains Chinese, English, Russian, and the targeted Russian translation scenario. Translation into other target languages is allowed only as best-effort behavior and is not part of the acceptance contract.
+`EC9` was revised to bound unsupported target-language behavior in the earlier narrow-output contract. That earlier contract was later superseded by the user's post-PR amendment requiring Chinese and English translations by default.
 
 Rationale:
 The original wording created an unbounded and hard-to-test behavior surface. The revised wording preserves user utility without adding unsupported-language acceptance criteria.
