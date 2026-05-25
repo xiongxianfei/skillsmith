@@ -68,12 +68,12 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: M2 implementation complete; code-review requested
-- Remaining in-scope implementation milestones: M2 pending review, M3
-- Next stage: code-review M2
+- Current milestone: M3
+- Current milestone state: ready-to-implement
+- Last reviewed milestone: M2
+- Review status: code-review M2 R1 returned clean-with-notes and closed M2
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement M3
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verification, and PR handoff have not started.
 
@@ -125,7 +125,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ### M2. Editor prompt optimization
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Update only `skills/editor/SKILL.md` to satisfy the approved output contract while keeping the skill concise and portable.
 - Requirements: R1-R20, R26, R27, R28, AC5, AC6, AC7, AC8, AC9, AC10, AC11
 - Files/components likely touched:
@@ -168,10 +168,11 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
   - Added explicit integrity and translation boundaries.
   - Reduced prompt length from 92 to 74 lines.
   - Validation passed and M2 is ready for code review.
+  - Code-review M2 R1 returned clean-with-notes and closed M2.
 
 ### M3. Post-change evidence and final implementation validation
 
-- Milestone state: planned
+- Milestone state: ready-to-implement
 - Goal: Compare optimized behavior against the same scenarios, update durable evidence, and prepare for code review.
 - Requirements: R19, R20, R25, R26, R27, R28, AC4, AC10, AC11, AC12, AC13, AC14, AC15
 - Files/components likely touched:
