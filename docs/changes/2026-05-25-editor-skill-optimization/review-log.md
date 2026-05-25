@@ -2,7 +2,7 @@
 
 ## Current status
 
-M3 review requested.
+M3 closed after clean code review; final closeout sequence is next.
 
 ## Reviews
 
@@ -16,7 +16,8 @@ M3 review requested.
 | test-spec-approval-r1 | test-spec owner approval | `specs/editor-skill-optimization.test.md` | approved | none | not required |
 | code-review-m1-r1 | code-review | `docs/plans/2026-05-25-editor-skill-optimization.md` M1 | clean-with-notes | none | M1 closed; no review-resolution required |
 | code-review-m2-r1 | code-review | `docs/plans/2026-05-25-editor-skill-optimization.md` M2 | clean-with-notes | none | M2 closed; no review-resolution required |
+| code-review-m3-r1 | code-review | `docs/plans/2026-05-25-editor-skill-optimization.md` M3 | clean-with-notes | none | M3 closed; no review-resolution required |
 
 ## Next stage
 
-`code-review M3`
+`explain-change`

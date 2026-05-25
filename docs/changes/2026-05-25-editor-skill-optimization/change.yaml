@@ -1,9 +1,9 @@
 id: 2026-05-25-editor-skill-optimization
 title: Baseline-first editor skill optimization
 status: active
-current_stage: code-review
-current_milestone: M3
-next_stage: code-review
+current_stage: explain-change
+current_milestone: final-closeout
+next_stage: explain-change
 artifacts:
   proposal: docs/proposals/2026-05-25-editor-skill-optimization.md
   spec: specs/editor-skill-optimization.md
@@ -55,6 +55,21 @@ validation:
   - command: git diff --check
     status: passed
     evidence: M3 whitespace check passed
+  - command: python tests/validate_skills.py
+    status: passed
+    evidence: code-review M3 rerun passed; 10 skills checked with expected warning for other grandfathered skills
+  - command: python -m unittest discover tests
+    status: passed
+    evidence: code-review M3 rerun passed; 31 tests ran
+  - command: python tests/check_readme_sync.py
+    status: passed
+    evidence: code-review M3 README sync check passed
+  - command: git diff --check HEAD~1..HEAD
+    status: passed
+    evidence: code-review M3 whitespace check passed
+  - command: wc -l skills/editor/SKILL.md
+    status: passed
+    evidence: code-review M3 line-count proof reported 74 lines
 notes:
   - Proposal, spec, plan, and test spec are approved.
   - M1 adds editor eval fixture and baseline evidence before prompt changes.
@@ -65,3 +80,4 @@ notes:
   - Code-review M2 R1 returned clean-with-notes and closed M2.
   - M3 added post-change prompt-contract evidence comparing optimized behavior against the M1 baseline scenarios.
   - M3 implementation complete; ready for code-review.
+  - Code-review M3 R1 returned clean-with-notes and closed M3.
