@@ -1,7 +1,17 @@
-# ai-skills
+# Skillsmith
 
-[![Validate Skills](https://github.com/xiongxianfei/ai-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/xiongxianfei/ai-skills/actions/workflows/validate.yml)
+[![Validate Skills](https://github.com/xiongxianfei/Skillsmith/actions/workflows/validate.yml/badge.svg)](https://github.com/xiongxianfei/Skillsmith/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+<!-- vision:start -->
+Skillsmith is a reusable prompt-skill library for people who use AI assistants to write, translate, learn, communicate, and make everyday decisions with more care.
+
+Unlike loose prompt collections that optimize for quantity, Skillsmith optimizes for reusable judgment: each skill states when to invoke it, what input it expects, how it should reason, and what output shape a user can rely on.
+
+It is for engineers, multilingual workers, learners, and self-directed professionals who already use AI tools and want sharper repeatable workflows instead of ad hoc prompting.
+
+See [VISION.md](VISION.md) for goals, non-goals, and falsifiability.
+<!-- vision:end -->
 
 A curated collection of AI prompts for writing, translation, and productivity — works with any model, installable as Claude Code skills.
 
@@ -29,7 +39,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 #### Install all skills (recommended)
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/xiongxianfei/ai-skills/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install.sh | bash
 ```
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
@@ -39,8 +49,8 @@ Restart Claude Code after installing — skills are available immediately as `/e
 #### Install a specific skill only
 
 ```bash
-git clone https://github.com/xiongxianfei/ai-skills
-cp -r ai-skills/skills/editor ~/.claude/skills/editor
+git clone https://github.com/xiongxianfei/Skillsmith
+cp -r Skillsmith/skills/editor ~/.claude/skills/editor
 ```
 
 Replace `editor` with the skill name you want.
@@ -50,7 +60,7 @@ Replace `editor` with the skill name you want.
 Run inside your project root:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/xiongxianfei/ai-skills/main/install.sh | bash -s -- --target .claude/skills
+curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install.sh | bash -s -- --target .claude/skills
 ```
 
 Or manually copy the folders you want into `.claude/skills/` and commit them so teammates get the skills automatically.
@@ -58,11 +68,11 @@ Or manually copy the folders you want into `.claude/skills/` and commit them so 
 #### Try it for one session (no install)
 
 ```bash
-git clone https://github.com/xiongxianfei/ai-skills
-claude --plugin-dir ./ai-skills
+git clone https://github.com/xiongxianfei/Skillsmith
+claude --plugin-dir ./Skillsmith
 ```
 
-Skills are available as `/ai-skills:editor` and `/ai-skills:communicator` for this session only.
+Skills are available as `/Skillsmith:editor` and `/Skillsmith:communicator` for this session only.
 
 ### Other AI models (ChatGPT, Gemini, etc.)
 
@@ -124,7 +134,8 @@ Best for: landlord communication, formal letters, official correspondence with R
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
 3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)
-4. Open a PR — include what the skill does and when to use it
+4. Follow the canonical quality standard in [specs/skill-quality-standard.md](specs/skill-quality-standard.md)
+5. Open a PR — include what the skill does, when to use it, validation output, and eval evidence for new or materially changed skills
 
 ## License
 

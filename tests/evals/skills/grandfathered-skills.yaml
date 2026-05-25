@@ -1,0 +1,14 @@
+version: 1
+created_for_change: "2026-05-25-rigorloop-governed-skill-quality"
+source: "generated from skills/* directories before eval-fixture enforcement"
+grandfathered_skills:
+  - communicator
+  - doctor
+  - editor
+  - email-drafter
+  - fitness-coach
+  - journaling
+  - language-tutor
+  - nvc
+  - oscp-coach
+  - study-planner
