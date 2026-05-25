@@ -19,6 +19,8 @@ The baseline evidence records the current prompt contract from `skills/editor/SK
 
 ## Later milestones
 
-M2 will update only `skills/editor/SKILL.md`.
+M2 updates only `skills/editor/SKILL.md`. It replaces the old fixed three-stage report with a shorter conditional workflow while preserving the skill name, `$ARGUMENTS`, `allowed-tools: ""`, and `## Output Format`.
+
+The M2 prompt now defines default output modes for edited text, translation, conditional notes, and integrity-boundary handling. It also keeps Chinese, English, and Russian as the directly supported translation set and treats unsupported target languages as best effort outside the acceptance contract.
 
 M3 will compare optimized behavior against this baseline and run the final validation set.

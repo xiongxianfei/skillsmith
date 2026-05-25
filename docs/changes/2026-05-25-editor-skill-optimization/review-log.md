@@ -2,7 +2,7 @@
 
 ## Current status
 
-M1 closed; ready for M2 implementation
+M2 review requested
 
 ## Reviews
 
@@ -18,4 +18,4 @@ M1 closed; ready for M2 implementation
 
 ## Next stage
 
-`implement M2`
+`code-review M2`

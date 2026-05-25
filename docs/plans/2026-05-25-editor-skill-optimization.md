@@ -68,12 +68,12 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ## Current Handoff Summary
 
-- Current milestone: M1
-- Current milestone state: closed
+- Current milestone: M2
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
-- Review status: code-review M1 R1 clean-with-notes
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Review status: M2 implementation complete; code-review requested
+- Remaining in-scope implementation milestones: M2 pending review, M3
+- Next stage: code-review M2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verification, and PR handoff have not started.
 
@@ -125,7 +125,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ### M2. Editor prompt optimization
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Update only `skills/editor/SKILL.md` to satisfy the approved output contract while keeping the skill concise and portable.
 - Requirements: R1-R20, R26, R27, R28, AC5, AC6, AC7, AC8, AC9, AC10, AC11
 - Files/components likely touched:
@@ -161,6 +161,13 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
   - The rewrite could accidentally broaden unsupported-language behavior beyond the accepted contract.
 - Rollback/recovery:
   - Revert `skills/editor/SKILL.md` to the pre-M2 version while keeping M1 fixture evidence available for another prompt revision.
+- Result:
+  - Rewrote only `skills/editor/SKILL.md`.
+  - Preserved `name: editor`, `$ARGUMENTS`, `allowed-tools: ""`, `effort: high`, and `## Output Format`.
+  - Replaced the fixed deep optimization, language-quality assessment, and Chinese-English bilingual translation pipeline with conditional output modes.
+  - Added explicit integrity and translation boundaries.
+  - Reduced prompt length from 92 to 74 lines.
+  - Validation passed and M2 is ready for code review.
 
 ### M3. Post-change evidence and final implementation validation
 
@@ -241,6 +248,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - 2026-05-25: Owner approved `specs/editor-skill-optimization.test.md` as active proof surface.
 - 2026-05-25: Implemented M1 by adding the editor eval fixture and baseline evidence before prompt edits.
 - 2026-05-25: Code-review M1 R1 returned clean-with-notes and closed M1.
+- 2026-05-25: Implemented M2 by rewriting `skills/editor/SKILL.md` into a conditional, shorter editor prompt.
 
 ## Decision log
 
@@ -262,6 +270,10 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - `python -m unittest tests/test_eval_fixtures.py` passed for M1; 9 tests ran.
 - `git diff --check` passed for M1.
 - Code-review M1 R1 reran `python tests/validate_skills.py`, `python -m unittest tests/test_eval_fixtures.py`, and `git diff --check HEAD~1..HEAD`; all passed.
+- `python tests/validate_skills.py` passed for M2; 10 skills checked with the expected warning for other grandfathered skills.
+- `python -m unittest discover tests` passed for M2; 31 tests ran.
+- `git diff --check` passed for M2.
+- `wc -l skills/editor/SKILL.md` reported 74 lines after M2, down from the 92-line baseline.
 
 ## Outcome and retrospective
 
@@ -270,4 +282,4 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `implement M2`; not ready for final closeout, verification, or PR.
+- Ready for `code-review M2`; not ready for M3, final closeout, verification, or PR.
