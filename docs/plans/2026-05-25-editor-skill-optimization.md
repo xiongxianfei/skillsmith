@@ -73,9 +73,9 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - Last reviewed milestone: M3
 - Review status: code-review M3 R1 returned clean-with-notes and closed M3
 - Remaining in-scope implementation milestones: none
-- Next stage: explain-change
+- Next stage: verify
 - Final closeout readiness: ready to start
-- Reason final closeout is or is not ready: all in-scope implementation milestones are closed and no review-resolution is required; explain-change, verification, and PR handoff remain.
+- Reason final closeout is or is not ready: all in-scope implementation milestones are closed, no review-resolution is required, and explain-change is complete; verification and PR handoff remain.
 
 ## Milestones
 

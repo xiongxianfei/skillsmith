@@ -2,7 +2,7 @@
 
 ## Current status
 
-M3 closed after clean code review; final closeout sequence is next.
+Explain-change complete; verify is next.
 
 ## Reviews
 
@@ -20,4 +20,4 @@ M3 closed after clean code review; final closeout sequence is next.
 
 ## Next stage
 
-`explain-change`
+`verify`
