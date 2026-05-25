@@ -2,7 +2,7 @@
 
 ## Current status
 
-M2 closed after clean code review; M3 implementation is next.
+M3 review requested.
 
 ## Reviews
 
@@ -19,4 +19,4 @@ M2 closed after clean code review; M3 implementation is next.
 
 ## Next stage
 
-`implement M3`
+`code-review M3`

@@ -69,11 +69,11 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: ready-to-implement
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
-- Review status: code-review M2 R1 returned clean-with-notes and closed M2
+- Review status: M3 implementation complete; code-review requested
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verification, and PR handoff have not started.
 
@@ -172,7 +172,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ### M3. Post-change evidence and final implementation validation
 
-- Milestone state: ready-to-implement
+- Milestone state: review-requested
 - Goal: Compare optimized behavior against the same scenarios, update durable evidence, and prepare for code review.
 - Requirements: R19, R20, R25, R26, R27, R28, AC4, AC10, AC11, AC12, AC13, AC14, AC15
 - Files/components likely touched:
@@ -210,6 +210,13 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - Rollback/recovery:
   - Reopen M2 for prompt adjustment if evidence does not satisfy the spec.
   - Revert M3 evidence-only files if they are incomplete or inaccurate.
+- Result:
+  - Added `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`.
+  - Compared optimized prompt-contract behavior against the same four M1 fixture scenarios.
+  - Recorded supplemental evidence for requested notes, explicit bilingual output, non-obvious ambiguity, ambiguous pasted text, and unsupported target-language behavior.
+  - Confirmed no other skill prompt, live model CI, runtime tool, dependency, installer behavior, generated asset, or validator behavior was changed.
+  - Confirmed optimized prompt length is 74 lines versus the 92-line baseline.
+  - Validation passed and M3 is ready for code review.
 
 ## Validation plan
 
