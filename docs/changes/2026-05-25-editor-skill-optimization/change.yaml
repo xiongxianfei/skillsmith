@@ -1,9 +1,9 @@
 id: 2026-05-25-editor-skill-optimization
 title: Baseline-first editor skill optimization
 status: active
-current_stage: verify
+current_stage: pr
 current_milestone: final-closeout
-next_stage: verify
+next_stage: pr
 artifacts:
   proposal: docs/proposals/2026-05-25-editor-skill-optimization.md
   spec: specs/editor-skill-optimization.md
@@ -12,6 +12,7 @@ artifacts:
   review_log: docs/changes/2026-05-25-editor-skill-optimization/review-log.md
   baseline_evidence: docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md
   post_change_evidence: docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md
+  verify_report: docs/changes/2026-05-25-editor-skill-optimization/verify-report.md
 validation:
   - command: python tests/validate_skills.py
     status: passed
@@ -73,6 +74,21 @@ validation:
   - command: explain-change
     status: passed
     evidence: durable change rationale refreshed in docs/changes/2026-05-25-editor-skill-optimization/explain-change.md
+  - command: python tests/validate_skills.py
+    status: passed
+    evidence: final verify passed; 10 skills checked with expected warning for other grandfathered skills
+  - command: python -m unittest discover tests
+    status: passed
+    evidence: final verify passed; 31 tests ran
+  - command: python tests/check_readme_sync.py
+    status: passed
+    evidence: final verify README sync check passed
+  - command: git diff --check
+    status: passed
+    evidence: final verify whitespace check passed
+  - command: wc -l skills/editor/SKILL.md
+    status: passed
+    evidence: final verify line-count proof reported 74 lines
 notes:
   - Proposal, spec, plan, and test spec are approved.
   - M1 adds editor eval fixture and baseline evidence before prompt changes.
@@ -85,3 +101,4 @@ notes:
   - M3 implementation complete; ready for code-review.
   - Code-review M3 R1 returned clean-with-notes and closed M3.
   - Explain-change refreshed the durable rationale and handed off to verify.
+  - Final verify passed and branch is ready for pr handoff; hosted CI is not claimed.
