@@ -1,0 +1,27 @@
+id: 2026-05-25-editor-skill-optimization
+title: Baseline-first editor skill optimization
+status: active
+current_stage: code-review
+current_milestone: M1
+next_stage: code-review
+artifacts:
+  proposal: docs/proposals/2026-05-25-editor-skill-optimization.md
+  spec: specs/editor-skill-optimization.md
+  test_spec: specs/editor-skill-optimization.test.md
+  plan: docs/plans/2026-05-25-editor-skill-optimization.md
+  review_log: docs/changes/2026-05-25-editor-skill-optimization/review-log.md
+  baseline_evidence: docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md
+validation:
+  - command: python tests/validate_skills.py
+    status: passed
+    evidence: 10 skills checked; editor now has eval fixture; remaining warning covers other grandfathered skills
+  - command: python -m unittest tests/test_eval_fixtures.py
+    status: passed
+    evidence: 9 eval fixture and grandfathering tests ran and passed
+  - command: git diff --check
+    status: passed
+    evidence: no whitespace errors
+notes:
+  - Proposal, spec, plan, and test spec are approved.
+  - M1 adds editor eval fixture and baseline evidence before prompt changes.
+  - M1 implementation complete; ready for code-review.
