@@ -2,7 +2,7 @@
 
 ## Current status
 
-M1 review requested
+M1 closed; ready for M2 implementation
 
 ## Reviews
 
@@ -14,7 +14,8 @@ M1 review requested
 | spec-review-r2 | spec-review | `specs/editor-skill-optimization.md` | approved | none | Prior findings confirmed resolved; see `docs/changes/2026-05-25-editor-skill-optimization/reviews/spec-review-r2.md` |
 | plan-review-r1 | plan-review | `docs/plans/2026-05-25-editor-skill-optimization.md` | approved | none | not required |
 | test-spec-approval-r1 | test-spec owner approval | `specs/editor-skill-optimization.test.md` | approved | none | not required |
+| code-review-m1-r1 | code-review | `docs/plans/2026-05-25-editor-skill-optimization.md` M1 | clean-with-notes | none | M1 closed; no review-resolution required |
 
 ## Next stage
 
-`code-review M1`
+`implement M2`

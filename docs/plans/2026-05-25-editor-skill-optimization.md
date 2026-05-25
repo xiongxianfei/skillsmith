@@ -69,11 +69,11 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 ## Current Handoff Summary
 
 - Current milestone: M1
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: M1 implementation complete; code-review requested
-- Remaining in-scope implementation milestones: M1 pending review, M2, M3
-- Next stage: code-review M1
+- Current milestone state: closed
+- Last reviewed milestone: M1
+- Review status: code-review M1 R1 clean-with-notes
+- Remaining in-scope implementation milestones: M2, M3
+- Next stage: implement M2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: implementation, code review, explain-change, verification, and PR handoff have not started.
 
@@ -81,7 +81,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 
 ### M1. Eval fixture and baseline evidence
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Add the required `editor` eval fixture and record baseline behavior before modifying the skill prompt.
 - Requirements: R21, R22, R23, R24, R26, R28, AC2, AC3, AC11
 - Files/components likely touched:
@@ -121,6 +121,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
   - Added `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`.
   - Confirmed `skills/editor/SKILL.md` was not edited in M1.
   - Validation passed and M1 is ready for code review.
+  - Code-review M1 R1 returned clean-with-notes and closed M1.
 
 ### M2. Editor prompt optimization
 
@@ -239,6 +240,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - 2026-05-25: Plan-review R1 approved the plan; drafted `specs/editor-skill-optimization.test.md`.
 - 2026-05-25: Owner approved `specs/editor-skill-optimization.test.md` as active proof surface.
 - 2026-05-25: Implemented M1 by adding the editor eval fixture and baseline evidence before prompt edits.
+- 2026-05-25: Code-review M1 R1 returned clean-with-notes and closed M1.
 
 ## Decision log
 
@@ -259,6 +261,7 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 - `python tests/validate_skills.py` passed for M1; 10 skills checked, and the remaining eval warning now excludes `editor`.
 - `python -m unittest tests/test_eval_fixtures.py` passed for M1; 9 tests ran.
 - `git diff --check` passed for M1.
+- Code-review M1 R1 reran `python tests/validate_skills.py`, `python -m unittest tests/test_eval_fixtures.py`, and `git diff --check HEAD~1..HEAD`; all passed.
 
 ## Outcome and retrospective
 
@@ -267,4 +270,4 @@ This plan sequences the accepted `editor` skill optimization into reviewable imp
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `code-review M1`; not ready for M2, final closeout, verification, or PR.
+- Ready for `implement M2`; not ready for final closeout, verification, or PR.
