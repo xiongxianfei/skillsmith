@@ -2,14 +2,14 @@
 
 ## Status
 
-draft
+active
 
 ## Related spec and plan
 
 - Spec: `specs/skill-quality-standard.md`
 - Plan: `docs/plans/2026-05-25-skill-quality-standard.md`
 - Architecture/ADRs: not applicable; plan-review approved no separate architecture artifact for this slice
-- Amendment note: `specs/skill-quality-standard.md` is currently a draft design-philosophy amendment. This test-spec update is isolated proof planning for that amendment and is not implementation-ready until spec-review reruns.
+- Amendment note: `specs/skill-quality-standard.md` is currently a draft design-philosophy amendment. This active test-spec update is the approved proof surface for that amendment, but downstream implementation must still wait until spec-review approves or revises the source spec.
 - Reviews:
   - `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md`
   - `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/plan-review-r1.md`
@@ -339,7 +339,7 @@ No live model, network provider, secret, external service, or real user data may
 
 ## Uncovered gaps
 
-The source spec is a draft amendment pending spec-review rerun. This test spec records intended proof coverage for the design-philosophy amendment, but implementation must not rely on R36-R47 until spec-review approves or revises them.
+The source spec is a draft amendment pending spec-review rerun. This test spec records approved proof coverage for the design-philosophy amendment, but implementation must not rely on R36-R47 until spec-review approves or revises them.
 
 The two approved-spec open questions are settled for this first test spec as follows: README sync reports drift and does not need `--fix`; reserved platform words are `anthropic` and `claude` only.
 
@@ -356,4 +356,4 @@ None yet.
 
 ## Readiness
 
-Draft proof surface for the design-philosophy amendment. Not ready for implementation until the source spec receives a clean spec-review rerun or review-resolution defines the accepted requirement set.
+Active proof surface for the design-philosophy amendment. Not ready for implementation until the source spec receives a clean spec-review rerun or review-resolution defines the accepted requirement set.
