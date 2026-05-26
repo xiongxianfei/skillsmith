@@ -17,7 +17,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 
 - Proposal: `docs/proposals/2026-05-25-editor-skill-optimization.md`
 - Spec: `specs/editor-skill-optimization.md`
-- Architecture: not-required; no runtime boundaries, dependencies, generated assets, data flow, or installer behavior change
+- Architecture: not-required; the amendment changes prompt-design principles and skill wording only. It does not change runtime boundaries, dependencies, generated assets, data flow, packaging, adapters, deployment, installer behavior, or repository component responsibilities.
 - Test spec: `specs/editor-skill-optimization.test.md`
 - Explain change: `docs/changes/2026-05-25-editor-skill-optimization/explain-change.md`
 - Verify report: `docs/changes/2026-05-25-editor-skill-optimization/verify-report.md`
@@ -83,6 +83,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - Milestone state: implementation-updated
 - Goal: Update the skill and related docs to the amended fixed three-stage workflow.
 - Requirements: R1-R27, AC1-AC15
+- Architecture impact: no canonical architecture artifact or ADR required. The durable decision is prompt-local: one verified path, input-as-material handling, meaning preservation, body-owned behavior, fixed output contract, and precise vocabulary. These principles affect `skills/editor/SKILL.md` and evidence artifacts, not system structure.
 - Files/components touched:
   - `skills/editor/SKILL.md`
   - `tests/evals/skills/editor/cases.yaml`
@@ -111,7 +112,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - Result:
   - Implementation updated for the amended workflow.
   - Runtime-specific skill frontmatter removed by user request.
-  - Prompt line count is 46 lines.
+  - Prompt line count is 48 lines.
   - Validation passed locally.
   - Ready for renewed code review of the amendment.
 
@@ -140,6 +141,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - 2026-05-25: M1-M3 were implemented, reviewed, explained, verified, and opened as PR #26.
 - 2026-05-25: User amended the desired `editor` workflow to a required three-stage process.
 - 2026-05-25: Skill, eval fixture, spec, test spec, evidence, and lifecycle docs were updated to the amended workflow.
+- 2026-05-26: Architecture pass recorded no architecture impact; the distilled principles are prompt-design rationale rather than repository architecture changes.
 
 ## Decision log
 
@@ -148,6 +150,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 | 2026-05-25 | Start with `editor` alone | Low-risk skill suitable for proving the quality path | Batch with high-risk skills |
 | 2026-05-25 | Keep live model calls out of CI | Prompt behavior is reviewed through deterministic fixtures and manual evidence | Live model CI |
 | 2026-05-25 | Amend output contract to mandatory fixed three-stage workflow | Explicit user direction after PR handoff | Narrow edited-text-only default |
+| 2026-05-26 | Do not create a canonical architecture artifact for the editor prompt principles | The change affects a leaf prompt contract and metadata policy, not components, data flow, deployment, packaging, adapters, or durable system boundaries | Create architecture docs for prompt-local design rationale |
 
 ## Current handoff
 

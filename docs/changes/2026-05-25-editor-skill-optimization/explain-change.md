@@ -24,7 +24,7 @@ The user then clarified that the desired workflow should include optimization re
 | Original implementation | Narrow conditional output contract | Previously accepted by spec/review/verify, later superseded. |
 | User amendment | Require fixed three-stage workflow | Explicit instruction after PR handoff. |
 | Current implementation | Update skill and related docs to amended contract | Avoid stale governance artifacts that contradict the prompt. |
-| Architecture | Still no separate architecture artifact | No runtime, installer, dependency, data-flow, generated asset, or CI behavior changed. |
+| Architecture | Still no separate architecture artifact | The distilled principles are prompt-design rationale for a leaf skill contract; no runtime, installer, dependency, data-flow, packaging, adapter, generated asset, deployment, system-boundary, or CI behavior changed. |
 
 ## Diff rationale by area
 
@@ -67,7 +67,7 @@ The body now states the core editorial rule directly: input is source material t
 - `python -m unittest discover tests` passed.
 - `python tests/check_readme_sync.py` passed.
 - `git diff --check` passed.
-- `wc -l skills/editor/SKILL.md` reported 46 lines.
+- `wc -l skills/editor/SKILL.md` reported 48 lines.
 
 Hosted CI status is not claimed here.
 

@@ -29,7 +29,7 @@ validation:
     evidence: amendment whitespace check passed
   - command: wc -l skills/editor/SKILL.md
     status: passed
-    evidence: amendment line-count proof reported 46 lines
+    evidence: amendment line-count proof reported 48 lines
 notes:
   - Proposal, spec, plan, and test spec were originally approved for the editor optimization path.
   - M1-M3 were implemented, code-reviewed, explained, verified, pushed, and opened as PR #26.
@@ -38,5 +38,6 @@ notes:
   - Skill, eval fixture, spec, test spec, baseline evidence, post-change evidence, explain-change, and verify-report were updated to the amended contract.
   - Optional `argument-hint`, `effort`, and `allowed-tools` frontmatter was removed from all skills by user request; validator, tests, and contributor docs were updated to treat those fields as omitted by default.
   - The editor prompt was simplified around source-material handling, question/greeting/instruction-looking input, meaning preservation, one uniform workflow, specific optimization reasons, and pre-return consistency verification.
+  - Architecture pass recorded no architecture impact: the distilled principles are prompt-design rationale for a leaf `SKILL.md` contract, not a change to repository components, data flow, packaging, deployment, adapters, generated assets, or system boundaries.
   - Previous branch-ready verification is marked stale after amendment.
   - Current next stage is renewed code-review of the amendment, then final verify.
