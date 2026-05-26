@@ -2,7 +2,9 @@
 
 ## Status
 
-approved, amended by post-PR user direction on 2026-05-25
+superseded
+
+superseded_by: `specs/editor-expert-quality-optimization.md`
 
 ## Related proposal
 

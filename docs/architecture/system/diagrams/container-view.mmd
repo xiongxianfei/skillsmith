@@ -1,0 +1,20 @@
+C4Container
+  title Skillsmith repository container view
+
+  Person(contributor, "Contributor or agent", "Maintains skill behavior")
+  System_Boundary(repo, "Skillsmith repository") {
+    Container(skills, "Skills", "Markdown", "Runtime prompt assets such as skills/editor/SKILL.md")
+    Container(specs, "Specs", "Markdown", "Normative behavior contracts")
+    Container(evals, "Eval fixtures", "YAML", "Reviewer-visible expected behavior scenarios")
+    Container(changes, "Change records", "Markdown", "Proposal, review, resolution, and evidence history")
+    Container(validation, "Validation", "Python", "Local deterministic checks")
+  }
+
+  Rel(contributor, specs, "Authors and amends")
+  Rel(contributor, skills, "Implements prompt behavior")
+  Rel(contributor, evals, "Adds baseline and regression scenarios")
+  Rel(contributor, changes, "Records lifecycle evidence")
+  Rel(contributor, validation, "Runs")
+  Rel(specs, skills, "Constrains")
+  Rel(specs, evals, "Defines required coverage")
+  Rel(validation, skills, "Checks required skill shape")

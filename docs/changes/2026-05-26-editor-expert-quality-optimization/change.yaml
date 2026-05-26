@@ -1,0 +1,179 @@
+id: 2026-05-26-editor-expert-quality-optimization
+status: active
+branch: improve/editor-expert-quality-optimization
+plan: docs/plans/2026-05-26-editor-expert-quality-optimization.md
+proposal: docs/proposals/2026-05-26-editor-expert-quality-optimization.md
+spec: specs/editor-expert-quality-optimization.md
+test_spec: specs/editor-expert-quality-optimization.test.md
+architecture: docs/architecture/system/architecture.md
+current_milestone: final closeout
+next_stage: track new artifacts then verify rerun
+open_findings: []
+validation:
+  - command: python tests/validate_skills.py
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest tests/test_eval_fixtures.py
+    status: passed
+    notes: "Ran 9 tests; OK."
+  - command: git diff --check
+    status: passed
+  - command: git diff -- skills/editor/SKILL.md
+    status: passed
+    notes: "No diff; prompt was not edited in M1."
+  - command: python tests/validate_skills.py
+    stage: M2
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M2
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M2
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M2
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M2
+    status: passed
+    notes: "122 lines."
+  - command: python tests/validate_skills.py
+    stage: M2 review-resolution
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M2 review-resolution
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M2 review-resolution
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M2 review-resolution
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M2 review-resolution
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: M2 code-review-rerun
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M2 code-review-rerun
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M2 code-review-rerun
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M2 code-review-rerun
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M2 code-review-rerun
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: M3
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M3
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M3
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M3
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M3
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: M3 code-review
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M3 code-review
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M3 code-review
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M3 code-review
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M3 code-review
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: M3 code-review-rerun
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M3 code-review-rerun
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M3 code-review-rerun
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M3 code-review-rerun
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M3 code-review-rerun
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: explain-change
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: explain-change
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: explain-change
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: explain-change
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: explain-change
+    status: passed
+    notes: "126 lines."
+  - command: python tests/validate_skills.py
+    stage: verify
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: verify
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: verify
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: verify
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: verify
+    status: passed
+    notes: "126 lines."
+  - command: git ls-files --others --exclude-standard docs/changes/2026-05-26-editor-expert-quality-optimization docs/plans/2026-05-26-editor-expert-quality-optimization.md docs/proposals/2026-05-26-editor-expert-quality-optimization.md specs/editor-expert-quality-optimization.md specs/editor-expert-quality-optimization.test.md docs/architecture editor_language_role_separation_workflow.svg
+    stage: verify
+    status: blocked
+    notes: "New authoritative change artifacts are untracked; branch-ready cannot be claimed until they are tracked."

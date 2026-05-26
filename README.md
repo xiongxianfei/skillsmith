@@ -19,7 +19,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
-| [editor](skills/editor/SKILL.md) | `/editor` | 3-phase text polish + Chinese/English bilingual translation (supports Chinese, English, Russian input) |
+| [editor](skills/editor/SKILL.md) | `/editor` | Expert text editing and translation with Chinese/English output by default and explicit target-language overrides |
 | [communicator](skills/communicator/SKILL.md) | `/communicator` | Draft formal Russian messages from Chinese input, with Chinese translation and cultural strategy notes |
 | [doctor](skills/doctor/SKILL.md) | `/doctor` | Medical consultation — symptoms, medications, lab reports, health advice, with referral guidance and safety flags |
 | [fitness-coach](skills/fitness-coach/SKILL.md) | `/fitness-coach` | Personal fitness coach — training plans, exercise technique, nutrition, and recovery advice |
@@ -105,15 +105,11 @@ Paste the prompt as the system prompt, then send your input as the first user me
 
 ## Skill Details
 
-### `editor` — Text Polish & Bilingual Translation
+### `editor` — Expert Text Editing & Translation
 
-Accepts Chinese, English, or Russian input and runs a 3-phase pipeline:
+Edits source text in its own language with fidelity and restraint, then returns Chinese and English final versions by default. Explicit target-language requests override the visible default.
 
-1. **Deep Optimization** — Clarify, condense, and elevate the text without changing its meaning. Each change is explained inline.
-2. **Quality Assessment** — Grammar, tone, and cultural-appropriateness check on the optimized text.
-3. **Bilingual Output** — Side-by-side Chinese/English translation of the final text.
-
-Best for: technical documentation, academic writing, professional business communication.
+Best for: emails, PR descriptions, documentation, release notes, messages, academic writing, and professional business communication.
 
 ### `communicator` — Formal Russian Communication Assistant
 

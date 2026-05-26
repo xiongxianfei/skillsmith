@@ -2,7 +2,9 @@
 
 ## Status
 
-accepted, amended by user direction on 2026-05-25
+superseded
+
+superseded_by: `docs/proposals/2026-05-26-editor-expert-quality-optimization.md`
 
 ## Problem
 

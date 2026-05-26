@@ -2,7 +2,7 @@
 
 ## Current status
 
-Post-PR user amendment implemented; renewed code review is next.
+Superseded by `docs/proposals/2026-05-26-editor-expert-quality-optimization.md` and `specs/editor-expert-quality-optimization.md`.
 
 ## Reviews
 
@@ -20,4 +20,4 @@ Post-PR user amendment implemented; renewed code review is next.
 
 ## Next stage
 
-`code-review amendment`
+No next stage for this change path. Continue through `2026-05-26-editor-expert-quality-optimization`.
