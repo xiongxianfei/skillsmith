@@ -6,6 +6,7 @@
 | R2 | 2026-05-25 | proposal-review | Codex | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/proposal-review-r2.md` |
 | R1 | 2026-05-25 | spec-review | Codex | changes-requested | F-SPEC-001 | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r1.md` |
 | R2 | 2026-05-25 | spec-review | Codex | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md` |
+| R3 | 2026-05-26 | manual spec approval design-philosophy amendment | Owner | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r3.md` |
 | R1 | 2026-05-25 | plan-review | Codex | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/plan-review-r1.md` |
 | R1 | 2026-05-25 | test-spec-approval | Owner | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/test-spec-approval-r1.md` |
 | R2 | 2026-05-26 | test-spec-approval design-philosophy amendment | Owner | approved | none | `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/test-spec-approval-r2.md` |

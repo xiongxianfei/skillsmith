@@ -2,13 +2,14 @@
 
 ## Status
 
-draft
+approved
 
 ## Related proposal
 
 - `docs/proposals/2026-05-25-rigorloop-governed-skill-quality.md`
 - Proposal review R2: `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/proposal-review-r2.md`
 - Prior version: approved by spec-review R2 before this design-philosophy amendment.
+- Design-philosophy amendment: approved by manual owner review on 2026-05-26.
 
 ## Goal and context
 
@@ -335,10 +336,9 @@ Grandfathering is not tied to an accepted proposal commit. The deterministic bas
 
 ## Next artifacts
 
-1. Spec-review rerun for this design-philosophy amendment.
-2. Update `specs/skill-quality-standard.test.md` only if spec review requires explicit test-spec mapping for the new reviewer heuristics.
-3. Update governance or contributor docs only after the amendment is approved.
-4. Architecture note only if review identifies a long-lived repository design decision that needs separate architecture assessment.
+1. Use `specs/skill-quality-standard.test.md` as the active proof surface for any downstream implementation of R36-R47.
+2. Update governance or contributor docs only if downstream implementation is explicitly requested.
+3. Architecture note only if review identifies a long-lived repository design decision that needs separate architecture assessment.
 
 ## Follow-on artifacts
 
@@ -346,4 +346,4 @@ None yet.
 
 ## Readiness
 
-The prior skill-quality standard was approved by spec-review R2. This design-philosophy amendment is draft and ready for spec-review rerun; it is not implementation-ready until reviewed.
+Approved after manual owner review of the design-philosophy amendment. Downstream implementation should use the active test spec and existing workflow gates.
