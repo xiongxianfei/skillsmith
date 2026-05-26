@@ -6,8 +6,6 @@ description: >
   business inquiries, academic requests, complaints, or follow-ups. Trigger even if they just
   describe the situation ("my order hasn't arrived, help me email them") without asking explicitly.
 argument-hint: <situation and key points, in Chinese or English>
-effort: high
-allowed-tools: ""
 ---
 
 **用户输入：**

@@ -6,8 +6,6 @@ description: >
   health concern — even casual ones like "I've had a headache for 3 days" or "is it safe to
   take ibuprofen with this?" — without waiting for them to explicitly ask for medical advice.
 argument-hint: <symptoms, medication question, or health concern>
-effort: high
-allowed-tools: ""
 ---
 
 **用户咨询内容：**

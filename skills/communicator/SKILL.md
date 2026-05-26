@@ -6,8 +6,6 @@ description: >
   landlord, colleague, official, or business partner — even if they just say "help me write
   to my landlord" or describe the situation in Chinese without mentioning Russian explicitly.
 argument-hint: <what you want to say in Chinese>
-effort: high
-allowed-tools: ""
 ---
 
 **我想表达的内容（中文）：**

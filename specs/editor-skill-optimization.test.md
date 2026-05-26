@@ -86,7 +86,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Fixture/setup: `skills/editor/SKILL.md`
 - Steps:
   - Confirm frontmatter keeps `name: editor`.
-  - Confirm `allowed-tools: ""`.
+  - Confirm runtime-specific frontmatter such as `effort` and `allowed-tools` is omitted.
   - Confirm `$ARGUMENTS` appears in the body.
   - Confirm `## Output Format` appears.
   - Run `python tests/validate_skills.py`.

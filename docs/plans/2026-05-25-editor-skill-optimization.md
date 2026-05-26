@@ -92,11 +92,15 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
   - `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`
   - lifecycle artifacts under `docs/changes/2026-05-25-editor-skill-optimization/`
+  - all `skills/*/SKILL.md` frontmatter
+  - `tests/validate_skills.py` and validator unit fixtures
+  - governance and contributor docs for skill metadata
 - Implementation steps:
   - Update the skill prompt to require optimization reasons, language-quality assessment, and Chinese/English translation.
   - Update eval scenarios to assert the amended behavior.
   - Update spec and test spec to remove the stale narrow-output contract.
   - Update baseline and post-change evidence to compare the previous branch behavior with the amended contract.
+  - Remove runtime-specific `effort` and `allowed-tools` frontmatter from all skills and align validator, tests, and contributor docs with that metadata policy.
   - Run deterministic validation.
 - Validation commands:
   - `python tests/validate_skills.py`
@@ -106,7 +110,8 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
   - `wc -l skills/editor/SKILL.md`
 - Result:
   - Implementation updated for the amended workflow.
-  - Prompt line count is 73 lines.
+  - Runtime-specific skill frontmatter removed by user request.
+  - Prompt line count is 71 lines.
   - Validation passed locally.
   - Ready for renewed code review of the amendment.
 

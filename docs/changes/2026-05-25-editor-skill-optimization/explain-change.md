@@ -69,7 +69,7 @@ The integrity boundary remains because the amended workflow should not optimize 
 - `python -m unittest discover tests` passed.
 - `python tests/check_readme_sync.py` passed.
 - `git diff --check` passed.
-- `wc -l skills/editor/SKILL.md` reported 73 lines.
+- `wc -l skills/editor/SKILL.md` reported 71 lines.
 
 Hosted CI status is not claimed here.
 

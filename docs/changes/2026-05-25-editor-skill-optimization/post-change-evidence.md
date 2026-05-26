@@ -183,12 +183,12 @@ Result: satisfies T9 and EC6.
 - Only `skills/editor/SKILL.md` was optimized.
 - No other `skills/*/SKILL.md` prompt was changed.
 - No live model CI, external dependency, runtime tool, generated prompt asset, installer behavior, or repository-wide validator behavior was added.
-- `name: editor`, `$ARGUMENTS`, `allowed-tools: ""`, and `## Output Format` remain present.
+- `name: editor`, `$ARGUMENTS`, and `## Output Format` remain present; runtime-specific `effort` and `allowed-tools` frontmatter are omitted.
 - The prompt remains pure Markdown with YAML frontmatter.
 
 ## Prompt length evidence
 
-- Amended prompt length: 73 lines.
+- Amended prompt length: 71 lines.
 - Result: the prompt remains under the 500-line hard limit.
 
 ## Post-change conclusion

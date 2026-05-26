@@ -6,8 +6,6 @@ description: >
   just say "fix this", "make it sound better", "check my writing", or paste text without a clear
   instruction. Also trigger for any translation request between Chinese, English, and Russian.
 argument-hint: <text to polish or translate>
-effort: high
-allowed-tools: ""
 ---
 
 ## Input

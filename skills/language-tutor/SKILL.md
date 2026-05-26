@@ -6,8 +6,6 @@ description: >
   even if they just paste a sentence and say "is this right?" or "how do I say X in Japanese?"
   without explicitly asking for a lesson. Always trigger for any foreign-language feedback request.
 argument-hint: <sentence to correct, grammar question, vocab, or practice request — specify the target language>
-effort: high
-allowed-tools: ""
 ---
 
 **学习内容：**

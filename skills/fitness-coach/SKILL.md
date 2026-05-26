@@ -6,8 +6,6 @@ description: >
   performance, soreness, or injury recovery — even casual questions like "should I run today?"
   or "why are my legs sore?" — without waiting for an explicit request for a training plan.
 argument-hint: <fitness goal, question, or training request>
-effort: high
-allowed-tools: ""
 ---
 
 **用户输入：**

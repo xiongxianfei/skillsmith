@@ -6,8 +6,6 @@ description: >
   on an experience, or work through feelings — even if they just say "I had a rough day" or
   "I need to think through something" without explicitly asking to journal.
 argument-hint: <what happened today, or what's on your mind>
-effort: high
-allowed-tools: ""
 ---
 
 **今天想聊的内容：**

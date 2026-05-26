@@ -6,8 +6,6 @@ description: >
   to express something more gently, resolve a conflict, or drafts a message that sounds angry,
   accusatory, or passive-aggressive — even if they don't mention NVC or ask to "communicate better".
 argument-hint: <what you want to say, or the situation/message bothering you>
-effort: high
-allowed-tools: ""
 ---
 
 **输入内容：**

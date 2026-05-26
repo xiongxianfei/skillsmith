@@ -8,8 +8,7 @@
 - [ ] Skill directory follows the pattern `skills/<skill-name>/SKILL.md`
 - [ ] `description` is in English and under 250 characters
 - [ ] `argument-hint` is in English
-- [ ] `effort` is omitted or uses an accepted value; behavior does not rely on `effort` for portability
-- [ ] `allowed-tools: ""` is set (for pure prompt skills)
+- [ ] Runtime-specific frontmatter such as `effort` or `allowed-tools` is omitted unless an accepted proposal/spec requires it
 - [ ] `$ARGUMENTS` appears in the prompt body
 - [ ] `## Output Format` section is present
 - [ ] No emojis in the Output Format section

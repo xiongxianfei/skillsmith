@@ -29,11 +29,12 @@ validation:
     evidence: amendment whitespace check passed
   - command: wc -l skills/editor/SKILL.md
     status: passed
-    evidence: amendment line-count proof reported 73 lines
+    evidence: amendment line-count proof reported 71 lines
 notes:
   - Proposal, spec, plan, and test spec were originally approved for the editor optimization path.
   - M1-M3 were implemented, code-reviewed, explained, verified, pushed, and opened as PR #26.
   - The user later amended the desired editor workflow to require optimization reasons, language-quality assessment, and Chinese/English translations.
   - Skill, eval fixture, spec, test spec, baseline evidence, post-change evidence, explain-change, and verify-report were updated to the amended contract.
+  - Runtime-specific `effort` and `allowed-tools` frontmatter was removed from all skills by user request; validator, tests, and contributor docs were updated to treat those fields as omitted by default.
   - Previous branch-ready verification is marked stale after amendment.
   - Current next stage is renewed code-review of the amendment, then final verify.

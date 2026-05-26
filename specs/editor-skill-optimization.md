@@ -58,7 +58,7 @@ Then the optimized skill briefly refuses the misleading transformation, offers a
 
 R1. The optimized `editor` skill MUST keep `name: editor`.
 
-R2. The optimized `editor` skill MUST remain a pure prompt skill with `allowed-tools: ""`.
+R2. The optimized `editor` skill MUST remain a pure prompt skill without runtime-specific tool frontmatter.
 
 R3. The optimized `editor` skill MUST keep `$ARGUMENTS` as the source text and editing instruction input surface.
 
@@ -134,7 +134,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 ## State and invariants
 
 - `editor` remains an existing grandfathered skill, but this material change removes its eval-fixture exemption for this PR.
-- The skill remains portable Markdown and must not rely on runtime-specific `effort` behavior.
+- The skill remains portable Markdown and must not rely on runtime-specific frontmatter.
 - The skill remains broadly useful for editing and translation rather than becoming engineer-only.
 - Eval fixtures are reviewer evidence and do not require live model execution in CI.
 
@@ -149,7 +149,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 - Existing install behavior and slash-command naming MUST remain unchanged.
 - README skill tables, install instructions, and command lists do not need updates unless implementation changes user-visible skill metadata that README mirrors.
-- The skill MAY keep `effort: high`, because `effort` is optional but valid when present. The optimized prompt MUST NOT rely on `effort` for portable behavior.
+- The skill omits runtime-specific frontmatter such as `effort` and `allowed-tools`; no migration is required for those removed metadata fields.
 - Rollback is limited to reverting `skills/editor/SKILL.md`, `tests/evals/skills/editor/cases.yaml`, and related change evidence.
 - No migration is required for other skills.
 
@@ -228,7 +228,7 @@ AC8. Chinese and English translations are included by default.
 
 AC9. Integrity-boundary requests are refused or redirected with accurate wording.
 
-AC10. `skills/editor/SKILL.md` remains pure prompt with `allowed-tools: ""`, `$ARGUMENTS`, and `## Output Format`.
+AC10. `skills/editor/SKILL.md` remains pure prompt with `$ARGUMENTS` and `## Output Format`, and without runtime-specific frontmatter.
 
 AC11. No other skill prompt is optimized in this slice.
 

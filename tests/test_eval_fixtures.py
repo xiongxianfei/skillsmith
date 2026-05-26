@@ -12,7 +12,6 @@ name: {name}
 description: >
   Use this skill whenever a user needs a focused sample output.
 argument-hint: sample input
-allowed-tools: ""
 ---
 
 **Input:**

@@ -31,9 +31,6 @@ description: >
   English only, under 250 chars. Must be "pushy" — include explicit
   "Use this skill whenever..." phrasing to prevent undertriggering.
 argument-hint: <English, describes expected user input>
-allowed-tools: ""
-# Optional Claude Code tuning only; not required for portable behavior:
-# effort: <low|medium|high|xhigh|max>
 ---
 ```
 
@@ -45,8 +42,7 @@ Body must contain:
 
 - Descriptions MUST be English — skill bodies can be any language
 - Descriptions should be trigger-phrase-forward and "pushy" per Anthropic's official guidance: tell Codex when to auto-invoke, including indirect/casual user phrasing
-- `effort` is optional; if present, use an accepted value such as `low`, `medium`, `high`, `xhigh`, or `max`
-- `allowed-tools: ""` for all skills (pure prompt, no tool use)
+- Do not add runtime-specific frontmatter such as `effort` or `allowed-tools` unless an accepted proposal/spec requires it
 - New or materially changed skills need eval evidence as defined in `specs/skill-quality-standard.md`
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers

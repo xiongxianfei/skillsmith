@@ -102,7 +102,7 @@ Validation flow:
 Primary data entities are filesystem artifacts:
 
 - Skill definitions: `skills/<skill-name>/SKILL.md`.
-- Skill metadata: YAML frontmatter fields such as `name`, `description`, `argument-hint`, `effort`, and `allowed-tools`.
+- Skill metadata: YAML frontmatter fields such as `name`, `description`, and `argument-hint`.
 - Skill prompt body: Markdown instructions that include `$ARGUMENTS` and `## Output Format`.
 - Workflow and governance data: Markdown files in the repository root and `docs/`.
 
@@ -124,7 +124,7 @@ Observed external dependencies:
 - GitHub Actions used for CI.
 - Claude Code skills and Codex slash-command compatibility are documented compatibility surfaces.
 
-There are no observed runtime calls from skills to external APIs. Skills set `allowed-tools: ""`, so they are intended as pure prompt assets.
+There are no observed runtime calls from skills to external APIs. Skills omit runtime-specific tool metadata, so they are intended as pure prompt assets.
 
 ## Test map
 
@@ -140,7 +140,7 @@ The validator checks:
 - `SKILL.md` exists in each skill directory.
 - YAML frontmatter can be parsed.
 - Required fields `name`, `description`, and `argument-hint` exist.
-- Best-practice fields `effort` and `allowed-tools` exist.
+- Runtime-specific frontmatter such as `effort` and `allowed-tools` is omitted by default.
 - UI metadata avoids CJK and Cyrillic scripts.
 - `$ARGUMENTS` appears in the body.
 - `## Output Format` appears in the body.
@@ -200,7 +200,7 @@ Repository rename surfaces:
 
 ## Open questions
 
-Should validator behavior be expanded to enforce `effort: high`, `allowed-tools: ""`, lowercase hyphenated names, and pushy descriptions as errors rather than warnings or documentation-only rules?
+Should validator behavior be expanded to enforce lowercase hyphenated names and pushy descriptions as errors rather than warnings or documentation-only rules?
 
 Should high-stakes skills have a dedicated safety checklist or test fixture before changes are accepted?
 

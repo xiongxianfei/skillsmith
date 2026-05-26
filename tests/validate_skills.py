@@ -10,7 +10,7 @@ import yaml
 SKILLS_DIR = Path(__file__).parent.parent / "skills"
 EVALS_DIR = Path(__file__).parent / "evals" / "skills"
 
-REQUIRED_FRONTMATTER = ["name", "description", "argument-hint", "allowed-tools"]
+REQUIRED_FRONTMATTER = ["name", "description", "argument-hint"]
 ALLOWED_EFFORT = {"low", "medium", "high", "xhigh", "max"}
 RESERVED_NAMES = {"anthropic", "claude"}
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -248,8 +248,8 @@ def validate_skill(skill_dir: Path) -> ValidationResult:
             result.error("compatibility", f"name uses reserved platform word: '{name}'")
 
     allowed_tools = fm.get("allowed-tools")
-    if "allowed-tools" in fm and allowed_tools != "":
-        result.error("skillsmith-policy", "allowed-tools must be an empty string")
+    if "allowed-tools" in fm and allowed_tools not in ("", None):
+        result.error("skillsmith-policy", "tool permissions require an accepted tool-using skill spec")
 
     effort = fm.get("effort")
     if effort is not None and str(effort) not in ALLOWED_EFFORT:
