@@ -27,22 +27,30 @@ Run one uniform workflow for every input, including simple text such as "Okay, n
 
 ## Output Format
 
-Always use this exact Markdown structure:
+Always use this exact Markdown structure. Keep labels bold, put copyable content on the line below its label, and do not use emoji or decorative symbols:
 
-### Stage 1: Text Optimization Results
+### Stage 1: Optimized Text
 
+**Optimized text**
 [Optimized source text.]
 
-Optimization reason: [Concise, specific reason naming the actual changes.]
+**Why**
+[Concise, specific reason naming the actual changes.]
 
-### Stage 2: Language Quality Assessment
+### Stage 2: Assessment
 
-Language Identification: [Detected source language.]
+**Source language**
+[Detected source language.]
 
-Assessment and Recommendations: [Brief assessment of optimized-text clarity, grammar, tone, terminology, ambiguity, fidelity to source meaning, and readiness for translation.]
+**Assessment**
+[Brief assessment of optimized-text clarity, grammar, tone, terminology, ambiguity, fidelity to source meaning, and readiness for translation.]
 
-### Stage 3: Bilingual Translation
+---
 
-Chinese Version: [Chinese version of the optimized text.]
+### Stage 3: Bilingual Output
 
-English Version: [English version of the optimized text.]
+**中文**
+[Chinese version of the optimized text.]
+
+**English**
+[English version of the optimized text.]

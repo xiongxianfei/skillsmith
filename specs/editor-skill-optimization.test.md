@@ -110,6 +110,8 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Confirm Chinese and English translations are required regardless of source language.
   - Confirm the workflow verifies meaning consistency before returning.
   - Confirm the output format uses `Stage 1`, `Stage 2`, and `Stage 3` headings rather than five separate top-level sections.
+  - Confirm labels are bold and copyable text appears on the line below each label.
+  - Confirm no emoji or decorative symbols are required by the output format.
 - Expected result: The prompt contract reflects the amended fixed three-stage workflow.
 
 ### T5. Simple proofreading scenario returns fixed workflow
