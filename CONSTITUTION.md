@@ -68,11 +68,11 @@ Agents MUST review dependency changes for supply-chain risk. New runtime or CI d
 
 ## Compatibility rules
 
-Skill files MUST remain plain Markdown with YAML frontmatter. Required frontmatter fields are `name`, `description`, `argument-hint`, and `allowed-tools`.
+Skill files MUST remain plain Markdown with YAML frontmatter. Required frontmatter fields are `name` and `description`.
 
-`effort` is optional frontmatter. When present, validators MAY check that it uses an accepted value, but Skillsmith skills MUST NOT rely on `effort` for portable behavior.
+Skillsmith skills SHOULD omit optional frontmatter such as `argument-hint`, `effort`, and `allowed-tools` unless a later accepted proposal and spec require those fields for a concrete compatibility reason.
 
-Skill names MUST be lowercase and hyphenated. Descriptions and argument hints MUST be English. Descriptions MUST be trigger-forward and include explicit "Use this skill whenever..." style guidance when practical.
+Skill names MUST be lowercase and hyphenated. Descriptions MUST be English, trigger-forward, and include explicit "Use this skill whenever..." style guidance when practical.
 
 Every skill body MUST include `$ARGUMENTS` and a `## Output Format` section.
 

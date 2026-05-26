@@ -9,6 +9,7 @@ active
 - Spec: `specs/skill-quality-standard.md`
 - Plan: `docs/plans/2026-05-25-skill-quality-standard.md`
 - Architecture/ADRs: not applicable; plan-review approved no separate architecture artifact for this slice
+- Amendment note: `specs/skill-quality-standard.md` is approved after manual owner review of the design-philosophy amendment. This active test-spec update is the approved proof surface for that amendment.
 - Reviews:
   - `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md`
   - `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/plan-review-r1.md`
@@ -16,7 +17,7 @@ active
 
 ## Testing strategy
 
-Use deterministic local tests only. The proof surface is a mix of unit tests for parser and validator helpers, integration tests for command behavior against temporary fixture repositories, smoke tests on the real repository, contract checks for docs and CI wiring, migration checks for optional `effort` and grandfathering, and manual review for subjective prompt quality.
+Use deterministic local tests only. The proof surface is a mix of unit tests for parser and validator helpers, integration tests for command behavior against temporary fixture repositories, smoke tests on the real repository, contract checks for docs and CI wiring, migration checks for omitted runtime-specific metadata and grandfathering, and manual review for subjective prompt quality and design-philosophy heuristics.
 
 No test may call a live model or require network access. The first-slice README sync helper is report-only; a `--fix` mode is not required or tested in this slice. Reserved platform words are limited to `anthropic` and `claude` for first-slice validation; additional reserved words require a later accepted spec or review-resolution decision.
 
@@ -37,10 +38,10 @@ python tests/check_readme_sync.py
 | R1 | T1, T2 | unit, smoke | Skill path and missing `SKILL.md` validation. |
 | R2 | T2 | unit | Lowercase hyphenated names, length, and first-slice reserved words `anthropic` and `claude`. |
 | R3 | T2 | unit | Invalid YAML frontmatter fails. |
-| R4 | T2 | unit | Required `name`, `description`, `argument-hint`, and `allowed-tools`. |
-| R5 | T2, T8 | unit, migration | Missing `effort` passes; invalid present value fails. |
-| R6 | T8 | migration | Governance and contributor docs no longer require `effort`. |
-| R7 | T2 | unit | Pure-prompt skills require `allowed-tools: ""`. |
+| R4 | T2 | unit | Required `name` and `description`. |
+| R5 | T2, T8 | unit, migration | Missing `effort` passes; invalid present value fails; current skills omit it. |
+| R6 | T8 | migration | Governance and contributor docs no longer require `argument-hint`, `effort`, or `allowed-tools`. |
+| R7 | T2 | unit | Non-empty `allowed-tools` requires an accepted tool-using skill spec. |
 | R8 | T2, T10 | unit, manual | Non-Latin metadata warning plus manual English-facing review. |
 | R9 | T10 | manual | Review checklist verifies description explains what and when. |
 | R10 | T10 | manual | Trigger-forward description quality stays reviewer-facing. |
@@ -69,6 +70,18 @@ python tests/check_readme_sync.py
 | R33 | T7 | contract | CI remains deterministic and has no live model execution. |
 | R34 | T10 | manual | Manual model smoke evidence only for high-risk, behavior-heavy, or model-specific claims. |
 | R35 | T1, T7, T11 | smoke, contract | Existing skills validate and installer remains usable. |
+| R36 | T12 | manual | Reviewer checks one clear primary job or accepted broader boundary. |
+| R37 | T12 | manual | Reviewer checks whether branches, effort scaling, fallbacks, or scenario accumulation are justified. |
+| R38 | T12 | manual | Reviewer checks whether known failure modes are structurally designed out when practical. |
+| R39 | T8, T12 | migration, manual | Optional metadata remains non-authoritative; behavior lives in the Markdown body. |
+| R40 | T10, T12 | manual | Reviewer checks third-person function-first descriptions and distinguishing output shape where relevant. |
+| R41 | T12 | manual | Reviewer checks whether durable directives replace unnecessary narrow rules. |
+| R42 | T12 | manual | Reviewer checks verification or consistency steps for silent-drift risks. |
+| R43 | T12 | manual | Reviewer checks vocabulary consistency across workflow instructions and output templates. |
+| R44 | T12 | manual | Reviewer checks output contracts name concrete dimensions for required reasons, assessments, checks, or refusals. |
+| R45 | T12 | manual | Reviewer checks known tradeoffs are recorded when accepted requirements deliberately choose them. |
+| R46 | T12 | manual | Reviewer checks remaining prompt concerns are behavioral rather than cosmetic before requesting more wording changes. |
+| R47 | T12 | manual | Design-philosophy heuristics are review evidence, notes, or checklist findings, not brittle CI gates. |
 
 ## Example coverage map
 
@@ -78,7 +91,7 @@ python tests/check_readme_sync.py
 | E2 | T5 | Editorial typo fixture avoids eval requirement. |
 | E3 | T5 | Description change fixture is material and requires eval evidence. |
 | E4 | T3, T10 | High-risk fixture and manual checklist require safety evidence. |
-| E5 | T2, T8 | Optional `effort` passes when absent and validates allowed values when present. |
+| E5 | T2, T8 | Runtime-specific metadata is omitted by default; non-empty tool permissions fail. |
 
 ## Edge case coverage
 
@@ -87,7 +100,7 @@ python tests/check_readme_sync.py
 | EC1 | T5 | Trigger-changing description typo is material. |
 | EC2 | T5 | Added reference file is material. |
 | EC3 | T5, T10 | High-risk safety wording is material unless reviewer records narrower rationale. |
-| EC4 | T2, T8 | Missing `effort` passes. |
+| EC4 | T2, T8 | Missing `argument-hint`, `effort`, and `allowed-tools` passes. |
 | EC5 | T2 | `effort: ultra` fails. |
 | EC6 | T6 | README extra skill reports drift. |
 | EC7 | T6 | README missing skill reports drift. |
@@ -114,11 +127,11 @@ python tests/check_readme_sync.py
 
 - Covers: R1-R12, R24, R25, R30, R32, E5, EC4, EC5, EC8
 - Level: unit
-- Fixture/setup: temporary skill directories or fixture files covering valid skill, missing `SKILL.md`, invalid YAML, missing required fields, invalid name, reserved name, non-empty `allowed-tools`, missing `$ARGUMENTS`, missing `## Output Format`, missing `effort`, invalid `effort`, non-Latin metadata, 300-line warning, and 500-line ceiling.
+- Fixture/setup: temporary skill directories or fixture files covering valid skill, missing `SKILL.md`, invalid YAML, missing required fields, invalid name, reserved name, non-empty `allowed-tools`, missing `$ARGUMENTS`, missing `## Output Format`, missing optional metadata, invalid `effort`, non-Latin metadata, 300-line warning, and 500-line ceiling.
 - Steps:
   - Run validator helper tests against each fixture.
   - Assert expected errors and warnings by rule category.
-- Expected result: objective compatibility and Skillsmith-policy failures are errors; non-Latin metadata and 300-line length are warnings; missing `effort` is neither an error nor a warning; invalid present `effort` is an error.
+- Expected result: objective compatibility and Skillsmith-policy failures are errors; non-Latin metadata and 300-line length are warnings; missing `argument-hint`, `effort`, and `allowed-tools` is neither an error nor a warning; invalid present `effort` is an error.
 - Failure proves: per-skill validation does not match the approved compatibility and policy contract.
 - Automation location: `tests/test_validate_skills.py` via `python -m unittest discover tests`
 
@@ -189,16 +202,16 @@ python tests/check_readme_sync.py
 - Failure proves: the first slice introduced nondeterministic CI or omitted a required check.
 - Automation location: `tests/test_ci_contract.py` via `python -m unittest discover tests`
 
-### T8. Optional-effort migration checks
+### T8. Runtime-specific metadata migration checks
 
 - Covers: R5, R6, AC3, AC4, E5
 - Level: integration
 - Fixture/setup: repository docs after M1 and validator after M2.
 - Steps:
-  - Search `CONSTITUTION.md`, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, README, and `.github/pull_request_template.md` for statements that require `effort` or `effort: high`.
-  - Run validator fixtures with absent, allowed, and invalid `effort`.
-- Expected result: docs describe `effort` as optional and validated only when present; validation permits absence and rejects invalid present values.
-- Failure proves: governance or validation still contradicts portability-first optional `effort`.
+  - Search `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, README, and `.github/pull_request_template.md` for statements that require `argument-hint`, `effort`, `effort: high`, or `allowed-tools: ""`.
+  - Run validator fixtures with absent runtime-specific metadata, invalid present `effort`, and non-empty `allowed-tools`.
+- Expected result: docs tell contributors to omit optional frontmatter by default; validation permits absence, rejects invalid present `effort`, and rejects non-empty tool permissions without an accepted tool-using spec.
+- Failure proves: governance or validation still contradicts portability-first metadata omission.
 - Automation location: `tests/test_governance_docs.py` and `tests/test_validate_skills.py` via `python -m unittest discover tests`
 
 ### T9. Contributor and PR evidence contract
@@ -214,7 +227,7 @@ python tests/check_readme_sync.py
 
 ### T10. Manual quality and safety review checklist
 
-- Covers: R8-R10, R17-R23, R26, R27, R31, R34, EC3, EC10
+- Covers: R8-R10, R17-R23, R26, R27, R31, R34, R40, EC3, EC10
 - Level: manual
 - Fixture/setup: PR or change-local evidence for any new or materially changed skill.
 - Steps:
@@ -238,6 +251,28 @@ python tests/check_readme_sync.py
 - Failure proves: the first slice broke the install surface while changing validation or docs.
 - Automation location: manual/local smoke command; may become `tests/test_install_smoke.py` only if the plan is revised to add installer automation.
 
+### T12. Manual skill design philosophy review checklist
+
+- Covers: R36-R47
+- Level: manual
+- Fixture/setup: PR or change-local evidence for any new or materially changed skill, including the skill prompt, eval scenarios, review notes, and accepted proposal/spec tradeoffs.
+- Steps:
+  - Confirm the skill has one clear primary job, or that the accepted proposal/spec justifies a broader boundary.
+  - Confirm branches, input-type detection, effort scaling, fallbacks, or scenario accumulation are absent unless accepted requirements require them.
+  - Confirm known failure modes are handled structurally where practical, rather than only through repeated warnings.
+  - Confirm behavior-defining instructions live in the Markdown body and do not depend on optional frontmatter.
+  - Confirm the description uses third-person descriptive language, states the function before trigger situations, and names distinguishing output shape when it affects selection.
+  - Confirm the prompt uses a small set of durable directives where they cover the same behavior as many narrow rules.
+  - Confirm quality-critical workflows include a verification or consistency-check step when output can silently drift.
+  - Confirm workflow instructions and output templates use consistent vocabulary.
+  - Confirm output sections, reasons, assessments, checks, and refusals name concrete dimensions instead of vague instructions.
+  - Confirm known tradeoffs, including fixed output verbosity for trivial input, are recorded when accepted requirements choose them.
+  - Confirm reviewers stop at behavioral eval evidence once remaining prompt concerns are cosmetic.
+  - Confirm design-philosophy concerns are captured as review notes or checklist findings, not hard-coded as brittle CI gates.
+- Expected result: reviewer-visible evidence shows how the skill follows or intentionally departs from the design philosophy, with tradeoffs recorded when requirements override generic best practice.
+- Failure proves: skill design philosophy cannot be reviewed consistently without turning subjective heuristics into brittle automation.
+- Automation location: manual checklist in `.github/pull_request_template.md`, `CONTRIBUTING.md`, or change-local review notes after the amendment is approved.
+
 ## Fixtures and data
 
 - `tests/evals/skills/grandfathered-skills.yaml`: real baseline artifact for current repository smoke and migration tests.
@@ -255,7 +290,7 @@ No live model, network provider, secret, external service, or real user data may
 ## Migration or compatibility tests
 
 - T4 proves grandfathering uses the checked-in baseline artifact rather than commit, branch, README, or future implementation state.
-- T8 proves `effort` is optional in docs and validation.
+- T8 proves `argument-hint`, `effort`, and `allowed-tools` are omitted by default in docs and validation.
 - T7 proves CI stays deterministic.
 - T11 proves existing skills remain installable.
 - README sync `--fix` mode is intentionally not part of the first-slice compatibility contract.
@@ -288,6 +323,9 @@ No live model, network provider, secret, external service, or real user data may
 - For model-specific claims, confirm manual smoke evidence records model, prompt, and result summary.
 - Confirm docs link to `specs/skill-quality-standard.md` rather than creating a second canonical standard.
 - Confirm warnings introduced for grandfathering, README drift, or length thresholds are actionable rather than noisy.
+- For new or materially changed skills, confirm design-philosophy tradeoffs are recorded when requirements intentionally override generic best practice.
+- Confirm vocabulary does not drift between workflow steps and output templates.
+- Confirm reviewers move to eval evidence once prompt wording concerns become cosmetic.
 
 ## What not to test and why
 
@@ -295,21 +333,20 @@ No live model, network provider, secret, external service, or real user data may
 - Do not require a README `--fix` mode; the first-slice contract is drift reporting.
 - Do not enforce detailed medical, legal, financial, or security schemas; R22 defers shared high-risk schemas.
 - Do not hard-block subjective trigger quality, concision, mission fit, or safety adequacy through brittle CI; these are reviewer heuristics.
+- Do not hard-block design-philosophy heuristics such as simplicity, branch avoidance, body-owned behavior, vocabulary precision, fixed output shape, or tradeoff handling through brittle CI.
 - Do not test `.claude-plugin` or plugin metadata validation; the accepted proposal and spec exclude it.
 - Do not backfill eval fixtures for all grandfathered existing skills in this slice unless a skill is materially changed.
 
 ## Uncovered gaps
 
-None blocking.
+None blocking. The source spec is approved after manual owner review, and this test spec records approved proof coverage for the design-philosophy amendment.
 
 The two approved-spec open questions are settled for this first test spec as follows: README sync reports drift and does not need `--fix`; reserved platform words are `anthropic` and `claude` only.
 
 ## Next artifacts
 
-1. Implementation of M1-M5 from `docs/plans/2026-05-25-skill-quality-standard.md`.
-2. Code review after implementation milestones.
-3. Review resolution if code review raises findings.
-4. Explain-change, verify, and PR handoff after implementation review is clean.
+1. Implementation planning or governance-doc updates only if downstream implementation of R36-R47 is explicitly requested.
+2. Code review, explain-change, verify, and PR handoff after any approved downstream implementation.
 
 ## Follow-on artifacts
 
@@ -317,4 +354,4 @@ None yet.
 
 ## Readiness
 
-Ready for `implement` of M1, with this test spec as the active proof surface. Implementation must not claim final completion until the tests, code review, review-resolution if triggered, explain-change, verify, and PR handoff gates are complete.
+Active approved proof surface for the design-philosophy amendment.

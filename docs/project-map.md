@@ -35,7 +35,7 @@ flowchart LR
 : Owns reusable prompt skills. Each skill is a directory containing one `SKILL.md` file with YAML frontmatter and a Markdown prompt body.
 
 `tests/validate_skills.py`
-: Owns local and CI validation. It parses skill frontmatter, checks required fields, checks `$ARGUMENTS`, checks `## Output Format`, warns on missing best-practice fields, and warns on CJK or Cyrillic in UI metadata.
+: Owns local and CI validation. It parses skill frontmatter, checks required fields, checks `$ARGUMENTS`, checks `## Output Format`, and warns on CJK or Cyrillic in UI metadata.
 
 `install.sh`
 : Owns installation behavior. It clones `https://github.com/xiongxianfei/Skillsmith`, copies every directory under `skills/` into `${HOME}/.claude/skills` or a `--target` directory, and replaces existing target skill directories.
@@ -102,7 +102,7 @@ Validation flow:
 Primary data entities are filesystem artifacts:
 
 - Skill definitions: `skills/<skill-name>/SKILL.md`.
-- Skill metadata: YAML frontmatter fields such as `name`, `description`, `argument-hint`, `effort`, and `allowed-tools`.
+- Skill metadata: YAML frontmatter fields `name` and `description`.
 - Skill prompt body: Markdown instructions that include `$ARGUMENTS` and `## Output Format`.
 - Workflow and governance data: Markdown files in the repository root and `docs/`.
 
@@ -124,7 +124,7 @@ Observed external dependencies:
 - GitHub Actions used for CI.
 - Claude Code skills and Codex slash-command compatibility are documented compatibility surfaces.
 
-There are no observed runtime calls from skills to external APIs. Skills set `allowed-tools: ""`, so they are intended as pure prompt assets.
+There are no observed runtime calls from skills to external APIs. Skills omit runtime-specific tool metadata, so they are intended as pure prompt assets.
 
 ## Test map
 
@@ -139,8 +139,8 @@ The validator checks:
 
 - `SKILL.md` exists in each skill directory.
 - YAML frontmatter can be parsed.
-- Required fields `name`, `description`, and `argument-hint` exist.
-- Best-practice fields `effort` and `allowed-tools` exist.
+- Required fields `name` and `description` exist.
+- Optional frontmatter such as `argument-hint`, `effort`, and `allowed-tools` is omitted by default.
 - UI metadata avoids CJK and Cyrillic scripts.
 - `$ARGUMENTS` appears in the body.
 - `## Output Format` appears in the body.
@@ -169,7 +169,7 @@ Observed repository patterns:
 - One canonical prompt file per skill: `SKILL.md`.
 - Skill metadata stays in YAML frontmatter.
 - Skill behavior stays in the Markdown prompt body.
-- Skill bodies can be multilingual, while descriptions and argument hints are English.
+- Skill bodies can be multilingual, while descriptions are English.
 - Validation is centralized in one Python script.
 - CI reuses the same command documented for local validation.
 - Installer is intentionally simple and copies files without generating prompt content.
@@ -200,7 +200,7 @@ Repository rename surfaces:
 
 ## Open questions
 
-Should validator behavior be expanded to enforce `effort: high`, `allowed-tools: ""`, lowercase hyphenated names, and pushy descriptions as errors rather than warnings or documentation-only rules?
+Should validator behavior be expanded to enforce lowercase hyphenated names and pushy descriptions as errors rather than warnings or documentation-only rules?
 
 Should high-stakes skills have a dedicated safety checklist or test fixture before changes are accepted?
 

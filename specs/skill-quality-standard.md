@@ -8,12 +8,36 @@ approved
 
 - `docs/proposals/2026-05-25-rigorloop-governed-skill-quality.md`
 - Proposal review R2: `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/proposal-review-r2.md`
+- Prior version: approved by spec-review R2 before this design-philosophy amendment.
+- Design-philosophy amendment: approved by manual owner review on 2026-05-26.
 
 ## Goal and context
 
 Skillsmith skills are portable Markdown prompt assets. This spec defines the observable quality contract for adding or materially changing a skill so reviewers can evaluate purpose, trigger behavior, output quality, safety behavior, and evidence without relying on ad hoc judgment.
 
 The standard applies to new skills and materially changed skills first. Existing skills listed in `tests/evals/skills/grandfathered-skills.yaml` are grandfathered for eval-fixture enforcement until materially changed.
+
+## Design Philosophy
+
+Skillsmith skills should be small, portable prompt contracts that do one job through one verified path.
+
+When a skill behavior can be expressed as one uniform workflow, prefer that over broad scenario coverage, input-type detection, effort-scaling branches, or fallback branches. Simpler skill structure should remove failure modes rather than patch them with louder instructions.
+
+Skill bodies should define behavior. Frontmatter should help selection, but the skill must remain correct from `name`, `description`, `$ARGUMENTS`, and the Markdown body alone. Optional metadata may make a runtime more convenient, but skill correctness must not depend on it.
+
+Descriptions are the highest-leverage metadata line. They should use third-person descriptive language, state what the skill does first, name any distinguishing output shape, then name concrete trigger situations and common user phrasing. Spending description tokens is acceptable when it improves reliable selection.
+
+The strongest skill rules should be few and deep. Prefer a small number of durable directives that imply boundary behavior. For example, preserving source meaning can also define an integrity boundary by preventing misleading transformations.
+
+Quality should be verified, not merely asserted. A quality-critical workflow should include an explicit check or review step when the skill output could silently drift from the source, user intent, safety boundary, or requested format.
+
+Conciseness should come from essential instructions and honest execution. Avoid adding branches only to shorten trivial cases when the accepted skill design requires a fixed output contract. When fixed output creates a known cost, record that tradeoff instead of hiding it.
+
+Every reference in a skill prompt should resolve to one thing. Terminology should not drift between workflow instructions and output templates, because ambiguous references can produce inconsistent behavior across runs.
+
+Output contracts should be stable and specific. Required reasons, assessments, or sections should name the actual dimensions to check rather than saying only "explain" or "assess quality."
+
+When a prompt reaches diminishing returns from wording review, freeze the good-enough contract and move to eval evidence. Further refinements should be driven by observed behavior, not endless polishing.
 
 ## Glossary
 
@@ -48,13 +72,13 @@ Given a contributor materially changes a medical, security, legal, financial, or
 When the change is submitted for review
 Then the evidence includes scope boundaries, escalation or refusal behavior, reviewer-visible safety notes, and at least one safety or misuse eval case.
 
-Example E5: optional effort remains portable
-Given a skill omits `effort`
+Example E5: optional metadata is omitted by default
+Given a skill omits `argument-hint`, `effort`, and `allowed-tools`
 When validation runs
-Then the omission is allowed.
-Given a skill includes `effort`
+Then the omission is allowed and preferred.
+Given a skill includes non-empty `allowed-tools`
 When validation runs
-Then the value is checked against the allowed set and the skill still does not rely on `effort` for portable behavior.
+Then validation fails unless a later accepted tool-using skill spec authorizes tool permissions.
 
 ## Requirements
 
@@ -64,19 +88,19 @@ R2. Each skill name MUST use lowercase letters, numbers, and hyphens only, MUST 
 
 R3. Each `SKILL.md` MUST have parseable YAML frontmatter.
 
-R4. Each `SKILL.md` frontmatter MUST include `name`, `description`, `argument-hint`, and `allowed-tools`.
+R4. Each `SKILL.md` frontmatter MUST include `name` and `description`.
 
-R5. `effort` MUST be optional. When present, `effort` MUST use an allowed value defined by the skill-quality standard or validator, and Skillsmith skills MUST NOT rely on `effort` for portable behavior.
+R5. `effort` MUST NOT be required, and Skillsmith skills SHOULD omit it unless a later accepted compatibility reason requires it.
 
-R6. `CONSTITUTION.md`, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, and the validator expectations MUST treat `effort` as optional once this standard is implemented.
+R6. `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, and validator expectations MUST NOT instruct contributors to add `argument-hint`, `effort`, or `allowed-tools` by default.
 
-R7. For pure-prompt skills, `allowed-tools` MUST be the empty string unless an accepted proposal and spec explicitly allow tool use.
+R7. Skills SHOULD omit `allowed-tools`; if `allowed-tools` is present and non-empty, validation MUST fail unless an accepted proposal and spec explicitly allow tool use.
 
-R8. `description` and `argument-hint` MUST be English-facing metadata suitable for assistant UI and invocation.
+R8. `description` MUST be English-facing metadata suitable for assistant UI and invocation.
 
 R9. `description` MUST explain both what the skill does and when to use it.
 
-R10. Skill descriptions SHOULD be trigger-forward and include explicit "Use this skill whenever..." style phrasing unless a reviewer records why a less direct description is clearer.
+R10. Skill descriptions SHOULD state what the skill does first, then name the triggering situations clearly enough for reliable selection.
 
 R11. Each skill body MUST include `$ARGUMENTS`.
 
@@ -128,6 +152,30 @@ R34. Manual model smoke evidence MUST be required only when a change is high-ris
 
 R35. The first implementation slice MUST keep existing skills installable.
 
+R36. New or materially changed skills SHOULD have one clear primary job unless the accepted proposal and spec justify a broader skill boundary.
+
+R37. New or materially changed skills SHOULD avoid input-type detection, effort-scaling branches, fallback branches, or scenario accumulation unless the accepted behavior requires them.
+
+R38. New or materially changed skills SHOULD design known failure modes out of the workflow when a structural rule can make the failure impossible or unlikely.
+
+R39. New or materially changed skills SHOULD put behavioral guarantees in the Markdown body rather than relying on optional frontmatter.
+
+R40. New or materially changed skill descriptions SHOULD use third-person descriptive language, state the skill function before trigger situations, and include distinguishing output shape when output shape affects selection.
+
+R41. New or materially changed skills SHOULD prefer a small number of durable directives over many narrow rules when those directives cover the same boundary behavior.
+
+R42. New or materially changed skills SHOULD include a verification or consistency-check step when output quality can silently drift from source meaning, user intent, safety boundaries, or requested format.
+
+R43. New or materially changed skills SHOULD use consistent vocabulary between workflow instructions and output templates.
+
+R44. New or materially changed skills SHOULD make output contracts specific enough for reviewers to observe, including concrete dimensions for reasons, assessments, checks, or refusals when those sections are required.
+
+R45. Reviewers SHOULD treat known tradeoffs, such as fixed output verbosity for trivial input, as acceptable when the accepted requirements deliberately choose that behavior and the tradeoff is recorded.
+
+R46. Reviewers SHOULD stop requesting prompt wording refinements once remaining concerns are cosmetic and the next useful evidence is behavioral eval output.
+
+R47. Reviewer heuristics for skill design philosophy, including simplicity, branch avoidance, body-owned behavior, vocabulary precision, fixed output contracts, and known tradeoffs, MUST be surfaced through eval evidence, review notes, or checklist findings rather than brittle CI gates.
+
 ## Inputs and outputs
 
 Inputs:
@@ -155,24 +203,26 @@ Outputs:
 - `tests/evals/skills/grandfathered-skills.yaml` is the only source of truth for grandfathered skill names.
 - Existing skills listed in the grandfathering baseline remain grandfathered for eval-fixture enforcement until materially changed.
 - Skills remain pure prompt assets unless a later accepted proposal and spec change that boundary.
-- `effort` remains optional even when present in current skills.
+- `argument-hint`, `effort`, and `allowed-tools` are omitted from current skill frontmatter.
 - CI remains deterministic and does not depend on live model calls.
+- Skill design philosophy is reviewer guidance unless a requirement states a mechanically verifiable rule.
 
 ## Error and boundary behavior
 
 - Invalid YAML frontmatter is a blocking validation error.
-- Missing `name`, `description`, `argument-hint`, `allowed-tools`, `$ARGUMENTS`, or `## Output Format` is a blocking validation error after this standard is implemented.
-- Missing `effort` is not an error or warning by itself.
-- Invalid `effort` values are validation errors when the field is present.
+- Missing `name`, `description`, `$ARGUMENTS`, or `## Output Format` is a blocking validation error after this standard is implemented.
+- Missing `argument-hint`, `effort`, and `allowed-tools` is not an error or warning.
+- Invalid `effort` values are validation errors when the field is present, but current skills should omit the field.
 - Missing eval fixtures are warnings for grandfathered skills and blocking errors for new or materially changed skills once the material-change detection path exists.
 - Stale entries in `tests/evals/skills/grandfathered-skills.yaml` are validation errors unless the corresponding skill deletion is part of the same change.
 - README sync drift starts as a warning and becomes blocking once the sync helper is reliable and documented.
 - Description quality failures are review findings unless the failure is mechanically checkable.
+- Skill design philosophy failures are review findings unless the failure is mechanically checkable.
 - If the validator cannot determine whether a change is new, material, or grandfathered, it must not silently pass the change as editorial; it must surface the uncertainty for review.
 
 ## Compatibility and migration
 
-- The implementation MUST update `CONSTITUTION.md` so `effort` is optional, because the current constitution lists `effort` as required.
+- The implementation MUST update `CONSTITUTION.md` so optional frontmatter is omitted by default.
 - The implementation MUST use `tests/evals/skills/grandfathered-skills.yaml`, not a commit hash, branch name, README table, or future implementation commit, to determine grandfathered skills.
 - The implementation MUST update `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, README, and PR template guidance to align with this standard.
 - Existing skills are grandfathered for eval fixtures but not for core parseability and required structural fields already enforced by the validator.
@@ -186,6 +236,7 @@ Outputs:
 - README sync output MUST identify missing, extra, or mismatched README entries.
 - Eval fixture validation output MUST identify the skill and scenario category that is missing or malformed.
 - PRs for new or materially changed skills MUST include validation command output or an explicit explanation when a check could not be run.
+- Reviews for new or materially changed skills SHOULD record any material design-philosophy tradeoffs that affect output length, trigger breadth, workflow branching, safety boundaries, or eval interpretation.
 
 ## Security and privacy
 
@@ -193,7 +244,7 @@ Outputs:
 - Eval fixtures MUST NOT contain secrets, credentials, private local paths, or unpublished personal data.
 - High-risk skills MUST include reviewer-visible safety notes and at least one safety or misuse eval scenario.
 - Medical, legal, financial, security, or similarly high-impact skills MUST NOT present themselves as substitutes for licensed professionals, emergency services, official advice, or authorized security review.
-- Skills MUST keep `allowed-tools: ""` unless a later accepted proposal and spec authorize tool use.
+- Skills SHOULD omit `allowed-tools`; non-empty tool permissions require a later accepted proposal and spec.
 
 ## Accessibility and UX
 
@@ -216,7 +267,7 @@ EC2. A skill adds a reference file without changing `SKILL.md` instructions. Tre
 
 EC3. A high-risk skill adds a minor safety wording change. Treat the change as material unless a reviewer records why behavior is unchanged.
 
-EC4. A skill omits `effort`. Validation passes because `effort` is optional.
+EC4. A skill omits `argument-hint`, `effort`, and `allowed-tools`. Validation passes because these fields are omitted by default.
 
 EC5. A skill includes `effort: ultra`. Validation fails when allowed values do not include `ultra`.
 
@@ -241,17 +292,18 @@ EC12. A new skill is not listed in the grandfathering baseline and has no `cases
 - Do not introduce tool-using skills.
 - Do not add `.claude-plugin` validation.
 - Do not make subjective prompt quality a brittle CI gate.
+- Do not make design-philosophy heuristics a brittle CI gate.
 - Do not create a second canonical skill-quality standard under `docs/`.
 
 ## Acceptance criteria
 
-AC1. `specs/skill-quality-standard.md` exists and contains testable requirements for skill metadata, body structure, eval fixtures, high-risk safety gates, README sync, `effort`, and grandfathering.
+AC1. `specs/skill-quality-standard.md` exists and contains testable or reviewer-observable requirements for skill metadata, body structure, design philosophy, eval fixtures, high-risk safety gates, README sync, runtime-specific metadata omission, and grandfathering.
 
 AC2. `specs/skill-quality-standard.test.md` maps each requirement in this spec to validation, fixture review, manual review, or non-applicable coverage.
 
-AC3. `CONSTITUTION.md` is updated so `effort` is optional and validated only when present.
+AC3. `CONSTITUTION.md` is updated so `argument-hint`, `effort`, and `allowed-tools` are omitted by default.
 
-AC4. Contributor and agent docs no longer describe `effort` as a required field.
+AC4. Contributor and agent docs no longer describe `argument-hint`, `effort`, or `allowed-tools` as required fields.
 
 AC5. Deterministic validation checks continue to pass for the existing repository after grandfathering is applied.
 
@@ -284,10 +336,9 @@ Grandfathering is not tied to an accepted proposal commit. The deterministic bas
 
 ## Next artifacts
 
-1. Implementation plan for the first slice.
-2. Plan review.
-3. `specs/skill-quality-standard.test.md` after plan review.
-4. Architecture note only if planning or review identifies a long-lived design decision that needs separate architecture assessment.
+1. Use `specs/skill-quality-standard.test.md` as the active proof surface for any downstream implementation of R36-R47.
+2. Update governance or contributor docs only if downstream implementation is explicitly requested.
+3. Architecture note only if review identifies a long-lived repository design decision that needs separate architecture assessment.
 
 ## Follow-on artifacts
 
@@ -295,4 +346,4 @@ None yet.
 
 ## Readiness
 
-Approved by spec-review R2 and ready for planning.
+Approved after manual owner review of the design-philosophy amendment. Downstream implementation should use the active test spec and existing workflow gates.

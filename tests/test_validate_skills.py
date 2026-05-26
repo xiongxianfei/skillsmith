@@ -11,8 +11,6 @@ VALID_FRONTMATTER = """---
 name: sample-skill
 description: >
   Use this skill whenever a user needs a focused sample output.
-argument-hint: sample input
-allowed-tools: ""
 ---
 
 **Input:**
@@ -57,7 +55,6 @@ class ValidateSkillsTest(unittest.TestCase):
         cases = {
             "name": "name: sample-skill\n",
             "description": "description: >\n  Use this skill whenever a user needs a focused sample output.\n",
-            "argument-hint": "argument-hint: sample input\n",
         }
 
         for field, text in cases.items():
@@ -66,7 +63,7 @@ class ValidateSkillsTest(unittest.TestCase):
 
                 self.assertIn(field, "\n".join(result.errors))
 
-    def test_valid_skill_without_effort_passes_without_warning(self):
+    def test_valid_skill_without_argument_hint_or_effort_passes_without_warning(self):
         result = self.validate_one("sample-skill")
 
         self.assertEqual([], result.errors)
@@ -74,27 +71,28 @@ class ValidateSkillsTest(unittest.TestCase):
 
     def test_invalid_effort_value_is_error_when_present(self):
         content = VALID_FRONTMATTER.replace(
-            'allowed-tools: ""',
-            'effort: ultra\nallowed-tools: ""',
+            "---\n\n**Input:**",
+            "effort: ultra\n---\n\n**Input:**",
         )
 
         result = self.validate_one("sample-skill", content)
 
         self.assertIn("invalid effort value: 'ultra'", "\n".join(result.errors))
 
-    def test_allowed_tools_must_be_empty_string(self):
-        content = VALID_FRONTMATTER.replace('allowed-tools: ""', 'allowed-tools: Bash')
+    def test_non_empty_allowed_tools_requires_tool_using_spec(self):
+        content = VALID_FRONTMATTER.replace(
+            "---\n\n**Input:**",
+            "allowed-tools: Bash\n---\n\n**Input:**",
+        )
 
         result = self.validate_one("sample-skill", content)
 
-        self.assertIn("allowed-tools must be an empty string", "\n".join(result.errors))
+        self.assertIn("tool permissions require an accepted tool-using skill spec", "\n".join(result.errors))
 
-    def test_missing_allowed_tools_is_error(self):
-        content = VALID_FRONTMATTER.replace('allowed-tools: ""\n', "")
+    def test_missing_allowed_tools_is_valid(self):
+        result = self.validate_one("sample-skill")
 
-        result = self.validate_one("sample-skill", content)
-
-        self.assertIn("missing required frontmatter field: 'allowed-tools'", "\n".join(result.errors))
+        self.assertEqual([], result.errors)
 
     def test_skill_name_must_match_directory_and_syntax(self):
         content = VALID_FRONTMATTER.replace("name: sample-skill", "name: Bad_Name")

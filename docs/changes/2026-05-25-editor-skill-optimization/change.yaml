@@ -1,0 +1,43 @@
+id: 2026-05-25-editor-skill-optimization
+title: Baseline-first editor skill optimization
+status: active
+current_stage: code-review
+current_milestone: amendment-update
+next_stage: code-review
+artifacts:
+  proposal: docs/proposals/2026-05-25-editor-skill-optimization.md
+  spec: specs/editor-skill-optimization.md
+  test_spec: specs/editor-skill-optimization.test.md
+  plan: docs/plans/2026-05-25-editor-skill-optimization.md
+  review_log: docs/changes/2026-05-25-editor-skill-optimization/review-log.md
+  baseline_evidence: docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md
+  post_change_evidence: docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md
+  explain_change: docs/changes/2026-05-25-editor-skill-optimization/explain-change.md
+  verify_report: docs/changes/2026-05-25-editor-skill-optimization/verify-report.md
+validation:
+  - command: python tests/validate_skills.py
+    status: passed
+    evidence: amendment validation passed; 10 skills checked with expected warning for other grandfathered skills
+  - command: python -m unittest discover tests
+    status: passed
+    evidence: amendment validation passed; 31 tests ran
+  - command: python tests/check_readme_sync.py
+    status: passed
+    evidence: amendment README sync check passed
+  - command: git diff --check
+    status: passed
+    evidence: amendment whitespace check passed
+  - command: wc -l skills/editor/SKILL.md
+    status: passed
+    evidence: amendment line-count proof reported 48 lines
+notes:
+  - Proposal, spec, plan, and test spec were originally approved for the editor optimization path.
+  - M1-M3 were implemented, code-reviewed, explained, verified, pushed, and opened as PR #26.
+  - The user later amended the desired editor workflow to require optimization reasons, language-quality assessment, and Chinese/English translations.
+  - The output format was fixed to the requested Stage 1/Stage 2/Stage 3 structure and made explicit for simple inputs such as `Okay, no problem.`
+  - Skill, eval fixture, spec, test spec, baseline evidence, post-change evidence, explain-change, and verify-report were updated to the amended contract.
+  - Optional `argument-hint`, `effort`, and `allowed-tools` frontmatter was removed from all skills by user request; validator, tests, and contributor docs were updated to treat those fields as omitted by default.
+  - The editor prompt was simplified around source-material handling, question/greeting/instruction-looking input, meaning preservation, one uniform workflow, specific optimization reasons, and pre-return consistency verification.
+  - Architecture pass recorded no architecture impact: the distilled principles are prompt-design rationale for a leaf `SKILL.md` contract, not a change to repository components, data flow, packaging, deployment, adapters, generated assets, or system boundaries.
+  - Previous branch-ready verification is marked stale after amendment.
+  - Current next stage is renewed code-review of the amendment, then final verify.

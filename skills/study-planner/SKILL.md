@@ -5,9 +5,6 @@ description: >
   Use this skill whenever the user says they want to learn something new — programming,
   a language, a certification, a framework — even casually like "I want to get into machine
   learning" or "how do I learn guitar?" — without waiting for an explicit request for a plan.
-argument-hint: <what you want to learn, your level, and hours available per week>
-effort: high
-allowed-tools: ""
 ---
 
 **学习目标与情况：**
