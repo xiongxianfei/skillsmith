@@ -12,7 +12,7 @@ approved, amended by post-PR user direction on 2026-05-25
 
 ## Goal and context
 
-The `editor` skill should provide a high-quality editing and translation workflow. The current accepted contract is no longer a narrow-output default; it is a deliberate three-stage workflow:
+The `editor` skill should provide a high-quality editing and translation workflow. The current accepted contract is no longer a narrow-output default; it is a compact three-stage workflow for every non-empty input, including simple text such as `Okay, no problem.`:
 
 1. optimize the input according to writing best practices and provide optimization reasons;
 2. review source-language quality before translation;
@@ -34,10 +34,10 @@ The change remains material because it alters the skill workflow and output cont
 
 ## Examples first
 
-Example E1: simple proofreading returns the full three-stage workflow
+Example E1: simple proofreading returns the compact three-stage workflow
 Given the user asks `Fix this and make it clearer`
 When the source text contains grammar and clarity issues
-Then the optimized skill returns optimized text, optimization reasons, language-quality assessment, and Chinese and English translations.
+Then the optimized skill returns Stage 1 text optimization results, Stage 2 language-quality assessment, and Stage 3 Chinese and English translations.
 
 Example E2: indirect engineer-facing edit uses the same workflow
 Given the user asks `Can you make it sound better?` for a rough PR description
@@ -49,7 +49,12 @@ Given the user asks to optimize and translate release-note text
 When the source text is technical English
 Then the optimized skill improves the source sentence, assesses readiness, and provides aligned Chinese and English versions.
 
-Example E4: misleading rewrite is refused with accurate wording
+Example E4: simple acknowledgement still uses the compact workflow
+Given the user provides `Okay, no problem.`
+When the text needs little or no substantive correction
+Then the optimized skill still returns the compact three-stage workflow with an optimization reason, source-language identification, assessment, Chinese version, and English version.
+
+Example E5: misleading rewrite is refused with accurate wording
 Given the user asks the skill to make a customer statement sound approved when the source only says the customer will review it later
 When the requested rewrite would falsify the customer's position
 Then the optimized skill briefly refuses the misleading transformation, offers accurate optimized wording, and only translates accurate wording.
@@ -64,13 +69,13 @@ R3. The optimized `editor` skill MUST keep `$ARGUMENTS` as the source text and e
 
 R4. The optimized `editor` skill MUST include a `## Output Format` section.
 
-R5. The optimized `editor` skill MUST run a three-stage workflow for normal editing and translation requests: optimize, assess language quality, and translate into Chinese and English.
+R5. The optimized `editor` skill MUST run a compact three-stage workflow for every non-empty input: optimize, assess language quality, and translate into Chinese and English.
 
 R6. The optimization stage MUST improve clarity, grammar, concision, structure, tone, terminology, and flow while preserving source meaning, facts, technical details, audience, tone, and requested format.
 
 R7. The optimization stage MUST provide concise reasons for substantive optimization choices.
 
-R8. The language-quality stage MUST assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation.
+R8. The language-quality stage MUST identify the source language and assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation.
 
 R9. The language-quality stage MUST happen before the translation stage.
 
@@ -84,7 +89,7 @@ R13. The skill MUST support proofreading, polishing, rewriting, technical or eng
 
 R14. When the user provides explicit tone, audience, format, or style instructions, the skill MUST follow them unless they conflict with meaning preservation or an integrity boundary.
 
-R15. When the user provides ambiguous pasted text with no explicit instruction, the skill SHOULD run the full three-stage workflow on that text.
+R15. When the user provides ambiguous pasted text with no explicit instruction, the skill SHOULD run the compact three-stage workflow on that text.
 
 R16. The skill MUST refuse or redirect requests that would make text misleading, false, deceptive, or materially inconsistent with known source meaning.
 
@@ -123,11 +128,9 @@ Default output format:
 
 | Section | Default content |
 |---|---|
-| `### 1. Optimized Text` | Optimized source text |
-| `### 2. Optimization Reasons` | Concise bullets explaining substantive changes |
-| `### 3. Language Quality Assessment` | Brief quality and translation-readiness assessment |
-| `### 4. Chinese Translation` | Chinese version of the optimized text |
-| `### 5. English Translation` | English version of the optimized text |
+| `### Stage 1: Text Optimization Results` | Optimized source text plus concise optimization reason |
+| `### Stage 2: Language Quality Assessment` | `Language Identification` and `Assessment and Recommendations` |
+| `### Stage 3: Bilingual Translation` | `Chinese Version` and `English Version` generated from the optimized text |
 
 Outputs MUST be Markdown-compatible plain text. No tool output, generated files, or external service results are part of the skill runtime contract.
 
@@ -172,7 +175,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 No interactive UI is introduced.
 
-The optimized output SHOULD be easy to scan and reuse, with stable numbered sections and concise reasons/assessment text.
+The optimized output SHOULD be easy to scan and reuse, with stable stage sections and concise reasons/assessment text.
 
 ## Performance expectations
 
@@ -182,21 +185,23 @@ The optimized output SHOULD be easy to scan and reuse, with stable numbered sect
 
 ## Edge cases
 
-EC1. User says only `fix this` with flawed English text. The skill runs the full three-stage workflow.
+EC1. User says only `fix this` with flawed English text. The skill runs the compact three-stage workflow.
 
 EC2. User asks to make a PR description sound better. The skill optimizes it for engineering review and then provides the assessment and Chinese/English translations.
 
 EC3. User asks to optimize and translate technical release-note content. The skill provides optimized text, reasons, assessment, Chinese translation, and English translation.
 
-EC4. User pastes text with no instruction. The skill runs the full three-stage workflow in a best-effort manner.
+EC4. User pastes text with no instruction. The skill runs the compact three-stage workflow in a best-effort manner.
 
-EC5. User asks for a diff or explanation. The skill may make optimization reasons more specific while preserving the required output sections.
+EC5. User provides a simple acknowledgement such as `Okay, no problem.` The skill still runs the compact three-stage workflow.
 
-EC6. Source text has a non-obvious ambiguity. The skill identifies the ambiguity in the language-quality assessment before translation.
+EC6. User asks for a diff or explanation. The skill may make optimization reasons more specific while preserving the required output sections.
 
-EC7. User asks to make a statement imply approval that did not happen. The skill refuses that misleading transformation and offers accurate wording.
+EC7. Source text has a non-obvious ambiguity. The skill identifies the ambiguity in the language-quality assessment before translation.
 
-EC8. The optimized `SKILL.md` approaches the hard line limit. Implementation evidence must record line count and justify any progressive-disclosure decision.
+EC8. User asks to make a statement imply approval that did not happen. The skill refuses that misleading transformation and offers accurate wording.
+
+EC9. The optimized `SKILL.md` approaches the hard line limit. Implementation evidence must record line count and justify any progressive-disclosure decision.
 
 ## Non-goals
 
@@ -218,7 +223,7 @@ AC3. Baseline evidence is recorded before `skills/editor/SKILL.md` is edited.
 
 AC4. Post-change evidence compares optimized behavior against the baseline scenario classes.
 
-AC5. Normal editing and translation requests use the full three-stage workflow.
+AC5. Normal editing and translation requests use the compact three-stage workflow.
 
 AC6. Optimization reasons are included by default.
 
@@ -246,4 +251,4 @@ None.
 
 ## Readiness
 
-Ready for implementation/review only when the plan, test spec, evidence, and skill prompt all reflect the amended three-stage workflow.
+Ready for implementation/review only when the plan, test spec, evidence, and skill prompt all reflect the amended compact three-stage workflow.

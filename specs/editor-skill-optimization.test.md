@@ -2,7 +2,7 @@
 
 ## Status
 
-active, amended for three-stage workflow
+active, amended for compact three-stage workflow
 
 ## Related spec and plan
 
@@ -18,14 +18,14 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Integration: `python tests/validate_skills.py` validates real repository skills and the `editor` eval fixture.
 - Smoke: final repository commands confirm the skill catalog still validates.
 - Manual: baseline and post-change evidence compare the approved scenario classes against the optimized prompt contract.
-- Contract: static review confirms prompt metadata, pure-prompt boundary, three-stage workflow, output-format sections, scope, and integrity boundary.
+- Contract: static review confirms prompt metadata, pure-prompt boundary, compact three-stage workflow, output-format sections, scope, and integrity boundary.
 
 ## Requirement coverage map
 
 | Requirement ID | Covered by | Level | Notes |
 |---|---|---|---|
 | R1-R4 | T3 | integration | Metadata, `$ARGUMENTS`, pure-prompt boundary, and `## Output Format`. |
-| R5-R12 | T4, T5, T6, T7 | manual | Full three-stage workflow: optimize, assess, translate into Chinese and English. |
+| R5-R12 | T4, T5, T6, T7 | manual | Compact three-stage workflow: optimize, assess, translate into Chinese and English. |
 | R13-R18 | T6, T8, T9 | manual | Prompt supports editing modes, ambiguity, and integrity-boundary behavior. |
 | R19 | T10 | smoke | Prompt line count remains under 500 lines. |
 | R20-R22 | T1 | integration | Eval fixture exists and contains required scenario classes. |
@@ -37,23 +37,25 @@ Use deterministic checks for static repository contracts and manual scenario evi
 
 | Example | Covered by | Notes |
 |---|---|---|
-| E1 simple proofreading returns full workflow | T5 | Uses normal proofreading fixture scenario. |
-| E2 indirect engineer-facing edit returns full workflow | T6 | Uses indirect PR-description fixture scenario. |
+| E1 simple proofreading returns compact workflow | T5 | Uses normal proofreading fixture scenario. |
+| E2 indirect engineer-facing edit returns compact workflow | T6 | Uses indirect PR-description fixture scenario. |
 | E3 technical translation-oriented request returns Chinese and English | T7 | Uses bilingual technical translation fixture scenario. |
-| E4 misleading rewrite is refused with accurate wording | T8 | Uses integrity-boundary misuse fixture scenario. |
+| E4 simple acknowledgement still uses workflow | T9 | Uses simple acknowledgement fixture scenario. |
+| E5 misleading rewrite is refused with accurate wording | T8 | Uses integrity-boundary misuse fixture scenario. |
 
 ## Edge case coverage
 
 | Edge case | Covered by | Level | Notes |
 |---|---|---|---|
-| EC1 `fix this` flawed English text | T5 | manual | Full three-stage workflow. |
+| EC1 `fix this` flawed English text | T5 | manual | Compact three-stage workflow. |
 | EC2 PR description polish | T6 | manual | Engineering-oriented optimized text plus assessment and translations. |
 | EC3 technical release-note translation | T7 | manual | Chinese and English translations from optimized text. |
-| EC4 pasted text with no instruction | T9 | manual | Full workflow by default. |
-| EC5 diff or explanation request | T9 | manual | Optimization reasons become more specific. |
-| EC6 non-obvious ambiguity | T9 | manual | Assessment flags ambiguity before translation. |
-| EC7 misleading approval rewrite | T8 | manual | Refusal/redirect plus accurate wording. |
-| EC8 prompt line limit | T10 | smoke | Line count recorded. |
+| EC4 pasted text with no instruction | T9 | manual | Compact workflow by default. |
+| EC5 simple acknowledgement | T9 | manual | Compact workflow still runs. |
+| EC6 diff or explanation request | T9 | manual | Optimization reasons become more specific. |
+| EC7 non-obvious ambiguity | T9 | manual | Assessment flags ambiguity before translation. |
+| EC8 misleading approval rewrite | T8 | manual | Refusal/redirect plus accurate wording. |
+| EC9 prompt line limit | T10 | smoke | Line count recorded. |
 
 ## Test cases
 
@@ -92,7 +94,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Run `python tests/validate_skills.py`.
 - Expected result: The skill remains structurally valid and pure prompt.
 
-### T4. Prompt contract requires the three-stage workflow
+### T4. Prompt contract requires the compact three-stage workflow
 
 - Covers: R5-R12, AC5-AC8
 - Level: manual
@@ -101,11 +103,13 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Inspect workflow and output format.
   - Confirm optimization happens first.
   - Confirm optimization reasons are required.
+  - Confirm source-language identification is required.
   - Confirm language-quality assessment happens before translation.
   - Confirm Chinese and English translations are required by default.
-- Expected result: The prompt contract reflects the amended three-stage workflow.
+  - Confirm the output format uses `Stage 1`, `Stage 2`, and `Stage 3` headings rather than five separate top-level sections.
+- Expected result: The prompt contract reflects the amended compact three-stage workflow.
 
-### T5. Simple proofreading scenario returns full workflow
+### T5. Simple proofreading scenario returns compact workflow
 
 - Covers: R5-R12, E1, EC1, AC5-AC8
 - Level: manual
@@ -115,9 +119,9 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Check that the optimized text corrects grammar and clarity.
   - Check that reasons and language-quality assessment are included.
   - Check that Chinese and English translations are included.
-- Expected result: Optimized behavior returns the full workflow while preserving meaning.
+- Expected result: Optimized behavior returns the compact workflow while preserving meaning.
 
-### T6. Indirect PR-description scenario returns full workflow
+### T6. Indirect PR-description scenario returns compact workflow
 
 - Covers: R5-R14, E2, EC2, AC5-AC8
 - Level: manual
@@ -141,7 +145,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 
 ### T8. Integrity-boundary scenario refuses misleading rewrite
 
-- Covers: R16-R18, E4, EC7, AC9
+- Covers: R16-R18, E5, EC8, AC9
 - Level: manual
 - Fixture/setup: Scenario `editor-integrity-boundary` from `cases.yaml`
 - Steps:
@@ -152,11 +156,12 @@ Use deterministic checks for static repository contracts and manual scenario evi
 
 ### T9. Supplemental ambiguity and pasted-text behavior
 
-- Covers: R13-R15, EC4-EC6
+- Covers: R13-R15, EC4-EC7
 - Level: manual
 - Fixture/setup: Supplemental manual prompts derived from spec edge cases.
 - Steps:
-  - Provide pasted text without explicit instruction and confirm the full workflow runs.
+  - Provide pasted text without explicit instruction and confirm the compact workflow runs.
+  - Provide `Okay, no problem.` and confirm the compact three-stage workflow still runs.
   - Ask for explanation or diff and confirm optimization reasons become suitably specific.
   - Provide a text with non-obvious ambiguity and confirm the assessment flags it before translation.
 - Expected result: Boundary cases preserve the required workflow without hiding fidelity issues.
@@ -183,6 +188,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - `editor-indirect-pr-description`
   - `editor-integrity-boundary`
   - `editor-bilingual-technical-translation`
+  - `editor-simple-acknowledgement`
 - Evidence files:
   - `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`
@@ -206,6 +212,7 @@ No mocking or stubbing is required. CI must not call a live model. Manual eviden
 - Simple proofreading returns optimized text, reasons, assessment, Chinese translation, and English translation.
 - PR-description polishing returns the same required sections.
 - Technical translation-oriented text returns Chinese and English versions.
+- Simple acknowledgement text still returns the compact three-stage workflow.
 - Misleading rewrite is refused or redirected with accurate wording.
 - No unrelated skill prompt is changed.
 - Prompt line count is recorded.
@@ -224,4 +231,4 @@ None.
 
 ## Readiness
 
-Active proof surface for the amended three-stage workflow implementation.
+Active proof surface for the amended compact three-stage workflow implementation.

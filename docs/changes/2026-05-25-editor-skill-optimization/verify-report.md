@@ -32,16 +32,16 @@ Commands run from `/home/xiongxianfei/data/20260525-skillsmith/code`:
 | `python -m unittest discover tests` | pass | 31 tests ran and passed. |
 | `python tests/check_readme_sync.py` | pass | README sync check passed. |
 | `git diff --check` | pass | No whitespace errors. |
-| `wc -l skills/editor/SKILL.md` | pass | 71 lines. |
+| `wc -l skills/editor/SKILL.md` | pass | 69 lines. |
 
 ## Current traceability summary
 
 | Requirement group | Evidence | Status |
 |---|---|---|
 | R1-R4 metadata and pure-prompt contract | `skills/editor/SKILL.md`, validator | pass |
-| R5-R12 three-stage workflow | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
+| R5-R12 compact three-stage workflow | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
 | R13-R18 integrity and ambiguity handling | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
-| R19 line limit | `wc -l skills/editor/SKILL.md` reported 71 lines | pass |
+| R19 line limit | `wc -l skills/editor/SKILL.md` reported 69 lines | pass |
 | R20-R24 fixture and evidence | `cases.yaml`, baseline/post-change evidence | pending renewed review |
 | R25-R27 scope boundaries | actual diff | pending renewed review |
 

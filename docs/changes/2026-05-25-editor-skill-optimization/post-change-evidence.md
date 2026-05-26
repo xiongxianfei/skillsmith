@@ -2,15 +2,15 @@
 
 ## Scope
 
-This file records post-change evidence after the `editor` prompt was amended to the user-requested three-stage workflow.
+This file records post-change evidence after the `editor` prompt was amended to the user-requested compact three-stage workflow.
 
 Evidence method: manual prompt-contract inspection of `skills/editor/SKILL.md`, using the scenario classes recorded in `tests/evals/skills/editor/cases.yaml`. No live model call, network service, or CI model execution was used.
 
 The optimized prompt now requires:
 
-1. optimized source text plus concise optimization reasons;
-2. language-quality assessment before translation;
-3. Chinese and English translations of the optimized text.
+1. Stage 1 text optimization results with a concise optimization reason;
+2. Stage 2 language-quality assessment with language identification and recommendations before translation;
+3. Stage 3 bilingual translation with Chinese and English versions of the optimized text.
 
 The prompt also retains the integrity boundary for misleading or false transformations.
 
@@ -41,21 +41,22 @@ Amended prompt-contract behavior:
 Representative optimized output shape:
 
 ```text
-### 1. Optimized Text
+### Stage 1: Text Optimization Results
 We shipped the docs yesterday, but the API example was broken and users were confused.
 
-### 2. Optimization Reasons
-- Corrected grammar and word forms.
-- Improved clarity while preserving the original meaning.
+Optimization reason: Corrected grammar and word forms while preserving the original meaning.
 
-### 3. Language Quality Assessment
-The optimized sentence is clear, grammatically sound, and ready for translation.
+### Stage 2: Language Quality Assessment
 
-### 4. Chinese Translation
-我们昨天发布了文档，但 API 示例有误，导致用户感到困惑。
+Language Identification: English
 
-### 5. English Translation
-We shipped the docs yesterday, but the API example was broken and users were confused.
+Assessment and Recommendations: The optimized sentence is clear, grammatically sound, and ready for translation.
+
+### Stage 3: Bilingual Translation
+
+Chinese Version: 我们昨天发布了文档，但 API 示例有误，导致用户感到困惑。
+
+English Version: We shipped the docs yesterday, but the API example was broken and users were confused.
 ```
 
 Result: satisfies T5 and AC5-AC8.
@@ -73,7 +74,7 @@ It clear cache when user update profile because stale profile page still show ol
 Pre-amendment branch behavior:
 
 - Returned concise PR-ready wording only by default.
-- Did not include the full three-stage workflow.
+- Did not include the compact three-stage workflow.
 
 Amended prompt-contract behavior:
 
@@ -152,7 +153,7 @@ Prompt class: user pastes flawed text without a clear instruction.
 
 Amended prompt-contract behavior:
 
-- Runs the full three-stage workflow by default.
+- Runs the compact three-stage workflow by default.
 - Does not ask for a target language because Chinese and English translations are part of the default contract.
 
 Result: satisfies T9 and EC4.
@@ -166,7 +167,7 @@ Amended prompt-contract behavior:
 - Keeps the required output sections.
 - Makes optimization reasons more specific when the user asks for extra rationale.
 
-Result: satisfies T9 and EC5.
+Result: satisfies T9 and EC6.
 
 ### Non-obvious ambiguity
 
@@ -176,7 +177,24 @@ Amended prompt-contract behavior:
 
 - Flags ambiguity, terminology, fidelity, or tone issues in the language-quality assessment before translation.
 
-Result: satisfies T9 and EC6.
+Result: satisfies T9 and EC7.
+
+### Simple acknowledgement
+
+Prompt:
+
+```text
+Okay, no problem.
+```
+
+Amended prompt-contract behavior:
+
+- Runs the compact three-stage workflow even though the source text is simple.
+- Provides a light optimization reason rather than omitting Stage 1 rationale.
+- Identifies the source language in Stage 2.
+- Provides Chinese and English versions in Stage 3.
+
+Result: satisfies T9 and EC5.
 
 ## Scope and compatibility evidence
 
@@ -188,11 +206,11 @@ Result: satisfies T9 and EC6.
 
 ## Prompt length evidence
 
-- Amended prompt length: 71 lines.
+- Amended prompt length: 69 lines.
 - Result: the prompt remains under the 500-line hard limit.
 
 ## Post-change conclusion
 
-The amended prompt contract satisfies the user's requested workflow: optimize first with reasons, assess language quality before translation, then provide Chinese and English translations. It keeps the prompt concise and preserves the integrity boundary that prevents misleading rewrites.
+The amended prompt contract satisfies the user's requested compact workflow: optimize first with reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations. It applies even to simple inputs and preserves the integrity boundary that prevents misleading rewrites.
 
 Residual risk: this evidence is prompt-contract evidence rather than live model output. That matches the approved test strategy, which forbids live model CI and uses reviewer-visible scenario evidence for prompt behavior.

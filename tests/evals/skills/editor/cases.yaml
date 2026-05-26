@@ -41,3 +41,12 @@ scenarios:
       Optimizes the technical sentence, provides optimization reasons, assesses
       language quality and translation readiness, and returns both Chinese and
       English versions without changing the technical meaning.
+  - id: editor-simple-acknowledgement
+    category: normal
+    prompt: |
+      Okay, no problem.
+    expected_behavior: >
+      Runs the compact three-stage workflow even for simple input, including
+      text optimization results with an optimization reason, language
+      identification, assessment and recommendations, and Chinese and English
+      versions.

@@ -6,7 +6,7 @@ accepted, amended by user direction on 2026-05-25
 
 ## Problem
 
-The `editor` skill should provide a dependable editing and translation workflow. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow, but make it concise and explicit.
+The `editor` skill should provide a dependable editing and translation workflow. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow, but make it compact and explicit for every non-empty input, including simple text such as `Okay, no problem.`
 
 The current accepted output contract is:
 
@@ -16,7 +16,7 @@ The current accepted output contract is:
 
 ## Goals
 
-1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended three-stage workflow.
+1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended compact three-stage workflow.
 2. Establish and preserve baseline evidence before prompt changes.
 3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, and bilingual technical translation.
 4. Preserve multilingual value while making Chinese and English the default output translation pair.
@@ -63,7 +63,7 @@ Disposition: rejected because it would not satisfy the user's amended workflow.
 
 Return corrected text, rewritten text, or target-language translation only by default.
 
-Disposition: rejected because the user now wants optimization reasons, language-quality assessment, and Chinese/English translations by default.
+Disposition: rejected because the user now wants compact optimization results, language-quality assessment, and Chinese/English translations by default.
 
 ### Option 3: Restore the original dense prompt exactly
 
@@ -71,7 +71,7 @@ Revert to the old Chinese-language three-stage report.
 
 Disposition: rejected because the amended workflow can be implemented more concisely and with clearer integrity boundaries.
 
-### Option 4: Implement a concise three-stage workflow
+### Option 4: Implement a compact three-stage workflow
 
 Optimize the input with reasons, assess language quality, and translate the optimized text into Chinese and English.
 
@@ -93,10 +93,11 @@ The optimized `editor` skill should:
 
 ## Expected behavior changes
 
-1. A request like "fix this" returns optimized text, reasons, assessment, and Chinese/English translations.
-2. A request like "make this PR description clearer" returns the same required sections with engineering-review wording.
-3. A request like "optimize this release-note sentence and translate it" returns optimized technical wording plus Chinese and English versions.
-4. A request to falsify meaning is handled as an integrity boundary and does not produce false translated wording.
+1. A request like "fix this" returns compact Stage 1 optimization results, Stage 2 language-quality assessment, and Stage 3 Chinese/English translations.
+2. A request like "Okay, no problem." still returns the same compact three-stage workflow.
+3. A request like "make this PR description clearer" returns the same required sections with engineering-review wording.
+4. A request like "optimize this release-note sentence and translate it" returns optimized technical wording plus Chinese and English versions.
+5. A request to falsify meaning is handled as an integrity boundary and does not produce false translated wording.
 
 ## Architecture impact
 
@@ -154,7 +155,7 @@ Do not add live model calls to CI for this slice.
 
 | Risk | Mitigation |
 |---|---|
-| The skill over-produces for quick edits. | The user explicitly requested the full workflow; keep reasons and assessments concise. |
+| The skill over-produces for quick edits. | The user explicitly requested the compact workflow even for quick edits; keep reasons and assessments concise. |
 | Translation output drifts from optimized meaning. | Require translations to be based on optimized text and aligned in technical meaning, tone, and formatting. |
 | Integrity boundary gets lost in the structured workflow. | Keep a dedicated integrity boundary section in `SKILL.md` and eval evidence. |
 | The prompt becomes long. | Keep a single concise `SKILL.md`; split only if approaching hard limits. |
@@ -162,11 +163,11 @@ Do not add live model calls to CI for this slice.
 
 ## Resolved decision: output workflow
 
-The optimized `editor` skill MUST use the three-stage workflow by default:
+The optimized `editor` skill MUST use the compact three-stage workflow by default:
 
 1. optimized text plus optimization reasons;
-2. language-quality assessment;
-3. Chinese and English translations.
+2. language-quality assessment with language identification and recommendations;
+3. bilingual translation with Chinese and English versions.
 
 This supersedes earlier proposal language that preferred edited text only, conditional notes, or target-language-only translation as the default.
 
@@ -180,4 +181,4 @@ This supersedes earlier proposal language that preferred edited text only, condi
 
 ## Readiness
 
-This amended proposal is ready for renewed code review and verification once the spec, test spec, skill prompt, eval fixture, and evidence files all reflect the three-stage workflow.
+This amended proposal is ready for renewed code review and verification once the spec, test spec, skill prompt, eval fixture, and evidence files all reflect the compact three-stage workflow.

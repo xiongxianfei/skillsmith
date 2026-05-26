@@ -7,7 +7,7 @@
 
 ## Purpose / big picture
 
-This plan tracks the accepted `editor` skill optimization and the 2026-05-25 user amendment that changed the desired output contract to a required three-stage workflow:
+This plan tracks the accepted `editor` skill optimization and the 2026-05-25 user amendment that changed the desired output contract to a required compact three-stage workflow:
 
 1. optimize the input and provide optimization reasons;
 2. review language quality before translation;
@@ -44,7 +44,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 ## Requirements covered
 
 - R1-R4: editor metadata, pure-prompt boundary, `$ARGUMENTS`, and `## Output Format`
-- R5-R12: three-stage workflow with optimization reasons, language-quality assessment, and Chinese/English translations
+- R5-R12: compact three-stage workflow with optimization reasons, language identification, language-quality assessment, and Chinese/English translations
 - R13-R18: supported editing modes, ambiguity behavior, and integrity boundary
 - R19: prompt line-count and concision
 - R20-R24: eval fixture plus baseline and post-change evidence
@@ -68,7 +68,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - Result:
   - Rewrote `skills/editor/SKILL.md` into a conditional, narrow-output prompt.
   - Code-review M2 R1 returned clean-with-notes and closed M2.
-  - This M2 contract was later superseded by the user's amended three-stage workflow request.
+  - This M2 contract was later superseded by the user's amended compact three-stage workflow request.
 
 ### M3. Post-change evidence and final implementation validation
 
@@ -81,7 +81,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 ### Amendment update. Three-stage editor workflow
 
 - Milestone state: implementation-updated
-- Goal: Update the skill and related docs to the amended three-stage workflow.
+- Goal: Update the skill and related docs to the amended compact three-stage workflow.
 - Requirements: R1-R27, AC1-AC15
 - Files/components touched:
   - `skills/editor/SKILL.md`
@@ -96,7 +96,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
   - `tests/validate_skills.py` and validator unit fixtures
   - governance and contributor docs for skill metadata
 - Implementation steps:
-  - Update the skill prompt to require optimization reasons, language-quality assessment, and Chinese/English translation.
+  - Update the skill prompt to require compact Stage 1 optimization results, Stage 2 language-quality assessment with language identification, and Stage 3 Chinese/English translation.
   - Update eval scenarios to assert the amended behavior.
   - Update spec and test spec to remove the stale narrow-output contract.
   - Update baseline and post-change evidence to compare the previous branch behavior with the amended contract.
@@ -111,7 +111,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - Result:
   - Implementation updated for the amended workflow.
   - Runtime-specific skill frontmatter removed by user request.
-  - Prompt line count is 71 lines.
+  - Prompt line count is 69 lines.
   - Validation passed locally.
   - Ready for renewed code review of the amendment.
 
@@ -122,7 +122,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - `python -m unittest discover tests`: full repository test suite after prompt/evidence changes.
 - `python tests/check_readme_sync.py`: README sync check because the helper exists on this branch.
 - `git diff --check`: whitespace and patch hygiene.
-- Manual scenario comparison: baseline and post-change evidence for the amended three-stage workflow.
+- Manual scenario comparison: baseline and post-change evidence for the amended compact three-stage workflow.
 - Line-count check for `skills/editor/SKILL.md`: prove the prompt remains under the hard limit.
 
 ## Risks and recovery
@@ -147,7 +147,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 |---|---|---|---|
 | 2026-05-25 | Start with `editor` alone | Low-risk skill suitable for proving the quality path | Batch with high-risk skills |
 | 2026-05-25 | Keep live model calls out of CI | Prompt behavior is reviewed through deterministic fixtures and manual evidence | Live model CI |
-| 2026-05-25 | Amend output contract to mandatory three-stage workflow | Explicit user direction after PR handoff | Narrow edited-text-only default |
+| 2026-05-25 | Amend output contract to mandatory compact three-stage workflow | Explicit user direction after PR handoff | Narrow edited-text-only default |
 
 ## Current handoff
 
