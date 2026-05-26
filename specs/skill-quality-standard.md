@@ -37,6 +37,8 @@ Every reference in a skill prompt should resolve to one thing. Terminology shoul
 
 Output contracts should be stable and specific. Required reasons, assessments, or sections should name the actual dimensions to check rather than saying only "explain" or "assess quality."
 
+Structured outputs should optimize for reuse, not decoration. Prefer concise bold labels, copyable content on its own line under each label, clear separation between deliverables and commentary, and no emoji or decorative symbols unless an accepted skill spec explicitly needs them.
+
 When a prompt reaches diminishing returns from wording review, freeze the good-enough contract and move to eval evidence. Further refinements should be driven by observed behavior, not endless polishing.
 
 ## Glossary
@@ -175,6 +177,8 @@ R45. Reviewers SHOULD treat known tradeoffs, such as fixed output verbosity for 
 R46. Reviewers SHOULD stop requesting prompt wording refinements once remaining concerns are cosmetic and the next useful evidence is behavioral eval output.
 
 R47. Reviewer heuristics for skill design philosophy, including simplicity, branch avoidance, body-owned behavior, vocabulary precision, fixed output contracts, and known tradeoffs, MUST be surfaced through eval evidence, review notes, or checklist findings rather than brittle CI gates.
+
+R48. New or materially changed structured output contracts SHOULD use concise bold labels, put copyable content on its own line below each label, visually separate deliverables from supporting commentary where useful, and avoid emoji or decorative symbols unless an accepted skill spec explicitly requires them.
 
 ## Inputs and outputs
 

@@ -134,11 +134,11 @@ Default output format:
 
 | Section | Default content |
 |---|---|
-| `### Stage 1: Text Optimization Results` | Optimized source text plus concise, specific optimization reason |
-| `### Stage 2: Language Quality Assessment` | `Language Identification` and `Assessment and Recommendations` |
-| `### Stage 3: Bilingual Translation` | `Chinese Version` and `English Version` generated from the optimized text |
+| `### Stage 1: Optimized Text` | `**Optimized text**` content on its own line plus `**Why**` content on its own line |
+| `### Stage 2: Assessment` | `**Source language**` and `**Assessment**`, each with content on its own line |
+| `### Stage 3: Bilingual Output` | `**中文**` and `**English**`, each with the generated translation on its own line |
 
-Outputs MUST be Markdown-compatible plain text. No tool output, generated files, or external service results are part of the skill runtime contract.
+Outputs MUST be Markdown-compatible plain text. Labels MUST be bold, copyable content MUST appear on the line below its label rather than inline after a colon, and the output MUST NOT use emoji or decorative symbols. A divider SHOULD separate supporting analysis from the final bilingual output. No tool output, generated files, or external service results are part of the skill runtime contract.
 
 ## State and invariants
 
@@ -181,7 +181,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 No interactive UI is introduced.
 
-The optimized output SHOULD be easy to scan and reuse, with stable stage sections and concise reasons/assessment text.
+The optimized output SHOULD be easy to scan and reuse, with stable stage sections, bold labels, copyable content on its own line, concise reasons/assessment text, and no decorative emoji.
 
 ## Performance expectations
 
