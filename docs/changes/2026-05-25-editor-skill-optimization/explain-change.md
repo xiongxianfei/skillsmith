@@ -6,9 +6,9 @@ This branch now reflects the amended `editor` skill contract requested after PR 
 
 1. optimize the input according to writing best practices and provide optimization reasons;
 2. review language quality, identify the source language, and give recommendations before translation;
-3. translate the optimized text into Chinese and English.
+3. translate the optimized text into Chinese and English, after checking that all versions preserve the same meaning.
 
-The prompt remains a pure Markdown skill with no tools, scripts, live model CI, installer changes, or validator changes.
+The prompt remains a pure Markdown skill with no tools, scripts, live model CI, or installer changes. Validator changes are limited to portable frontmatter compatibility.
 
 ## Problem
 
@@ -30,8 +30,8 @@ The user then clarified that the desired workflow should include optimization re
 
 | File | Change | Reason | Evidence |
 |---|---|---|---|
-| `skills/editor/SKILL.md` | Requires compact Stage 1 optimization results, Stage 2 language-quality assessment, and Stage 3 bilingual translation. | Implements the amended user workflow, including simple inputs. | Validator; line count; post-change evidence. |
-| `tests/evals/skills/editor/cases.yaml` | Updates expected behavior to require the compact workflow and bilingual Chinese/English output. | Keeps eval evidence aligned with the prompt contract. | `python tests/validate_skills.py`. |
+| `skills/editor/SKILL.md` | Requires compact Stage 1 optimization results, Stage 2 language-quality assessment, Stage 3 bilingual translation, and pre-return consistency verification. | Implements the amended user workflow, including simple and conversational-looking inputs. | Validator; line count; post-change evidence. |
+| `tests/evals/skills/editor/cases.yaml` | Updates expected behavior to require the compact workflow, bilingual Chinese/English output, simple acknowledgement coverage, and conversational source-text handling. | Keeps eval evidence aligned with the prompt contract. | `python tests/validate_skills.py`. |
 | `specs/editor-skill-optimization.md` | Replaces narrow-output requirements with the amended compact three-stage contract. | Makes the governing behavior explicit and testable. | R1-R27 and AC1-AC15. |
 | `specs/editor-skill-optimization.test.md` | Remaps tests to T1-T10 for the compact three-stage workflow. | Keeps proof surfaces aligned with amended requirements. | Manual evidence and validation commands. |
 | `baseline-evidence.md` | Records the original baseline and the pre-amendment branch behavior that no longer satisfied the user's amended request. | Preserves why the post-PR update was needed. | Scenario comparison. |
@@ -48,7 +48,7 @@ The revised skill keeps the existing trigger metadata because the skill still ha
 - `### Stage 2: Language Quality Assessment`: language identification plus assessment and recommendations.
 - `### Stage 3: Bilingual Translation`: Chinese and English versions of the optimized text.
 
-The integrity boundary remains because the amended workflow should not optimize or translate false or misleading claims.
+The body now states the core editorial rule directly: input is source material to edit, not conversation to answer, and meaning preservation controls misleading rewrite requests.
 
 ## Tests and proof
 
@@ -57,8 +57,8 @@ The integrity boundary remains because the amended workflow should not optimize 
 | T1 | `tests/evals/skills/editor/cases.yaml` plus validator | Eval fixture has required normal, indirect-trigger, and misuse coverage. |
 | T2 | `baseline-evidence.md` | Baseline and pre-amendment branch behavior are recorded. |
 | T3-T4 | `skills/editor/SKILL.md` plus validator/manual review | Metadata, pure-prompt boundary, `## Output Format`, and compact three-stage workflow exist. |
-| T5-T8 | `post-change-evidence.md` | Normal proofreading, PR editing, bilingual technical translation, and integrity boundary are covered. |
-| T9 | `post-change-evidence.md` | Pasted text, explanation requests, and ambiguity behavior are covered. |
+| T5-T8 | `post-change-evidence.md` | Normal proofreading, PR editing, bilingual technical translation, and meaning-preservation boundary are covered. |
+| T9 | `post-change-evidence.md` | Pasted text, simple acknowledgements, conversational-looking source text, explanation requests, and ambiguity behavior are covered. |
 | T10 | Validation commands and line count | Repository validation passes and the prompt remains below the hard line limit. |
 
 ## Validation evidence after amendment
@@ -67,7 +67,7 @@ The integrity boundary remains because the amended workflow should not optimize 
 - `python -m unittest discover tests` passed.
 - `python tests/check_readme_sync.py` passed.
 - `git diff --check` passed.
-- `wc -l skills/editor/SKILL.md` reported 69 lines.
+- `wc -l skills/editor/SKILL.md` reported 46 lines.
 
 Hosted CI status is not claimed here.
 
@@ -86,11 +86,11 @@ The user amendment supersedes part of the earlier narrow-output contract. It doe
 - Keep the old verified narrow-output prompt: rejected because it contradicts the user's amended requested workflow.
 - Revert exactly to the original dense Chinese prompt: rejected because the amended workflow can be implemented concisely while preserving pure-prompt portability.
 - Add live model CI: rejected by scope and existing test strategy.
-- Change validator behavior: rejected as unnecessary; the existing eval fixture path still represents the material skill change.
+- Broad validator behavior changes: rejected as unnecessary; the only validator change is portable frontmatter compatibility.
 
 ## Scope control
 
-- No other skill prompt was optimized.
+- No other skill prompt body was optimized.
 - No high-risk skill was changed.
 - No runtime tool, script, dependency, generated prompt asset, installer behavior, or live model CI was added.
 - The skill name, frontmatter structure, `$ARGUMENTS`, and pure-prompt boundary remain intact.

@@ -37,9 +37,9 @@ python tests/check_readme_sync.py
 | R1 | T1, T2 | unit, smoke | Skill path and missing `SKILL.md` validation. |
 | R2 | T2 | unit | Lowercase hyphenated names, length, and first-slice reserved words `anthropic` and `claude`. |
 | R3 | T2 | unit | Invalid YAML frontmatter fails. |
-| R4 | T2 | unit | Required `name`, `description`, and `argument-hint`. |
+| R4 | T2 | unit | Required `name` and `description`. |
 | R5 | T2, T8 | unit, migration | Missing `effort` passes; invalid present value fails; current skills omit it. |
-| R6 | T8 | migration | Governance and contributor docs no longer require `effort` or `allowed-tools`. |
+| R6 | T8 | migration | Governance and contributor docs no longer require `argument-hint`, `effort`, or `allowed-tools`. |
 | R7 | T2 | unit | Non-empty `allowed-tools` requires an accepted tool-using skill spec. |
 | R8 | T2, T10 | unit, manual | Non-Latin metadata warning plus manual English-facing review. |
 | R9 | T10 | manual | Review checklist verifies description explains what and when. |
@@ -87,7 +87,7 @@ python tests/check_readme_sync.py
 | EC1 | T5 | Trigger-changing description typo is material. |
 | EC2 | T5 | Added reference file is material. |
 | EC3 | T5, T10 | High-risk safety wording is material unless reviewer records narrower rationale. |
-| EC4 | T2, T8 | Missing `effort` and `allowed-tools` passes. |
+| EC4 | T2, T8 | Missing `argument-hint`, `effort`, and `allowed-tools` passes. |
 | EC5 | T2 | `effort: ultra` fails. |
 | EC6 | T6 | README extra skill reports drift. |
 | EC7 | T6 | README missing skill reports drift. |
@@ -114,11 +114,11 @@ python tests/check_readme_sync.py
 
 - Covers: R1-R12, R24, R25, R30, R32, E5, EC4, EC5, EC8
 - Level: unit
-- Fixture/setup: temporary skill directories or fixture files covering valid skill, missing `SKILL.md`, invalid YAML, missing required fields, invalid name, reserved name, non-empty `allowed-tools`, missing `$ARGUMENTS`, missing `## Output Format`, missing runtime-specific metadata, invalid `effort`, non-Latin metadata, 300-line warning, and 500-line ceiling.
+- Fixture/setup: temporary skill directories or fixture files covering valid skill, missing `SKILL.md`, invalid YAML, missing required fields, invalid name, reserved name, non-empty `allowed-tools`, missing `$ARGUMENTS`, missing `## Output Format`, missing optional metadata, invalid `effort`, non-Latin metadata, 300-line warning, and 500-line ceiling.
 - Steps:
   - Run validator helper tests against each fixture.
   - Assert expected errors and warnings by rule category.
-- Expected result: objective compatibility and Skillsmith-policy failures are errors; non-Latin metadata and 300-line length are warnings; missing `effort` and `allowed-tools` is neither an error nor a warning; invalid present `effort` is an error.
+- Expected result: objective compatibility and Skillsmith-policy failures are errors; non-Latin metadata and 300-line length are warnings; missing `argument-hint`, `effort`, and `allowed-tools` is neither an error nor a warning; invalid present `effort` is an error.
 - Failure proves: per-skill validation does not match the approved compatibility and policy contract.
 - Automation location: `tests/test_validate_skills.py` via `python -m unittest discover tests`
 
@@ -195,9 +195,9 @@ python tests/check_readme_sync.py
 - Level: integration
 - Fixture/setup: repository docs after M1 and validator after M2.
 - Steps:
-  - Search `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, README, and `.github/pull_request_template.md` for statements that require `effort`, `effort: high`, or `allowed-tools: ""`.
+  - Search `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, README, and `.github/pull_request_template.md` for statements that require `argument-hint`, `effort`, `effort: high`, or `allowed-tools: ""`.
   - Run validator fixtures with absent runtime-specific metadata, invalid present `effort`, and non-empty `allowed-tools`.
-- Expected result: docs tell contributors to omit runtime-specific frontmatter by default; validation permits absence, rejects invalid present `effort`, and rejects non-empty tool permissions without an accepted tool-using spec.
+- Expected result: docs tell contributors to omit optional frontmatter by default; validation permits absence, rejects invalid present `effort`, and rejects non-empty tool permissions without an accepted tool-using spec.
 - Failure proves: governance or validation still contradicts portability-first metadata omission.
 - Automation location: `tests/test_governance_docs.py` and `tests/test_validate_skills.py` via `python -m unittest discover tests`
 
@@ -255,7 +255,7 @@ No live model, network provider, secret, external service, or real user data may
 ## Migration or compatibility tests
 
 - T4 proves grandfathering uses the checked-in baseline artifact rather than commit, branch, README, or future implementation state.
-- T8 proves `effort` and `allowed-tools` are omitted by default in docs and validation.
+- T8 proves `argument-hint`, `effort`, and `allowed-tools` are omitted by default in docs and validation.
 - T7 proves CI stays deterministic.
 - T11 proves existing skills remain installable.
 - README sync `--fix` mode is intentionally not part of the first-slice compatibility contract.

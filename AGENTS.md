@@ -30,7 +30,6 @@ name: <lowercase-hyphenated>
 description: >
   English only, under 250 chars. Must be "pushy" — include explicit
   "Use this skill whenever..." phrasing to prevent undertriggering.
-argument-hint: <English, describes expected user input>
 ---
 ```
 
@@ -42,7 +41,7 @@ Body must contain:
 
 - Descriptions MUST be English — skill bodies can be any language
 - Descriptions should be trigger-phrase-forward and "pushy" per Anthropic's official guidance: tell Codex when to auto-invoke, including indirect/casual user phrasing
-- Do not add runtime-specific frontmatter such as `effort` or `allowed-tools` unless an accepted proposal/spec requires it
+- Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
 - New or materially changed skills need eval evidence as defined in `specs/skill-quality-standard.md`
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers
@@ -70,5 +69,5 @@ VISION.md                  ← project identity and scope
 
 - Forgetting `$ARGUMENTS` in the body → CI error
 - Missing `## Output Format` → CI error
-- Non-English description or argument-hint → CI warning (CJK/Cyrillic detected)
+- Non-English description → CI warning (CJK/Cyrillic detected)
 - Using passive descriptions ("Triggers when...") instead of pushy ("Use this skill whenever...") → skill won't auto-invoke reliably

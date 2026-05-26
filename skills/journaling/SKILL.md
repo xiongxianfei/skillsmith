@@ -5,7 +5,6 @@ description: >
   Use this skill whenever the user wants to process their day, vent about something, reflect
   on an experience, or work through feelings — even if they just say "I had a rough day" or
   "I need to think through something" without explicitly asking to journal.
-argument-hint: <what happened today, or what's on your mind>
 ---
 
 **今天想聊的内容：**

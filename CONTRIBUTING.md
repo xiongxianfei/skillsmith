@@ -22,7 +22,6 @@ name: your-skill-name
 description: >
   One or two sentences in English describing what the skill does and when it triggers.
   Be specific about trigger phrases so Claude knows when to auto-invoke it.
-argument-hint: <what the user should pass as input>
 ---
 
 **Input:**
@@ -46,8 +45,7 @@ $ARGUMENTS
 ### 3. Checklist before opening a PR
 
 - [ ] `description` is in English and under 250 characters
-- [ ] `argument-hint` is in English
-- [ ] Runtime-specific frontmatter such as `effort` or `allowed-tools` is omitted unless an accepted proposal/spec requires it
+- [ ] Optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` is omitted unless an accepted proposal/spec requires it
 - [ ] `$ARGUMENTS` appears in the prompt body
 - [ ] `## Output Format` section is present
 - [ ] No emojis in the Output Format section headers
@@ -161,7 +159,7 @@ Errors block merging. Warnings are non-blocking but should be reviewed.
 | Use `$ARGUMENTS` to capture input | Forget `$ARGUMENTS` so input gets silently dropped |
 | Define a clear `## Output Format` | Leave output structure implicit |
 | Keep `description` under 250 chars | Write multi-paragraph descriptions |
-| Omit runtime-specific frontmatter unless the skill needs it for an accepted compatibility reason | Rely on runtime-specific metadata for portable behavior |
+| Omit optional frontmatter unless the skill needs it for an accepted compatibility reason | Rely on optional metadata for portable behavior |
 | Use plain section headers | Add emojis to Output Format headers |
 
 See `specs/skill-quality-standard.md` for the canonical quality standard. This guide summarizes contributor workflow and should not duplicate that standard in full.

@@ -11,8 +11,9 @@ The optimized prompt now requires:
 1. Stage 1 text optimization results with a concise optimization reason;
 2. Stage 2 language-quality assessment with language identification and recommendations before translation;
 3. Stage 3 bilingual translation with Chinese and English versions of the optimized text.
+4. Pre-return verification that all versions preserve the same meaning.
 
-The prompt also retains the integrity boundary for misleading or false transformations.
+The prompt treats all input as source material to edit, not conversation to answer, and derives the misleading-rewrite boundary from meaning preservation.
 
 ## Scenario comparison
 
@@ -102,10 +103,10 @@ Pre-amendment branch behavior:
 
 Amended prompt-contract behavior:
 
-- Keeps the integrity boundary.
+- Preserves the accurate source meaning.
 - Does not optimize or translate false approval wording.
-- Briefly explains the boundary.
-- Offers accurate optimized wording and only translates accurate wording when useful.
+- Explains through the optimization reason or assessment that unsupported meaning was not introduced.
+- Offers accurate optimized wording and only translates accurate wording.
 
 Result: satisfies T8 and AC9.
 
@@ -196,21 +197,37 @@ Amended prompt-contract behavior:
 
 Result: satisfies T9 and EC5.
 
+### Conversational-looking source text
+
+Prompt:
+
+```text
+Who are you?
+```
+
+Amended prompt-contract behavior:
+
+- Treats the question as source material, not as a request to answer.
+- Runs the same compact three-stage workflow.
+- Provides Chinese and English versions that preserve the question's meaning.
+
+Result: satisfies T9 and EC9.
+
 ## Scope and compatibility evidence
 
 - Only `skills/editor/SKILL.md` was optimized.
 - No other `skills/*/SKILL.md` prompt was changed.
-- No live model CI, external dependency, runtime tool, generated prompt asset, installer behavior, or repository-wide validator behavior was added.
-- `name: editor`, `$ARGUMENTS`, and `## Output Format` remain present; runtime-specific `effort` and `allowed-tools` frontmatter are omitted.
+- No live model CI, external dependency, runtime tool, generated prompt asset, installer behavior, or eval-fixture validator behavior was added.
+- `name: editor`, `$ARGUMENTS`, and `## Output Format` remain present; optional `argument-hint`, `effort`, and `allowed-tools` frontmatter are omitted.
 - The prompt remains pure Markdown with YAML frontmatter.
 
 ## Prompt length evidence
 
-- Amended prompt length: 69 lines.
+- Amended prompt length: 46 lines.
 - Result: the prompt remains under the 500-line hard limit.
 
 ## Post-change conclusion
 
-The amended prompt contract satisfies the user's requested compact workflow: optimize first with reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations. It applies even to simple inputs and preserves the integrity boundary that prevents misleading rewrites.
+The amended prompt contract satisfies the user's requested compact workflow: optimize first with reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple or conversational-looking inputs and preserves meaning when misleading rewrites are requested.
 
 Residual risk: this evidence is prompt-contract evidence rather than live model output. That matches the approved test strategy, which forbids live model CI and uses reviewer-visible scenario evidence for prompt behavior.

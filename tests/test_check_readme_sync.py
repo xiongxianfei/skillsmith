@@ -11,7 +11,6 @@ SKILL_TEMPLATE = """---
 name: {name}
 description: >
   {description}
-argument-hint: sample input
 ---
 
 $ARGUMENTS

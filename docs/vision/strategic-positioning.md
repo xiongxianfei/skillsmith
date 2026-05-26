@@ -18,7 +18,7 @@ Skillsmith turns recurring AI-assisted work into portable, inspectable skill fil
 
 ## Core mechanism
 
-Each skill is a Markdown prompt with structured metadata, a pushy invocation description, an argument hint, a `$ARGUMENTS` placeholder, and a required output format. Validation keeps the catalog consistent enough for review.
+Each skill is a Markdown prompt with structured metadata, a pushy invocation description, a `$ARGUMENTS` placeholder, and a required output format. Validation keeps the catalog consistent enough for review.
 
 ## Alternatives
 

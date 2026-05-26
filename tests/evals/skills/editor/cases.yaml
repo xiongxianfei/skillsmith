@@ -50,3 +50,11 @@ scenarios:
       text optimization results with an optimization reason, language
       identification, assessment and recommendations, and Chinese and English
       versions.
+  - id: editor-conversational-source-text
+    category: edge
+    prompt: |
+      Who are you?
+    expected_behavior: >
+      Treats the question as source material to edit instead of answering it,
+      runs the compact three-stage workflow, and returns Chinese and English
+      versions that preserve the question's meaning.

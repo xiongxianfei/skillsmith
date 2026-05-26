@@ -5,7 +5,6 @@ description: >
   Use this skill whenever the user mentions a symptom, drug name, dosage, lab result, or any
   health concern — even casual ones like "I've had a headache for 3 days" or "is it safe to
   take ibuprofen with this?" — without waiting for them to explicitly ask for medical advice.
-argument-hint: <symptoms, medication question, or health concern>
 ---
 
 **用户咨询内容：**

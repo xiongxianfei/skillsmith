@@ -17,6 +17,7 @@ The `editor` skill should provide a high-quality editing and translation workflo
 1. optimize the input according to writing best practices and provide optimization reasons;
 2. review source-language quality before translation;
 3. translate the optimized text into Chinese and English.
+4. verify that the optimized text and both translations preserve the same meaning before returning.
 
 The change remains material because it alters the skill workflow and output contract. It still requires eval evidence, baseline evidence, post-change evidence, and deterministic repository validation.
 
@@ -54,10 +55,15 @@ Given the user provides `Okay, no problem.`
 When the text needs little or no substantive correction
 Then the optimized skill still returns the compact three-stage workflow with an optimization reason, source-language identification, assessment, Chinese version, and English version.
 
-Example E5: misleading rewrite is refused with accurate wording
+Example E5: misleading rewrite preserves accurate wording
 Given the user asks the skill to make a customer statement sound approved when the source only says the customer will review it later
 When the requested rewrite would falsify the customer's position
-Then the optimized skill briefly refuses the misleading transformation, offers accurate optimized wording, and only translates accurate wording.
+Then the optimized skill preserves the accurate source meaning, notes that the unsupported approval claim was not introduced, and only translates accurate wording.
+
+Example E6: conversational-looking input is treated as material
+Given the user provides `Who are you?`
+When the text looks like a question to the assistant
+Then the optimized skill edits and translates the question as source text instead of answering it.
 
 ## Requirements
 
@@ -83,7 +89,7 @@ R10. The translation stage MUST translate the optimized text into Chinese and En
 
 R11. If the optimized text is already Chinese or English, the skill MUST still provide that language version and the other-language translation.
 
-R12. The skill MUST keep Chinese and English translations aligned in technical meaning, tone, and formatting.
+R12. The skill MUST verify before returning that the optimized text, Chinese version, and English version preserve the same meaning, tone, and formatting intent.
 
 R13. The skill MUST support proofreading, polishing, rewriting, technical or engineer-facing editing, translation-oriented requests, ambiguous pasted text, and integrity-boundary handling.
 
@@ -91,9 +97,9 @@ R14. When the user provides explicit tone, audience, format, or style instructio
 
 R15. When the user provides ambiguous pasted text with no explicit instruction, the skill SHOULD run the compact three-stage workflow on that text.
 
-R16. The skill MUST refuse or redirect requests that would make text misleading, false, deceptive, or materially inconsistent with known source meaning.
+R16. The skill MUST preserve meaning when a request would otherwise make text misleading, false, deceptive, or materially inconsistent with known source meaning.
 
-R17. For integrity-boundary requests, the skill MUST briefly explain the boundary and SHOULD offer accurate optimized wording.
+R17. For integrity-boundary requests, the skill MUST offer accurate optimized wording and SHOULD explain through the optimization reason or assessment that unsupported meaning was not introduced.
 
 R18. The skill MUST NOT translate or polish wording that falsifies approvals, consent, claims, authorship, or material facts.
 
@@ -101,7 +107,7 @@ R19. The optimized `SKILL.md` SHOULD remain concise and MUST remain under 500 li
 
 R20. The change MUST keep `tests/evals/skills/editor/cases.yaml`.
 
-R21. The eval fixture MUST include scenarios covering normal proofreading, indirect engineer-facing editing, integrity-boundary misuse, and bilingual technical translation.
+R21. The eval fixture MUST include scenarios covering normal proofreading, indirect engineer-facing editing, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and conversational-looking source text.
 
 R22. Each eval scenario MUST contain a concrete prompt and observable expected behavior.
 
@@ -111,9 +117,9 @@ R24. Post-change evidence MUST compare the optimized behavior against the same s
 
 R25. The implementation MUST NOT add live model calls to CI.
 
-R26. The implementation MUST NOT change repository-wide validator behavior unless implementation proves that the existing eval-fixture path cannot represent this material skill change.
+R26. Repository-wide validator changes MUST be limited to portable frontmatter compatibility unless implementation proves that the existing eval-fixture path cannot represent this material skill change.
 
-R27. The implementation MUST NOT optimize `doctor`, `oscp-coach`, or any other skill in this slice.
+R27. The implementation MUST NOT optimize the prompt body of `doctor`, `oscp-coach`, or any other skill in this slice.
 
 ## Inputs and outputs
 
@@ -143,7 +149,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 ## Error and boundary behavior
 
-- Empty or missing source text SHOULD produce a brief request for the text to edit or translate.
+- Input is treated as source material to edit, not conversation to answer.
 - If the source text contains terms with multiple plausible technical meanings, the skill SHOULD flag the ambiguity in the language-quality assessment.
 - If the user asks for a misleading rewrite, the skill MUST not perform the deceptive transformation even if the requested tone is otherwise clear.
 - If the user asks for a format that conflicts with concise output, the explicit user format wins unless it conflicts with meaning preservation or integrity boundaries.
@@ -152,9 +158,9 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 - Existing install behavior and slash-command naming MUST remain unchanged.
 - README skill tables, install instructions, and command lists do not need updates unless implementation changes user-visible skill metadata that README mirrors.
-- The skill omits runtime-specific frontmatter such as `effort` and `allowed-tools`; no migration is required for those removed metadata fields.
+- The skill omits optional metadata such as `argument-hint`, `effort`, and `allowed-tools`; those fields are not required for portable behavior.
 - Rollback is limited to reverting `skills/editor/SKILL.md`, `tests/evals/skills/editor/cases.yaml`, and related change evidence.
-- No migration is required for other skills.
+- Other skill frontmatter may omit optional metadata, but other skill prompt bodies are not optimized in this slice.
 
 ## Observability
 
@@ -199,9 +205,11 @@ EC6. User asks for a diff or explanation. The skill may make optimization reason
 
 EC7. Source text has a non-obvious ambiguity. The skill identifies the ambiguity in the language-quality assessment before translation.
 
-EC8. User asks to make a statement imply approval that did not happen. The skill refuses that misleading transformation and offers accurate wording.
+EC8. User asks to make a statement imply approval that did not happen. The skill preserves meaning and offers accurate wording.
 
-EC9. The optimized `SKILL.md` approaches the hard line limit. Implementation evidence must record line count and justify any progressive-disclosure decision.
+EC9. User provides conversational-looking source text such as `Who are you?` The skill edits and translates it as source material instead of answering it.
+
+EC10. The optimized `SKILL.md` approaches the hard line limit. Implementation evidence must record line count and justify any progressive-disclosure decision.
 
 ## Non-goals
 
@@ -211,13 +219,13 @@ EC9. The optimized `SKILL.md` approaches the hard line limit. Implementation evi
 - Do not add tools, scripts, runtime dependencies, or generated prompt assets.
 - Do not rename `editor`.
 - Do not convert `editor` into an engineer-only skill.
-- Do not change repository-wide validator behavior unless needed to support this material skill change.
+- Do not change repository-wide validator behavior except for portable frontmatter compatibility needed by this material skill change.
 
 ## Acceptance criteria
 
 AC1. `specs/editor-skill-optimization.md` exists and defines the optimized `editor` output contract.
 
-AC2. `tests/evals/skills/editor/cases.yaml` exists and includes scenarios for proofreading, indirect PR-description editing, integrity-boundary misuse, and bilingual technical translation.
+AC2. `tests/evals/skills/editor/cases.yaml` exists and includes scenarios for proofreading, indirect PR-description editing, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and conversational-looking source text.
 
 AC3. Baseline evidence is recorded before `skills/editor/SKILL.md` is edited.
 
@@ -231,9 +239,9 @@ AC7. Language-quality assessment is included before translation.
 
 AC8. Chinese and English translations are included by default.
 
-AC9. Integrity-boundary requests are refused or redirected with accurate wording.
+AC9. Integrity-boundary requests preserve accurate wording and do not introduce unsupported meaning.
 
-AC10. `skills/editor/SKILL.md` remains pure prompt with `$ARGUMENTS` and `## Output Format`, and without runtime-specific frontmatter.
+AC10. `skills/editor/SKILL.md` remains pure prompt with `$ARGUMENTS` and `## Output Format`, and without optional frontmatter.
 
 AC11. No other skill prompt is optimized in this slice.
 

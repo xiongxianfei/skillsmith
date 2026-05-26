@@ -25,13 +25,13 @@ Use deterministic checks for static repository contracts and manual scenario evi
 | Requirement ID | Covered by | Level | Notes |
 |---|---|---|---|
 | R1-R4 | T3 | integration | Metadata, `$ARGUMENTS`, pure-prompt boundary, and `## Output Format`. |
-| R5-R12 | T4, T5, T6, T7 | manual | Compact three-stage workflow: optimize, assess, translate into Chinese and English. |
-| R13-R18 | T6, T8, T9 | manual | Prompt supports editing modes, ambiguity, and integrity-boundary behavior. |
+| R5-R12 | T4, T5, T6, T7 | manual | Compact three-stage workflow: optimize, assess, translate into Chinese and English, and verify consistency. |
+| R13-R18 | T6, T8, T9 | manual | Prompt supports editing modes, source-material handling, ambiguity, and integrity-boundary behavior. |
 | R19 | T10 | smoke | Prompt line count remains under 500 lines. |
 | R20-R22 | T1 | integration | Eval fixture exists and contains required scenario classes. |
 | R23 | T2 | manual | Baseline evidence exists before prompt edit. |
 | R24 | T5-T10 | manual | Post-change evidence compares optimized behavior against baseline scenario classes. |
-| R25-R27 | T10 | contract | No live model CI, validator behavior change, or unrelated skill optimization. |
+| R25-R27 | T10 | contract | No live model CI, no eval-fixture validator behavior change, and no unrelated prompt optimization. |
 
 ## Example coverage map
 
@@ -41,7 +41,8 @@ Use deterministic checks for static repository contracts and manual scenario evi
 | E2 indirect engineer-facing edit returns compact workflow | T6 | Uses indirect PR-description fixture scenario. |
 | E3 technical translation-oriented request returns Chinese and English | T7 | Uses bilingual technical translation fixture scenario. |
 | E4 simple acknowledgement still uses workflow | T9 | Uses simple acknowledgement fixture scenario. |
-| E5 misleading rewrite is refused with accurate wording | T8 | Uses integrity-boundary misuse fixture scenario. |
+| E5 misleading rewrite preserves accurate wording | T8 | Uses integrity-boundary misuse fixture scenario. |
+| E6 conversational-looking input is treated as material | T9 | Uses conversational source-text fixture scenario. |
 
 ## Edge case coverage
 
@@ -54,8 +55,9 @@ Use deterministic checks for static repository contracts and manual scenario evi
 | EC5 simple acknowledgement | T9 | manual | Compact workflow still runs. |
 | EC6 diff or explanation request | T9 | manual | Optimization reasons become more specific. |
 | EC7 non-obvious ambiguity | T9 | manual | Assessment flags ambiguity before translation. |
-| EC8 misleading approval rewrite | T8 | manual | Refusal/redirect plus accurate wording. |
-| EC9 prompt line limit | T10 | smoke | Line count recorded. |
+| EC8 misleading approval rewrite | T8 | manual | Preserve meaning plus accurate wording. |
+| EC9 conversational-looking source text | T9 | manual | Edits and translates rather than answering. |
+| EC10 prompt line limit | T10 | smoke | Line count recorded. |
 
 ## Test cases
 
@@ -66,7 +68,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Fixture/setup: `tests/evals/skills/editor/cases.yaml`
 - Steps:
   - Include `version: 1`.
-  - Include scenarios for normal proofreading, indirect PR-description editing, integrity-boundary misuse, and bilingual technical translation.
+  - Include scenarios for normal proofreading, indirect PR-description editing, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and conversational-looking source text.
   - Run `python tests/validate_skills.py`.
   - Run `python -m unittest tests/test_eval_fixtures.py`.
 - Expected result: The fixture passes validation and contains required `normal`, `indirect-trigger`, and `misuse` coverage.
@@ -88,7 +90,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Fixture/setup: `skills/editor/SKILL.md`
 - Steps:
   - Confirm frontmatter keeps `name: editor`.
-  - Confirm runtime-specific frontmatter such as `effort` and `allowed-tools` is omitted.
+  - Confirm optional frontmatter such as `argument-hint`, `effort`, and `allowed-tools` is omitted.
   - Confirm `$ARGUMENTS` appears in the body.
   - Confirm `## Output Format` appears.
   - Run `python tests/validate_skills.py`.
@@ -106,6 +108,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Confirm source-language identification is required.
   - Confirm language-quality assessment happens before translation.
   - Confirm Chinese and English translations are required by default.
+  - Confirm the workflow verifies meaning consistency before returning.
   - Confirm the output format uses `Stage 1`, `Stage 2`, and `Stage 3` headings rather than five separate top-level sections.
 - Expected result: The prompt contract reflects the amended compact three-stage workflow.
 
@@ -143,25 +146,26 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Check that both Chinese and English versions preserve technical meaning.
 - Expected result: Optimized behavior returns both translations from the optimized text.
 
-### T8. Integrity-boundary scenario refuses misleading rewrite
+### T8. Integrity-boundary scenario preserves meaning
 
 - Covers: R16-R18, E5, EC8, AC9
 - Level: manual
 - Fixture/setup: Scenario `editor-integrity-boundary` from `cases.yaml`
 - Steps:
   - Check that the optimized output does not falsify the customer's position.
-  - Check that it briefly explains the boundary.
+  - Check that it explains through the reason or assessment that unsupported meaning was not introduced.
   - Check that any translated wording remains accurate.
-- Expected result: Optimized behavior refuses or redirects the misleading transformation and only offers accurate wording.
+- Expected result: Optimized behavior preserves source meaning and only offers accurate wording.
 
 ### T9. Supplemental ambiguity and pasted-text behavior
 
-- Covers: R13-R15, EC4-EC7
+- Covers: R13-R15, E6, EC4-EC7, EC9
 - Level: manual
 - Fixture/setup: Supplemental manual prompts derived from spec edge cases.
 - Steps:
   - Provide pasted text without explicit instruction and confirm the compact workflow runs.
   - Provide `Okay, no problem.` and confirm the compact three-stage workflow still runs.
+  - Provide `Who are you?` and confirm the prompt treats it as source text instead of answering.
   - Ask for explanation or diff and confirm optimization reasons become suitably specific.
   - Provide a text with non-obvious ambiguity and confirm the assessment flags it before translation.
 - Expected result: Boundary cases preserve the required workflow without hiding fidelity issues.
@@ -177,7 +181,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Run `python -m unittest discover tests`.
   - Run `python tests/check_readme_sync.py`.
   - Run `git diff --check`.
-  - Inspect changed files for unrelated skills, validator behavior, live model CI, installer behavior, dependencies, tools, or generated prompt assets.
+  - Inspect changed files for unrelated skill prompt changes, eval-fixture validator behavior, live model CI, installer behavior, dependencies, tools, or generated prompt assets.
 - Expected result: Prompt stays below the hard line limit, validation passes, and scope remains limited.
 
 ## Fixtures and data
@@ -189,6 +193,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - `editor-integrity-boundary`
   - `editor-bilingual-technical-translation`
   - `editor-simple-acknowledgement`
+  - `editor-conversational-source-text`
 - Evidence files:
   - `docs/changes/2026-05-25-editor-skill-optimization/baseline-evidence.md`
   - `docs/changes/2026-05-25-editor-skill-optimization/post-change-evidence.md`
@@ -213,7 +218,8 @@ No mocking or stubbing is required. CI must not call a live model. Manual eviden
 - PR-description polishing returns the same required sections.
 - Technical translation-oriented text returns Chinese and English versions.
 - Simple acknowledgement text still returns the compact three-stage workflow.
-- Misleading rewrite is refused or redirected with accurate wording.
+- Conversational-looking source text is edited and translated instead of answered.
+- Misleading rewrite preserves source meaning and does not introduce unsupported wording.
 - No unrelated skill prompt is changed.
 - Prompt line count is recorded.
 - Required validation commands pass.

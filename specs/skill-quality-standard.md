@@ -48,8 +48,8 @@ Given a contributor materially changes a medical, security, legal, financial, or
 When the change is submitted for review
 Then the evidence includes scope boundaries, escalation or refusal behavior, reviewer-visible safety notes, and at least one safety or misuse eval case.
 
-Example E5: runtime-specific metadata is omitted by default
-Given a skill omits `effort` and `allowed-tools`
+Example E5: optional metadata is omitted by default
+Given a skill omits `argument-hint`, `effort`, and `allowed-tools`
 When validation runs
 Then the omission is allowed and preferred.
 Given a skill includes non-empty `allowed-tools`
@@ -64,15 +64,15 @@ R2. Each skill name MUST use lowercase letters, numbers, and hyphens only, MUST 
 
 R3. Each `SKILL.md` MUST have parseable YAML frontmatter.
 
-R4. Each `SKILL.md` frontmatter MUST include `name`, `description`, and `argument-hint`.
+R4. Each `SKILL.md` frontmatter MUST include `name` and `description`.
 
 R5. `effort` MUST NOT be required, and Skillsmith skills SHOULD omit it unless a later accepted compatibility reason requires it.
 
-R6. `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, and validator expectations MUST NOT instruct contributors to add `effort` or `allowed-tools` by default.
+R6. `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, and validator expectations MUST NOT instruct contributors to add `argument-hint`, `effort`, or `allowed-tools` by default.
 
 R7. Skills SHOULD omit `allowed-tools`; if `allowed-tools` is present and non-empty, validation MUST fail unless an accepted proposal and spec explicitly allow tool use.
 
-R8. `description` and `argument-hint` MUST be English-facing metadata suitable for assistant UI and invocation.
+R8. `description` MUST be English-facing metadata suitable for assistant UI and invocation.
 
 R9. `description` MUST explain both what the skill does and when to use it.
 
@@ -155,14 +155,14 @@ Outputs:
 - `tests/evals/skills/grandfathered-skills.yaml` is the only source of truth for grandfathered skill names.
 - Existing skills listed in the grandfathering baseline remain grandfathered for eval-fixture enforcement until materially changed.
 - Skills remain pure prompt assets unless a later accepted proposal and spec change that boundary.
-- `effort` and `allowed-tools` are omitted from current skill frontmatter.
+- `argument-hint`, `effort`, and `allowed-tools` are omitted from current skill frontmatter.
 - CI remains deterministic and does not depend on live model calls.
 
 ## Error and boundary behavior
 
 - Invalid YAML frontmatter is a blocking validation error.
-- Missing `name`, `description`, `argument-hint`, `$ARGUMENTS`, or `## Output Format` is a blocking validation error after this standard is implemented.
-- Missing `effort` and `allowed-tools` is not an error or warning.
+- Missing `name`, `description`, `$ARGUMENTS`, or `## Output Format` is a blocking validation error after this standard is implemented.
+- Missing `argument-hint`, `effort`, and `allowed-tools` is not an error or warning.
 - Invalid `effort` values are validation errors when the field is present, but current skills should omit the field.
 - Missing eval fixtures are warnings for grandfathered skills and blocking errors for new or materially changed skills once the material-change detection path exists.
 - Stale entries in `tests/evals/skills/grandfathered-skills.yaml` are validation errors unless the corresponding skill deletion is part of the same change.
@@ -172,7 +172,7 @@ Outputs:
 
 ## Compatibility and migration
 
-- The implementation MUST update `CONSTITUTION.md` so runtime-specific frontmatter is omitted by default.
+- The implementation MUST update `CONSTITUTION.md` so optional frontmatter is omitted by default.
 - The implementation MUST use `tests/evals/skills/grandfathered-skills.yaml`, not a commit hash, branch name, README table, or future implementation commit, to determine grandfathered skills.
 - The implementation MUST update `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, README, and PR template guidance to align with this standard.
 - Existing skills are grandfathered for eval fixtures but not for core parseability and required structural fields already enforced by the validator.
@@ -216,7 +216,7 @@ EC2. A skill adds a reference file without changing `SKILL.md` instructions. Tre
 
 EC3. A high-risk skill adds a minor safety wording change. Treat the change as material unless a reviewer records why behavior is unchanged.
 
-EC4. A skill omits `effort` and `allowed-tools`. Validation passes because both are omitted by default.
+EC4. A skill omits `argument-hint`, `effort`, and `allowed-tools`. Validation passes because these fields are omitted by default.
 
 EC5. A skill includes `effort: ultra`. Validation fails when allowed values do not include `ultra`.
 
@@ -249,9 +249,9 @@ AC1. `specs/skill-quality-standard.md` exists and contains testable requirements
 
 AC2. `specs/skill-quality-standard.test.md` maps each requirement in this spec to validation, fixture review, manual review, or non-applicable coverage.
 
-AC3. `CONSTITUTION.md` is updated so `effort` and `allowed-tools` are omitted by default.
+AC3. `CONSTITUTION.md` is updated so `argument-hint`, `effort`, and `allowed-tools` are omitted by default.
 
-AC4. Contributor and agent docs no longer describe `effort` or `allowed-tools` as required fields.
+AC4. Contributor and agent docs no longer describe `argument-hint`, `effort`, or `allowed-tools` as required fields.
 
 AC5. Deterministic validation checks continue to pass for the existing repository after grandfathering is applied.
 

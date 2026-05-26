@@ -35,7 +35,7 @@ flowchart LR
 : Owns reusable prompt skills. Each skill is a directory containing one `SKILL.md` file with YAML frontmatter and a Markdown prompt body.
 
 `tests/validate_skills.py`
-: Owns local and CI validation. It parses skill frontmatter, checks required fields, checks `$ARGUMENTS`, checks `## Output Format`, warns on missing best-practice fields, and warns on CJK or Cyrillic in UI metadata.
+: Owns local and CI validation. It parses skill frontmatter, checks required fields, checks `$ARGUMENTS`, checks `## Output Format`, and warns on CJK or Cyrillic in UI metadata.
 
 `install.sh`
 : Owns installation behavior. It clones `https://github.com/xiongxianfei/Skillsmith`, copies every directory under `skills/` into `${HOME}/.claude/skills` or a `--target` directory, and replaces existing target skill directories.
@@ -102,7 +102,7 @@ Validation flow:
 Primary data entities are filesystem artifacts:
 
 - Skill definitions: `skills/<skill-name>/SKILL.md`.
-- Skill metadata: YAML frontmatter fields such as `name`, `description`, and `argument-hint`.
+- Skill metadata: YAML frontmatter fields `name` and `description`.
 - Skill prompt body: Markdown instructions that include `$ARGUMENTS` and `## Output Format`.
 - Workflow and governance data: Markdown files in the repository root and `docs/`.
 
@@ -139,8 +139,8 @@ The validator checks:
 
 - `SKILL.md` exists in each skill directory.
 - YAML frontmatter can be parsed.
-- Required fields `name`, `description`, and `argument-hint` exist.
-- Runtime-specific frontmatter such as `effort` and `allowed-tools` is omitted by default.
+- Required fields `name` and `description` exist.
+- Optional frontmatter such as `argument-hint`, `effort`, and `allowed-tools` is omitted by default.
 - UI metadata avoids CJK and Cyrillic scripts.
 - `$ARGUMENTS` appears in the body.
 - `## Output Format` appears in the body.
@@ -169,7 +169,7 @@ Observed repository patterns:
 - One canonical prompt file per skill: `SKILL.md`.
 - Skill metadata stays in YAML frontmatter.
 - Skill behavior stays in the Markdown prompt body.
-- Skill bodies can be multilingual, while descriptions and argument hints are English.
+- Skill bodies can be multilingual, while descriptions are English.
 - Validation is centralized in one Python script.
 - CI reuses the same command documented for local validation.
 - Installer is intentionally simple and copies files without generating prompt content.

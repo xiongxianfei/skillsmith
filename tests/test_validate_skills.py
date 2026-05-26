@@ -11,7 +11,6 @@ VALID_FRONTMATTER = """---
 name: sample-skill
 description: >
   Use this skill whenever a user needs a focused sample output.
-argument-hint: sample input
 ---
 
 **Input:**
@@ -56,7 +55,6 @@ class ValidateSkillsTest(unittest.TestCase):
         cases = {
             "name": "name: sample-skill\n",
             "description": "description: >\n  Use this skill whenever a user needs a focused sample output.\n",
-            "argument-hint": "argument-hint: sample input\n",
         }
 
         for field, text in cases.items():
@@ -65,7 +63,7 @@ class ValidateSkillsTest(unittest.TestCase):
 
                 self.assertIn(field, "\n".join(result.errors))
 
-    def test_valid_skill_without_effort_passes_without_warning(self):
+    def test_valid_skill_without_argument_hint_or_effort_passes_without_warning(self):
         result = self.validate_one("sample-skill")
 
         self.assertEqual([], result.errors)
@@ -73,8 +71,8 @@ class ValidateSkillsTest(unittest.TestCase):
 
     def test_invalid_effort_value_is_error_when_present(self):
         content = VALID_FRONTMATTER.replace(
-            "argument-hint: sample input",
-            "argument-hint: sample input\neffort: ultra",
+            "---\n\n**Input:**",
+            "effort: ultra\n---\n\n**Input:**",
         )
 
         result = self.validate_one("sample-skill", content)
@@ -83,8 +81,8 @@ class ValidateSkillsTest(unittest.TestCase):
 
     def test_non_empty_allowed_tools_requires_tool_using_spec(self):
         content = VALID_FRONTMATTER.replace(
-            "argument-hint: sample input",
-            "argument-hint: sample input\nallowed-tools: Bash",
+            "---\n\n**Input:**",
+            "allowed-tools: Bash\n---\n\n**Input:**",
         )
 
         result = self.validate_one("sample-skill", content)

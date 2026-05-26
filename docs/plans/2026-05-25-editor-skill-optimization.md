@@ -45,10 +45,10 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 
 - R1-R4: editor metadata, pure-prompt boundary, `$ARGUMENTS`, and `## Output Format`
 - R5-R12: compact three-stage workflow with optimization reasons, language identification, language-quality assessment, and Chinese/English translations
-- R13-R18: supported editing modes, ambiguity behavior, and integrity boundary
+- R13-R18: supported editing modes, source-material handling, ambiguity behavior, and meaning-preservation boundary
 - R19: prompt line-count and concision
 - R20-R24: eval fixture plus baseline and post-change evidence
-- R25-R27: no live model CI, no validator behavior change, no unrelated skill optimization
+- R25-R27: no live model CI, no eval-fixture validator behavior change, no unrelated skill prompt optimization
 - AC1-AC15: acceptance criteria in `specs/editor-skill-optimization.md`
 
 ## Milestone history
@@ -100,7 +100,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
   - Update eval scenarios to assert the amended behavior.
   - Update spec and test spec to remove the stale narrow-output contract.
   - Update baseline and post-change evidence to compare the previous branch behavior with the amended contract.
-  - Remove runtime-specific `effort` and `allowed-tools` frontmatter from all skills and align validator, tests, and contributor docs with that metadata policy.
+  - Remove optional `argument-hint`, `effort`, and `allowed-tools` frontmatter from all skills and align validator, tests, and contributor docs with that portable metadata policy.
   - Run deterministic validation.
 - Validation commands:
   - `python tests/validate_skills.py`
@@ -111,7 +111,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 - Result:
   - Implementation updated for the amended workflow.
   - Runtime-specific skill frontmatter removed by user request.
-  - Prompt line count is 69 lines.
+  - Prompt line count is 46 lines.
   - Validation passed locally.
   - Ready for renewed code review of the amendment.
 

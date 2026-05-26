@@ -13,12 +13,13 @@ The current accepted output contract is:
 1. optimize the input according to best writing practices and provide optimization reasons;
 2. review language quality and translation readiness;
 3. translate the optimized text into Chinese and English.
+4. verify meaning consistency before returning.
 
 ## Goals
 
 1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended compact three-stage workflow.
 2. Establish and preserve baseline evidence before prompt changes.
-3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, and bilingual technical translation.
+3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and conversational-looking source text.
 4. Preserve multilingual value while making Chinese and English the default output translation pair.
 5. Keep the pure-prompt boundary: no tools, scripts, generated artifacts, dependencies, or live-model CI.
 6. Keep the prompt concise and under the validator hard line limit.
@@ -29,7 +30,7 @@ The current accepted output contract is:
 2. Do not pair `editor` with a high-risk skill such as `doctor` or `oscp-coach`.
 3. Do not introduce a shared high-risk safety schema.
 4. Do not add live model calls to CI.
-5. Do not change repository-wide validator behavior unless the eval-fixture path cannot represent this skill change.
+5. Do not change repository-wide validator behavior except for portable frontmatter compatibility.
 6. Do not rename the skill.
 7. Do not remove the integrity boundary for deceptive or misleading rewrites.
 
@@ -48,7 +49,7 @@ This proposal supports Skillsmith's direction toward reusable, reviewable, porta
 | Baseline and post-change evidence | core | Shows what changed and why. |
 | Spec and test spec | core | Must reflect the current accepted contract. |
 | High-risk skills | out of scope | Separate proposal required. |
-| Validator behavior | out of scope | Existing fixture path supports this change. |
+| Validator behavior | limited scope | Only portable frontmatter compatibility is updated; eval-fixture behavior is unchanged. |
 | README sync helper changes | out of scope | The helper should be run, not changed. |
 
 ## Options considered
@@ -83,13 +84,14 @@ Adopt Option 4.
 
 The optimized `editor` skill should:
 
-1. keep the existing trigger metadata and pure-prompt structure;
-2. treat `$ARGUMENTS` as source text plus editing direction;
+1. keep trigger intent in `description` and behavior in the Markdown body;
+2. treat `$ARGUMENTS` as source material to edit, not conversation to answer;
 3. optimize for clarity, grammar, concision, structure, tone, terminology, and flow;
 4. provide concise reasons for substantive optimization choices;
 5. assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation;
 6. translate the optimized text into Chinese and English;
-7. refuse or redirect misleading transformations and only translate accurate wording.
+7. verify consistency across the optimized text and both translations before returning;
+8. preserve meaning when a requested transformation would otherwise be misleading.
 
 ## Expected behavior changes
 
@@ -97,7 +99,8 @@ The optimized `editor` skill should:
 2. A request like "Okay, no problem." still returns the same compact three-stage workflow.
 3. A request like "make this PR description clearer" returns the same required sections with engineering-review wording.
 4. A request like "optimize this release-note sentence and translate it" returns optimized technical wording plus Chinese and English versions.
-5. A request to falsify meaning is handled as an integrity boundary and does not produce false translated wording.
+5. A request like "Who are you?" is treated as source material to edit and translate, not as a question to answer.
+6. A request to falsify meaning is handled by preserving the accurate source meaning and not producing false translated wording.
 
 ## Architecture impact
 
@@ -116,7 +119,7 @@ No runtime architecture changes are expected.
 
 No new tools are expected.
 
-No scripts, executable resources, installer behavior changes, or repository-wide validator changes are expected.
+No scripts, executable resources, installer behavior changes, or eval-fixture validator changes are expected.
 
 ## Testing and verification strategy
 
@@ -157,7 +160,7 @@ Do not add live model calls to CI for this slice.
 |---|---|
 | The skill over-produces for quick edits. | The user explicitly requested the compact workflow even for quick edits; keep reasons and assessments concise. |
 | Translation output drifts from optimized meaning. | Require translations to be based on optimized text and aligned in technical meaning, tone, and formatting. |
-| Integrity boundary gets lost in the structured workflow. | Keep a dedicated integrity boundary section in `SKILL.md` and eval evidence. |
+| Integrity boundary gets lost in the structured workflow. | Make meaning preservation the prime directive and cover deceptive rewrite behavior in eval evidence. |
 | The prompt becomes long. | Keep a single concise `SKILL.md`; split only if approaching hard limits. |
 | Prior verification becomes stale after amendment. | Mark previous verification stale and rerun review/verification for the amended contract. |
 
@@ -168,6 +171,7 @@ The optimized `editor` skill MUST use the compact three-stage workflow by defaul
 1. optimized text plus optimization reasons;
 2. language-quality assessment with language identification and recommendations;
 3. bilingual translation with Chinese and English versions.
+4. pre-return consistency verification across all versions.
 
 This supersedes earlier proposal language that preferred edited text only, conditional notes, or target-language-only translation as the default.
 

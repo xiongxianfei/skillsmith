@@ -119,7 +119,7 @@ The current validator is per-skill and structural. The first slice must preserve
   - test spec coverage for validator behavior
 - Tests to add/update:
   - parseable YAML
-  - required `name`, `description`, `argument-hint`, and `allowed-tools`
+  - required `name` and `description`, with optional runtime/frontmatter metadata omitted by default
   - optional `effort` accepted when absent
   - invalid `effort` rejected when present
   - name syntax and reserved words

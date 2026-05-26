@@ -5,7 +5,6 @@ description: >
   exploitation, and privilege escalation. Use this skill whenever the user is working on
   an OSCP lab, HTB/THM machine, or CTF challenge — even if they just paste scan output and
   say "I'm stuck" — without waiting for them to explicitly ask for OSCP coaching.
-argument-hint: <describe your situation, scan results, or what you're stuck on>
 ---
 
 **User input:**
