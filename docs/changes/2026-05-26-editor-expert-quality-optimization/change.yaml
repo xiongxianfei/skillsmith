@@ -7,7 +7,7 @@ spec: specs/editor-expert-quality-optimization.md
 test_spec: specs/editor-expert-quality-optimization.test.md
 architecture: docs/architecture/system/architecture.md
 current_milestone: final closeout
-next_stage: track new artifacts then verify rerun
+next_stage: pr
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -177,3 +177,26 @@ validation:
     stage: verify
     status: blocked
     notes: "New authoritative change artifacts are untracked; branch-ready cannot be claimed until they are tracked."
+  - command: python tests/validate_skills.py
+    stage: verify-rerun
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: verify-rerun
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: verify-rerun
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: verify-rerun
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: verify-rerun
+    status: passed
+    notes: "126 lines."
+  - command: git ls-files --others --exclude-standard docs/changes/2026-05-26-editor-expert-quality-optimization docs/plans/2026-05-26-editor-expert-quality-optimization.md docs/proposals/2026-05-26-editor-expert-quality-optimization.md specs/editor-expert-quality-optimization.md specs/editor-expert-quality-optimization.test.md docs/architecture editor_language_role_separation_workflow.svg
+    stage: verify-rerun
+    status: passed
+    notes: "No untracked authoritative artifacts found for this change pack."

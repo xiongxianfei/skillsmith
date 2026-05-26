@@ -59,9 +59,9 @@ No runtime components, tools, generated prompt assets, installer changes, live m
 - Last reviewed milestone: M3
 - Review status: code-review M3 R2 returned clean-with-notes; no review-resolution required
 - Remaining in-scope implementation milestones: none
-- Next stage: track new artifacts, then verify rerun
+- Next stage: pr
 - Final closeout readiness: ready to start final closeout
-- Reason final closeout is or is not ready: all implementation milestones are closed, review-resolution is closed, and explain-change is complete; final verification is blocked until new authoritative artifacts are tracked.
+- Reason final closeout is or is not ready: all implementation milestones are closed, review-resolution is closed, explain-change is complete, and final verification passed; PR handoff remains.
 
 ## Milestones
 
@@ -231,6 +231,7 @@ No runtime components, tools, generated prompt assets, installer changes, live m
 - 2026-05-26: Code-review M3 R2 returned clean-with-notes, closed `F-CODE-EDITOR-M3-001`, closed M3, and advanced the active handoff to final closeout.
 - 2026-05-26: Explain-change completed durable change rationale and advanced the active handoff to final verification.
 - 2026-05-26: Verify ran final local validation successfully but blocked branch-ready because new authoritative change artifacts are untracked.
+- 2026-05-26: New authoritative artifacts were committed, verify rerun passed, and the active handoff advanced to PR.
 
 ## Decision log
 
@@ -289,14 +290,20 @@ No runtime components, tools, generated prompt assets, installer changes, live m
 - 2026-05-26 verify: `git diff --check` passed.
 - 2026-05-26 verify: `wc -l skills/editor/SKILL.md` returned 126 lines.
 - 2026-05-26 verify: `git ls-files --others --exclude-standard ...` found new authoritative change artifacts untracked; branch-ready blocked.
+- 2026-05-26 verify-rerun: `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
+- 2026-05-26 verify-rerun: `python -m unittest discover tests` passed, 31 tests OK.
+- 2026-05-26 verify-rerun: `python tests/check_readme_sync.py` passed.
+- 2026-05-26 verify-rerun: `git diff --check` passed.
+- 2026-05-26 verify-rerun: `wc -l skills/editor/SKILL.md` returned 126 lines.
+- 2026-05-26 verify-rerun: `git ls-files --others --exclude-standard ...` found no untracked authoritative artifacts for this change pack.
 
 ## Outcome and retrospective
 
 - M1, M2, and M3 are closed. Post-change evidence and validation are recorded, and all code-review findings are closed.
-- The change remains active until final closeout completes verification and PR gates. Current blocker: new authoritative artifacts must be tracked before verify can mark the branch ready.
+- The change remains active until PR gates complete. Final verification passed and the branch is ready for PR handoff.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready to track new change artifacts, then rerun `verify`.
-- Not ready for PR handoff until final verification completes.
+- Ready for `pr`.
+- Branch-ready is true; PR body/open readiness is not claimed until the PR stage.

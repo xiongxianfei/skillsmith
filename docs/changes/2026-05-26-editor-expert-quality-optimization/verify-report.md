@@ -3,13 +3,13 @@
 ## Result
 
 - Skill: verify
-- Status: blocked
+- Status: branch-ready
 - Verification date: 2026-05-26
 - Branch: `improve/editor-expert-quality-optimization`
 - Change ID: `2026-05-26-editor-expert-quality-optimization`
-- Readiness: not branch-ready
-- Next stage: track the new authoritative change artifacts, then rerun `verify`
-- Open blockers: new governing and lifecycle artifacts are present only as untracked files
+- Readiness: branch-ready
+- Next stage: pr
+- Open blockers: none
 - CI status: not observed; local validation only
 
 ## Verification Summary
@@ -26,7 +26,7 @@
 | Validation evidence | pass | Required local commands passed; details below. |
 | Drift detection | pass | README sync, line count, diff hygiene, and lifecycle coherence checks passed. |
 | Risk closure | concern | No live weakest-model smoke was run; this is documented in post-change evidence and explain-change. |
-| Release readiness | block | Required new governing artifacts are untracked, so branch-ready cannot be claimed. |
+| Release readiness | pass | Required governing artifacts are tracked, local validation passed, and no implementation milestones or review findings remain open. |
 
 ## Traceability
 
@@ -56,17 +56,17 @@ All commands ran from `/home/xiongxianfei/data/20260525-skillsmith/code` on 2026
 | `python tests/check_readme_sync.py` | pass | README sync check passed. |
 | `git diff --check` | pass | No whitespace errors. |
 | `wc -l skills/editor/SKILL.md` | pass | 126 lines. |
-| `git ls-files --others --exclude-standard ...` | block | New governing/lifecycle artifacts for this change are untracked. |
+| `git ls-files --others --exclude-standard ...` | pass | No untracked authoritative artifacts found for this change pack. |
 
 ## CI Status
 
 Hosted CI was not observed. The repository workflow `.github/workflows/validate.yml` runs unit tests, skill validation, and README sync on push and pull request to `main`; the equivalent local commands passed.
 
-## Branch-Readiness Blocker
+## Branch-Readiness Check
 
-Final branch readiness is blocked because required new authoritative artifacts are untracked in git. A PR branch would not include them unless they are added to tracked branch state.
+Final branch readiness is supported. The new authoritative artifacts are now tracked in git and included in the branch state.
 
-Untracked authoritative or lifecycle artifacts include:
+Tracked authoritative and lifecycle artifacts include:
 
 - `docs/architecture/system/architecture.md`
 - `docs/architecture/system/diagrams/container-view.mmd`
@@ -78,8 +78,6 @@ Untracked authoritative or lifecycle artifacts include:
 - `editor_language_role_separation_workflow.svg`
 - `specs/editor-expert-quality-optimization.md`
 - `specs/editor-expert-quality-optimization.test.md`
-
-Resolution: add these new files to tracked branch state, then rerun `verify`.
 
 ## Review Findings
 
@@ -99,10 +97,9 @@ Closed material findings:
 
 - No live weakest-model smoke was run. This is documented in `post-change-evidence.md` and `explain-change.md`.
 - Hosted CI has not been observed.
-- Branch-ready is blocked until the new authoritative artifacts are tracked.
 
 ## Verdict
 
-Not branch-ready.
+Branch-ready for PR handoff.
 
-Local validation passes, lifecycle artifacts are coherent, and implementation milestones/review-resolution are closed. The remaining blocker is repository state: required new governing and lifecycle artifacts are untracked.
+Local validation passes, lifecycle artifacts are coherent, implementation milestones/review-resolution are closed, and required governing artifacts are tracked. This report does not claim hosted CI success, PR body readiness, or PR open readiness.
