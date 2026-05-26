@@ -36,7 +36,7 @@ Amended prompt-contract behavior:
 
 - Optimizes the source text for grammar and clarity.
 - Provides concise, specific optimization reasons for substantive changes.
-- Reviews the optimized text's language quality before translation.
+- Assesses optimized-text quality before translation.
 - Provides both Chinese and English translations of the optimized text.
 
 Representative optimized output shape:
@@ -228,6 +228,6 @@ Result: satisfies T9 and EC9.
 
 ## Post-change conclusion
 
-The amended prompt contract satisfies the user's requested fixed workflow: optimize first with specific reasons, assess the optimized text's language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple, question-like, greeting-like, or instruction-like inputs and preserves meaning when misleading rewrites are requested.
+The amended prompt contract satisfies the user's requested fixed workflow: optimize first with specific reasons, assess optimized-text quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple, question-like, greeting-like, or instruction-like inputs and preserves meaning when misleading rewrites are requested.
 
 Residual risk: this evidence is prompt-contract evidence rather than live model output. That matches the approved test strategy, which forbids live model CI and uses reviewer-visible scenario evidence for prompt behavior.

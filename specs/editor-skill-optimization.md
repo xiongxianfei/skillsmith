@@ -8,14 +8,14 @@ approved, amended by post-PR user direction on 2026-05-25
 
 - `docs/proposals/2026-05-25-editor-skill-optimization.md`
 - Proposal review R2: `docs/changes/2026-05-25-editor-skill-optimization/reviews/proposal-review-r2.md`
-- User amendment: require a three-stage editor workflow: optimize with reasons, review the optimized text's language quality, then translate optimized text into Chinese and English.
+- User amendment: require a three-stage editor workflow: optimize with reasons, assess optimized-text quality, then translate optimized text into Chinese and English.
 
 ## Goal and context
 
 The `editor` skill should provide a high-quality editing and translation workflow for text intended to be shared, such as emails, PR descriptions, docs, and messages. The current accepted contract is no longer a narrow-output default; it is a fixed three-stage workflow for every input, including simple text such as `Okay, no problem.`:
 
 1. optimize the input according to writing best practices and provide optimization reasons;
-2. review the optimized text's source-language quality before translation;
+2. assess optimized-text quality before translation;
 3. translate the optimized text into Chinese and English, regardless of whether the source text is Chinese, English, Russian, or another detected source language.
 4. verify that the optimized text and both translations preserve the same meaning before returning.
 
@@ -81,7 +81,7 @@ R6. The optimization stage MUST improve clarity, grammar, concision, structure, 
 
 R7. The optimization stage MUST provide concise, specific reasons that name the actual optimization choices rather than generic praise.
 
-R8. The language-quality stage MUST identify the detected source language and assess the optimized text for clarity, grammar, tone, terminology, ambiguity, fidelity to the source meaning, and readiness for translation.
+R8. The language-quality stage MUST assess optimized-text quality by identifying the detected source language and evaluating clarity, grammar, tone, terminology, ambiguity, fidelity to the source meaning, and readiness for translation.
 
 R9. The language-quality stage MUST happen before the translation stage.
 

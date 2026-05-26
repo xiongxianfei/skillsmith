@@ -11,7 +11,7 @@ The `editor` skill should provide a dependable editing and translation workflow 
 The current accepted output contract is:
 
 1. optimize the input according to best writing practices and provide optimization reasons;
-2. review the optimized text's language quality and translation readiness;
+2. assess optimized-text quality and translation readiness;
 3. translate the optimized text into Chinese and English regardless of source language.
 4. verify meaning consistency before returning.
 

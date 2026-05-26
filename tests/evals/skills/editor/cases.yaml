@@ -8,7 +8,7 @@ scenarios:
       We shiped the docs yesterday, but the API example were broke and users got confuse.
     expected_behavior: >
       Optimizes the source text while preserving meaning, provides concise
-      optimization reasons, assesses the optimized text's language quality before translation, and
+      optimization reasons, assesses optimized-text quality before translation, and
       returns both Chinese and English translations of the optimized text.
   - id: editor-indirect-pr-description
     category: indirect-trigger

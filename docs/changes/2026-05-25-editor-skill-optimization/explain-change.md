@@ -5,7 +5,7 @@
 This branch now reflects the amended `editor` skill contract requested after PR handoff. The skill uses a required fixed three-stage workflow:
 
 1. optimize the input according to writing best practices and provide specific optimization reasons;
-2. review the optimized text's language quality, identify the source language, and give recommendations before translation;
+2. assess optimized-text quality, identify the source language, and give recommendations before translation;
 3. translate the optimized text into Chinese and English, after checking that all versions preserve the same meaning.
 
 The prompt remains a pure Markdown skill with no tools, scripts, live model CI, or installer changes. Validator changes are limited to portable frontmatter compatibility.
@@ -42,7 +42,7 @@ The user then clarified that the desired workflow should include optimization re
 
 ## Skill behavior rationale
 
-The revised skill keeps the three-language source framing because the skill still handles polishing, proofreading, refining, and translation for Chinese, English, and Russian source text. The description now states the skill identity before trigger situations, and the body makes the fixed output contract explicit:
+The revised skill keeps the three-language source framing because the skill still handles polishing, proofreading, refining, and translation for Chinese, English, and Russian source text. The description now states the function first, names concrete trigger situations, and makes the Chinese/English output contract explicit. The body makes the fixed output contract explicit:
 
 - `### Stage 1: Text Optimization Results`: edited source text plus a concise, specific optimization reason.
 - `### Stage 2: Language Quality Assessment`: language identification plus assessment and recommendations.

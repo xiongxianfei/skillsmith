@@ -10,7 +10,7 @@
 This plan tracks the accepted `editor` skill optimization and the 2026-05-25 user amendment that changed the desired output contract to a required fixed three-stage workflow:
 
 1. optimize the input and provide optimization reasons;
-2. review the optimized text's language quality before translation;
+2. assess optimized-text quality before translation;
 3. translate the optimized text into Chinese and English.
 
 ## Source artifacts

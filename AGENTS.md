@@ -28,7 +28,7 @@ Every skill lives at `skills/<skill-name>/SKILL.md`. Required structure:
 ---
 name: <lowercase-hyphenated>
 description: >
-  English only, under 250 chars. Describe what the skill does and when it applies.
+  English only. Describe what the skill does and when it applies.
 ---
 ```
 
