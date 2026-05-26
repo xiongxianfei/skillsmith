@@ -39,7 +39,7 @@ Optimization reason: [Concise, specific reason naming the actual changes.]
 
 Language Identification: [Detected source language.]
 
-Assessment and Recommendations: [Brief assessment of clarity, grammar, tone, terminology, ambiguity, and readiness for translation.]
+Assessment and Recommendations: [Brief assessment of optimized-text clarity, grammar, tone, terminology, ambiguity, fidelity to source meaning, and readiness for translation.]
 
 ### Stage 3: Bilingual Translation
 
