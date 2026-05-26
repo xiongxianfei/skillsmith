@@ -31,10 +31,10 @@ After M2/M3, the branch prompt was optimized for narrow, intent-sensitive output
 - notes were conditional;
 - an integrity boundary was explicit.
 
-That contract passed the previous verification gate, but the user later amended the desired workflow. The new desired behavior is a mandatory compact three-stage workflow:
+That contract passed the previous verification gate, but the user later amended the desired workflow. The new desired behavior is a mandatory fixed three-stage workflow:
 
 1. optimize the input according to best practices and provide optimization reasons;
-2. review language quality before translation;
+2. review the optimized text's language quality before translation;
 3. translate the optimized text into Chinese and English.
 
 ## Baseline scenario gaps for the amended workflow
@@ -58,7 +58,7 @@ Pre-amendment branch behavior:
 
 Amendment gap:
 
-- The user now wants the compact three-stage workflow even for simple editing requests.
+- The user now wants the fixed three-stage workflow even for simple editing requests.
 
 ### editor-indirect-pr-description
 

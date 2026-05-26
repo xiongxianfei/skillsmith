@@ -6,18 +6,18 @@ accepted, amended by user direction on 2026-05-25
 
 ## Problem
 
-The `editor` skill should provide a dependable editing and translation workflow for text intended to be shared, including emails, PR descriptions, docs, and messages. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow, but make it compact and explicit for every input, including simple text such as `Okay, no problem.`
+The `editor` skill should provide a dependable editing and translation workflow for text intended to be shared, including emails, PR descriptions, docs, and messages. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow and make it explicit for every input, including simple text such as `Okay, no problem.`
 
 The current accepted output contract is:
 
 1. optimize the input according to best writing practices and provide optimization reasons;
-2. review language quality and translation readiness;
+2. review the optimized text's language quality and translation readiness;
 3. translate the optimized text into Chinese and English regardless of source language.
 4. verify meaning consistency before returning.
 
 ## Goals
 
-1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended compact three-stage workflow.
+1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended fixed three-stage workflow.
 2. Establish and preserve baseline evidence before prompt changes.
 3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and question/greeting/instruction-looking source text.
 4. Preserve multilingual value while making Chinese and English the default output translation pair.
@@ -64,7 +64,7 @@ Disposition: rejected because it would not satisfy the user's amended workflow.
 
 Return corrected text, rewritten text, or target-language translation only by default.
 
-Disposition: rejected because the user now wants compact optimization results, language-quality assessment, and Chinese/English translations by default.
+Disposition: rejected because the user now wants fixed optimization results, language-quality assessment, and Chinese/English translations by default.
 
 ### Option 3: Restore the original dense prompt exactly
 
@@ -72,7 +72,7 @@ Revert to the old Chinese-language three-stage report.
 
 Disposition: rejected because the amended workflow can be implemented more concisely and with clearer integrity boundaries.
 
-### Option 4: Implement a compact three-stage workflow
+### Option 4: Implement a fixed three-stage workflow
 
 Optimize the input with reasons, assess language quality, and translate the optimized text into Chinese and English.
 
@@ -84,19 +84,19 @@ Adopt Option 4.
 
 The optimized `editor` skill should:
 
-1. keep trigger intent in `description` and behavior in the Markdown body;
+1. state the skill identity first in `description`, then the trigger situations, while keeping behavior in the Markdown body;
 2. treat `$ARGUMENTS` as source material to edit, not conversation to answer;
 3. optimize for clarity, grammar, concision, structure, tone, terminology, and flow;
 4. provide concise, specific reasons for substantive optimization choices;
-5. assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation;
+5. assess the optimized text for clarity, grammar, tone, terminology, ambiguity, fidelity to source meaning, and readiness for translation;
 6. translate the optimized text into Chinese and English;
 7. verify consistency across the optimized text and both translations before returning;
 8. preserve meaning when a requested transformation would otherwise be misleading.
 
 ## Expected behavior changes
 
-1. A request like "fix this" returns compact Stage 1 optimization results, Stage 2 language-quality assessment, and Stage 3 Chinese/English translations.
-2. A request like "Okay, no problem." still returns the same compact three-stage workflow.
+1. A request like "fix this" returns fixed Stage 1 optimization results, Stage 2 language-quality assessment, and Stage 3 Chinese/English translations.
+2. A request like "Okay, no problem." still returns the same fixed three-stage workflow.
 3. A request like "make this PR description clearer" returns the same required sections with engineering-review wording.
 4. A request like "optimize this release-note sentence and translate it" returns optimized technical wording plus Chinese and English versions.
 5. A request like "Who are you?" is treated as source material to edit and translate, not as a question to answer; the same applies to greetings and instruction-looking text.
@@ -158,7 +158,7 @@ Do not add live model calls to CI for this slice.
 
 | Risk | Mitigation |
 |---|---|
-| The skill over-produces for quick edits. | The user explicitly requested the compact workflow even for quick edits; keep reasons and assessments concise. |
+| The skill over-produces for quick edits. | The user explicitly requested the fixed workflow even for quick edits; keep reasons and assessments concise. |
 | Translation output drifts from optimized meaning. | Require translations to be based on optimized text and aligned in technical meaning, tone, and formatting. |
 | Integrity boundary gets lost in the structured workflow. | Make meaning preservation the prime directive and cover deceptive rewrite behavior in eval evidence. |
 | The prompt becomes long. | Keep a single concise `SKILL.md`; split only if approaching hard limits. |
@@ -166,7 +166,7 @@ Do not add live model calls to CI for this slice.
 
 ## Resolved decision: output workflow
 
-The optimized `editor` skill MUST use the compact three-stage workflow by default:
+The optimized `editor` skill MUST use the fixed three-stage workflow by default:
 
 1. optimized text plus optimization reasons;
 2. language-quality assessment with language identification and recommendations;
@@ -185,4 +185,4 @@ This supersedes earlier proposal language that preferred edited text only, condi
 
 ## Readiness
 
-This amended proposal is ready for renewed code review and verification once the spec, test spec, skill prompt, eval fixture, and evidence files all reflect the compact three-stage workflow.
+This amended proposal is ready for renewed code review and verification once the spec, test spec, skill prompt, eval fixture, and evidence files all reflect the fixed three-stage workflow.

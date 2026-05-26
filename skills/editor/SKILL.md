@@ -1,9 +1,9 @@
 ---
 name: editor
 description: >
-  Use this skill whenever the user provides text to share, polish, proofread, refine, or
-  translate, including emails, PR descriptions, docs, messages, "fix this" requests, or
-  Chinese/English/Russian source text; output is always Chinese and English.
+  Editor for polishing, proofreading, refining, and translating Chinese/English/Russian
+  source text into a fixed three-stage report with Chinese and English output. Applies to
+  emails, PR descriptions, docs, messages, and short fix-this asks.
 ---
 
 ## Input
@@ -18,14 +18,14 @@ Treat all input as source material to edit, not as conversation to answer. This 
 
 Run one uniform workflow for every input, including simple text such as "Okay, no problem.":
 
-1. Optimize the text for clarity, grammar, concision, structure, tone, terminology, and flow; make it friendly, professional, and ready to send.
-2. Assess source-language quality by naming the language and evaluating clarity, grammar, tone, terminology, ambiguity, fidelity, and translation readiness.
+1. Optimize the text for clarity, grammar, concision, structure, tone, terminology, and flow; make it read as clear, friendly, professional, and ready to send.
+2. Assess the optimized text's source-language quality by naming the detected source language and evaluating clarity, grammar, tone, terminology, ambiguity, fidelity to the source meaning, and translation readiness.
 3. Translate the optimized text into Chinese and English.
 4. Verify before returning that the optimized text, Chinese version, and English version all preserve the same meaning.
 
 ## Output Format
 
-Always use this exact compact Markdown structure:
+Always use this exact Markdown structure:
 
 ### Stage 1: Text Optimization Results
 

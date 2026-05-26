@@ -2,7 +2,7 @@
 
 ## Status
 
-active, amended for compact three-stage workflow
+active, amended for fixed three-stage workflow
 
 ## Related spec and plan
 
@@ -18,7 +18,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Integration: `python tests/validate_skills.py` validates real repository skills and the `editor` eval fixture.
 - Smoke: final repository commands confirm the skill catalog still validates.
 - Manual: baseline and post-change evidence compare the approved scenario classes against the optimized prompt contract.
-- Contract: static review confirms prompt metadata, pure-prompt boundary, compact three-stage workflow, output-format sections, scope, and integrity boundary.
+- Contract: static review confirms prompt metadata, pure-prompt boundary, fixed three-stage workflow, output-format sections, scope, and integrity boundary.
 
 ## Requirement coverage map
 
@@ -37,8 +37,8 @@ Use deterministic checks for static repository contracts and manual scenario evi
 
 | Example | Covered by | Notes |
 |---|---|---|
-| E1 simple proofreading returns compact workflow | T5 | Uses normal proofreading fixture scenario. |
-| E2 indirect engineer-facing edit returns compact workflow | T6 | Uses indirect PR-description fixture scenario. |
+| E1 simple proofreading returns fixed workflow | T5 | Uses normal proofreading fixture scenario. |
+| E2 indirect engineer-facing edit returns fixed workflow | T6 | Uses indirect PR-description fixture scenario. |
 | E3 technical translation-oriented request returns Chinese and English | T7 | Uses bilingual technical translation fixture scenario. |
 | E4 simple acknowledgement still uses workflow | T9 | Uses simple acknowledgement fixture scenario. |
 | E5 misleading rewrite preserves accurate wording | T8 | Uses integrity-boundary misuse fixture scenario. |
@@ -96,7 +96,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Run `python tests/validate_skills.py`.
 - Expected result: The skill remains structurally valid and pure prompt.
 
-### T4. Prompt contract requires the compact three-stage workflow
+### T4. Prompt contract requires the fixed three-stage workflow
 
 - Covers: R5-R12, AC5-AC8
 - Level: manual
@@ -110,9 +110,9 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Confirm Chinese and English translations are required regardless of source language.
   - Confirm the workflow verifies meaning consistency before returning.
   - Confirm the output format uses `Stage 1`, `Stage 2`, and `Stage 3` headings rather than five separate top-level sections.
-- Expected result: The prompt contract reflects the amended compact three-stage workflow.
+- Expected result: The prompt contract reflects the amended fixed three-stage workflow.
 
-### T5. Simple proofreading scenario returns compact workflow
+### T5. Simple proofreading scenario returns fixed workflow
 
 - Covers: R5-R12, E1, EC1, AC5-AC8
 - Level: manual
@@ -122,9 +122,9 @@ Use deterministic checks for static repository contracts and manual scenario evi
   - Check that the optimized text corrects grammar and clarity.
   - Check that reasons and language-quality assessment are included.
   - Check that Chinese and English translations are included.
-- Expected result: Optimized behavior returns the compact workflow while preserving meaning.
+- Expected result: Optimized behavior returns the fixed workflow while preserving meaning.
 
-### T6. Indirect PR-description scenario returns compact workflow
+### T6. Indirect PR-description scenario returns fixed workflow
 
 - Covers: R5-R14, E2, EC2, AC5-AC8
 - Level: manual
@@ -163,8 +163,8 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Level: manual
 - Fixture/setup: Supplemental manual prompts derived from spec edge cases.
 - Steps:
-  - Provide pasted text without explicit instruction and confirm the compact workflow runs.
-  - Provide `Okay, no problem.` and confirm the compact three-stage workflow still runs.
+  - Provide pasted text without explicit instruction and confirm the fixed workflow runs.
+  - Provide `Okay, no problem.` and confirm the fixed three-stage workflow still runs.
   - Provide question-like, greeting-like, or instruction-like text such as `Who are you?` and confirm the prompt treats it as source text instead of answering.
   - Ask for explanation or diff and confirm optimization reasons become suitably specific.
   - Provide a text with non-obvious ambiguity and confirm the assessment flags it before translation.
@@ -217,7 +217,7 @@ No mocking or stubbing is required. CI must not call a live model. Manual eviden
 - Simple proofreading returns optimized text, reasons, assessment, Chinese translation, and English translation.
 - PR-description polishing returns the same required sections.
 - Technical translation-oriented text returns Chinese and English versions.
-- Simple acknowledgement text still returns the compact three-stage workflow.
+- Simple acknowledgement text still returns the fixed three-stage workflow.
 - Conversational-looking source text is edited and translated instead of answered.
 - Misleading rewrite preserves source meaning and does not introduce unsupported wording.
 - No unrelated skill prompt is changed.
@@ -237,4 +237,4 @@ None.
 
 ## Readiness
 
-Active proof surface for the amended compact three-stage workflow implementation.
+Active proof surface for the amended fixed three-stage workflow implementation.

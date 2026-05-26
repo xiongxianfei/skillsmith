@@ -76,7 +76,7 @@ R8. `description` MUST be English-facing metadata suitable for assistant UI and 
 
 R9. `description` MUST explain both what the skill does and when to use it.
 
-R10. Skill descriptions SHOULD be trigger-forward and include explicit "Use this skill whenever..." style phrasing unless a reviewer records why a less direct description is clearer.
+R10. Skill descriptions SHOULD state what the skill does first, then name the triggering situations clearly enough for reliable selection.
 
 R11. Each skill body MUST include `$ARGUMENTS`.
 

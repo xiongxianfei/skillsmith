@@ -4,7 +4,7 @@
 
 - Skill: verify
 - Status: stale-after-amendment
-- Verification date: 2026-05-25
+- Verification date: 2026-05-26
 - Branch: `improve/editor-skill-optimization`
 - Change ID: `2026-05-25-editor-skill-optimization`
 - Readiness: not branch-ready after amended workflow update
@@ -39,7 +39,7 @@ Commands run from `/home/xiongxianfei/data/20260525-skillsmith/code`:
 | Requirement group | Evidence | Status |
 |---|---|---|
 | R1-R4 metadata and pure-prompt contract | `skills/editor/SKILL.md`, validator | pass |
-| R5-R12 compact three-stage workflow | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
+| R5-R12 fixed three-stage workflow | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
 | R13-R18 integrity and ambiguity handling | `skills/editor/SKILL.md`, `post-change-evidence.md` | pending renewed review |
 | R19 line limit | `wc -l skills/editor/SKILL.md` reported 46 lines | pass |
 | R20-R24 fixture and evidence | `cases.yaml`, baseline/post-change evidence | pending renewed review |

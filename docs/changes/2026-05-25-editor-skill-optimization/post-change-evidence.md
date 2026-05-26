@@ -2,7 +2,7 @@
 
 ## Scope
 
-This file records post-change evidence after the `editor` prompt was amended to the user-requested compact three-stage workflow.
+This file records post-change evidence after the `editor` prompt was amended to the user-requested fixed three-stage workflow.
 
 Evidence method: manual prompt-contract inspection of `skills/editor/SKILL.md`, using the scenario classes recorded in `tests/evals/skills/editor/cases.yaml`. No live model call, network service, or CI model execution was used.
 
@@ -36,7 +36,7 @@ Amended prompt-contract behavior:
 
 - Optimizes the source text for grammar and clarity.
 - Provides concise, specific optimization reasons for substantive changes.
-- Reviews language quality before translation.
+- Reviews the optimized text's language quality before translation.
 - Provides both Chinese and English translations of the optimized text.
 
 Representative optimized output shape:
@@ -75,14 +75,14 @@ It clear cache when user update profile because stale profile page still show ol
 Pre-amendment branch behavior:
 
 - Returned concise PR-ready wording only by default.
-- Did not include the compact three-stage workflow.
+- Did not include the fixed three-stage workflow.
 
 Amended prompt-contract behavior:
 
 - Recognizes the indirect request as an editing task.
 - Optimizes the PR description for engineering review.
 - Explains substantive optimization choices.
-- Assesses source-text quality and translation readiness.
+- Assesses optimized-text quality and translation readiness.
 - Provides aligned Chinese and English translations.
 
 Result: satisfies T6 and AC5-AC8.
@@ -154,7 +154,7 @@ Prompt class: user pastes flawed text without a clear instruction.
 
 Amended prompt-contract behavior:
 
-- Runs the compact three-stage workflow by default.
+- Runs the fixed three-stage workflow by default.
 - Does not ask for a target language because Chinese and English translations are part of the default contract.
 
 Result: satisfies T9 and EC4.
@@ -190,7 +190,7 @@ Okay, no problem.
 
 Amended prompt-contract behavior:
 
-- Runs the compact three-stage workflow even though the source text is simple.
+- Runs the fixed three-stage workflow even though the source text is simple.
 - Provides a light optimization reason rather than omitting Stage 1 rationale.
 - Identifies the source language in Stage 2.
 - Provides Chinese and English versions in Stage 3.
@@ -208,7 +208,7 @@ Who are you?
 Amended prompt-contract behavior:
 
 - Treats the question as source material, not as a request to answer; the same rule applies to greetings and instruction-looking text.
-- Runs the same compact three-stage workflow.
+- Runs the same fixed three-stage workflow.
 - Provides Chinese and English versions that preserve the question's meaning.
 
 Result: satisfies T9 and EC9.
@@ -228,6 +228,6 @@ Result: satisfies T9 and EC9.
 
 ## Post-change conclusion
 
-The amended prompt contract satisfies the user's requested compact workflow: optimize first with specific reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple, question-like, greeting-like, or instruction-like inputs and preserves meaning when misleading rewrites are requested.
+The amended prompt contract satisfies the user's requested fixed workflow: optimize first with specific reasons, assess the optimized text's language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple, question-like, greeting-like, or instruction-like inputs and preserves meaning when misleading rewrites are requested.
 
 Residual risk: this evidence is prompt-contract evidence rather than live model output. That matches the approved test strategy, which forbids live model CI and uses reviewer-visible scenario evidence for prompt behavior.
