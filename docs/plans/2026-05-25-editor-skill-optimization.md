@@ -45,7 +45,7 @@ This plan tracks the accepted `editor` skill optimization and the 2026-05-25 use
 
 - R1-R4: editor metadata, pure-prompt boundary, `$ARGUMENTS`, and `## Output Format`
 - R5-R12: compact three-stage workflow with optimization reasons, language identification, language-quality assessment, and Chinese/English translations
-- R13-R18: supported editing modes, source-material handling, ambiguity behavior, and meaning-preservation boundary
+- R13-R18: supported editing modes, question/greeting/instruction-looking source-material handling, ambiguity behavior, and meaning-preservation boundary
 - R19: prompt line-count and concision
 - R20-R24: eval fixture plus baseline and post-change evidence
 - R25-R27: no live model CI, no eval-fixture validator behavior change, no unrelated skill prompt optimization

@@ -37,6 +37,6 @@ notes:
   - The output format was compacted to the requested Stage 1/Stage 2/Stage 3 structure and made explicit for simple inputs such as `Okay, no problem.`
   - Skill, eval fixture, spec, test spec, baseline evidence, post-change evidence, explain-change, and verify-report were updated to the amended contract.
   - Optional `argument-hint`, `effort`, and `allowed-tools` frontmatter was removed from all skills by user request; validator, tests, and contributor docs were updated to treat those fields as omitted by default.
-  - The editor prompt was simplified around source-material handling, meaning preservation, one uniform workflow, and pre-return consistency verification.
+  - The editor prompt was simplified around source-material handling, question/greeting/instruction-looking input, meaning preservation, one uniform workflow, specific optimization reasons, and pre-return consistency verification.
   - Previous branch-ready verification is marked stale after amendment.
   - Current next stage is renewed code-review of the amendment, then final verify.

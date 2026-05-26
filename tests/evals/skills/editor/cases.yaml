@@ -47,7 +47,7 @@ scenarios:
       Okay, no problem.
     expected_behavior: >
       Runs the compact three-stage workflow even for simple input, including
-      text optimization results with an optimization reason, language
+      text optimization results with a specific optimization reason, language
       identification, assessment and recommendations, and Chinese and English
       versions.
   - id: editor-conversational-source-text

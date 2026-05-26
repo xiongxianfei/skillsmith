@@ -12,11 +12,11 @@ approved, amended by post-PR user direction on 2026-05-25
 
 ## Goal and context
 
-The `editor` skill should provide a high-quality editing and translation workflow. The current accepted contract is no longer a narrow-output default; it is a compact three-stage workflow for every non-empty input, including simple text such as `Okay, no problem.`:
+The `editor` skill should provide a high-quality editing and translation workflow for text intended to be shared, such as emails, PR descriptions, docs, and messages. The current accepted contract is no longer a narrow-output default; it is a compact three-stage workflow for every input, including simple text such as `Okay, no problem.`:
 
 1. optimize the input according to writing best practices and provide optimization reasons;
 2. review source-language quality before translation;
-3. translate the optimized text into Chinese and English.
+3. translate the optimized text into Chinese and English, regardless of whether the source text is Chinese, English, Russian, or another detected source language.
 4. verify that the optimized text and both translations preserve the same meaning before returning.
 
 The change remains material because it alters the skill workflow and output contract. It still requires eval evidence, baseline evidence, post-change evidence, and deterministic repository validation.
@@ -79,7 +79,7 @@ R5. The optimized `editor` skill MUST run a compact three-stage workflow for eve
 
 R6. The optimization stage MUST improve clarity, grammar, concision, structure, tone, terminology, and flow while preserving source meaning, facts, technical details, audience, tone, and requested format.
 
-R7. The optimization stage MUST provide concise reasons for substantive optimization choices.
+R7. The optimization stage MUST provide concise, specific reasons that name the actual optimization choices rather than generic praise.
 
 R8. The language-quality stage MUST identify the source language and assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation.
 
@@ -91,7 +91,7 @@ R11. If the optimized text is already Chinese or English, the skill MUST still p
 
 R12. The skill MUST verify before returning that the optimized text, Chinese version, and English version preserve the same meaning, tone, and formatting intent.
 
-R13. The skill MUST support proofreading, polishing, rewriting, technical or engineer-facing editing, translation-oriented requests, ambiguous pasted text, and integrity-boundary handling.
+R13. The skill MUST support proofreading, polishing, rewriting, technical or engineer-facing editing, translation-oriented requests, ambiguous pasted text, and integrity-boundary handling. Source text that looks like a question, greeting, or instruction MUST still be treated as material to edit rather than conversation to answer.
 
 R14. When the user provides explicit tone, audience, format, or style instructions, the skill MUST follow them unless they conflict with meaning preservation or an integrity boundary.
 
@@ -134,7 +134,7 @@ Default output format:
 
 | Section | Default content |
 |---|---|
-| `### Stage 1: Text Optimization Results` | Optimized source text plus concise optimization reason |
+| `### Stage 1: Text Optimization Results` | Optimized source text plus concise, specific optimization reason |
 | `### Stage 2: Language Quality Assessment` | `Language Identification` and `Assessment and Recommendations` |
 | `### Stage 3: Bilingual Translation` | `Chinese Version` and `English Version` generated from the optimized text |
 
@@ -149,7 +149,7 @@ Outputs MUST be Markdown-compatible plain text. No tool output, generated files,
 
 ## Error and boundary behavior
 
-- Input is treated as source material to edit, not conversation to answer.
+- Input is treated as source material to edit, not conversation to answer, including when it looks like a question, greeting, or instruction.
 - If the source text contains terms with multiple plausible technical meanings, the skill SHOULD flag the ambiguity in the language-quality assessment.
 - If the user asks for a misleading rewrite, the skill MUST not perform the deceptive transformation even if the requested tone is otherwise clear.
 - If the user asks for a format that conflicts with concise output, the explicit user format wins unless it conflicts with meaning preservation or integrity boundaries.

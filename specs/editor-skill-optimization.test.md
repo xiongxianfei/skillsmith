@@ -104,10 +104,10 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Steps:
   - Inspect workflow and output format.
   - Confirm optimization happens first.
-  - Confirm optimization reasons are required.
+  - Confirm optimization reasons are specific and name actual changes.
   - Confirm source-language identification is required.
   - Confirm language-quality assessment happens before translation.
-  - Confirm Chinese and English translations are required by default.
+  - Confirm Chinese and English translations are required regardless of source language.
   - Confirm the workflow verifies meaning consistency before returning.
   - Confirm the output format uses `Stage 1`, `Stage 2`, and `Stage 3` headings rather than five separate top-level sections.
 - Expected result: The prompt contract reflects the amended compact three-stage workflow.
@@ -165,7 +165,7 @@ Use deterministic checks for static repository contracts and manual scenario evi
 - Steps:
   - Provide pasted text without explicit instruction and confirm the compact workflow runs.
   - Provide `Okay, no problem.` and confirm the compact three-stage workflow still runs.
-  - Provide `Who are you?` and confirm the prompt treats it as source text instead of answering.
+  - Provide question-like, greeting-like, or instruction-like text such as `Who are you?` and confirm the prompt treats it as source text instead of answering.
   - Ask for explanation or diff and confirm optimization reasons become suitably specific.
   - Provide a text with non-obvious ambiguity and confirm the assessment flags it before translation.
 - Expected result: Boundary cases preserve the required workflow without hiding fidelity issues.

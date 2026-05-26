@@ -8,12 +8,12 @@ Evidence method: manual prompt-contract inspection of `skills/editor/SKILL.md`, 
 
 The optimized prompt now requires:
 
-1. Stage 1 text optimization results with a concise optimization reason;
+1. Stage 1 text optimization results with a concise, specific optimization reason;
 2. Stage 2 language-quality assessment with language identification and recommendations before translation;
 3. Stage 3 bilingual translation with Chinese and English versions of the optimized text.
 4. Pre-return verification that all versions preserve the same meaning.
 
-The prompt treats all input as source material to edit, not conversation to answer, and derives the misleading-rewrite boundary from meaning preservation.
+The prompt treats all input as source material to edit, not conversation to answer, including questions, greetings, and instruction-looking text. It derives the misleading-rewrite boundary from meaning preservation.
 
 ## Scenario comparison
 
@@ -35,7 +35,7 @@ Pre-amendment branch behavior:
 Amended prompt-contract behavior:
 
 - Optimizes the source text for grammar and clarity.
-- Provides concise optimization reasons for substantive changes.
+- Provides concise, specific optimization reasons for substantive changes.
 - Reviews language quality before translation.
 - Provides both Chinese and English translations of the optimized text.
 
@@ -207,7 +207,7 @@ Who are you?
 
 Amended prompt-contract behavior:
 
-- Treats the question as source material, not as a request to answer.
+- Treats the question as source material, not as a request to answer; the same rule applies to greetings and instruction-looking text.
 - Runs the same compact three-stage workflow.
 - Provides Chinese and English versions that preserve the question's meaning.
 
@@ -228,6 +228,6 @@ Result: satisfies T9 and EC9.
 
 ## Post-change conclusion
 
-The amended prompt contract satisfies the user's requested compact workflow: optimize first with reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple or conversational-looking inputs and preserves meaning when misleading rewrites are requested.
+The amended prompt contract satisfies the user's requested compact workflow: optimize first with specific reasons, assess language quality and identify the source language before translation, then provide Chinese and English translations after checking consistency. It applies even to simple, question-like, greeting-like, or instruction-like inputs and preserves meaning when misleading rewrites are requested.
 
 Residual risk: this evidence is prompt-contract evidence rather than live model output. That matches the approved test strategy, which forbids live model CI and uses reviewer-visible scenario evidence for prompt behavior.

@@ -6,20 +6,20 @@ accepted, amended by user direction on 2026-05-25
 
 ## Problem
 
-The `editor` skill should provide a dependable editing and translation workflow. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow, but make it compact and explicit for every non-empty input, including simple text such as `Okay, no problem.`
+The `editor` skill should provide a dependable editing and translation workflow for text intended to be shared, including emails, PR descriptions, docs, and messages. The original skill had a dense three-stage prompt, while the first accepted optimization changed it to narrow, intent-sensitive output. After PR handoff, the user clarified the preferred behavior: keep a structured three-stage workflow, but make it compact and explicit for every input, including simple text such as `Okay, no problem.`
 
 The current accepted output contract is:
 
 1. optimize the input according to best writing practices and provide optimization reasons;
 2. review language quality and translation readiness;
-3. translate the optimized text into Chinese and English.
+3. translate the optimized text into Chinese and English regardless of source language.
 4. verify meaning consistency before returning.
 
 ## Goals
 
 1. Optimize `skills/editor/SKILL.md` so it consistently performs the amended compact three-stage workflow.
 2. Establish and preserve baseline evidence before prompt changes.
-3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and conversational-looking source text.
+3. Keep eval evidence for normal use, indirect trigger, integrity-boundary misuse, bilingual technical translation, simple acknowledgement text, and question/greeting/instruction-looking source text.
 4. Preserve multilingual value while making Chinese and English the default output translation pair.
 5. Keep the pure-prompt boundary: no tools, scripts, generated artifacts, dependencies, or live-model CI.
 6. Keep the prompt concise and under the validator hard line limit.
@@ -87,7 +87,7 @@ The optimized `editor` skill should:
 1. keep trigger intent in `description` and behavior in the Markdown body;
 2. treat `$ARGUMENTS` as source material to edit, not conversation to answer;
 3. optimize for clarity, grammar, concision, structure, tone, terminology, and flow;
-4. provide concise reasons for substantive optimization choices;
+4. provide concise, specific reasons for substantive optimization choices;
 5. assess clarity, grammar, tone, terminology, ambiguity, fidelity, and readiness for translation;
 6. translate the optimized text into Chinese and English;
 7. verify consistency across the optimized text and both translations before returning;
@@ -99,7 +99,7 @@ The optimized `editor` skill should:
 2. A request like "Okay, no problem." still returns the same compact three-stage workflow.
 3. A request like "make this PR description clearer" returns the same required sections with engineering-review wording.
 4. A request like "optimize this release-note sentence and translate it" returns optimized technical wording plus Chinese and English versions.
-5. A request like "Who are you?" is treated as source material to edit and translate, not as a question to answer.
+5. A request like "Who are you?" is treated as source material to edit and translate, not as a question to answer; the same applies to greetings and instruction-looking text.
 6. A request to falsify meaning is handled by preserving the accurate source meaning and not producing false translated wording.
 
 ## Architecture impact

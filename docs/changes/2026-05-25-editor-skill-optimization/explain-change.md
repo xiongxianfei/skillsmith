@@ -4,7 +4,7 @@
 
 This branch now reflects the amended `editor` skill contract requested after PR handoff. The skill uses a required compact three-stage workflow:
 
-1. optimize the input according to writing best practices and provide optimization reasons;
+1. optimize the input according to writing best practices and provide specific optimization reasons;
 2. review language quality, identify the source language, and give recommendations before translation;
 3. translate the optimized text into Chinese and English, after checking that all versions preserve the same meaning.
 
@@ -30,7 +30,7 @@ The user then clarified that the desired workflow should include optimization re
 
 | File | Change | Reason | Evidence |
 |---|---|---|---|
-| `skills/editor/SKILL.md` | Requires compact Stage 1 optimization results, Stage 2 language-quality assessment, Stage 3 bilingual translation, and pre-return consistency verification. | Implements the amended user workflow, including simple and conversational-looking inputs. | Validator; line count; post-change evidence. |
+| `skills/editor/SKILL.md` | Requires compact Stage 1 optimization results, Stage 2 language-quality assessment, Stage 3 bilingual translation, and pre-return consistency verification. | Implements the amended user workflow, including text intended to share, simple text, and question/greeting/instruction-looking inputs. | Validator; line count; post-change evidence. |
 | `tests/evals/skills/editor/cases.yaml` | Updates expected behavior to require the compact workflow, bilingual Chinese/English output, simple acknowledgement coverage, and conversational source-text handling. | Keeps eval evidence aligned with the prompt contract. | `python tests/validate_skills.py`. |
 | `specs/editor-skill-optimization.md` | Replaces narrow-output requirements with the amended compact three-stage contract. | Makes the governing behavior explicit and testable. | R1-R27 and AC1-AC15. |
 | `specs/editor-skill-optimization.test.md` | Remaps tests to T1-T10 for the compact three-stage workflow. | Keeps proof surfaces aligned with amended requirements. | Manual evidence and validation commands. |
@@ -44,11 +44,11 @@ The user then clarified that the desired workflow should include optimization re
 
 The revised skill keeps the existing trigger metadata because the skill still handles polishing, proofreading, refining, and translation for Chinese, English, and Russian source text. The body now makes the compact output contract explicit:
 
-- `### Stage 1: Text Optimization Results`: edited source text plus a concise optimization reason.
+- `### Stage 1: Text Optimization Results`: edited source text plus a concise, specific optimization reason.
 - `### Stage 2: Language Quality Assessment`: language identification plus assessment and recommendations.
 - `### Stage 3: Bilingual Translation`: Chinese and English versions of the optimized text.
 
-The body now states the core editorial rule directly: input is source material to edit, not conversation to answer, and meaning preservation controls misleading rewrite requests.
+The body now states the core editorial rule directly: input is source material to edit, not conversation to answer, including when it looks like a question, greeting, or instruction. Meaning preservation controls misleading rewrite requests.
 
 ## Tests and proof
 
