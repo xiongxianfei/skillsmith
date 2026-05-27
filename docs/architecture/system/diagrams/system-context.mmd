@@ -1,0 +1,11 @@
+C4Context
+  title Skillsmith system context
+
+  Person(user, "Skill user", "Invokes installed skills through an AI assistant runtime")
+  Person(contributor, "Contributor or agent", "Authors, reviews, and validates skill changes")
+  System(repo, "Skillsmith repository", "Portable Markdown skills, specs, eval fixtures, and lifecycle evidence")
+  System_Ext(runtime, "AI assistant runtime", "Consumes installed Markdown skill prompts")
+
+  Rel(user, runtime, "Invokes editor skill")
+  Rel(contributor, repo, "Updates and validates")
+  Rel(repo, runtime, "Provides portable skill prompt")

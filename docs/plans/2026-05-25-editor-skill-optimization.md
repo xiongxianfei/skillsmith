@@ -2,8 +2,8 @@
 
 ## Status
 
-- Plan lifecycle state: active
-- Terminal disposition: none
+- Plan lifecycle state: superseded
+- Terminal disposition: superseded by `docs/plans/2026-05-26-editor-expert-quality-optimization.md`
 
 ## Purpose / big picture
 

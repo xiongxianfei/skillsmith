@@ -1,0 +1,48 @@
+flowchart TD
+  input["Input message via $ARGUMENTS"]
+  split["Separate roles<br>instruction / source / target"]
+
+  instruction["Instruction role<br>user direction to the tool"]
+  source["Source role<br>artifact to edit or render"]
+  target["Target role<br>default CN + EN<br>honor explicit override"]
+
+  framing{"Instruction language clear?"}
+  framingInstruction["Use instruction language<br>for labels, notes, refusals"]
+  framingSource["Use source language<br>for labels, notes, refusals"]
+  responseLanguage["Resolved response language"]
+
+  intake["Accept source in any detected language<br>intake rule, not equal-quality guarantee"]
+  outputFlags["Set output flags from source + request<br>source block only for non-CN/EN source edit<br>notes only when explicitly asked"]
+  integrity{"Misleading transformation?"}
+  refuse["Brief refusal in response language<br>+ accurate target-language alternatives"]
+
+  sourceEdit["Edit source in source language<br>fidelity + restraint"]
+  meaning["Resolve meaning once"]
+  render["Render target languages<br>from resolved meaning<br>internally render both when useful for cross-check"]
+  crosscheck{"Rendered versions preserve meaning<br>against source and each other when plural?"}
+  fix["Fix drift or flag ambiguity"]
+  assemble["Assemble target-language output<br>default CN + EN<br>plus only requested flags"]
+
+  input --> split
+  split --> instruction
+  split --> source
+  split --> target
+
+  instruction --> framing
+  framing -- yes --> framingInstruction
+  framing -- no --> framingSource
+  framingInstruction --> responseLanguage
+  framingSource --> responseLanguage
+
+  source --> intake --> outputFlags --> integrity
+  integrity -- yes --> refuse
+  integrity -- no --> sourceEdit
+  sourceEdit --> meaning
+  target --> render
+  meaning --> render --> crosscheck
+  crosscheck -- no --> fix --> render
+  crosscheck -- yes --> assemble
+
+  responseLanguage -. response framing .-> refuse
+  responseLanguage -. response framing .-> assemble
+  outputFlags -. source block / notes flags .-> assemble
