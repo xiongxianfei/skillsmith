@@ -4,6 +4,7 @@
 
 | Plan | State | Current milestone | Next stage | Active context |
 | --- | --- | --- | --- | --- |
+| `docs/plans/2026-06-16-editor-source-plus-companion-language-optimization.md` | active | M1. Eval fixture and baseline evidence | implement | Plan-review approved and test spec authored; implementation may begin with M1 only. |
 | `docs/plans/2026-06-16-editor-learning-default-optimization.md` | active | final closeout | pr | Verify passed; branch-ready for PR handoff. |
 | `docs/plans/2026-05-26-editor-expert-quality-optimization.md` | active | final closeout | pr | Verify passed; branch-ready for PR handoff. |
 | `docs/plans/2026-05-25-editor-skill-optimization.md` | superseded | amendment update | none | superseded by: `docs/plans/2026-05-26-editor-expert-quality-optimization.md`; active-context: kept temporarily to show replacement of the old fixed three-stage contract. |
