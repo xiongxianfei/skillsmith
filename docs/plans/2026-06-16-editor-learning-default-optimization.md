@@ -59,14 +59,14 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ## Current Handoff Summary
 
-- Current milestone: M2. Editor prompt learning-default implementation
-- Current milestone state: review-requested
-- Last reviewed milestone: M1. Eval fixture and baseline evidence
-- Review status: M2 implementation ready for code-review
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review for M2
+- Current milestone: M3. Post-change evidence and validation
+- Current milestone state: planned
+- Last reviewed milestone: M2. Editor prompt learning-default implementation
+- Review status: M2 code review clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2, M3, explain-change closeout, verification, and PR handoff remain.
+- Reason final closeout is or is not ready: M3, explain-change closeout, verification, and PR handoff remain.
 
 ## Milestones
 
@@ -119,7 +119,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ### M2. Editor prompt learning-default implementation
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Update `skills/editor/SKILL.md` so the prompt implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, and no-padding rules while preserving the expert editor contract.
 - Requirements: R1-R36, AC2-AC18.
 - Files/components likely touched:
@@ -146,6 +146,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `wc -l skills/editor/SKILL.md`
 - Expected observable result: `skills/editor/SKILL.md` implements the approved default learning-notes contract and remains a pure prompt skill with `name: editor`, `$ARGUMENTS`, and `## Output Format`.
 - Implementation result: `skills/editor/SKILL.md` implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, no-padding rules, response-language labels, target-language templates, and integrity-boundary note behavior. README was updated because it mirrors editor behavior.
+- Review result: code-review M2 R1 returned clean-with-notes with no material findings.
 - Commit message: `M2: implement editor learning notes default`
 - Milestone closeout:
   - validation passed
@@ -241,6 +242,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M2 implementation updated `skills/editor/SKILL.md` to replace notes-on-request behavior with default `Learning notes` while preserving the expert editor contract.
 - 2026-06-16: M2 implementation updated `README.md` because the editor table row and skill detail section mirror the changed output contract.
 - 2026-06-16: M2 is review-requested for code review.
+- 2026-06-16: Code-review M2 R1 closed M2 clean-with-notes with no material findings.
 
 ## Aligned-surface audit
 
@@ -298,12 +300,13 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M2 `git diff --check` passed.
 - 2026-06-16: M2 `wc -l skills/editor/SKILL.md` returned 175 lines.
 - 2026-06-16: M2 stale notes-on-request search passed; only the retained `No default Why` rule remains by design.
+- 2026-06-16: Code-review M2 R1 direct checks passed: `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, targeted prompt search, and prompt line count.
 
 ## Outcome and retrospective
 
-- M1 is closed by code-review M1 R1. M2 implementation is review-requested. M3 remains unimplemented; downstream gates remain.
+- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 remains unimplemented; downstream gates remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M2. Readiness is not Done; M2 review, M3, explain-change closeout, verify, and PR handoff remain.
+- Ready for implement M3. Readiness is not Done; M3, explain-change closeout, verify, and PR handoff remain.
