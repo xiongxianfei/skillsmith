@@ -60,13 +60,13 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 ## Current Handoff Summary
 
 - Current milestone: final closeout sequence
-- Current milestone state: planned
+- Current milestone state: branch-ready
 - Last reviewed milestone: M3. Post-change evidence and validation
 - Review status: M3 code review clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: final closeout
-- Final closeout readiness: ready to start final closeout sequence, not complete
-- Reason final closeout is or is not ready: all implementation milestones are closed; explain-change closeout, verification, and PR handoff remain.
+- Next stage: pr
+- Final closeout readiness: branch-ready for PR handoff
+- Reason final closeout is or is not ready: implementation, reviews, explain-change, and verification are complete; PR handoff remains.
 
 ## Milestones
 
@@ -248,6 +248,8 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M3 implementation recorded post-change evidence in `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md`.
 - 2026-06-16: M3 is review-requested for code review.
 - 2026-06-16: Code-review M3 R1 closed M3 clean-with-notes with no material findings.
+- 2026-06-16: Explain-change closed at `docs/changes/2026-06-16-editor-learning-default-optimization/explain-change.md`.
+- 2026-06-16: Verify passed and recorded branch-ready evidence in `docs/changes/2026-06-16-editor-learning-default-optimization/verify-report.md`.
 
 ## Aligned-surface audit
 
@@ -324,12 +326,18 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M3 `wc -l skills/editor/SKILL.md` returned 175 lines.
 - 2026-06-16: M3 direct evidence search confirmed post-change evidence covers key learning-note labels, scenario IDs, and T4-T14 behavior groups.
 - 2026-06-16: Code-review M3 R1 direct checks passed: all required scenario IDs present in post-change evidence, `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, and prompt line count.
+- 2026-06-16: Verify `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
+- 2026-06-16: Verify `python -m unittest discover tests` passed, 31 tests OK.
+- 2026-06-16: Verify `python tests/check_readme_sync.py` passed.
+- 2026-06-16: Verify `git diff --check` passed.
+- 2026-06-16: Verify `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: Verify direct scenario coverage check found no required scenario IDs missing from the eval fixture or post-change evidence.
 
 ## Outcome and retrospective
 
-- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 is closed by code-review M3 R1. All implementation milestones are closed; downstream final closeout gates remain.
+- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 is closed by code-review M3 R1. Explain-change and verify are complete; PR handoff remains.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for final closeout sequence. Readiness is not Done; explain-change closeout, verify, and PR handoff remain.
+- Branch-ready for PR handoff. Readiness is not Done; PR body/open handoff remains.
