@@ -48,13 +48,13 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 ## Current Handoff Summary
 
 - Current milestone: M2. Editor prompt implementation
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1. Eval fixture and baseline evidence
-- Review status: M1 code-review clean-with-notes; no material findings
+- Review status: M2 implementation ready for code-review
 - Remaining in-scope implementation milestones: M2-M3
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not-ready
-- Reason final closeout is not ready: the plan still needs M2 and M3 implementation, code review for those milestones, final change explanation closeout, final verification, and PR handoff.
+- Reason final closeout is not ready: the plan still needs M2 code-review, M3 implementation, final change explanation closeout, final verification, and PR handoff.
 
 ## Milestones
 
@@ -82,7 +82,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 
 ### M2. Editor prompt implementation
 
-- State: planned
+- State: review-requested
 - Goal: revise `editor` to implement the source-language + companion-language contract while reducing prompt weight.
 - Requirements covered: R1-R67, AC2-AC18.
 - Files likely touched:
@@ -107,7 +107,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
   - `python tests/check_readme_sync.py`
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
-- Result: pending
+- Result: implemented; ready for code-review.
 
 ### M3. Post-change evidence and validation
 
@@ -182,6 +182,8 @@ No live model calls should be added to CI.
 - 2026-06-16: M1 implementation started; scope is limited to eval fixture updates, baseline evidence, and required change-local implementation metadata. Production prompt edits remain gated until M1 review.
 - 2026-06-16: M1 implementation completed and moved to review-requested after validation.
 - 2026-06-16: Code-review M1 R1 closed M1 with status `clean-with-notes` and no material findings.
+- 2026-06-16: M2 implementation started; scope is limited to `skills/editor/SKILL.md`, README mirror wording, and lifecycle evidence.
+- 2026-06-16: M2 implementation completed and moved to review-requested after validation.
 
 ## Decision log
 
@@ -191,11 +193,13 @@ No live model calls should be added to CI.
 | 2026-06-16 | Do not create a canonical architecture artifact. | Architecture-review approved that this is prompt/test/documentation work with no runtime design impact. | Add an ADR or architecture doc with no durable design decision. |
 | 2026-06-16 | Treat README update as conditional implementation scope. | README currently mirrors editor output behavior, but exact wording should be changed only with the prompt implementation. | Update README during plan authoring. |
 | 2026-06-16 | Keep M1 prompt-neutral. | Baseline evidence must precede any production prompt edit, so M1 updates only proof and lifecycle surfaces. | Edit `skills/editor/SKILL.md` before baseline evidence. |
+| 2026-06-16 | Replace the old template gallery with one base output shape plus modification rules. | This implements the spec's prompt-weight reduction without losing explicit target, target-only, integrity, and learning-note behavior. | Keep separate default, target, non-English-source, no-substantive-lesson, and integrity templates. |
 
 ## Surprises and discoveries
 
 - The existing prompt is 188 lines and still hardcodes Chinese + English in both the description and workflow. M2 must remove those conflicts while staying under 500 lines and preferably shorter than 188 lines.
 - The old editor eval fixture already had strong learning-default coverage, but several cases still expected Chinese + English defaults. M1 replaced it instead of layering conflicting expectations.
+- The revised prompt is 174 lines, shorter than the 188-line baseline while adding the new deterministic source-plus-companion language policy.
 
 ## Validation notes
 
@@ -223,6 +227,13 @@ No live model calls should be added to CI.
   - `git diff --check HEAD~1..HEAD` passed.
   - `git diff HEAD~1..HEAD -- skills/editor/SKILL.md` produced no diff.
   - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 188 prompt lines and 274 eval fixture lines.
+- 2026-06-16 M2 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+  - `wc -l skills/editor/SKILL.md` reported 174 lines.
+  - Stale text search passed: no `defaults to Chinese`, `Default visible target`, `internally render`, `Chinese + English final`, `Default Chinese + English output`, or `defaulting to Chinese and English` matches in `skills/editor/SKILL.md` or `README.md`.
 
 ## Outcome and retrospective
 
@@ -230,6 +241,6 @@ No live model calls should be added to CI.
 
 ## Readiness
 
-This plan is ready for M2 implementation.
+This plan is ready for M2 code-review.
 
-It is not verified, branch-ready, or PR-ready. Those states require M2 and M3 implementation, code review for those milestones, durable change explanation updates, and final verification.
+It is not M3-ready, verified, branch-ready, or PR-ready. Those states require M2 code-review, M3 implementation, durable change explanation updates, and final verification.
