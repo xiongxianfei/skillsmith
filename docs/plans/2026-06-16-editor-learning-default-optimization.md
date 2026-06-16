@@ -59,20 +59,20 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ## Current Handoff Summary
 
-- Current milestone: M1. Eval fixture and baseline evidence
-- Current milestone state: review-requested
-- Last reviewed milestone: none
-- Review status: M1 implementation ready for code-review
-- Remaining in-scope implementation milestones: M1, M2, M3
-- Next stage: code-review for M1
+- Current milestone: M2. Editor prompt learning-default implementation
+- Current milestone state: planned
+- Last reviewed milestone: M1. Eval fixture and baseline evidence
+- Review status: M1 code review clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M2, M3
+- Next stage: implement M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M1 code review, M2, M3, explain-change closeout, verification, and PR handoff remain.
+- Reason final closeout is or is not ready: M2, M3, explain-change closeout, verification, and PR handoff remain.
 
 ## Milestones
 
 ### M1. Eval fixture and baseline evidence
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Update the editor eval fixture for the learning-default contract and record baseline evidence before changing `skills/editor/SKILL.md`.
 - Requirements: R37-R38, AC19-AC20, plus eval coverage for R6-R35a.
 - Files/components likely touched:
@@ -103,6 +103,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `git diff --check`
 - Expected observable result: eval fixture expresses the approved learning-default behavior, baseline evidence exists, and `skills/editor/SKILL.md` has no M1 diff.
 - Implementation result: eval fixture now expresses the approved learning-default behavior, baseline evidence exists, and `skills/editor/SKILL.md` has no M1 diff.
+- Review result: code-review M1 R1 returned clean-with-notes with no material findings.
 - Commit message: `M1: add editor learning evals and baseline evidence`
 - Milestone closeout:
   - validation passed
@@ -234,7 +235,8 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M1 implementation updated `tests/evals/skills/editor/cases.yaml` with learning-default scenarios before prompt edits.
 - 2026-06-16: M1 implementation recorded baseline evidence in `docs/changes/2026-06-16-editor-learning-default-optimization/baseline-evidence.md` while `skills/editor/SKILL.md` had no diff.
 - 2026-06-16: M1 implementation added change-local metadata pack: `change.yaml` and active `explain-change.md`.
-- 2026-06-16: M1 is review-requested for code review.
+- 2026-06-16: M1 was review-requested for code review.
+- 2026-06-16: Code-review M1 R1 closed M1 clean-with-notes with no material findings.
 
 ## Aligned-surface audit
 
@@ -274,12 +276,13 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M1 `git diff -- skills/editor/SKILL.md` produced no output; prompt was not edited.
 - 2026-06-16: M1 `git diff --check` passed.
 - 2026-06-16: M1 trailing-whitespace check on changed M1 artifacts passed.
+- 2026-06-16: Code-review M1 R1 direct checks passed: required scenario IDs present, `python tests/validate_skills.py` passed with the existing unrelated grandfathered-evals warning, `git diff --check HEAD~1..HEAD` passed, and `git diff HEAD~1..HEAD -- skills/editor/SKILL.md` produced no output.
 
 ## Outcome and retrospective
 
-- M1 implementation is review-requested. M2 and M3 remain unimplemented; downstream gates remain.
+- M1 is closed by code-review M1 R1. M2 and M3 remain unimplemented; downstream gates remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M1. Readiness is not Done; M1 review, M2, M3, explain-change closeout, verify, and PR handoff remain.
+- Ready for implement M2. Readiness is not Done; M2, M3, explain-change closeout, verify, and PR handoff remain.

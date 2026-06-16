@@ -50,3 +50,10 @@
 - Status: approved
 - Material findings: none
 - Outcome: test spec is approved as the active proof surface for M1-M3; next repository stage is `implement M1`.
+
+## Code Review M1 R1
+
+- Path: `docs/changes/2026-06-16-editor-learning-default-optimization/reviews/code-review-m1-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M1 is closed; next repository stage is `implement M2`.

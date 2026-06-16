@@ -6,8 +6,8 @@ proposal: docs/proposals/2026-06-16-editor-learning-default-optimization.md
 spec: specs/editor-learning-default-optimization.md
 test_spec: specs/editor-learning-default-optimization.test.md
 architecture: not-required
-current_milestone: M1 review-requested
-next_stage: code-review
+current_milestone: M2 planned
+next_stage: implement M2
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -37,3 +37,8 @@ validation:
     stage: M1
     status: passed
     notes: "No trailing whitespace in changed M1 artifacts."
+reviews:
+  - stage: code-review M1 R1
+    status: clean-with-notes
+    findings: []
+    record: docs/changes/2026-06-16-editor-learning-default-optimization/reviews/code-review-m1-r1.md
