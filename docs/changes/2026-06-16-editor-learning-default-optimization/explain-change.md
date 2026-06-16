@@ -27,10 +27,23 @@ M1 intentionally does not edit `skills/editor/SKILL.md`. The prompt still contai
 
 No runtime tools, scripts, generated assets, dependencies, installer behavior, validator behavior, README behavior, or live-model CI are added in M1.
 
+## M2 Rationale
+
+M2 implements the approved prompt behavior change:
+
+| File | M2 change | Reason |
+| --- | --- | --- |
+| `skills/editor/SKILL.md` | Replaces notes-on-request behavior with default `Learning notes`, explicit suppression, fallback-note rules, anchoring, no-padding, response-language labels, and updated output templates. | Implements spec R1-R36 and preserves the expert editor contract while making teaching default. |
+| `README.md` | Updates the editor table row and detail section to mention concise learning notes by default and no-notes overrides. | README mirrors the public editor behavior and must not advertise the old output contract. |
+| `docs/plans/2026-06-16-editor-learning-default-optimization.md` | Records M2 progress, aligned-surface audit, validation, and review-requested handoff. | `implement` owns keeping the active plan current. |
+| `docs/changes/2026-06-16-editor-learning-default-optimization/change.yaml` | Records M2 validation and handoff state. | Keeps lifecycle metadata reviewable. |
+
+M2 does not change the validator, installer, eval fixture, or other skills. The eval fixture was intentionally updated in M1 before prompt implementation.
+
 ## Validation Evidence
 
 M1 validation is recorded in the active plan and `change.yaml`. The expected baseline warning is the existing non-blocking grandfathered-evals warning for unrelated skills without eval fixtures.
 
 ## Current Handoff
 
-M1 is review-requested for `code-review`. M2 and M3 remain unimplemented.
+M1 is closed. M2 is review-requested for `code-review`. M3 remains unimplemented.

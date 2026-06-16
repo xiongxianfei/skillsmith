@@ -6,8 +6,8 @@ proposal: docs/proposals/2026-06-16-editor-learning-default-optimization.md
 spec: specs/editor-learning-default-optimization.md
 test_spec: specs/editor-learning-default-optimization.test.md
 architecture: not-required
-current_milestone: M2 planned
-next_stage: implement M2
+current_milestone: M2 review-requested
+next_stage: code-review
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -37,6 +37,25 @@ validation:
     stage: M1
     status: passed
     notes: "No trailing whitespace in changed M1 artifacts."
+  - command: python tests/validate_skills.py
+    stage: M2
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M2
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M2
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M2
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M2
+    status: passed
+    notes: "175 lines."
 reviews:
   - stage: code-review M1 R1
     status: clean-with-notes

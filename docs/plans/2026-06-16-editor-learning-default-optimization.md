@@ -60,11 +60,11 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 ## Current Handoff Summary
 
 - Current milestone: M2. Editor prompt learning-default implementation
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1. Eval fixture and baseline evidence
-- Review status: M1 code review clean-with-notes; no material findings
+- Review status: M2 implementation ready for code-review
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Next stage: code-review for M2
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M2, M3, explain-change closeout, verification, and PR handoff remain.
 
@@ -119,7 +119,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ### M2. Editor prompt learning-default implementation
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Update `skills/editor/SKILL.md` so the prompt implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, and no-padding rules while preserving the expert editor contract.
 - Requirements: R1-R36, AC2-AC18.
 - Files/components likely touched:
@@ -145,6 +145,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
 - Expected observable result: `skills/editor/SKILL.md` implements the approved default learning-notes contract and remains a pure prompt skill with `name: editor`, `$ARGUMENTS`, and `## Output Format`.
+- Implementation result: `skills/editor/SKILL.md` implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, no-padding rules, response-language labels, target-language templates, and integrity-boundary note behavior. README was updated because it mirrors editor behavior.
 - Commit message: `M2: implement editor learning notes default`
 - Milestone closeout:
   - validation passed
@@ -237,6 +238,9 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M1 implementation added change-local metadata pack: `change.yaml` and active `explain-change.md`.
 - 2026-06-16: M1 was review-requested for code review.
 - 2026-06-16: Code-review M1 R1 closed M1 clean-with-notes with no material findings.
+- 2026-06-16: M2 implementation updated `skills/editor/SKILL.md` to replace notes-on-request behavior with default `Learning notes` while preserving the expert editor contract.
+- 2026-06-16: M2 implementation updated `README.md` because the editor table row and skill detail section mirror the changed output contract.
+- 2026-06-16: M2 is review-requested for code review.
 
 ## Aligned-surface audit
 
@@ -247,6 +251,17 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 | `docs/changes/2026-06-16-editor-learning-default-optimization/baseline-evidence.md` | added | M1 owns baseline-first evidence before prompt edits. |
 | `README.md` | unaffected with rationale | README does not change until prompt behavior changes in M2, and only if it mirrors editor behavior. |
 | `tests/validate_skills.py` | unaffected with rationale | No validator behavior change is in scope; existing fixture schema represents the proof surface. |
+| `install.sh` | unaffected with rationale | No installation behavior change is in scope. |
+
+### M2 aligned-surface audit
+
+| Surface | M2 status | Rationale |
+| --- | --- | --- |
+| `skills/editor/SKILL.md` | updated | M2 owns prompt implementation for default `Learning notes`. |
+| `README.md` | updated | README mirrors editor behavior in the skills table and detail section. |
+| `tests/evals/skills/editor/cases.yaml` | unaffected with rationale | Eval fixture was already updated in M1 and remains the proof surface for M2 behavior. |
+| `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md` | unaffected with rationale | Post-change evidence belongs to M3 after prompt implementation review. |
+| `tests/validate_skills.py` | unaffected with rationale | No validator behavior change is in scope. |
 | `install.sh` | unaffected with rationale | No installation behavior change is in scope. |
 
 ## Decision log
@@ -277,12 +292,18 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M1 `git diff --check` passed.
 - 2026-06-16: M1 trailing-whitespace check on changed M1 artifacts passed.
 - 2026-06-16: Code-review M1 R1 direct checks passed: required scenario IDs present, `python tests/validate_skills.py` passed with the existing unrelated grandfathered-evals warning, `git diff --check HEAD~1..HEAD` passed, and `git diff HEAD~1..HEAD -- skills/editor/SKILL.md` produced no output.
+- 2026-06-16: M2 `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
+- 2026-06-16: M2 `python -m unittest discover tests` passed, 31 tests OK.
+- 2026-06-16: M2 `python tests/check_readme_sync.py` passed.
+- 2026-06-16: M2 `git diff --check` passed.
+- 2026-06-16: M2 `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: M2 stale notes-on-request search passed; only the retained `No default Why` rule remains by design.
 
 ## Outcome and retrospective
 
-- M1 is closed by code-review M1 R1. M2 and M3 remain unimplemented; downstream gates remain.
+- M1 is closed by code-review M1 R1. M2 implementation is review-requested. M3 remains unimplemented; downstream gates remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implement M2. Readiness is not Done; M2, M3, explain-change closeout, verify, and PR handoff remain.
+- Ready for code-review of M2. Readiness is not Done; M2 review, M3, explain-change closeout, verify, and PR handoff remain.

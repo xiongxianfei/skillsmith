@@ -19,7 +19,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
-| [editor](skills/editor/SKILL.md) | `/editor` | Expert text editing and translation with Chinese/English output by default and explicit target-language overrides |
+| [editor](skills/editor/SKILL.md) | `/editor` | Expert text editing and translation with Chinese/English output, concise learning notes by default, and explicit target-language or no-notes overrides |
 | [communicator](skills/communicator/SKILL.md) | `/communicator` | Draft formal Russian messages from Chinese input, with Chinese translation and cultural strategy notes |
 | [doctor](skills/doctor/SKILL.md) | `/doctor` | Medical consultation — symptoms, medications, lab reports, health advice, with referral guidance and safety flags |
 | [fitness-coach](skills/fitness-coach/SKILL.md) | `/fitness-coach` | Personal fitness coach — training plans, exercise technique, nutrition, and recovery advice |
@@ -107,7 +107,7 @@ Paste the prompt as the system prompt, then send your input as the first user me
 
 ### `editor` — Expert Text Editing & Translation
 
-Edits source text in its own language with fidelity and restraint, then returns Chinese and English final versions by default. Explicit target-language requests override the visible default.
+Edits source text in its own language with fidelity and restraint, then returns Chinese and English final versions plus concise learning notes by default. Explicit target-language and no-notes requests override the visible default.
 
 Best for: emails, PR descriptions, documentation, release notes, messages, academic writing, and professional business communication.
 
