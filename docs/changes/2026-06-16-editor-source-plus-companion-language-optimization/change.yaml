@@ -6,8 +6,8 @@ spec: specs/editor-source-plus-companion-language-optimization.md
 test_spec: specs/editor-source-plus-companion-language-optimization.test.md
 plan: docs/plans/2026-06-16-editor-source-plus-companion-language-optimization.md
 architecture: not-required
-current_milestone: M2 editor prompt implementation review-requested
-next_stage: code-review M2
+current_milestone: M3 post-change evidence and validation planned
+next_stage: implement M3
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -79,6 +79,29 @@ validation:
     stage: M2
     status: passed
     notes: "No matches for stale hardcoded Chinese+English default or hidden cross-check patterns in skills/editor/SKILL.md or README.md."
+  - command: python tests/validate_skills.py
+    stage: code-review M2 R1
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated grandfathered skills."
+  - command: python -m unittest discover tests
+    stage: code-review M2 R1
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: code-review M2 R1
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check HEAD~1..HEAD
+    stage: code-review M2 R1
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: code-review M2 R1
+    status: passed
+    notes: "174 lines."
+  - command: rg stale Chinese+English default and hidden cross-check text
+    stage: code-review M2 R1
+    status: passed
+    notes: "No matches for stale hardcoded Chinese+English default or hidden cross-check patterns in skills/editor/SKILL.md or README.md."
 reviews:
   - stage: proposal-review R1
     status: approved
@@ -113,3 +136,7 @@ reviews:
     status: clean-with-notes
     findings: []
     record: docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m1-r1.md
+  - stage: code-review M2 R1
+    status: clean-with-notes
+    findings: []
+    record: docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m2-r1.md

@@ -56,3 +56,10 @@
 - Status: clean-with-notes
 - Material findings: none
 - Outcome: M1 is closed; eval fixture and baseline evidence are accepted for this milestone. Next stage is M2 implementation.
+
+## Code Review M2 R1
+
+- Path: `docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m2-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M2 is closed; prompt and README mirror implementation are accepted for this milestone. Next stage is M3 implementation.
