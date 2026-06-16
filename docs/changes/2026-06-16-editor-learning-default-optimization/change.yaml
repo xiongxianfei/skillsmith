@@ -6,8 +6,8 @@ proposal: docs/proposals/2026-06-16-editor-learning-default-optimization.md
 spec: specs/editor-learning-default-optimization.md
 test_spec: specs/editor-learning-default-optimization.test.md
 architecture: not-required
-current_milestone: M3 review-requested
-next_stage: code-review
+current_milestone: final closeout
+next_stage: final closeout
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -84,3 +84,7 @@ reviews:
     status: clean-with-notes
     findings: []
     record: docs/changes/2026-06-16-editor-learning-default-optimization/reviews/code-review-m2-r1.md
+  - stage: code-review M3 R1
+    status: clean-with-notes
+    findings: []
+    record: docs/changes/2026-06-16-editor-learning-default-optimization/reviews/code-review-m3-r1.md

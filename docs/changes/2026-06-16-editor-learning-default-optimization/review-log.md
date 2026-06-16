@@ -64,3 +64,10 @@
 - Status: clean-with-notes
 - Material findings: none
 - Outcome: M2 is closed; next repository stage is `implement M3`.
+
+## Code Review M3 R1
+
+- Path: `docs/changes/2026-06-16-editor-learning-default-optimization/reviews/code-review-m3-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M3 is closed; all implementation milestones are closed; next repository stage is final closeout.

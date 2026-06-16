@@ -59,14 +59,14 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ## Current Handoff Summary
 
-- Current milestone: M3. Post-change evidence and validation
-- Current milestone state: review-requested
-- Last reviewed milestone: M2. Editor prompt learning-default implementation
-- Review status: M2 code review clean-with-notes; no material findings
-- Remaining in-scope implementation milestones: M3
-- Next stage: code-review for M3
-- Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3, explain-change closeout, verification, and PR handoff remain.
+- Current milestone: final closeout sequence
+- Current milestone state: planned
+- Last reviewed milestone: M3. Post-change evidence and validation
+- Review status: M3 code review clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: none
+- Next stage: final closeout
+- Final closeout readiness: ready to start final closeout sequence, not complete
+- Reason final closeout is or is not ready: all implementation milestones are closed; explain-change closeout, verification, and PR handoff remain.
 
 ## Milestones
 
@@ -163,7 +163,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ### M3. Post-change evidence and validation
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Record post-change evidence, compare it against baseline scenario classes, and prepare the implementation for code review.
 - Requirements: R37-R38, AC19-AC21.
 - Files/components likely touched:
@@ -187,6 +187,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `wc -l skills/editor/SKILL.md`
 - Expected observable result: post-change evidence and validation are complete enough to hand M1-M3 to code review.
 - Implementation result: `post-change-evidence.md` records post-change prompt-contract evidence against the same baseline scenario classes, compares learning value, bloat, over-editing, and fidelity, and documents the residual model-following risk. Required validation commands passed.
+- Review result: code-review M3 R1 returned clean-with-notes with no material findings.
 - Commit message: `M3: record editor learning evidence and validation`
 - Milestone closeout:
   - validation passed
@@ -246,6 +247,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: Code-review M2 R1 closed M2 clean-with-notes with no material findings.
 - 2026-06-16: M3 implementation recorded post-change evidence in `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md`.
 - 2026-06-16: M3 is review-requested for code review.
+- 2026-06-16: Code-review M3 R1 closed M3 clean-with-notes with no material findings.
 
 ## Aligned-surface audit
 
@@ -321,12 +323,13 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M3 `git diff --check` passed.
 - 2026-06-16: M3 `wc -l skills/editor/SKILL.md` returned 175 lines.
 - 2026-06-16: M3 direct evidence search confirmed post-change evidence covers key learning-note labels, scenario IDs, and T4-T14 behavior groups.
+- 2026-06-16: Code-review M3 R1 direct checks passed: all required scenario IDs present in post-change evidence, `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, and prompt line count.
 
 ## Outcome and retrospective
 
-- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 implementation is review-requested; downstream gates remain.
+- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 is closed by code-review M3 R1. All implementation milestones are closed; downstream final closeout gates remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for code-review of M3. Readiness is not Done; M3 review, explain-change closeout, verify, and PR handoff remain.
+- Ready for final closeout sequence. Readiness is not Done; explain-change closeout, verify, and PR handoff remain.
