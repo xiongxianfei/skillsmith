@@ -48,13 +48,13 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 ## Current Handoff Summary
 
 - Current milestone: M3. Post-change evidence and validation
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2. Editor prompt implementation
-- Review status: M2 code-review clean-with-notes; no material findings
+- Review status: M3 implementation ready for code-review
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not-ready
-- Reason final closeout is not ready: the plan still needs M3 implementation, M3 code-review, final change explanation closeout, final verification, and PR handoff.
+- Reason final closeout is not ready: the plan still needs M3 code-review, final change explanation closeout, final verification, and PR handoff.
 
 ## Milestones
 
@@ -111,7 +111,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 
 ### M3. Post-change evidence and validation
 
-- State: planned
+- State: review-requested
 - Goal: record post-change evidence, run validation, and prepare the implementation for code review.
 - Requirements covered: R62-R67, AC2-AC20.
 - Files likely touched:
@@ -132,7 +132,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
   - `python tests/check_readme_sync.py`
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
-- Result: pending
+- Result: implemented; ready for code-review.
 
 ## Validation plan
 
@@ -185,6 +185,9 @@ No live model calls should be added to CI.
 - 2026-06-16: M2 implementation started; scope is limited to `skills/editor/SKILL.md`, README mirror wording, and lifecycle evidence.
 - 2026-06-16: M2 implementation completed and moved to review-requested after validation.
 - 2026-06-16: Code-review M2 R1 closed M2 with status `clean-with-notes` and no material findings.
+- 2026-06-16: User-requested line-break normalization for `skills/editor/SKILL.md` was applied and validated as an isolated formatting fix before M3 evidence.
+- 2026-06-16: M3 implementation started; scope is limited to post-change evidence, validation records, and lifecycle handoff.
+- 2026-06-16: M3 implementation completed and moved to review-requested after post-change evidence and validation.
 
 ## Decision log
 
@@ -195,12 +198,14 @@ No live model calls should be added to CI.
 | 2026-06-16 | Treat README update as conditional implementation scope. | README currently mirrors editor output behavior, but exact wording should be changed only with the prompt implementation. | Update README during plan authoring. |
 | 2026-06-16 | Keep M1 prompt-neutral. | Baseline evidence must precede any production prompt edit, so M1 updates only proof and lifecycle surfaces. | Edit `skills/editor/SKILL.md` before baseline evidence. |
 | 2026-06-16 | Replace the old template gallery with one base output shape plus modification rules. | This implements the spec's prompt-weight reduction without losing explicit target, target-only, integrity, and learning-note behavior. | Keep separate default, target, non-English-source, no-substantive-lesson, and integrity templates. |
+| 2026-06-16 | Treat line-break normalization as formatting-only evidence for the final prompt state. | The user requested unwrapped prompt lines after M2 review; M3 evidence uses the final prompt state after that formatting fix. | Revert the formatting fix or pretend M2 review covered the later formatting commit. |
 
 ## Surprises and discoveries
 
 - The existing prompt is 188 lines and still hardcodes Chinese + English in both the description and workflow. M2 must remove those conflicts while staying under 500 lines and preferably shorter than 188 lines.
 - The old editor eval fixture already had strong learning-default coverage, but several cases still expected Chinese + English defaults. M1 replaced it instead of layering conflicting expectations.
 - The revised prompt is 174 lines, shorter than the 188-line baseline while adding the new deterministic source-plus-companion language policy.
+- After user-requested line-break normalization, the final prompt is 117 lines. This remains shorter than baseline and under the 500-line maximum.
 
 ## Validation notes
 
@@ -242,6 +247,13 @@ No live model calls should be added to CI.
   - `git diff --check HEAD~1..HEAD` passed.
   - `wc -l skills/editor/SKILL.md` reported 174 lines.
   - Stale text search found no hardcoded Chinese + English default or hidden cross-check text in `skills/editor/SKILL.md` or `README.md`.
+- 2026-06-16 M3 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+  - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 117 prompt lines and 274 eval fixture lines.
+  - Stale text search passed: no `defaults to Chinese`, `Default visible target`, `internally render`, `Chinese + English final`, `Default Chinese + English output`, or `defaulting to Chinese and English` matches in `skills/editor/SKILL.md` or `README.md`.
 
 ## Outcome and retrospective
 
@@ -249,6 +261,6 @@ No live model calls should be added to CI.
 
 ## Readiness
 
-This plan is ready for M3 implementation.
+This plan is ready for M3 code-review.
 
-It is not verified, branch-ready, or PR-ready. Those states require M3 implementation, M3 code-review, durable change explanation updates, and final verification.
+It is not verified, branch-ready, or PR-ready. Those states require M3 code-review, durable change explanation closeout, and final verification.
