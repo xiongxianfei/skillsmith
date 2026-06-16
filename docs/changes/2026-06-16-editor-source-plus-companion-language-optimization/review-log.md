@@ -49,3 +49,10 @@
 - Status: approved
 - Material findings: none
 - Outcome: execution plan is approved for test-spec; implementation remains gated on test-spec, baseline evidence, milestone execution, code review, explanation, verification, and PR handoff.
+
+## Code Review M1 R1
+
+- Path: `docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m1-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M1 is closed; eval fixture and baseline evidence are accepted for this milestone. Next stage is M2 implementation.

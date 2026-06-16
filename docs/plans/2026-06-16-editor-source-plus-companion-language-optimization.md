@@ -47,20 +47,20 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 
 ## Current Handoff Summary
 
-- Current milestone: M1. Eval fixture and baseline evidence
-- Current milestone state: review-requested
-- Last reviewed milestone: plan
-- Review status: M1 implementation ready for code-review
-- Remaining in-scope implementation milestones: M1-M3
-- Next stage: code-review M1
+- Current milestone: M2. Editor prompt implementation
+- Current milestone state: planned
+- Last reviewed milestone: M1. Eval fixture and baseline evidence
+- Review status: M1 code-review clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M2-M3
+- Next stage: implement M2
 - Final closeout readiness: not-ready
-- Reason final closeout is not ready: the plan still needs M1 code-review, remaining implementation milestones, final change explanation closeout, final verification, and PR handoff.
+- Reason final closeout is not ready: the plan still needs M2 and M3 implementation, code review for those milestones, final change explanation closeout, final verification, and PR handoff.
 
 ## Milestones
 
 ### M1. Eval fixture and baseline evidence
 
-- State: review-requested
+- State: closed
 - Goal: update reviewer-visible editor eval cases for the new language contract and capture baseline evidence before editing the prompt.
 - Requirements covered: R13-R56, R64-R67, AC3-AC16, AC19-AC20.
 - Files likely touched:
@@ -78,7 +78,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
   - `python -m unittest discover tests`
   - `python tests/check_readme_sync.py`
   - `git diff --check`
-- Result: implemented; ready for code-review.
+- Result: closed by code-review M1 R1 with no material findings.
 
 ### M2. Editor prompt implementation
 
@@ -181,6 +181,7 @@ No live model calls should be added to CI.
 - 2026-06-16: Owner approved the test spec for implementation use.
 - 2026-06-16: M1 implementation started; scope is limited to eval fixture updates, baseline evidence, and required change-local implementation metadata. Production prompt edits remain gated until M1 review.
 - 2026-06-16: M1 implementation completed and moved to review-requested after validation.
+- 2026-06-16: Code-review M1 R1 closed M1 with status `clean-with-notes` and no material findings.
 
 ## Decision log
 
@@ -215,6 +216,13 @@ No live model calls should be added to CI.
   - `python -m unittest discover tests` passed, 31 tests.
   - `python tests/check_readme_sync.py` passed.
   - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 188 prompt lines and 274 eval fixture lines.
+- 2026-06-16 code-review M1 R1 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check HEAD~1..HEAD` passed.
+  - `git diff HEAD~1..HEAD -- skills/editor/SKILL.md` produced no diff.
+  - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 188 prompt lines and 274 eval fixture lines.
 
 ## Outcome and retrospective
 
@@ -222,6 +230,6 @@ No live model calls should be added to CI.
 
 ## Readiness
 
-This plan is ready for M1 code-review.
+This plan is ready for M2 implementation.
 
-It is not M2-ready, verified, branch-ready, or PR-ready. Those states require M1 code-review, any required review-resolution, later milestone execution, durable change explanation updates, and final verification.
+It is not verified, branch-ready, or PR-ready. Those states require M2 and M3 implementation, code review for those milestones, durable change explanation updates, and final verification.
