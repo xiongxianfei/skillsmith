@@ -60,9 +60,9 @@ scenarios:
       The migration is mostly done, but we still need to watch error rates after launch.
     expected_behavior: >
       Keeps the deliverable concise, preserves uncertainty about the migration
-      and post-launch monitoring, and still includes a concise capped Learning
-      notes block because "keep it short" is an ambiguous brevity cue rather
-      than explicit no-notes suppression.
+      and post-launch monitoring, and still includes a focused, scannable
+      Learning notes block because "keep it short" is an ambiguous brevity cue
+      rather than explicit no-notes suppression.
 
   - id: editor-learning-response-language-notes
     category: edge

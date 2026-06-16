@@ -55,7 +55,7 @@ validation:
   - command: wc -l skills/editor/SKILL.md
     stage: M2
     status: passed
-    notes: "175 lines."
+    notes: "188 lines."
   - command: python tests/validate_skills.py
     stage: M3
     status: passed
@@ -74,7 +74,7 @@ validation:
   - command: wc -l skills/editor/SKILL.md
     stage: M3
     status: passed
-    notes: "175 lines."
+    notes: "188 lines."
   - command: python tests/validate_skills.py
     stage: verify
     status: passed
@@ -93,7 +93,7 @@ validation:
   - command: wc -l skills/editor/SKILL.md
     stage: verify
     status: passed
-    notes: "175 lines."
+    notes: "188 lines."
 reviews:
   - stage: code-review M1 R1
     status: clean-with-notes

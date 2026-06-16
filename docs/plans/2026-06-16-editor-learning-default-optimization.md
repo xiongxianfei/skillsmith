@@ -47,9 +47,9 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 ## Requirements covered
 
 - R1-R5, AC2-AC4: M2.
-- R6-R11, R31, R33-R35a, AC5-AC11: M2, with eval coverage from M1 and evidence in M3.
+- R6-R11, R31, R33-R35b, AC5-AC11: M2, with eval coverage from M1 and evidence in M3.
 - R12-R18, R21-R25, AC12-AC17: M2, with eval coverage from M1 and evidence in M3.
-- R19-R20, R22, AC15: M2 and M3.
+- R19-R22, AC15: M2 and M3.
 - R26-R30, AC10-AC11: M2, with suppression and ambiguity evals from M1 and evidence in M3.
 - R32, AC18: M2, with integrity-boundary eval coverage from M1 and evidence in M3.
 - R36: M2.
@@ -74,7 +74,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 - Milestone state: closed
 - Goal: Update the editor eval fixture for the learning-default contract and record baseline evidence before changing `skills/editor/SKILL.md`.
-- Requirements: R37-R38, AC19-AC20, plus eval coverage for R6-R35a.
+- Requirements: R37-R38, AC19-AC20, plus eval coverage for R6-R35b.
 - Files/components likely touched:
   - `tests/evals/skills/editor/cases.yaml`
   - `docs/changes/2026-06-16-editor-learning-default-optimization/baseline-evidence.md`
@@ -145,7 +145,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
 - Expected observable result: `skills/editor/SKILL.md` implements the approved default learning-notes contract and remains a pure prompt skill with `name: editor`, `$ARGUMENTS`, and `## Output Format`.
-- Implementation result: `skills/editor/SKILL.md` implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, no-padding rules, response-language labels, target-language templates, and integrity-boundary note behavior. README was updated because it mirrors editor behavior.
+- Implementation result: `skills/editor/SKILL.md` implements default `Learning notes`, explicit suppression, fallback-note behavior, anchoring, no-padding rules, scannable longer-note formatting, response-language labels, target-language templates, and integrity-boundary note behavior. README was updated because it mirrors editor behavior.
 - Review result: code-review M2 R1 returned clean-with-notes with no material findings.
 - Commit message: `M2: implement editor learning notes default`
 - Milestone closeout:
@@ -212,7 +212,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 ## Risks and recovery
 
 - Risk: Default `Learning notes` causes report-like verbosity.
-  - Recovery: Keep notes after deliverables, cap them, and require fallback notes instead of padded explanations.
+  - Recovery: Keep notes after deliverables, require one bullet per useful substantive lesson, group longer note sets with short theme labels, and require fallback notes instead of padded explanations.
 - Risk: Suppression behavior becomes too permissive.
   - Recovery: Keep suppression explicit-only and test ambiguous brevity cues separately.
 - Risk: The prompt invents edits to create lessons.
@@ -316,21 +316,21 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M2 `python -m unittest discover tests` passed, 31 tests OK.
 - 2026-06-16: M2 `python tests/check_readme_sync.py` passed.
 - 2026-06-16: M2 `git diff --check` passed.
-- 2026-06-16: M2 `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: M2 `wc -l skills/editor/SKILL.md` returned 188 lines after the no-fixed-cap output-format amendment.
 - 2026-06-16: M2 stale notes-on-request search passed; only the retained `No default Why` rule remains by design.
 - 2026-06-16: Code-review M2 R1 direct checks passed: `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, targeted prompt search, and prompt line count.
 - 2026-06-16: M3 `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
 - 2026-06-16: M3 `python -m unittest discover tests` passed, 31 tests OK.
 - 2026-06-16: M3 `python tests/check_readme_sync.py` passed.
 - 2026-06-16: M3 `git diff --check` passed.
-- 2026-06-16: M3 `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: M3 `wc -l skills/editor/SKILL.md` returned 188 lines after the no-fixed-cap output-format amendment.
 - 2026-06-16: M3 direct evidence search confirmed post-change evidence covers key learning-note labels, scenario IDs, and T4-T14 behavior groups.
 - 2026-06-16: Code-review M3 R1 direct checks passed: all required scenario IDs present in post-change evidence, `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, and prompt line count.
 - 2026-06-16: Verify `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
 - 2026-06-16: Verify `python -m unittest discover tests` passed, 31 tests OK.
 - 2026-06-16: Verify `python tests/check_readme_sync.py` passed.
 - 2026-06-16: Verify `git diff --check` passed.
-- 2026-06-16: Verify `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: Verify `wc -l skills/editor/SKILL.md` returned 188 lines after the no-fixed-cap output-format amendment.
 - 2026-06-16: Verify direct scenario coverage check found no required scenario IDs missing from the eval fixture or post-change evidence.
 
 ## Outcome and retrospective

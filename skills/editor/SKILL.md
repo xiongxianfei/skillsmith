@@ -6,7 +6,7 @@ description: >
   emails, PR descriptions, docs, release notes, messages, and casual asks like
   "fix this", "make this sound better", "translate this", or "show me what to
   learn from these edits"; defaults to Chinese + English final output with
-  concise Learning notes, and honors explicit target-language or no-notes
+  structured Learning notes, and honors explicit target-language or no-notes
   requests.
 ---
 
@@ -34,7 +34,7 @@ set of changes that makes the text clear, accurate, natural, and ready to use.
 - Do not invent context, add unsupported certainty, change facts, or replace precise wording with fancier but less accurate wording.
 - If the source is already good, make minimal changes or leave it nearly unchanged.
 - If wording is ambiguous, preserve the ambiguity or edit around it; do not use Learning notes to justify unsupported certainty or meaning drift.
-- Include concise Learning notes by default after the deliverable unless the user explicitly asks for output-only delivery or no explanation.
+- Include focused Learning notes by default after the deliverable unless the user explicitly asks for output-only delivery or no explanation.
 - If the user provides no source text, or asks for broad writing coaching without a source artifact, ask for text to edit or translate and do not include Learning notes.
 - Refuse misleading, false, deceptive, falsely attributed, or materially unsupported transformations, and offer accurate alternatives.
 
@@ -57,7 +57,7 @@ set of changes that makes the text clear, accurate, natural, and ready to use.
 7. Verify before returning that visible target versions and any edited source-language block preserve the same meaning, tone, intent, and formatting intent. For single-target requests, internally render Chinese + English where practical as a fidelity cross-check, but display only the requested target.
 8. Select Learning notes:
    - Suppress Learning notes only for explicit output-only or no-explanation requests, such as `no notes`, `just the text`, `only the translation`, `skip the explanation`, `不用解释`, `不要说明`, `只要译文`, or equivalent direct phrasing.
-   - Do not infer suppression from ambiguous brevity cues such as `keep it short`, `I'm in a hurry`, or `just need this quickly`; keep the notes concise instead.
+   - Do not infer suppression from ambiguous brevity cues such as `keep it short`, `I'm in a hurry`, or `just need this quickly`; keep the notes focused instead.
    - For substantive edits or translation choices, teach one reusable principle per substantive lesson.
    - For trivial-only, already-strong, no-substantive-lesson, brittle-rule, or integrity-boundary cases, use exactly one concise fallback note.
    - Never create extra edits or padded explanations to populate the notes.
@@ -94,8 +94,9 @@ Learning note rules:
 
 - Do not use generic self-commentary such as `I improved clarity`, `This is better`, or `I made it more professional`.
 - Explain reusable principles without brittle absolutes. If a rule depends on context, qualify it or use a fallback note instead.
-- Cap Learning notes at three by default. Use four only for longer text with genuinely distinct lessons. Fewer is normal and preferred.
-- Treat the cap as a ceiling, not a target; never pad to reach it.
+- Do not apply a fixed numeric cap to Learning notes. Include the substantive lessons that are genuinely useful for the user's source text.
+- Treat the number of notes as an outcome of the actual edits, not a quota; never pad the block or invent lessons.
+- Keep the block scannable. Use one bullet per substantive lesson; for a longer set of varied lessons, group notes with short theme labels such as `Clarity`, `Tone`, `Accuracy`, or `Translation` inside the same `Learning notes` block.
 - Do not explain ordinary typos, punctuation, capitalization, or mechanical corrections as full grammar lessons unless they reveal a recurring pattern.
 - For fallback notes, do not force original-to-revised anchoring when there is no substantive edit or no safe reusable principle. Still reference the concrete source condition, edit category, or integrity issue.
 - Acceptable fallback note patterns include:
@@ -115,6 +116,18 @@ Default Chinese + English output:
 <final English version>
 
 **<Learning notes label in response language>**
+- `<original>` -> `<revised>`: <generalizable principle>.
+```
+
+For longer or varied Learning notes, keep one block and group bullets by theme:
+
+```markdown
+**<Learning notes label in response language>**
+**<theme label>**
+- `<original>` -> `<revised>`: <generalizable principle>.
+- `<original>` -> `<revised>`: <generalizable principle>.
+
+**<theme label>**
 - `<original>` -> `<revised>`: <generalizable principle>.
 ```
 

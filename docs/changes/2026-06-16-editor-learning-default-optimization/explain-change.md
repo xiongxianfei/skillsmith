@@ -6,7 +6,7 @@ closed for explain-change
 
 ## Summary
 
-This change updates the `editor` skill so polishing and translation remain the primary deliverables, and a concise `Learning notes` block appears by default after those deliverables unless the user explicitly asks for output-only delivery or no explanation.
+This change updates the `editor` skill so polishing and translation remain the primary deliverables, and a structured `Learning notes` block appears by default after those deliverables unless the user explicitly asks for output-only delivery or no explanation.
 
 The work reverses the prior notes-on-request default while preserving the expert editor contract: fidelity, restraint, target-language overrides, response-language framing, copyable output, and integrity boundaries. It also adds reviewer-visible eval coverage, baseline evidence, post-change evidence, and lifecycle records for the full change.
 
@@ -32,7 +32,7 @@ Key requirements implemented:
 - R1-R2: preserve expert editor quality and pure-prompt boundary.
 - R3-R5: editor/translator identity, learning from edits, no standalone coaching trigger.
 - R6-R14: default post-deliverable `Learning notes`, labels, anchoring, response-language-only notes.
-- R15-R25: fidelity, no meaning drift, no extra edits, capped notes, trivial/already-good/brittle fallback handling.
+- R15-R25: fidelity, no meaning drift, no extra edits, uncapped-but-scannable notes, trivial/already-good/brittle fallback handling.
 - R26-R31: explicit suppression, ambiguous fallback, explicit target-language behavior.
 - R32-R36: integrity-boundary behavior and removal of obsolete notes-on-request prompt text.
 - R37-R38: baseline and post-change evidence over the required scenario classes.
@@ -41,8 +41,8 @@ Key requirements implemented:
 
 | File | Change | Reason | Source artifact | Test/evidence |
 | --- | --- | --- | --- | --- |
-| `skills/editor/SKILL.md` | Replaced the old notes-on-request contract with default `Learning notes`; added explicit suppression examples, ambiguous brevity handling, anchoring, fallback notes, no-padding cap rules, response-language labels, target-language templates, and integrity-boundary note behavior. | Implements the accepted learning-default contract while preserving the expert editor and translator behavior. | Spec R1-R36; proposal recommended direction. | M2 code review, `python tests/validate_skills.py`, prompt line count. |
-| `README.md` | Updated the editor table row and detail section to mention concise learning notes by default and no-notes overrides. | README mirrors public skill behavior and would otherwise advertise the old output contract. | Plan M2 aligned-surface audit. | `python tests/check_readme_sync.py`; M2 code review. |
+| `skills/editor/SKILL.md` | Replaced the old notes-on-request contract with default `Learning notes`; added explicit suppression examples, ambiguous brevity handling, anchoring, fallback notes, no-padding rules, scannable longer-note formatting, response-language labels, target-language templates, and integrity-boundary note behavior. | Implements the accepted learning-default contract while preserving the expert editor and translator behavior. | Spec R1-R36; proposal recommended direction. | M2 code review, amendment validation, `python tests/validate_skills.py`, prompt line count. |
+| `README.md` | Updated the editor table row and detail section to mention structured learning notes by default and no-notes overrides. | README mirrors public skill behavior and would otherwise advertise the old output contract. | Plan M2 aligned-surface audit. | `python tests/check_readme_sync.py`; M2 code review. |
 | `tests/evals/skills/editor/cases.yaml` | Updated editor eval scenarios from notes-on-request expectations to learning-default expectations. | The proof surface had to express the accepted behavior before prompt implementation. | Spec R38; test spec required scenario IDs. | M1 code review; `python tests/validate_skills.py`. |
 | `docs/changes/2026-06-16-editor-learning-default-optimization/baseline-evidence.md` | Recorded the old prompt behavior before editing `skills/editor/SKILL.md`. | Required baseline-first evidence and showed baseline learning value was absent by design. | Spec R37; test spec T3. | M1 code review; direct no-prompt-diff check. |
 | `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md` | Recorded post-change prompt-contract evidence for the same scenario classes and compared learning value, bloat, over-editing, fidelity, suppression, labels, target-language behavior, and integrity boundaries. | Required after-change evidence without live model CI. | Spec R37-R38; test spec T14. | M3 code review; direct scenario-ID coverage check. |
@@ -74,7 +74,7 @@ Validation has passed during implementation and review. The known warning is non
 | `python -m unittest discover tests` | Passed, 31 tests OK. |
 | `python tests/check_readme_sync.py` | Passed. |
 | `git diff --check` / commit-range diff checks | Passed. |
-| `wc -l skills/editor/SKILL.md` | 175 lines. |
+| `wc -l skills/editor/SKILL.md` | 188 lines. |
 | Code review M1 R1 | `clean-with-notes`, no material findings. |
 | Code review M2 R1 | `clean-with-notes`, no material findings. |
 | Code review M3 R1 | `clean-with-notes`, no material findings. |
@@ -119,10 +119,10 @@ The change intentionally does not:
 
 | Risk | Current mitigation |
 | --- | --- |
-| Weak models may still miss or overproduce learning notes. | Prompt now gives explicit examples, caps, fallback-note rules, and no-padding/no-extra-edit constraints; post-change evidence records this as residual model-following risk. |
+| Weak models may still miss or overproduce learning notes. | Prompt now gives explicit examples, scannable formatting, fallback-note rules, and no-padding/no-extra-edit constraints; post-change evidence records this as residual model-following risk. |
 | Users may sometimes not want notes. | Explicit suppression phrases in English and Chinese remove the block; ambiguous brevity keeps notes concise rather than hidden. |
 | Teaching could justify meaning drift. | Prompt explicitly subordinates notes to fidelity and integrity and forbids unsupported certainty, false approval, or false attribution. |
-| Prompt complexity could grow over time. | Prompt line count is recorded at 175 lines; future changes should keep caps and fallback rules concise. |
+| Prompt complexity could grow over time. | Prompt line count is recorded during validation; future changes should keep the learning-note format scannable and fallback rules focused. |
 
 ## Current Handoff
 

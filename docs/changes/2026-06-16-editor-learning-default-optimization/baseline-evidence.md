@@ -70,7 +70,7 @@ This means the baseline learning value for normal polish and translation request
 | Dimension | Current baseline | Required after change |
 | --- | --- | --- |
 | Learning value | Absent by default; present only when requested. | Present by default for non-empty, non-suppressed editing and translation requests. |
-| Bloat risk | Low because notes are usually absent. | Must remain low through deliverable-first output, note caps, fallback notes, and no padding. |
+| Bloat risk | Low because notes are usually absent. | Must remain controlled through deliverable-first output, scannable formatting, fallback notes, and no padding. |
 | Over-editing risk | Low-to-moderate; prompt already says minimal change when text is good. | Must stay low by forbidding extra edits for teaching and by testing already-good/trivial-only cases. |
 | Fidelity | Strong existing fidelity and restraint language. | Must be preserved; learning notes must not justify meaning drift or unsupported certainty. |
 | Suppression | Effectively default because notes are opt-in. | Must become explicit-only suppression for output-only or no-explanation requests. |

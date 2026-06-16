@@ -40,7 +40,7 @@ Use deterministic repository checks for static contracts and reviewer-readable e
 | R14 | T8 | manual | Notes use response language only and are not duplicated bilingually. |
 | R15-R16 | T4, T5, T10, T11, T12, T14 | manual | Learning notes preserve fidelity and do not justify drift, unsupported certainty, or misleading claims. |
 | R17-R18 | T9, T10, T14 | manual | No extra edits for teaching; one note per substantive lesson, not per mechanical edit. |
-| R19-R22 | T4, T9, T10, T14, T16 | manual, smoke | Note cap is a ceiling, not a target; line-count check guards prompt bloat. |
+| R19-R22 | T4, T7, T9, T10, T14, T16 | manual, smoke | Learning notes have no fixed numeric cap, are not padded, and stay scannable through one bullet per substantive lesson plus theme labels when useful. |
 | R23 | T9 | manual | Trivial-only correction gets exactly one concise fallback note and no grammar lecture. |
 | R24 | T10 | manual | Already-strong text stays minimally edited and gets at most one restraint note. |
 | R25 | T11 | manual | Brittle-rule cases avoid or qualify unsafe lessons and use exactly one fallback when needed. |
@@ -48,7 +48,7 @@ Use deterministic repository checks for static contracts and reviewer-readable e
 | R30 | T13 | manual | Explicit learn-more requests may expand but remain anchored. |
 | R31 | T5, T6 | manual | Explicit target-language requests control visible deliverables while notes remain unless suppressed. |
 | R32 | T12 | manual | Integrity-boundary refusals remain truth-preserving and concise. |
-| R33-R35a | T4, T5, T6, T9, T10 | manual | Default, explicit target, suppression, and fallback output templates are exercised. |
+| R33-R35b | T4, T5, T6, T9, T10 | manual | Default, explicit target, suppression, fallback, and longer-note output templates are exercised. |
 | R36 | T2 | contract | Prompt no longer says notes appear only when explicitly requested. |
 | R37 | T3, T14 | manual | Baseline and post-change evidence compare learning value, bloat, over-editing, and fidelity. |
 | R38 | T2-T14 | manual, integration | Eval fixture and evidence cover every required learning-default scenario class. |
@@ -60,7 +60,7 @@ Use deterministic repository checks for static contracts and reviewer-readable e
 | E1 default polish includes learning notes | T4 | Default Chinese and English deliverables followed by anchored `Learning notes`. |
 | E2 explicit English target still includes learning notes | T5 | English-only deliverable followed by learning notes unless suppressed. |
 | E3 explicit suppression removes learning notes | T6 | `No notes` and output-only phrasing omit the block. |
-| E4 ambiguous brevity does not suppress learning notes | T7 | `Keep it short` keeps concise learning notes. |
+| E4 ambiguous brevity does not suppress learning notes | T7 | `Keep it short` keeps focused learning notes. |
 | E5 already-good text teaches restraint without padding | T10 | Minimal edits, `24 hours` preserved, at most one restraint note. |
 | E6 trivial typo does not create a lesson quota | T9 | Typo fix, exactly one fallback note, no grammar lecture. |
 | E7 already-strong text teaches restraint without padding | T10 | Same restraint behavior as E5, with explicit fallback-note assertion. |
@@ -144,8 +144,9 @@ Use deterministic repository checks for static contracts and reviewer-readable e
   - Confirm an English-framed `Learning notes` block appears after both deliverables.
   - Confirm at least one note uses original-to-revised anchoring or an equivalent concrete reference.
   - Confirm the note teaches a reusable principle and does not say only `I improved clarity`.
-  - Confirm the block has no more than three notes and is not padded.
-- Expected result: The default output visibly teaches from substantive edits without interleaving or bloat.
+  - Confirm the block is not limited by a fixed numeric cap.
+  - Confirm the block is not padded and remains scannable.
+- Expected result: The default output visibly teaches from substantive edits without interleaving or report-style bloat.
 - Failure proves: The core learning-default contract is not implemented.
 - Automation location: `tests/evals/skills/editor/cases.yaml`; baseline and post-change evidence files.
 
@@ -180,7 +181,7 @@ Use deterministic repository checks for static contracts and reviewer-readable e
 - Failure proves: Explicit user intent is not respected or suppression examples are too English-centric.
 - Automation location: `tests/evals/skills/editor/cases.yaml`; evidence files.
 
-### T7. Ambiguous brevity keeps concise learning notes
+### T7. Ambiguous brevity keeps focused learning notes
 
 - Covers: R6-R8, R19, R21, R22, R28, R29, R37-R38, E4, EC3, AC5, AC11, AC15, AC19, AC20
 - Level: manual
@@ -188,8 +189,8 @@ Use deterministic repository checks for static contracts and reviewer-readable e
 - Steps:
   - Prompt: `Keep it short and polish this:` followed by source text.
   - Confirm the deliverable is concise.
-  - Confirm a concise `Learning notes` block still appears.
-  - Confirm the block is not padded and does not exceed the default cap.
+  - Confirm a focused `Learning notes` block still appears.
+  - Confirm the block is not padded and uses a scannable bullet format.
 - Expected result: Ambiguous brevity cues reduce verbosity but do not suppress default teaching.
 - Failure proves: The implementation over-infers suppression from soft user intent.
 - Automation location: `tests/evals/skills/editor/cases.yaml`; evidence files.
@@ -239,7 +240,7 @@ Use deterministic repository checks for static contracts and reviewer-readable e
   - Confirm `24 hours` is preserved.
   - Confirm the `Learning notes` block appears unless suppressed.
   - Confirm there is at most one restraint-oriented fallback note.
-  - Confirm no unnecessary edit is introduced merely to create a lesson and the note count is not padded to three.
+  - Confirm no unnecessary edit is introduced merely to create a lesson and the note count is not padded.
 - Expected result: The implementation turns restraint into a teachable moment without over-editing.
 - Failure proves: The highest-risk failure mode, editing to create lessons, is present.
 - Automation location: `tests/evals/skills/editor/cases.yaml`; evidence files.
@@ -388,7 +389,7 @@ Observable proof is through:
 ## Performance checks
 
 - T16 records `wc -l skills/editor/SKILL.md`.
-- T4, T7, T9, T10, T11, and T14 check that learning notes are capped, concise, and not padded.
+- T4, T7, T9, T10, T11, and T14 check that learning notes are uncapped, focused, scannable, and not padded.
 - No latency or runtime performance tests are applicable because the skill has no executable runtime.
 
 ## Manual QA checklist
@@ -398,7 +399,7 @@ Observable proof is through:
 - Substantive notes use concrete original-to-revised anchoring or equivalent concrete references.
 - Fallback notes reference the source condition, edit category, or integrity issue.
 - Explicit suppression removes learning notes in English and Chinese examples.
-- Ambiguous brevity keeps concise notes.
+- Ambiguous brevity keeps focused notes.
 - Explicit target-language requests still control visible deliverables.
 - Mixed-language requests use response language for labels and notes only.
 - Trivial-only and already-good cases produce one or fewer fallback notes as specified.
@@ -413,7 +414,7 @@ Observable proof is through:
 - Do not test installer behavior; install paths and packaging are unchanged.
 - Do not test every language; the spec only requires response-language behavior, exact English/Chinese labels, and localized fallback where practical.
 - Do not assert exact polished prose beyond safety-critical facts, labels, block presence, ordering, suppression, and meaning preservation; prompt outputs can vary while satisfying the contract.
-- Do not require four learning notes; four is allowed only for longer text with genuinely distinct lessons.
+- Do not assert any fixed maximum number of learning notes; useful substantive lessons should be included without padding.
 
 ## Uncovered gaps
 

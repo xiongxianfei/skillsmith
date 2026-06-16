@@ -161,7 +161,7 @@ Teaching notes should follow these rules:
 3. Anchor each note to a concrete change using an original-to-revised form or equivalent.
 4. Explain a reusable principle rather than merely reporting that a change happened.
 5. Skip trivial edits such as ordinary typos, punctuation, capitalization, and mechanical grammar corrections unless they reveal a recurring pattern.
-6. Include one note per substantive lesson, capped to protect concision. Default to at most three notes; allow four only for longer text with genuinely distinct substantive lessons. Fewer is normal and preferred; never pad to reach the cap.
+6. Include one note per substantive lesson without a fixed numeric cap. The number of notes should follow the actual useful lessons in the source text; never pad the block or invent lessons.
 7. Do not invent extra edits to produce more teaching notes.
 8. If the text is already strong and needs little change, include at most one brief note about restraint.
 9. Use the response framing language for teaching notes rather than repeating them in every target language.
@@ -173,7 +173,7 @@ Teaching notes should follow these rules:
 
 Suppression should be high-precision rather than clever. The skill should suppress learning notes for direct, unambiguous output-only requests, such as `no notes`, `just the text`, `only the translation`, `skip the explanation`, `不用解释`, `不要说明`, `只要译文`, or equivalent explicit phrasing in the user's language.
 
-The skill should not infer suppression from indirect or ambiguous cues such as "keep it short," "I'm in a hurry," or "just need this quickly." Those cues may mean concise output, not no notes. When suppression intent is ambiguous, the skill should show the concise learning notes because teaching is the default behavior. This default is acceptable only because the notes are deliverable-first, short, capped, and easy to ignore; if future work makes notes longer, the ambiguity fallback should be revisited.
+The skill should not infer suppression from indirect or ambiguous cues such as "keep it short," "I'm in a hurry," or "just need this quickly." Those cues may mean concise output, not no notes. When suppression intent is ambiguous, the skill should show focused learning notes because teaching is the default behavior. This default is acceptable because the notes are deliverable-first, anchored, scannable, and suppressible on explicit request.
 
 The `description` field should mention the new default teaching behavior, but it should not introduce `writing coach` as a standalone third identity. Teaching is a byproduct of editing or translating a source artifact, not a separate coaching mode. A downstream spec should settle final wording, but the direction is:
 
@@ -184,13 +184,13 @@ description: >
   emails, PR descriptions, docs, release notes, messages, and casual asks like
   "fix this", "make this sound better", "translate this", or "show me what to
   learn from these edits"; defaults to Chinese + English final output with
-  concise learning notes, and honors explicit target-language or no-notes
+  structured learning notes, and honors explicit target-language or no-notes
   requests.
 ```
 
 ## Expected Behavior Changes
 
-1. A normal polishing request returns Chinese and English final versions first, followed by concise learning notes.
+1. A normal polishing request returns Chinese and English final versions first, followed by structured learning notes.
 2. A translation request returns the target-language deliverable first, then a `Learning notes` block by default unless explicitly suppressed.
 3. Default teaching notes explain substantive choices, not every mechanical correction.
 4. Users can use explicit output-only or no-explanation phrasing, such as "no notes," "just the text," or "only translate," to suppress teaching.
@@ -228,9 +228,9 @@ Required eval scenarios should cover:
 | Default polish plus translation plus teaching | Chinese and English final versions first, then learning notes by default. |
 | Teaching note quality | Notes preserve uncertainty, teach a generalizable principle, and avoid generic "made it professional" claims. |
 | Explicit no-notes override | Direct suppression phrases such as "no notes," "just the text," `不用解释`, and `只要译文` suppress the learning block while preserving the deliverable. |
-| Ambiguous suppression fallback | Indirect cues such as "keep it short" do not suppress learning notes; the skill still shows concise capped notes. |
+| Ambiguous suppression fallback | Indirect cues such as "keep it short" do not suppress learning notes; the skill still shows focused, scannable notes. |
 | Restraint for already-good text | Minimal or no changes; at most one note about preserving already-clear wording. |
-| No over-editing to teach | Already-good text remains minimally edited and the note count matches the actual substantive changes instead of being padded to three. |
+| No over-editing to teach | Already-good text remains minimally edited and the note count matches the actual substantive changes instead of being padded. |
 | Trivial mechanical fix | Corrects the typo without producing a padded grammar lesson. |
 | Translation with useful teaching | Honors explicit target-language requests and explains a transferable translation choice when useful. |
 | Integrity boundary | Refuses misleading transformations and may include one note explaining why approval cannot be implied from review intent. |
@@ -244,14 +244,14 @@ Success criteria:
 | Deliverable first | Polished or translated text appears before teaching. |
 | Default teaching | A `Learning notes` block appears by default unless explicitly suppressed. |
 | Suppression override | Explicit output-only or no-explanation requests remove the teaching block. |
-| Ambiguity fallback | Ambiguous brevity cues keep the default concise learning notes. |
+| Ambiguity fallback | Ambiguous brevity cues keep the default focused learning notes. |
 | Anchoring | Notes use original-to-revised or equivalent concrete anchoring. |
 | Generalization | Notes explain reusable principles and qualify them when a rule has common exceptions. |
 | Selectivity | Trivial edits are not over-explained. |
 | Restraint | The skill does not over-edit to create teaching material. |
 | Framing language | Notes use the response language, not bilingual duplication. |
 | Fidelity | Teaching does not justify meaning drift. |
-| Concision | Teaching block is capped and scannable. |
+| Scannability | Teaching block has no fixed numeric cap, but remains structured and scannable. |
 
 Minimum validation commands for the eventual implementation:
 
@@ -279,7 +279,7 @@ Rollback is straightforward: revert the `editor` skill prompt, eval fixture chan
 
 | Risk | Mitigation |
 |---|---|
-| Teaching notes make every response too long. | Cap notes at three by default and keep each note short. |
+| Teaching notes make every response too long. | Use deliverable-first ordering, one bullet per substantive lesson, theme labels for longer note sets, and no-padding rules. |
 | The skill over-edits to create lessons. | Add an explicit "do not invent edits to teach" rule and a restraint eval. |
 | Notes become generic self-commentary. | Require concrete original-to-revised anchoring and a reusable principle. |
 | Trivial fixes drown out useful lessons. | Skip typos and mechanical punctuation unless they reveal a recurring pattern. |
@@ -299,7 +299,7 @@ None blocking before spec.
 Resolved proposal-level decisions:
 
 1. Suppression detection should be high-precision on explicit phrasing and should not try to infer suppression from indirect cues.
-2. Ambiguous suppression intent should default to showing concise learning notes.
+2. Ambiguous suppression intent should default to showing focused learning notes.
 3. The spec should use both a narrow semantic rule and multilingual anchor examples: suppress only on explicit output-only or no-explanation requests, illustrated by examples such as `no notes`, `just the text`, `only the translation`, `skip the explanation`, `不用解释`, `不要说明`, and `只要译文`.
 
 Labels are settled as:
@@ -310,7 +310,7 @@ Labels are settled as:
 | Chinese | `学习要点` |
 | Other | Localized where practical; otherwise `Learning notes` |
 
-The cap is settled as: one note per substantive lesson, at most three by default, four only for longer text with genuinely distinct substantive lessons. Fewer is normal and preferred; never pad to the cap.
+The note-count rule is settled as: one note per genuinely useful substantive lesson, no fixed numeric cap, no padding, and scannable formatting with short theme labels when the note set is longer or varied.
 
 ## Decision Log
 
@@ -328,7 +328,7 @@ The cap is settled as: one note per substantive lesson, at most three by default
 | 2026-06-16 | Show concise notes when suppression intent is ambiguous | Teaching is the default and unwanted short notes are a visible, recoverable cost | Suppress notes on ambiguity |
 | 2026-06-16 | Use both semantic rule and multilingual anchor examples for suppression | The rule defines the narrow concept and examples calibrate weak-model behavior across common languages | Closed list only; broad semantic inference only |
 | 2026-06-16 | Set the teaching label to `Learning notes` / `学习要点` | The labels foreground learning and selectivity | Generic `Notes`; literal `学习笔记` |
-| 2026-06-16 | Treat the note cap as a ceiling, not a target | Prevents padded explanations and over-editing to teach | Always produce three notes |
+| 2026-06-16 | Remove the fixed note cap while preserving no-padding | Supports fuller learning notes when useful without turning the count into a quota | Fixed three-note cap; always produce three notes |
 
 ## Next Artifacts
 

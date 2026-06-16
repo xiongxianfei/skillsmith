@@ -14,7 +14,7 @@ approved
 
 ## Goal and context
 
-The `editor` skill should keep its expert editor and translator contract while making teaching a default secondary behavior. The primary deliverable remains polished and translated text. After that deliverable, the skill should include a concise `Learning notes` block by default so the user can learn from substantive edits.
+The `editor` skill should keep its expert editor and translator contract while making teaching a default secondary behavior. The primary deliverable remains polished and translated text. After that deliverable, the skill should include a structured `Learning notes` block by default so the user can learn from substantive edits.
 
 This spec changes only the notes/default-teaching portion of the current editor contract. It preserves the existing language-role model, default Chinese and English visible output, explicit target-language overrides, fidelity with restraint, integrity boundaries, copyable deliverables, and pure-prompt boundary.
 
@@ -52,7 +52,7 @@ Then the skill returns the requested deliverable and does not include a `Learnin
 Example E4: ambiguous brevity does not suppress learning notes
 Given the user asks `Keep it short and polish this:` followed by source text
 When the request does not explicitly ask to remove notes
-Then the skill returns the deliverable first and still includes a concise capped `Learning notes` block.
+Then the skill returns the deliverable first and still includes a focused `Learning notes` block.
 
 Example E5: already-good text teaches restraint without padding
 Given the user asks `Polish this:` followed by `The rollout is complete. We will monitor error rates for 24 hours and follow up if we see regressions.`
@@ -114,13 +114,13 @@ R17. The skill MUST NOT create extra edits for the purpose of producing learning
 
 R18. The skill MUST include one learning note per substantive lesson, not one note per mechanical edit.
 
-R19. The skill MUST cap the learning notes block at three notes by default.
+R19. The skill MUST NOT impose a fixed numeric cap on the learning notes block.
 
-R20. The skill MAY include four learning notes only when the source text is longer and the lessons are genuinely distinct.
+R20. The skill MUST include the substantive lessons that are genuinely useful for the user's source text.
 
-R21. The skill MUST treat the note cap as a ceiling, not a target, and MUST NOT pad the learning notes block to reach the cap.
+R21. The skill MUST treat the number of learning notes as an outcome of actual substantive edits or translation choices, not as a quota, and MUST NOT pad the learning notes block.
 
-R22. The skill SHOULD use fewer than three notes when the source has fewer than three substantive lessons.
+R22. The skill MUST keep the learning notes block scannable by using one bullet per substantive lesson and, when the useful note set becomes longer or varied, grouping notes under short theme labels inside the same learning notes block.
 
 R23. The skill MUST NOT explain ordinary typos, punctuation, capitalization, or mechanical corrections as full grammar lessons unless they reveal a recurring pattern. For a trivial-only correction, the skill MUST still render the default learning notes block unless the user explicitly suppresses notes. In that case, the block MUST contain exactly one concise fallback note, such as `Only the typo was corrected; there was no broader writing pattern to teach.`
 
@@ -134,7 +134,7 @@ R27. Explicit suppression MUST include direct phrases such as `no notes`, `just 
 
 R28. The skill MUST NOT infer suppression from ambiguous brevity cues such as `keep it short`, `I'm in a hurry`, or `just need this quickly`.
 
-R29. When suppression intent is ambiguous, the skill MUST show concise learning notes by default.
+R29. When suppression intent is ambiguous, the skill MUST show focused learning notes by default.
 
 R30. When the user explicitly asks to learn more, the skill MAY expand the learning notes beyond the default brevity, but the expanded explanation MUST remain anchored to concrete edits or translation choices.
 
@@ -180,6 +180,18 @@ R35a. For no-substantive-lesson cases, the default Chinese and English output te
 - <one concise fallback note referencing the concrete source condition or edit category>
 ```
 
+R35b. For longer or varied learning-note sets, the output template SHOULD keep one learning notes block and group bullets by short theme labels:
+
+```markdown
+**<Learning notes label in response language>**
+**<theme label>**
+- `<original>` -> `<revised>`: <generalizable principle>.
+- `<original>` -> `<revised>`: <generalizable principle>.
+
+**<theme label>**
+- `<original>` -> `<revised>`: <generalizable principle>.
+```
+
 R36. The implementation MUST update or replace any existing editor prompt text that says notes appear only when explicitly requested.
 
 R37. Eval evidence MUST include baseline behavior showing current learning value from the same prompts before this change and post-change behavior showing default learning value without unacceptable bloat, over-editing, or fidelity drift.
@@ -205,7 +217,7 @@ For every non-empty editing, polishing, rewriting, professionalizing, or transla
 
 The `Learning notes` block MUST NOT be empty.
 
-For ordinary substantive edits or translation choices, the block SHOULD contain one note per substantive lesson, capped by the note-count rule.
+For ordinary substantive edits or translation choices, the block SHOULD contain one note per substantive lesson and MUST NOT be constrained by a fixed numeric maximum.
 
 For trivial-only corrections, already-strong text, no-substantive-lesson cases, brittle-rule cases, or cases where a tempting rule would be misleading, the block MUST contain exactly one concise fallback note.
 
@@ -248,8 +260,10 @@ Explicitly suppressed output:
 - Teaching is subordinate to fidelity, restraint, and integrity.
 - The learning notes block is default-on for normal non-empty editing and translation requests.
 - Explicit suppression is honored.
-- Ambiguous suppression intent keeps concise learning notes.
-- The note cap is a ceiling, not a quota.
+- Ambiguous suppression intent keeps focused learning notes.
+- The learning notes block has no fixed numeric cap.
+- The note count follows actual useful substantive lessons and is not a quota.
+- Longer or varied learning-note sets stay scannable through short theme labels inside the same block.
 - Response-language framing applies to learning notes.
 - Visible target-language behavior from `specs/editor-expert-quality-optimization.md` remains in force except where this spec explicitly changes notes behavior.
 
@@ -258,7 +272,7 @@ Explicitly suppressed output:
 - Empty or missing source text: the skill should ask for source text or state that it needs text to edit or translate; it should not produce a learning notes block without a source artifact.
 - Standalone writing-coaching request without source text: the skill should not act as a broad writing coach; it should ask for text to edit or translate.
 - Explicit no-notes request: the skill must omit learning notes.
-- Ambiguous brevity request: the skill must keep concise learning notes.
+- Ambiguous brevity request: the skill must keep focused learning notes.
 - Misleading transformation request: the skill must refuse or redirect accurately under the existing integrity-boundary contract; teaching must not weaken the refusal.
 - Already-good source: the skill must not invent unnecessary edits or padded notes; unless explicitly suppressed, it must render the learning notes block with at most one restraint-oriented fallback note.
 - Trivial-only correction: the skill must avoid long grammar lessons and padded teaching notes; unless explicitly suppressed, it must render the learning notes block with exactly one concise fallback note identifying the correction as trivial.
@@ -273,7 +287,7 @@ This spec is a deliberate output-contract change for `editor`.
 - It preserves explicit target-language-only output while adding learning notes after the requested target deliverable unless explicitly suppressed.
 - It preserves no default assessment section and no default `Why` section.
 - It preserves copyable deliverable blocks before commentary.
-- PR notes should call out that users now receive concise learning notes by default and can suppress them with explicit output-only or no-explanation phrasing.
+- PR notes should call out that users now receive structured learning notes by default and can suppress them with explicit output-only or no-explanation phrasing.
 - Rollback is to restore the prior notes-on-request behavior in `skills/editor/SKILL.md`, eval fixtures, and any change-local evidence for this slice.
 
 ## Observability
@@ -285,7 +299,7 @@ Observable proof is through:
 - Baseline evidence recording current learning value from representative prompts.
 - Post-change eval evidence showing the learning notes block appears by default.
 - Eval cases showing suppression removes the block.
-- Eval cases showing ambiguous brevity cues keep concise notes.
+- Eval cases showing ambiguous brevity cues keep focused notes.
 - Eval cases showing fidelity, restraint, and no-padding behavior.
 - Local validation commands recorded in downstream implementation and verification artifacts.
 
@@ -302,14 +316,14 @@ Observable proof is through:
 - Output must remain readable as plain Markdown.
 - Labels must be clear and concise.
 - Deliverables must remain copyable without interleaved teaching commentary.
-- The learning notes block must be short and scannable.
+- The learning notes block must be focused and scannable.
 - No decorative emoji or nonfunctional formatting is required.
 - The skill should avoid dense report-style sections.
 
 ## Performance expectations
 
 - The prompt remains a pure Markdown skill and must not add runtime calls or external dependencies.
-- The learning notes block should be concise enough to keep ordinary responses small: at most three notes by default, four only for longer text with distinct lessons.
+- The learning notes block should be complete enough to cover the actual useful lessons without a fixed numeric maximum, while remaining scannable through one bullet per lesson and short theme labels for longer or varied note sets.
 - No live model calls may be added to CI for this slice.
 
 ## Edge cases
@@ -372,7 +386,7 @@ AC9. Explicit target-language requests still include a learning notes block unle
 
 AC10. Explicit suppression phrases remove the learning notes block.
 
-AC11. Ambiguous brevity cues keep a concise learning notes block.
+AC11. Ambiguous brevity cues keep a focused learning notes block.
 
 AC12. Substantive learning notes use original-to-revised anchoring or an equivalent concrete reference to the edit or translation choice. Fallback notes for restraint, typo-only, no-substantive-lesson, brittle-rule, or integrity-boundary cases reference the concrete source condition, edit category, or integrity issue and do not become generic self-commentary.
 
@@ -380,7 +394,7 @@ AC13. Learning notes teach reusable principles when a substantive lesson exists.
 
 AC14. Learning notes qualify brittle rules or avoid teaching them.
 
-AC15. Learning notes are capped and not padded to the cap.
+AC15. Learning notes are not limited by a fixed numeric cap, are not padded, and remain scannable when the useful note set is longer or varied.
 
 AC16. Already-good text is minimally edited and receives at most one restraint note.
 

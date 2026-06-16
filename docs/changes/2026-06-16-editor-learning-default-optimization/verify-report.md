@@ -36,7 +36,7 @@
 | R3-R5 | T2, T13 | `skills/editor/SKILL.md`, `README.md` | Description identifies editor/translator behavior, learning from edits, and no standalone coaching mode. | pass |
 | R6-R14 | T4-T8 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | Default post-deliverable notes, labels, anchoring, response-language-only notes, and non-interleaving are covered. | pass |
 | R15-R18 | T4, T5, T10, T12, T14 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | Notes are subordinate to fidelity and must not justify drift, unsupported certainty, false approval, or extra edits. | pass |
-| R19-R25 | T9-T11, T14, T16 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | Cap, ceiling-not-target rule, trivial fallback, restraint fallback, and brittle-rule qualification are covered. | pass |
+| R19-R25 | T9-T11, T14, T16 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | No fixed numeric cap, no-padding/scannable-format rule, trivial fallback, restraint fallback, and brittle-rule qualification are covered. | pass |
 | R26-R31 | T5-T7, T13 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | Explicit suppression, ambiguous-brevity fallback, learn-more anchoring, and target-language override behavior are covered. | pass |
 | R32-R36 | T2, T12, T15 | `skills/editor/SKILL.md`, eval fixture, post-change evidence | Integrity-boundary behavior remains truth-preserving and obsolete notes-on-request wording was replaced. | pass |
 | R37-R38 | T3, T14, fixture IDs | `baseline-evidence.md`, `post-change-evidence.md`, `tests/evals/skills/editor/cases.yaml` | Baseline and post-change evidence compare the same scenario classes; direct check found no missing scenario IDs. | pass |
@@ -51,7 +51,7 @@ All commands ran from `/home/xiongxianfei/data/20260525-skillsmith/code` on 2026
 | `python -m unittest discover tests` | pass | 31 tests passed. |
 | `python tests/check_readme_sync.py` | pass | README sync check passed. |
 | `git diff --check` | pass | No whitespace errors. |
-| `wc -l skills/editor/SKILL.md` | pass | 175 lines. |
+| `wc -l skills/editor/SKILL.md` | pass | 188 lines. |
 | direct scenario coverage check | pass | No required scenario IDs missing from eval fixture or post-change evidence. |
 | `git ls-files --others --exclude-standard` | pass | No untracked authoritative artifacts remain after removing generated `tests/__pycache__`. |
 
