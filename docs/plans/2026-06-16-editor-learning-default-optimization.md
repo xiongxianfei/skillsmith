@@ -60,11 +60,11 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 ## Current Handoff Summary
 
 - Current milestone: M3. Post-change evidence and validation
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2. Editor prompt learning-default implementation
 - Review status: M2 code review clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review for M3
 - Final closeout readiness: not ready
 - Reason final closeout is or is not ready: M3, explain-change closeout, verification, and PR handoff remain.
 
@@ -163,7 +163,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 
 ### M3. Post-change evidence and validation
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Record post-change evidence, compare it against baseline scenario classes, and prepare the implementation for code review.
 - Requirements: R37-R38, AC19-AC21.
 - Files/components likely touched:
@@ -186,6 +186,7 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
 - Expected observable result: post-change evidence and validation are complete enough to hand M1-M3 to code review.
+- Implementation result: `post-change-evidence.md` records post-change prompt-contract evidence against the same baseline scenario classes, compares learning value, bloat, over-editing, and fidelity, and documents the residual model-following risk. Required validation commands passed.
 - Commit message: `M3: record editor learning evidence and validation`
 - Milestone closeout:
   - validation passed
@@ -243,6 +244,8 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M2 implementation updated `README.md` because the editor table row and skill detail section mirror the changed output contract.
 - 2026-06-16: M2 is review-requested for code review.
 - 2026-06-16: Code-review M2 R1 closed M2 clean-with-notes with no material findings.
+- 2026-06-16: M3 implementation recorded post-change evidence in `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md`.
+- 2026-06-16: M3 is review-requested for code review.
 
 ## Aligned-surface audit
 
@@ -263,6 +266,17 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 | `README.md` | updated | README mirrors editor behavior in the skills table and detail section. |
 | `tests/evals/skills/editor/cases.yaml` | unaffected with rationale | Eval fixture was already updated in M1 and remains the proof surface for M2 behavior. |
 | `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md` | unaffected with rationale | Post-change evidence belongs to M3 after prompt implementation review. |
+| `tests/validate_skills.py` | unaffected with rationale | No validator behavior change is in scope. |
+| `install.sh` | unaffected with rationale | No installation behavior change is in scope. |
+
+### M3 aligned-surface audit
+
+| Surface | M3 status | Rationale |
+| --- | --- | --- |
+| `docs/changes/2026-06-16-editor-learning-default-optimization/post-change-evidence.md` | added | M3 owns post-change evidence comparing the updated prompt contract to baseline scenario classes. |
+| `skills/editor/SKILL.md` | unaffected with rationale | Prompt behavior was implemented and reviewed in M2; M3 records evidence and validation only. |
+| `tests/evals/skills/editor/cases.yaml` | unaffected with rationale | Eval fixture was updated in M1 and remains the scenario index for post-change evidence. |
+| `README.md` | unaffected with rationale | README behavior mirror was updated and validated in M2; no further README change is needed in M3. |
 | `tests/validate_skills.py` | unaffected with rationale | No validator behavior change is in scope. |
 | `install.sh` | unaffected with rationale | No installation behavior change is in scope. |
 
@@ -301,12 +315,18 @@ No runtime components, tools, generated prompt assets, installer behavior, repos
 - 2026-06-16: M2 `wc -l skills/editor/SKILL.md` returned 175 lines.
 - 2026-06-16: M2 stale notes-on-request search passed; only the retained `No default Why` rule remains by design.
 - 2026-06-16: Code-review M2 R1 direct checks passed: `python tests/validate_skills.py`, `python -m unittest discover tests`, `python tests/check_readme_sync.py`, `git diff --check HEAD~1..HEAD`, targeted prompt search, and prompt line count.
+- 2026-06-16: M3 `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-evals warning for unrelated skills.
+- 2026-06-16: M3 `python -m unittest discover tests` passed, 31 tests OK.
+- 2026-06-16: M3 `python tests/check_readme_sync.py` passed.
+- 2026-06-16: M3 `git diff --check` passed.
+- 2026-06-16: M3 `wc -l skills/editor/SKILL.md` returned 175 lines.
+- 2026-06-16: M3 direct evidence search confirmed post-change evidence covers key learning-note labels, scenario IDs, and T4-T14 behavior groups.
 
 ## Outcome and retrospective
 
-- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 remains unimplemented; downstream gates remain.
+- M1 is closed by code-review M1 R1. M2 is closed by code-review M2 R1. M3 implementation is review-requested; downstream gates remain.
 
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for implement M3. Readiness is not Done; M3, explain-change closeout, verify, and PR handoff remain.
+- Ready for code-review of M3. Readiness is not Done; M3 review, explain-change closeout, verify, and PR handoff remain.

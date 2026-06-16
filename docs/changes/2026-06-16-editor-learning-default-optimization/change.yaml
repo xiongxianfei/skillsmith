@@ -6,8 +6,8 @@ proposal: docs/proposals/2026-06-16-editor-learning-default-optimization.md
 spec: specs/editor-learning-default-optimization.md
 test_spec: specs/editor-learning-default-optimization.test.md
 architecture: not-required
-current_milestone: M3 planned
-next_stage: implement M3
+current_milestone: M3 review-requested
+next_stage: code-review
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -54,6 +54,25 @@ validation:
     status: passed
   - command: wc -l skills/editor/SKILL.md
     stage: M2
+    status: passed
+    notes: "175 lines."
+  - command: python tests/validate_skills.py
+    stage: M3
+    status: passed
+    notes: "Passed with existing non-blocking grandfathered-evals warning for unrelated skills."
+  - command: python -m unittest discover tests
+    stage: M3
+    status: passed
+    notes: "Ran 31 tests; OK."
+  - command: python tests/check_readme_sync.py
+    stage: M3
+    status: passed
+    notes: "README sync check passed."
+  - command: git diff --check
+    stage: M3
+    status: passed
+  - command: wc -l skills/editor/SKILL.md
+    stage: M3
     status: passed
     notes: "175 lines."
 reviews:
