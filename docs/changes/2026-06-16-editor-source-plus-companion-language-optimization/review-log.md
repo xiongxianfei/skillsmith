@@ -63,3 +63,18 @@
 - Status: clean-with-notes
 - Material findings: none
 - Outcome: M2 is closed; prompt and README mirror implementation are accepted for this milestone. Next stage is M3 implementation.
+
+## Code Review M3 R1
+
+- Path: `docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m3-r1.md`
+- Status: changes-requested
+- Material findings:
+  - `F-CODE-EDITOR-SOURCE-COMPANION-M3-001`
+- Outcome: M3 remains open; `explain-change.md` has stale M1 handoff text that must be corrected through review-resolution before M3 can close.
+
+## Code Review M3 R2
+
+- Path: `docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/reviews/code-review-m3-r2.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: `F-CODE-EDITOR-SOURCE-COMPANION-M3-001` is accepted as fixed; M3 is closed. Next stage is final closeout, starting with `explain-change`.

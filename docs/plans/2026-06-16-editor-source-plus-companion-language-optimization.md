@@ -47,14 +47,14 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 
 ## Current Handoff Summary
 
-- Current milestone: M3. Post-change evidence and validation
-- Current milestone state: review-requested
-- Last reviewed milestone: M2. Editor prompt implementation
-- Review status: M3 implementation ready for code-review
-- Remaining in-scope implementation milestones: M3
-- Next stage: code-review M3
+- Current milestone: final closeout
+- Current milestone state: planned
+- Last reviewed milestone: M3. Post-change evidence and validation
+- Review status: code-review M3 R2 clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: none
+- Next stage: verify
 - Final closeout readiness: not-ready
-- Reason final closeout is not ready: the plan still needs M3 code-review, final change explanation closeout, final verification, and PR handoff.
+- Reason final closeout is not ready: the plan still needs final verification and PR handoff.
 
 ## Milestones
 
@@ -111,7 +111,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 
 ### M3. Post-change evidence and validation
 
-- State: review-requested
+- State: closed
 - Goal: record post-change evidence, run validation, and prepare the implementation for code review.
 - Requirements covered: R62-R67, AC2-AC20.
 - Files likely touched:
@@ -132,7 +132,7 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
   - `python tests/check_readme_sync.py`
   - `git diff --check`
   - `wc -l skills/editor/SKILL.md`
-- Result: implemented; ready for code-review.
+- Result: closed by code-review M3 R2 with no material findings.
 
 ## Validation plan
 
@@ -188,6 +188,10 @@ No live model calls should be added to CI.
 - 2026-06-16: User-requested line-break normalization for `skills/editor/SKILL.md` was applied and validated as an isolated formatting fix before M3 evidence.
 - 2026-06-16: M3 implementation started; scope is limited to post-change evidence, validation records, and lifecycle handoff.
 - 2026-06-16: M3 implementation completed and moved to review-requested after post-change evidence and validation.
+- 2026-06-16: Code-review M3 R1 requested changes for stale current-handoff text in `explain-change.md`; M3 remains open pending review-resolution.
+- 2026-06-16: Review-resolution fixed `F-CODE-EDITOR-SOURCE-COMPANION-M3-001` by updating `explain-change.md`; M3 is ready for code-review M3 R2.
+- 2026-06-16: Code-review M3 R2 accepted the fix, closed M3 with status `clean-with-notes`, and handed off to final closeout starting with `explain-change`.
+- 2026-06-16: Final explain-change closeout completed and handed off to `verify`.
 
 ## Decision log
 
@@ -254,6 +258,30 @@ No live model calls should be added to CI.
   - `git diff --check` passed.
   - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 117 prompt lines and 274 eval fixture lines.
   - Stale text search passed: no `defaults to Chinese`, `Default visible target`, `internally render`, `Chinese + English final`, `Default Chinese + English output`, or `defaulting to Chinese and English` matches in `skills/editor/SKILL.md` or `README.md`.
+- 2026-06-16 code-review M3 R1 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check HEAD~1..HEAD` passed.
+  - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 117 prompt lines and 274 eval fixture lines.
+  - Stale text search found no hardcoded Chinese + English default or hidden cross-check text in `skills/editor/SKILL.md` or `README.md`.
+  - `git diff HEAD~1..HEAD -- skills/editor/SKILL.md` produced no diff; M3 did not edit the production prompt.
+- 2026-06-16 review-resolution for code-review M3 R1 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+- 2026-06-16 code-review M3 R2 validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+  - Stale M1 handoff text search found no stale handoff text in `explain-change.md`, this plan, or `docs/plan.md`.
+- 2026-06-16 explain-change validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+  - Stale active handoff text search found no stale handoff text in `explain-change.md`, `review-resolution.md`, `change.yaml`, this plan, or `docs/plan.md`.
 
 ## Outcome and retrospective
 
@@ -261,6 +289,6 @@ No live model calls should be added to CI.
 
 ## Readiness
 
-This plan is ready for M3 code-review.
+This plan is ready for final verification.
 
-It is not verified, branch-ready, or PR-ready. Those states require M3 code-review, durable change explanation closeout, and final verification.
+It is not verified, branch-ready, or PR-ready. Those states require final verification.
