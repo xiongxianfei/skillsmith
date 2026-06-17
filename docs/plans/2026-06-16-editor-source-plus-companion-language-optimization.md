@@ -52,9 +52,9 @@ This plan keeps the change scoped to prompt behavior, eval evidence, and mirrore
 - Last reviewed milestone: M3. Post-change evidence and validation
 - Review status: code-review M3 R2 clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: verify
-- Final closeout readiness: not-ready
-- Reason final closeout is not ready: the plan still needs final verification and PR handoff.
+- Next stage: pr
+- Final closeout readiness: branch-ready for PR handoff
+- Reason final closeout is not done: PR handoff has not been completed.
 
 ## Milestones
 
@@ -192,6 +192,7 @@ No live model calls should be added to CI.
 - 2026-06-16: Review-resolution fixed `F-CODE-EDITOR-SOURCE-COMPANION-M3-001` by updating `explain-change.md`; M3 is ready for code-review M3 R2.
 - 2026-06-16: Code-review M3 R2 accepted the fix, closed M3 with status `clean-with-notes`, and handed off to final closeout starting with `explain-change`.
 - 2026-06-16: Final explain-change closeout completed and handed off to `verify`.
+- 2026-06-16: Final verification passed locally and handed off to `pr`.
 
 ## Decision log
 
@@ -282,6 +283,14 @@ No live model calls should be added to CI.
   - `python tests/check_readme_sync.py` passed.
   - `git diff --check` passed.
   - Stale active handoff text search found no stale handoff text in `explain-change.md`, `review-resolution.md`, `change.yaml`, this plan, or `docs/plan.md`.
+- 2026-06-16 verify validation:
+  - `python tests/validate_skills.py` passed with one non-blocking grandfathered-evals warning for unrelated existing skills.
+  - `python -m unittest discover tests` passed, 31 tests.
+  - `python tests/check_readme_sync.py` passed.
+  - `git diff --check` passed.
+  - `wc -l skills/editor/SKILL.md tests/evals/skills/editor/cases.yaml` reported 117 prompt lines and 274 eval fixture lines.
+  - Stale hardcoded Chinese + English default and hidden cross-check text search found no stale prompt or README text.
+  - Stale active handoff text search found no stale handoff text in `explain-change.md`, `review-resolution.md`, `change.yaml`, this plan, or `docs/plan.md`.
 
 ## Outcome and retrospective
 
@@ -289,6 +298,6 @@ No live model calls should be added to CI.
 
 ## Readiness
 
-This plan is ready for final verification.
+This plan is branch-ready for PR handoff.
 
-It is not verified, branch-ready, or PR-ready. Those states require final verification.
+It is not PR-ready. PR body readiness and PR open readiness belong to the PR stage.
