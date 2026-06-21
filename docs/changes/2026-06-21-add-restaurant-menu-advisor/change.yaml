@@ -9,8 +9,8 @@ test_spec: specs/restaurant-menu-advisor.test.md
 plan: docs/plans/2026-06-21-add-restaurant-menu-advisor.md
 review_log: docs/changes/2026-06-21-add-restaurant-menu-advisor/review-log.md
 current_milestone: final closeout
-next_stage: verify
-milestone_state: planned
+next_stage: pr
+milestone_state: branch-ready
 last_reviewed_milestone: M3
 last_review_status: clean-with-notes
 open_findings: []
@@ -171,6 +171,30 @@ validation:
     stage: explain-change
     status: passed
     notes: "Passed."
+  - command: python tests/validate_skills.py
+    stage: verify
+    status: passed
+    notes: "Passed for 11 skills with the existing non-blocking grandfathered-evals warning."
+  - command: python -m unittest discover tests
+    stage: verify
+    status: passed
+    notes: "Ran 31 tests."
+  - command: python tests/check_readme_sync.py
+    stage: verify
+    status: passed
+    notes: "Passed."
+  - command: git diff --check HEAD
+    stage: verify
+    status: passed
+    notes: "Passed."
+  - command: git status --short
+    stage: verify
+    status: passed
+    notes: "Clean after verify commit."
+  - command: git merge-base HEAD main
+    stage: verify
+    status: passed
+    notes: "Branch base is current main at fd367d98c8fc4728b6d3e448b16286210b13e4a1."
 notes:
   - Proposal-review R2 approved the accepted proposal.
   - Spec-review R1 approved the spec and recorded no architecture artifact required for the current pure-prompt boundary.
@@ -180,4 +204,5 @@ notes:
   - Code-review M2 R1 closed M2 with no material findings.
   - Code-review M3 R1 closed M3 with no material findings.
   - Explain-change recorded the problem-to-diff rationale; next stage is verify.
+  - Verify passed local validation and marked the branch ready for PR handoff; hosted CI has not been observed locally.
   - Plan created with M1 eval fixture, M2 prompt and README synchronization, and M3 manual smoke evidence.

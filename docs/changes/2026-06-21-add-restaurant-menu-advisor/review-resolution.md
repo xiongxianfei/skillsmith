@@ -4,6 +4,10 @@
 
 closed
 
+## Closeout status
+
+closed
+
 ## Findings resolved
 
 | Finding ID | Disposition | Resolution | Validation |
