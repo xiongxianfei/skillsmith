@@ -3,13 +3,13 @@
 ## Result
 
 - Skill: pr
-- Status: ready-to-open
+- Status: opened
 - Branch: `feat/restaurant-menu-advisor`
 - Base: `main`
 - PR title: `feat: add restaurant menu advisor skill`
-- PR URL: pending
+- PR URL: https://github.com/xiongxianfei/skillsmith/pull/31
 - Open blockers: none
-- Readiness: branch-ready from verify; PR body ready; PR open pending push/create
+- Readiness: PR opened; hosted CI in progress/pending at handoff
 
 ## Readiness Checks
 
@@ -91,3 +91,10 @@
 
 ## Follow-ups
 - None required before review.
+
+## Opened PR
+
+- URL: https://github.com/xiongxianfei/skillsmith/pull/31
+- State: open
+- Draft: no
+- Initial hosted CI status: `Validate skill files` in progress/pending at handoff.

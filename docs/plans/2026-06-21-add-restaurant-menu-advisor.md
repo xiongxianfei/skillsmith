@@ -63,13 +63,13 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Current Handoff Summary
 
 - Current milestone: final closeout
-- Current milestone state: pr-ready
+- Current milestone state: pr-open
 - Last reviewed milestone: M3
 - Review status: code-review M3 R1 clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: pr
-- Final closeout readiness: PR handoff artifact ready; PR opening pending
-- Reason final closeout is or is not ready: local verify passed and PR body is ready; branch push, PR creation, and hosted CI observation remain open.
+- Next stage: hosted-ci-and-review
+- Final closeout readiness: PR opened
+- Reason final closeout is or is not ready: PR #31 is open; hosted CI was pending/in progress at handoff and human review remains open.
 
 ## Milestones
 
@@ -253,6 +253,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Recorded `docs/changes/2026-06-21-add-restaurant-menu-advisor/explain-change.md`; next stage is verify.
 - 2026-06-21: Verify passed and recorded `docs/changes/2026-06-21-add-restaurant-menu-advisor/verify-report.md`; branch is ready for PR handoff.
 - 2026-06-21: Prepared `docs/changes/2026-06-21-add-restaurant-menu-advisor/pr.md`; branch push and PR creation are next.
+- 2026-06-21: Opened PR #31 at https://github.com/xiongxianfei/skillsmith/pull/31; hosted CI was pending/in progress at handoff.
 
 ## Decision log
 
@@ -298,4 +299,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- PR body ready for `pr`. PR open and hosted CI observation remain pending.
+- PR opened at https://github.com/xiongxianfei/skillsmith/pull/31. Hosted CI and human review remain pending.

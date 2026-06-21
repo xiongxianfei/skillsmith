@@ -9,8 +9,8 @@ test_spec: specs/restaurant-menu-advisor.test.md
 plan: docs/plans/2026-06-21-add-restaurant-menu-advisor.md
 review_log: docs/changes/2026-06-21-add-restaurant-menu-advisor/review-log.md
 current_milestone: final closeout
-next_stage: pr
-milestone_state: pr-ready
+next_stage: hosted-ci-and-review
+milestone_state: pr-open
 last_reviewed_milestone: M3
 last_review_status: clean-with-notes
 open_findings: []
@@ -203,6 +203,22 @@ validation:
     stage: pr
     status: passed
     notes: "Remote main exists; feature branch was not present before push."
+  - command: git push -u origin feat/restaurant-menu-advisor
+    stage: pr
+    status: passed
+    notes: "Created remote feature branch and set upstream."
+  - command: gh pr create --base main --head feat/restaurant-menu-advisor --title "feat: add restaurant menu advisor skill"
+    stage: pr
+    status: passed
+    notes: "Opened https://github.com/xiongxianfei/skillsmith/pull/31."
+  - command: gh pr view 31 --json url,state,headRefName,baseRefName,isDraft,statusCheckRollup
+    stage: pr
+    status: passed
+    notes: "PR is open, not draft; Validate skill files check was in progress."
+  - command: gh pr checks 31 --watch=false
+    stage: pr
+    status: pending
+    notes: "Validate skill files pending/in progress at PR handoff; not claimed passed."
 notes:
   - Proposal-review R2 approved the accepted proposal.
   - Spec-review R1 approved the spec and recorded no architecture artifact required for the current pure-prompt boundary.
@@ -213,5 +229,5 @@ notes:
   - Code-review M3 R1 closed M3 with no material findings.
   - Explain-change recorded the problem-to-diff rationale; next stage is verify.
   - Verify passed local validation and marked the branch ready for PR handoff; hosted CI has not been observed locally.
-  - PR handoff artifact is ready; PR opening is pending branch push and `gh pr create`.
+  - PR #31 opened; hosted CI was pending/in progress at handoff.
   - Plan created with M1 eval fixture, M2 prompt and README synchronization, and M3 manual smoke evidence.
