@@ -43,3 +43,11 @@
 - Material findings: none
 - Outcome: test spec is owner-approved as the active proof surface; implementation may start with M1.
 - Resolution: not required
+
+## Code Review M1 R1
+
+- Path: `docs/changes/2026-06-21-add-restaurant-menu-advisor/reviews/code-review-m1-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M1 is closed; implementation may continue with M2.
+- Resolution: not required

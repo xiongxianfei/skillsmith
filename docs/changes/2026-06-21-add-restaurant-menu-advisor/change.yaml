@@ -1,16 +1,18 @@
 id: 2026-06-21-add-restaurant-menu-advisor
 title: Add restaurant menu advisor skill
 status: active
-branch: unknown
+branch: feat/restaurant-menu-advisor
 proposal: docs/proposals/2026-06-21-add-restaurant-menu-advisor.md
 spec: specs/restaurant-menu-advisor.md
 architecture: not-required
 test_spec: specs/restaurant-menu-advisor.test.md
 plan: docs/plans/2026-06-21-add-restaurant-menu-advisor.md
 review_log: docs/changes/2026-06-21-add-restaurant-menu-advisor/review-log.md
-current_milestone: M1
-next_stage: code-review M1
-milestone_state: review-requested
+current_milestone: M2
+next_stage: implement M2
+milestone_state: planned
+last_reviewed_milestone: M1
+last_review_status: clean-with-notes
 open_findings: []
 validation:
   - command: python tests/validate_skills.py
@@ -53,10 +55,30 @@ validation:
     stage: implement M1
     status: passed
     notes: "No whitespace errors."
+  - command: python -c 'from pathlib import Path; from tests.validate_skills import validate_cases_file; result = validate_cases_file("restaurant-menu-advisor", Path("tests/evals/skills/restaurant-menu-advisor/cases.yaml")); assert not result.errors, result.errors; print("direct eval fixture validation passed")'
+    stage: code-review M1
+    status: passed
+    notes: "Reviewer rerun passed."
+  - command: python tests/validate_skills.py
+    stage: code-review M1
+    status: passed
+    notes: "Reviewer rerun passed with the existing non-blocking grandfathered-evals warning."
+  - command: python -m unittest discover tests
+    stage: code-review M1
+    status: passed
+    notes: "Reviewer rerun passed; ran 31 tests."
+  - command: python tests/check_readme_sync.py
+    stage: code-review M1
+    status: passed
+    notes: "Reviewer rerun passed."
+  - command: git diff --check HEAD
+    stage: code-review M1
+    status: passed
+    notes: "Reviewer rerun passed."
 notes:
   - Proposal-review R2 approved the accepted proposal.
   - Spec-review R1 approved the spec and recorded no architecture artifact required for the current pure-prompt boundary.
   - Plan-review R1 approved the execution plan.
   - Test spec is active at specs/restaurant-menu-advisor.test.md and owner-approved in test-spec-approval R1.
-  - M1 added high-risk eval fixture and baseline evidence; ready for code-review M1.
+  - Code-review M1 R1 closed M1 with no material findings.
   - Plan created with M1 eval fixture, M2 prompt and README synchronization, and M3 manual smoke evidence.
