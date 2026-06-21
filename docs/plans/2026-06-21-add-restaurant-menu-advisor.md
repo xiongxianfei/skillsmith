@@ -67,9 +67,9 @@ No runtime server, data persistence, installer change, CI change, external servi
 - Last reviewed milestone: M3
 - Review status: code-review M3 R1 clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: none
-- Next stage: explain-change
+- Next stage: verify
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: ready to start final closeout with explain-change; verify and PR handoff remain open.
+- Reason final closeout is or is not ready: explain-change is recorded; verify and PR handoff remain open.
 
 ## Milestones
 
@@ -250,6 +250,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Started M3 implementation for post-change prompt-contract smoke evidence and final implementation-slice validation.
 - 2026-06-21: Implemented M3 by recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`; milestone is ready for code-review M3.
 - 2026-06-21: Code-review M3 R1 closed M3 with no material findings; all implementation milestones are closed and final closeout can start with explain-change.
+- 2026-06-21: Recorded `docs/changes/2026-06-21-add-restaurant-menu-advisor/explain-change.md`; next stage is verify.
 
 ## Decision log
 
@@ -282,6 +283,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Code-review M2 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 - 2026-06-21: M3 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 - 2026-06-21: Code-review M3 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
+- 2026-06-21: Explain-change checks passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, and `git diff --check HEAD`.
 
 ## Outcome and retrospective
 
@@ -290,4 +292,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `explain-change`. Not ready for verify, branch readiness, or PR readiness.
+- Ready for `verify`. Not ready for branch readiness or PR readiness.
