@@ -62,14 +62,14 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ## Current Handoff Summary
 
-- Current milestone: M3
-- Current milestone state: review-requested
-- Last reviewed milestone: M2
-- Review status: code-review M2 R1 clean-with-notes; no material findings
-- Remaining in-scope implementation milestones: M3
-- Next stage: code-review M3
+- Current milestone: final closeout
+- Current milestone state: planned
+- Last reviewed milestone: M3
+- Review status: code-review M3 R1 clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: none
+- Next stage: explain-change
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 code-review, explain-change, verify, and PR handoff remain open.
+- Reason final closeout is or is not ready: ready to start final closeout with explain-change; verify and PR handoff remain open.
 
 ## Milestones
 
@@ -164,7 +164,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ### M3. Manual Smoke Evidence And Final Implementation Slice Closeout
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Record behavior evidence for the text-only path, optional image-capable path, allergy path, unreadable-menu path, and final repository validation.
 - Requirements: R13-R19, R20-R27, R31-R34, AC13-AC16
 - Files/components likely touched:
@@ -249,6 +249,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Code-review M2 R1 closed M2 with no material findings; next stage is implement M3.
 - 2026-06-21: Started M3 implementation for post-change prompt-contract smoke evidence and final implementation-slice validation.
 - 2026-06-21: Implemented M3 by recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`; milestone is ready for code-review M3.
+- 2026-06-21: Code-review M3 R1 closed M3 with no material findings; all implementation milestones are closed and final closeout can start with explain-change.
 
 ## Decision log
 
@@ -280,6 +281,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: M2 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 - 2026-06-21: Code-review M2 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 - 2026-06-21: M3 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
+- 2026-06-21: Code-review M3 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 
 ## Outcome and retrospective
 
@@ -288,4 +290,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `code-review` M3. Not ready for explain-change, verify, branch readiness, or PR readiness.
+- Ready for `explain-change`. Not ready for verify, branch readiness, or PR readiness.
