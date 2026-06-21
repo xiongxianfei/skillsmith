@@ -20,6 +20,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
 | [editor](skills/editor/SKILL.md) | `/editor` | Expert text editing and translation with source-language plus companion-language output, structured learning notes by default, and explicit target-language or no-notes overrides |
+| [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
 | [communicator](skills/communicator/SKILL.md) | `/communicator` | Draft formal Russian messages from Chinese input, with Chinese translation and cultural strategy notes |
 | [doctor](skills/doctor/SKILL.md) | `/doctor` | Medical consultation — symptoms, medications, lab reports, health advice, with referral guidance and safety flags |
 | [fitness-coach](skills/fitness-coach/SKILL.md) | `/fitness-coach` | Personal fitness coach — training plans, exercise technique, nutrition, and recovery advice |
@@ -44,7 +45,7 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/restaurant-menu-advisor`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`.
 
 #### Install a specific skill only
 
@@ -72,7 +73,7 @@ git clone https://github.com/xiongxianfei/Skillsmith
 claude --plugin-dir ./Skillsmith
 ```
 
-Skills are available as `/Skillsmith:editor` and `/Skillsmith:communicator` for this session only.
+Skills are available as `/Skillsmith:editor`, `/Skillsmith:restaurant-menu-advisor`, and `/Skillsmith:communicator` for this session only.
 
 ### Other AI models (ChatGPT, Gemini, etc.)
 
@@ -92,6 +93,7 @@ Invoke by slash command, passing your text as the argument:
 
 ```
 /editor  Please polish this text for me.
+/restaurant-menu-advisor  Here's the menu. What should I order if I want something filling under $25?
 /communicator  我想告诉房东暖气坏了，请帮我写一条俄语消息。
 ```
 
@@ -110,6 +112,12 @@ Paste the prompt as the system prompt, then send your input as the first user me
 Edits source text in its own language with fidelity and restraint, then returns polished source-language output plus one companion language and structured learning notes by default. Explicit target-language and no-notes requests override the visible default.
 
 Best for: emails, PR descriptions, documentation, release notes, messages, academic writing, and professional business communication.
+
+### `restaurant-menu-advisor` — Restaurant Menu Advisor
+
+Compares supplied restaurant-menu evidence against taste, budget, appetite, dietary restrictions, allergies, and sharing context, then returns a small grounded shortlist, one leading recommendation, staff-confirmation questions when needed, and a copyable illustrative visual brief.
+
+Best for: choosing from unfamiliar menus, deciding quickly at a restaurant, comparing a few dishes, handling allergy uncertainty conservatively, and previewing a likely dish appearance without treating generated images as restaurant photos.
 
 ### `communicator` — Formal Russian Communication Assistant
 

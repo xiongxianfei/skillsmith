@@ -63,13 +63,13 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Current Handoff Summary
 
 - Current milestone: M2
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M1
 - Review status: code-review M1 R1 clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: M2, M3
-- Next stage: implement M2
+- Next stage: code-review M2
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2-M3 implementation, downstream code-review, explain-change, verify, and PR handoff remain open.
+- Reason final closeout is or is not ready: M2 code-review, M3 implementation, downstream code-review, explain-change, verify, and PR handoff remain open.
 
 ## Milestones
 
@@ -116,13 +116,14 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ### M2. Skill Prompt And README Synchronization
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Add the `restaurant-menu-advisor` prompt skill and public README entries while preserving portability and the safety boundaries in the spec.
 - Requirements: R1-R19, R20-R27, R30-R34, AC1-AC15
 - Files/components likely touched:
   - `skills/restaurant-menu-advisor/SKILL.md`
   - `README.md`
   - `tests/evals/skills/restaurant-menu-advisor/cases.yaml`
+  - `docs/changes/2026-06-21-add-restaurant-menu-advisor/m2-evidence.md`
   - `docs/changes/2026-06-21-add-restaurant-menu-advisor/change.yaml`
   - this plan
   - `docs/plan.md`
@@ -243,6 +244,8 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Started M1 implementation for the high-risk eval fixture and baseline proof.
 - 2026-06-21: Implemented M1 by adding `tests/evals/skills/restaurant-menu-advisor/cases.yaml` and `docs/changes/2026-06-21-add-restaurant-menu-advisor/baseline-evidence.md`; milestone is ready for code-review M1.
 - 2026-06-21: Code-review M1 R1 closed M1 with no material findings; next stage is implement M2.
+- 2026-06-21: Started M2 implementation for the prompt skill and README synchronization.
+- 2026-06-21: Implemented M2 by adding `skills/restaurant-menu-advisor/SKILL.md`, updating README discovery surfaces, and recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/m2-evidence.md`; milestone is ready for code-review M2.
 
 ## Decision log
 
@@ -258,10 +261,11 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ## Aligned-surface audit
 
-- `skills/restaurant-menu-advisor/SKILL.md`: intentionally absent until M2, with absence recorded in baseline evidence.
-- `README.md`: intentionally unchanged until M2, when the skill directory exists and README sync can include the new public command.
+- `skills/restaurant-menu-advisor/SKILL.md`: added in M2 with required frontmatter, `$ARGUMENTS`, `## Output Format`, and approved safety boundaries.
+- `README.md`: synchronized in M2 with the new skill table row, slash command mentions, usage example, and skill detail section.
+- `tests/evals/skills/restaurant-menu-advisor/cases.yaml`: unchanged in M2 because the M2 prompt aligns with the M1 scenario expectations.
 - `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`: intentionally absent until M3 manual smoke evidence.
-- `install.sh`, `tests/validate_skills.py`, CI, architecture, scripts, dependencies, secrets, generated images, and provider-specific API instructions: unaffected by M1.
+- `install.sh`, `tests/validate_skills.py`, CI, architecture, scripts, dependencies, secrets, generated images, and provider-specific API instructions: unaffected by M2.
 
 ## Validation notes
 
@@ -270,6 +274,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: M1 direct fixture validation passed: `python -c 'from pathlib import Path; from tests.validate_skills import validate_cases_file; result = validate_cases_file("restaurant-menu-advisor", Path("tests/evals/skills/restaurant-menu-advisor/cases.yaml")); assert not result.errors, result.errors; print("direct eval fixture validation passed")'`.
 - 2026-06-21: M1 broad checks passed: `python -m unittest discover tests` ran 31 tests, `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-eval warning, `python tests/check_readme_sync.py` passed, and `git diff --check` passed.
 - 2026-06-21: Code-review M1 R1 reviewer reruns passed: direct `validate_cases_file`, `python tests/validate_skills.py` with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, and `git diff --check HEAD`.
+- 2026-06-21: M2 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 
 ## Outcome and retrospective
 
@@ -278,4 +283,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `implement` M2. Not ready for explain-change, verify, branch readiness, or PR readiness.
+- Ready for `code-review` M2. Not ready for M3 implementation, explain-change, verify, branch readiness, or PR readiness.
