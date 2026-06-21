@@ -63,13 +63,13 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Current Handoff Summary
 
 - Current milestone: M3
-- Current milestone state: planned
+- Current milestone state: review-requested
 - Last reviewed milestone: M2
 - Review status: code-review M2 R1 clean-with-notes; no material findings
 - Remaining in-scope implementation milestones: M3
-- Next stage: implement M3
+- Next stage: code-review M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M3 implementation, downstream code-review, explain-change, verify, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3 code-review, explain-change, verify, and PR handoff remain open.
 
 ## Milestones
 
@@ -164,7 +164,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ### M3. Manual Smoke Evidence And Final Implementation Slice Closeout
 
-- Milestone state: planned
+- Milestone state: review-requested
 - Goal: Record behavior evidence for the text-only path, optional image-capable path, allergy path, unreadable-menu path, and final repository validation.
 - Requirements: R13-R19, R20-R27, R31-R34, AC13-AC16
 - Files/components likely touched:
@@ -247,6 +247,8 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Started M2 implementation for the prompt skill and README synchronization.
 - 2026-06-21: Implemented M2 by adding `skills/restaurant-menu-advisor/SKILL.md`, updating README discovery surfaces, and recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/m2-evidence.md`; milestone is ready for code-review M2.
 - 2026-06-21: Code-review M2 R1 closed M2 with no material findings; next stage is implement M3.
+- 2026-06-21: Started M3 implementation for post-change prompt-contract smoke evidence and final implementation-slice validation.
+- 2026-06-21: Implemented M3 by recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`; milestone is ready for code-review M3.
 
 ## Decision log
 
@@ -265,8 +267,8 @@ No runtime server, data persistence, installer change, CI change, external servi
 - `skills/restaurant-menu-advisor/SKILL.md`: added in M2 with required frontmatter, `$ARGUMENTS`, `## Output Format`, and approved safety boundaries.
 - `README.md`: synchronized in M2 with the new skill table row, slash command mentions, usage example, and skill detail section.
 - `tests/evals/skills/restaurant-menu-advisor/cases.yaml`: unchanged in M2 because the M2 prompt aligns with the M1 scenario expectations.
-- `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`: intentionally absent until M3 manual smoke evidence.
-- `install.sh`, `tests/validate_skills.py`, CI, architecture, scripts, dependencies, secrets, generated images, and provider-specific API instructions: unaffected by M2.
+- `docs/changes/2026-06-21-add-restaurant-menu-advisor/post-change-evidence.md`: added in M3 with text-only, optional image-boundary, allergy, unreadable-menu, active-emergency, and scope-boundary prompt-contract evidence.
+- `install.sh`, `tests/validate_skills.py`, CI, architecture, scripts, dependencies, secrets, generated images, and provider-specific API instructions: unaffected by M3.
 
 ## Validation notes
 
@@ -277,6 +279,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Code-review M1 R1 reviewer reruns passed: direct `validate_cases_file`, `python tests/validate_skills.py` with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, and `git diff --check HEAD`.
 - 2026-06-21: M2 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 - 2026-06-21: Code-review M2 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
+- 2026-06-21: M3 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 
 ## Outcome and retrospective
 
@@ -285,4 +288,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `implement` M3. Not ready for explain-change, verify, branch readiness, or PR readiness.
+- Ready for `code-review` M3. Not ready for explain-change, verify, branch readiness, or PR readiness.
