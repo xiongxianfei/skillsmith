@@ -62,14 +62,14 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ## Current Handoff Summary
 
-- Current milestone: M2
-- Current milestone state: review-requested
-- Last reviewed milestone: M1
-- Review status: code-review M1 R1 clean-with-notes; no material findings
-- Remaining in-scope implementation milestones: M2, M3
-- Next stage: code-review M2
+- Current milestone: M3
+- Current milestone state: planned
+- Last reviewed milestone: M2
+- Review status: code-review M2 R1 clean-with-notes; no material findings
+- Remaining in-scope implementation milestones: M3
+- Next stage: implement M3
 - Final closeout readiness: not ready
-- Reason final closeout is or is not ready: M2 code-review, M3 implementation, downstream code-review, explain-change, verify, and PR handoff remain open.
+- Reason final closeout is or is not ready: M3 implementation, downstream code-review, explain-change, verify, and PR handoff remain open.
 
 ## Milestones
 
@@ -116,7 +116,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 
 ### M2. Skill Prompt And README Synchronization
 
-- Milestone state: review-requested
+- Milestone state: closed
 - Goal: Add the `restaurant-menu-advisor` prompt skill and public README entries while preserving portability and the safety boundaries in the spec.
 - Requirements: R1-R19, R20-R27, R30-R34, AC1-AC15
 - Files/components likely touched:
@@ -246,6 +246,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: Code-review M1 R1 closed M1 with no material findings; next stage is implement M2.
 - 2026-06-21: Started M2 implementation for the prompt skill and README synchronization.
 - 2026-06-21: Implemented M2 by adding `skills/restaurant-menu-advisor/SKILL.md`, updating README discovery surfaces, and recording `docs/changes/2026-06-21-add-restaurant-menu-advisor/m2-evidence.md`; milestone is ready for code-review M2.
+- 2026-06-21: Code-review M2 R1 closed M2 with no material findings; next stage is implement M3.
 
 ## Decision log
 
@@ -275,6 +276,7 @@ No runtime server, data persistence, installer change, CI change, external servi
 - 2026-06-21: M1 broad checks passed: `python -m unittest discover tests` ran 31 tests, `python tests/validate_skills.py` passed with the existing non-blocking grandfathered-eval warning, `python tests/check_readme_sync.py` passed, and `git diff --check` passed.
 - 2026-06-21: Code-review M1 R1 reviewer reruns passed: direct `validate_cases_file`, `python tests/validate_skills.py` with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, and `git diff --check HEAD`.
 - 2026-06-21: M2 checks passed: `python tests/validate_skills.py` passed for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py` passed, `git diff --check` passed, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
+- 2026-06-21: Code-review M2 R1 reviewer reruns passed: `python tests/validate_skills.py` for 11 skills with the existing non-blocking grandfathered-eval warning, `python -m unittest discover tests` ran 31 tests, `python tests/check_readme_sync.py`, `git diff --check HEAD`, and `wc -l skills/restaurant-menu-advisor/SKILL.md` reported 152 lines.
 
 ## Outcome and retrospective
 
@@ -283,4 +285,4 @@ No runtime server, data persistence, installer change, CI change, external servi
 ## Readiness
 
 - See `Current Handoff Summary`.
-- Ready for `code-review` M2. Not ready for M3 implementation, explain-change, verify, branch readiness, or PR readiness.
+- Ready for `implement` M3. Not ready for explain-change, verify, branch readiness, or PR readiness.

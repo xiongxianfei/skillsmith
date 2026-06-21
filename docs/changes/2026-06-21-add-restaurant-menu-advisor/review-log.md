@@ -51,3 +51,11 @@
 - Material findings: none
 - Outcome: M1 is closed; implementation may continue with M2.
 - Resolution: not required
+
+## Code Review M2 R1
+
+- Path: `docs/changes/2026-06-21-add-restaurant-menu-advisor/reviews/code-review-m2-r1.md`
+- Status: clean-with-notes
+- Material findings: none
+- Outcome: M2 is closed; implementation may continue with M3.
+- Resolution: not required
