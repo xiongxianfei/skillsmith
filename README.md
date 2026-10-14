@@ -19,7 +19,7 @@ A curated collection of AI prompts for writing, translation, and productivity â€
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
-| [editor](skills/editor/SKILL.md) | `/editor` | Expert text editing and translation with source-language plus companion-language output, structured learning notes by default, and explicit target-language or no-notes overrides |
+| [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
 | [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
 | [flashcard-generator](skills/flashcard-generator/SKILL.md) | `/flashcard-generator` | Source-grounded spaced-repetition flashcard generator for Anki cards, cloze deletions, memory prompts, durable recall practice, and retention cards |
 | [quiz-generator](skills/quiz-generator/SKILL.md) | `/quiz-generator` | Source-grounded diagnostic quiz generator for quizzes, comprehension checks, MCQs, short-answer items, answer keys, rationales, feedback, and rubrics |
@@ -95,6 +95,7 @@ Invoke by slash command, passing your text as the argument:
 
 ```
 /editor  Please polish this text for me.
+/editor  Correct this paragraph and explain the two most useful linguistic patterns.
 /restaurant-menu-advisor  Here's the menu. What should I order if I want something filling under $25?
 /flashcard-generator  Turn this onboarding note into Anki-ready flashcards.
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
@@ -156,7 +157,7 @@ Paste the prompt as the system prompt, then send your input as the first user me
 
 ### `editor` â€” Expert Text Editing & Translation
 
-Edits source text in its own language with fidelity and restraint, then returns polished source-language output plus one companion language and structured learning notes by default. Explicit target-language and no-notes requests override the visible default.
+Edits writing or accessible speech in its own language with fidelity and restraint, then returns polished source-language output plus one companion language and selective, personalized linguistic learning notes by default. Notes label real changes with relevant domains, explain transferable patterns, and avoid unsupported pronunciation or intonation claims without audio. Explicit target-language and no-notes requests still override the defaults.
 
 Best for: emails, PR descriptions, documentation, release notes, messages, academic writing, and professional business communication.
 
