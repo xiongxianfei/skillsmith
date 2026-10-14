@@ -272,3 +272,93 @@ scenarios:
       Does not act as a standalone writing coach without a source artifact,
       asks for text to edit or translate, and omits learning notes because no
       deliverable is produced.
+
+  - id: editor-linguistic-purpose-and-word-formation
+    category: normal
+    prompt: |
+      Improve my English and teach me the linguistic patterns I missed:
+
+      I want to refine editor skill. when it can give the learn notes from language lingusitics.
+    expected_behavior: >
+      Produces a faithful English correction and the existing Chinese
+      companion block. Teaches up to three grounded patterns such as when
+      versus so that for time versus purpose (syntax/semantics), and learn
+      notes versus learning notes (morphology/lexicon). Avoids ten compulsory
+      domain sections or presenting optional wording as obligatory.
+
+  - id: editor-linguistic-indirect-trigger
+    category: indirect-trigger
+    prompt: |
+      This sounds awkward. Can you show what was off so I stop doing it?
+
+      We discussed about the rollout and agreed on the next step.
+    expected_behavior: >
+      Treats the casual request as editing plus learning. Returns the
+      established source/companion blocks and a grounded note addressing
+      discussed about versus discussed, with a relevant linguistic tag and
+      a reusable transitivity explanation, not a standalone textbook lesson.
+
+  - id: editor-linguistic-transcript-no-acoustics
+    category: edge
+    prompt: |
+      Correct this meeting transcript and tell me about my intonation:
+      "We was gonna ship it yesterday but the tests ain't passing."
+      I don't have the audio.
+    expected_behavior: >
+      Edits faithfully with register and dialect sensitivity. Distinguishes
+      a formal-register alternative from a proved error and does not claim
+      to have heard a sound, stress pattern, or intonation. Can request audio
+      for prosody feedback while keeping the standard language outputs.
+
+  - id: editor-linguistic-audio-supported
+    category: edge
+    situation: >
+      The user supplies a directly accessible, intelligible recording of
+      their own speech and asks for grammatical and intonation feedback.
+    expected_behavior: >
+      Revises the intelligible words, flags uncertain transcription, and
+      only makes phonetics, phonology, or prosody observations actually
+      evidenced in the audio. Avoids accent stigma and ungrounded claims.
+      Preserves the normal editing output structure.
+
+  - id: editor-linguistic-unavailable-audio
+    category: failure
+    prompt: |
+      Please correct this voice memo and tell me what sounds wrong.
+      (No audio file or transcript is attached.)
+    expected_behavior: >
+      Requests accessible audio or a transcript rather than fabricating
+      source speech, corrections, sound-level diagnoses, or learning notes.
+
+  - id: editor-linguistic-register-is-optional
+    category: edge
+    prompt: |
+      Improve this informal message for a close friend:
+      "Hey! I'm gonna be a bit late, sorry!"
+    expected_behavior: >
+      Respects the casual context, does not treat gonna as inherently
+      incorrect, makes minimal useful edits, and falls back to the existing
+      concise restraint note rather than fabricating linguistic mistakes.
+
+  - id: editor-linguistic-personalized-goal-and-exercise
+    category: normal
+    prompt: |
+      I'm preparing formal English project updates. Correct this and teach
+      me the most important pattern with one mini exercise:
+
+      The issue was fixed yesterday, we will release next week.
+    expected_behavior: >
+      Preserves chronology and level of commitment. Explains a grounded
+      syntax or discourse issue about independent-clause connection,
+      distinguishes necessary from optional revisions, and adds one
+      targeted exercise in the notes block as explicitly requested.
+
+  - id: editor-linguistic-target-only-and-no-notes
+    category: edge
+    prompt: |
+      Only translate this into French. No notes, please:
+
+      The migration is mostly done, but we will verify the remaining cases.
+    expected_behavior: >
+      Returns only the faithful French translation with no source block,
+      notes, domain tags, or practice; preserves the meaning of mostly done.
