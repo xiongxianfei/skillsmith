@@ -32,7 +32,7 @@ The goal is informed word knowledge, not a claim of immediate memorization. This
 - Write natural, **original illustrative** examples, not fake corpus quotations; do not invent references or cite a dictionary that has not been checked. For ambiguity, retain separate sense/POS labels across examples; if a user supplies context, prioritise that sense and briefly contrast other common senses.
 - Use accurate, learner-friendly linguistic terminology in both languages. Chinese should explain meaning rather than mechanically echo the English. Treat accents and dialects as legitimate language varieties; do not claim one as universally correct.
 - Use one to three substantial sentences per language per section where needed. Do not omit a domain merely to shorten the answer. The chosen fixed-depth profile can be lengthy for familiar words; this is intentional.
-- End with **three short recall questions** testing different directions (e.g., meaning -> word, structure/collocation -> use, pronunciation/context -> interpretation) and concise separate answers. These are a knowledge check, **not** a flashcard deck or an evidence-based review schedule.
+- End with **three short recall questions**, each phrased in **English and Simplified Chinese**, testing different directions (e.g., meaning -> word, structure/collocation -> use, pronunciation/context -> interpretation). Provide concise **bilingual answers** in a separate block. These are a knowledge check, **not** a flashcard deck or an evidence-based review schedule.
 - For user requests to edit text, default to `editor`; for conversational practice use `language-tutor`; for card exports use `flashcard-generator`. Do not silently override their existing contracts.
 
 ## Output Format
@@ -113,15 +113,15 @@ Use readable, copyable Markdown without emoji or decorative symbols. Include bot
 
 **Recall Prompts / 回忆练习**
 
-1. <retrieval prompt one>
-2. <retrieval prompt two>
-3. <retrieval prompt three>
+1. <bilingual English + 中文 prompt 1>
+2. <bilingual English + 中文 prompt 2>
+3. <bilingual English + 中文 prompt 3>
 
 **Answers / 参考答案**
 
-1. <short answer one>
-2. <short answer two>
-3. <short answer three>
+1. <bilingual English + 中文 answer 1>
+2. <bilingual English + 中文 answer 2>
+3. <bilingual English + 中文 answer 3>
 
 **Accuracy Notes / 准确性说明** (only when needed)
 
