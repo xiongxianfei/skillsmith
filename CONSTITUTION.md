@@ -15,7 +15,7 @@ When project artifacts conflict, agents and reviewers MUST use this order:
 3. Accepted behavior and architectural decisions in `design/architecture/`, and the shared quality standard in `docs/skill-quality-standard.md`
 4. Tests and CI configuration
 5. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
-6. README, contribution docs and historical plans
+6. README, contribution docs and historical records
 
 Architecture specifications MUST distinguish accepted decisions, observed implementation, proposals and unknowns. Reverse engineering or drawing a diagram does not establish acceptance. Explicit user decisions that change durable policy MUST be reflected in the owning documents.
 
@@ -134,6 +134,6 @@ Agents MUST NOT silently remove governance, safety boundaries, validation checks
 
 Use a proportionate workflow: describe the intended behavior → design with `c4-architecture` when architecture is affected → edit the owning artifacts → validate and evaluate → review through a PR.
 
-`design/architecture/` is the only design directory. Keep goals, requirements, behavior, decisions and risks together in each subject specification. Use a plan only when dependencies or risk justify it. No RigorLoop installation, Node upgrade or managed Change is required for this workflow.
+`design/architecture/` is the only design directory. Keep goals, requirements, behavior, decisions and risks together in each subject specification. Use a plan only when dependencies or risk justify it, recorded in the issue, PR or a local working note. Do not maintain separate proposal/plan directories or routing indexes. No RigorLoop installation, Node upgrade or managed Change is required for this workflow.
 
 The [workflow guide](docs/workflows.md) explains artifact locations and commands. Completion claims include changed subjects, actual validation, warnings, unresolved issues and skipped checks. New records under `docs/changes/` stay local and ignored.

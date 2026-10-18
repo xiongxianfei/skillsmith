@@ -12,6 +12,8 @@ Use a shared `model.d2` within each C4 package, context/container views and only
 
 Edit the owning prompt, validator, installer or document. Add or update eval fixtures for new or materially changed skills. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
 
+Keep current design decisions in the subject architecture specification. When delivery sequencing needs a plan, use the issue, PR description or a local working note; do not recreate a separate proposal/plan directory or an active-plan index.
+
 ## 3. Validate and evaluate
 
 Install PyYAML if needed, then run the required check from the repository root:
@@ -24,6 +26,8 @@ python tests/validate_skills.py
 Errors block merging. Warnings are non-blocking but must be reviewed.
 
 Run `python tests/check_readme_sync.py` when changing the catalog or its documentation, and relevant unit tests when changing validation code. Static fixtures describe expected behavior; they do not replace the model evidence required by the quality standard.
+
+The validator discovers fixtures through existing `skills/` directories. A fixture authored before its skill directory exists needs a direct `validate_cases_file` check; the full command does not cover that orphan fixture. This limitation was observed during the menu and learning-skill work. Likewise, material-change classification is a review decision, not something the current tree alone proves.
 
 For changed C4 diagrams, put D2 on PATH and run the package's helper:
 

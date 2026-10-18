@@ -18,7 +18,6 @@ This is an orientation map of the repository after simplifying design to C4. It 
 | `docs/workflows.md` | Contributor workflow, authoring examples, eval fixtures and bug guidance |
 | `design/architecture/` | C4 specifications, models, views and generated diagrams |
 | `docs/skill-quality-standard.md` | Shared authoring, safety and evaluation obligations |
-| `docs/plans/` | Stable delivery plans |
 | `docs/changes/` | New records remain local and ignored; pre-existing tracked history is preserved |
 | Ignored `.agents/skills/` | Locally installed maintainer skills |
 

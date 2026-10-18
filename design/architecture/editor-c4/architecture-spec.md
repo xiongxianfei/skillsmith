@@ -115,6 +115,14 @@ The target-only example previously documented in the standalone editor view rema
 
 Retain coverage for source/instruction separation, mixed directive languages, source-equal targets, target-only with and without suppression, ambiguous terms, code-switching, non-Chinese/non-English input, already-clear text, restrained professional/PR editing, grounded lessons and integrity misuse. Learning checks include ambiguous suppression, trivial mechanics, expanded useful notes, qualified language rules and no unnecessary edits made for teaching. Historical proof intent includes the named `dim lighting` fidelity case; its fixture gap remains open below. The shared quality standard determines when actual model smoke evidence is required.
 
+## Decision rationale and provenance
+
+Fidelity and restraint define editing quality: an expert persona alone can encourage unnecessary transformation. Separating instructions, source and target languages prevents mixed-input role confusion. Deliverables come first so they stay copyable; learning notes follow and use concrete changes to teach reusable principles. Explicit suppression keeps that default controllable, while ambiguous brevity requests retain concise notes. Teaching must never reward unnecessary edits.
+
+Source-plus-companion output replaced a fixed Chinese/English pair to preserve the user's source language while adding useful translation. Deterministic companion selection avoids duplicate English output. One base output shape with explicit overrides reduces competing templates, and fidelity checks compare the visible versions without requiring hidden extra-language renderings.
+
+The original [expert-editing](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-05-26-editor-expert-quality-optimization.md#decision-log), [learning-default](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-06-16-editor-learning-default-optimization.md#decision-log) and [language-policy](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-06-16-editor-source-plus-companion-language-optimization.md#decision-log) decision logs preserve the alternatives and their reasons. Their superseded output defaults are history; the behavior tables in this specification describe the current prompt. Original review/model-run limitations remain in the historical plans and do not establish compliance with today's prompt.
+
 ## Shared platform participation
 
 The platform supports the maintainer through authoring methods, fixture structure, deterministic validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
