@@ -26,7 +26,7 @@ It is also not a substitute for licensed professionals, emergency services, or o
 
 Every accepted skill is plain enough to inspect, copy, and adapt.
 
-Every accepted skill has English metadata, a pushy invocation description, an argument hint, a `$ARGUMENTS` placeholder, and a clear output format.
+Every accepted skill has English metadata, a clear invocation description, a `$ARGUMENTS` placeholder, and a clear output format.
 
 Every accepted skill names a real user workflow and avoids being a vague personality preset.
 

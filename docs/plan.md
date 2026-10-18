@@ -1,6 +1,14 @@
 # Plan Index
 
-## Active
+## Adoption
+
+[Design migration and RigorLoop v2 adoption](plans/2026-10-18-rigorloop-v2-adoption.md) — see [current adoption handoff](changes/2026-10-18-rigorloop-v2-adoption/handoff.md) for scoped evidence and remaining gates.
+
+## Historical routing snapshots
+
+The rows below retain prior handoff claims. Their hosted CI, PR and completion states have not been rechecked during adoption and remain unknown today. Before resuming, inspect actual evidence and establish the managed Change handoff under the workflow guide. These rows are navigation, not current operational authority.
+
+## Active (last recorded)
 
 | Plan | State | Current milestone | Next stage | Active context |
 | --- | --- | --- | --- | --- |

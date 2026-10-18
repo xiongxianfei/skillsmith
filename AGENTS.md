@@ -41,11 +41,13 @@ Body must contain:
 - Descriptions MUST be English — skill bodies can be any language
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
 - Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
-- New or materially changed skills need eval evidence as defined in `specs/skill-quality-standard.md`
+- New or materially changed skills need eval evidence as defined in `design/requirements/skill-quality-standard.md`
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers
 
 ## Workflow
+
+Use [the workflow guide](docs/workflows.md) for RigorLoop v2.0.0 setup, managed versus isolated work, stage gates and recovery. [The design index](design/README.md) links requirement, system and architecture owners.
 
 - All changes via PR to `main` (branch protection enabled)
 - Branch naming: `feat/`, `fix/`, `docs/`, `improve/`
@@ -57,9 +59,10 @@ Body must contain:
 ## Project Structure
 
 ```
-skills/*/SKILL.md          ← the skills (10 currently)
+skills/*/SKILL.md          ← portable product prompts
 tests/validate_skills.py   ← CI validator (errors block merge, warnings don't)
 install.sh                 ← one-command installer (supports --target flag)
+design/                    ← requirements, system behavior and architecture
 CONSTITUTION.md            ← durable governance and workflow rules
 VISION.md                  ← project identity and scope
 ```

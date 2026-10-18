@@ -1,191 +1,98 @@
-# Skillsmith Workflow Guide
+# Skillsmith maintenance workflow
 
-## Purpose
+## Purpose and authority
 
-This guide maps Skillsmith's local artifacts to the standard spec-driven, test-driven workflow. It tells agents where lifecycle evidence belongs; the specialized stage skills still own the content of proposals, specs, architecture records, plans, reviews, implementation, verification, PR handoff, and learning records.
+This guide tells a maintainer how to develop a reviewed change and where its knowledge belongs. [CONSTITUTION.md](../CONSTITUTION.md) owns policy; [VISION.md](../VISION.md) owns product identity. [Requirements](../design/requirements/rigorloop-v2-adoption.md), [logical behavior](../design/system/maintenance-workflow.md) and [architecture](../design/architecture/maintenance-workflow.md) explain the adopted process.
 
-Treat this file as the project-local workflow contract and artifact-location map. When this guide conflicts with higher-priority governance, follow the source order below and update this guide rather than relying on chat history.
+The v2 policy takes effect when this adoption is accepted and merged. This adoption finishes under prior governance, with attributed reviews and evidence in [its handoff](changes/2026-10-18-rigorloop-v2-adoption/handoff.md). Installing adapters does not approve or complete a change.
 
-## Source order
+## Choose the scope
 
-Use this order when artifacts conflict:
+After adoption, new non-trivial standard-workflow work uses a CLI-managed Change. Begin with `route`: inspect the request, authority, accepted basis, outstanding issues and current next action. Create a Change only for authorized work, using the explicit project root and a stable Change ID.
 
-1. `CONSTITUTION.md`
-2. `VISION.md`
-3. Approved specs under `specs/` or change-local docs under `docs/changes/`
-4. Architecture, workflow, and project-map docs under `docs/`
-5. Execution plans and test specs
-6. Tests and CI configuration
-7. Implementation files
-8. README, contribution docs, and chat history
+An explicitly isolated skill invocation or small editorial correction may stay outside the store. Report its limited scope and checks; do not claim full-workflow completion. If managed delivery later relies on that output, select it into the appropriate requirement or design basis and obtain applicable review.
 
-## Standard lifecycle
+Historical work is not bulk imported. On resumption, inspect its actual state, preserve unknown hosted CI or review status, and record outstanding obligations and applicability of old judgments. An old “approved” or “branch-ready” note is not current whole-change approval.
 
-Non-trivial changes follow this path:
+## Stages and gates
 
-```text
-proposal -> proposal-review -> spec -> spec-review -> architecture -> architecture-review -> plan -> plan-review -> test-spec -> implement -> code-review -> review-resolution when triggered -> ci-maintenance when triggered -> explain-change -> verify -> pr
-```
+| Work | Required outcome before downstream reliance |
+| --- | --- |
+| `requirement-analysis`, `requirement-review` | Observable obligations and Scenarios, with independent requirement assessment |
+| `system-design`, `architecture-design`, `design-review` | Logical behavior and responsibility/Interface allocation, assessed together independently |
+| `plan`, `delivery-review` | Stable milestones, dependency/recovery intent and concrete verification allocation, independently assessed |
+| `implement` | All authorized milestones and scoped checks completed; issues remain visible |
+| `code-review` | One independent whole-change gate covering the entire delivered scope; corrections reassessed within that gate |
+| `verify` | Distinct final assessment of current basis, applicable reviews, evidence and remaining obligations |
+| `pr` | Separately authorized publication/handoff through the repository's PR-to-main process |
 
-Manual invocation of one skill is allowed and remains isolated unless the user explicitly asks to continue through the full workflow or an active workflow-managed context requires continuation.
+Use supporting exploration/research to resolve uncertainty at its owning stage. A change to an obligation returns to requirements; a change to logical behavior returns to system design; allocation or Interface changes return to architecture design. No mandatory code-review gate is added per milestone. Optional interim advice does not advance formal approval.
 
-## Artifact locations
+Reviews identify the actual reviewer, subjects, findings and applicability. The reviewer must not be the author of the subjects being approved. A saved record proves persistence, not independence, engineering correctness or permission. Keep final Verify separate from authoring and Code Review; never repair something and silently verify your own correction.
 
-Use existing files when they already own the topic. For new lifecycle artifacts, prefer these paths:
+## Artifact ownership
 
-| Artifact type | Canonical location |
-|---|---|
-| Agent guidance | `AGENTS.md` |
-| Constitution | `CONSTITUTION.md` |
-| Vision | `VISION.md` |
-| Workflow guide | `docs/workflows.md` |
-| Project map | `docs/project-map.md` |
-| Strategic positioning | `docs/vision/strategic-positioning.md` |
-| Change metadata | `docs/changes/<change-id>/change.yaml` |
-| Change-local proposal | `docs/changes/<change-id>/proposal.md` |
-| Top-level proposal | `docs/proposals/YYYY-MM-DD-slug.md` |
-| Durable product or skill spec | `specs/<slug>.md` |
-| Durable test spec | `specs/<slug>.test.md` |
-| Change-local spec | `docs/changes/<change-id>/spec.md` |
-| Change-local architecture | `docs/changes/<change-id>/architecture.md` |
-| System architecture | `docs/architecture/system/architecture.md` |
-| Plan body | `docs/plans/YYYY-MM-DD-slug.md` |
-| Plan lifecycle index | `docs/plan.md` |
-| Plan lifecycle archive | `docs/plan-archive.md` |
-| Change-local test spec | `docs/changes/<change-id>/test-spec.md` |
-| Review record | `docs/changes/<change-id>/reviews/<stage>-r<n>.md` |
-| Review log | `docs/changes/<change-id>/review-log.md` |
-| Review resolution | `docs/changes/<change-id>/review-resolution.md` |
-| Explain-change record | `docs/changes/<change-id>/explain-change.md` |
-| Verify report | `docs/changes/<change-id>/verify-report.md` |
-| PR handoff | `docs/changes/<change-id>/pr.md` |
-| Learn session | `docs/learn/sessions/YYYY-MM-DD-slug.md` |
-| Learn topic | `docs/learn/topics/<topic>.md` |
-| Cross-change follow-ups | `docs/follow-ups.md` |
+| Meaning | Owner |
+| --- | --- |
+| Durable policy and product identity | `CONSTITUTION.md`, `VISION.md` |
+| Needs, obligations, Scenarios, acceptance and allocated requirements | `design/requirements/` |
+| Features, Functions, behavior and model-owned test intent | `design/system/` |
+| Modules, Interfaces, allocation and realization | `design/architecture/` |
+| Stable delivery intent and proof allocation | `docs/plans/<date>-<slug>.md`; focused proof map may be `docs/changes/<id>/test-spec.md` |
+| Current managed goal, authority, selected basis, work, issues, judgments and next action | Supported CLI context for the explicitly selected Change |
+| Attributed historical evidence, source snapshots and Git-visible transfer account | `docs/changes/<id>/` |
+| Navigation and prior plan history | `docs/plan.md`, `docs/plan-archive.md` |
 
-Use `docs/changes/<change-id>/` for workflow-managed work that needs traceability across requirements, design, plan, tests, implementation, review, verification, and PR handoff.
+Start at the [design index](../design/README.md). Amend an existing owner rather than adding a competing definition. Git snapshots support review without the operational store; they are not a second writable work queue. Historical source/test documents retain their original scope and do not certify current code.
 
-Use top-level `specs/` for durable product or skill contracts that should outlive one change.
+## Maintainer setup
 
-Use `docs/plans/YYYY-MM-DD-slug.md` for detailed plan bodies. `docs/changes/<change-id>/plan.md` is non-canonical and should be treated as historical or rejected unless an older artifact explicitly explains why it exists.
+The pinned tool is `@xiongxianfei/rigorloop@2.0.0`. Its package requires Node `>=24.15.0 <25`, a qualified SQLite `>=3.51.3` build and Linux filesystem primitives. Safe installation requires accessible `/proc/self/fd` descriptors and hard-link support. These are maintenance prerequisites; product prompt use, `install.sh` and Python validation do not require Node or RigorLoop.
 
-## Change IDs
-
-Use lowercase dated slugs:
-
-```text
-YYYY-MM-DD-short-name
-```
-
-Example:
-
-```text
-docs/changes/2026-05-25-add-skill-validator-rules/
-```
-
-## Plan Index And Archive
-
-`docs/plan.md` is lifecycle index bookkeeping, not a milestone journal. Keep it bounded:
-
-- `Active` contains active or blocked plan bodies that still own current routing.
-- `Blocked` contains plans that cannot move without a named decision, dependency, or external event.
-- `Done (recent)` contains only a short recent window of terminal plan history when that helps current routing.
-- `docs/plan-archive.md` contains older terminal plan history, including superseded, abandoned, archived, or completed plans that no longer have active routing context.
-
-Write plan references in both files as relative Markdown links such as `[Editor plan](plans/YYYY-MM-DD-slug.md)`.
-
-Move superseded entries out of `docs/plan.md` when they no longer carry active routing context. Keep superseded entries in `docs/plan.md` only while the active index genuinely needs the replacement context and the entry names both `superseded by:` and a non-empty `active-context:`.
-
-## Follow-up Routing
-
-Route future work to the artifact that can act on it:
-
-- active plan work goes in the active plan body and `docs/plan.md`;
-- review-driven work goes in `review-log.md` and, when needed, `review-resolution.md`;
-- release or PR handoff work goes in the change-local PR or verify artifacts;
-- durable lessons go in `docs/learn/sessions/` and confirmed topic files;
-- cross-change work with no better owner goes in `docs/follow-ups.md`.
-
-Do not put deferred execution work in `docs/project-map.md`; project maps orient readers and do not own future work.
-
-## Stage routing
-
-Use `explore` before proposal when the problem, user value, or option set is not stable.
-
-Use `research` before proposal, spec, architecture, or implementation when current external facts, platform behavior, standards, laws, pricing, security limits, or dependency behavior affect correctness.
-
-Use `proposal` when a direction needs decision framing before requirements.
-
-Use `proposal-review` when a proposal needs challenge before downstream reliance.
-
-Use `spec` when observable behavior, compatibility, safety, validation, or user-facing contracts need to be stated before implementation.
-
-Use `spec-review` when requirements need challenge before architecture, planning, test planning, or implementation.
-
-Use `architecture` when a change affects repository boundaries, dependencies, generated assets, plugin packaging, data flow, control flow, security, performance, migration, or long-lived design decisions.
-
-Use `architecture-review` before implementation when architecture is material or hard to reverse.
-
-Use `plan` when work spans multiple files, milestones, risky edits, migration steps, or separate reviewable slices.
-
-Use `plan-review` before implementation when the execution sequence, validation plan, or recovery path needs challenge.
-
-Use `test-spec` before implementation when requirements need traceable test coverage.
-
-Use `implement` only after the needed upstream artifacts are stable enough to code.
-
-Use `code-review` after implementation and before final closeout for validator, installer, CI, template, high-risk skill, or multi-file changes.
-
-Use `review-resolution` when a material review finding needs action, owner decision, or re-review evidence.
-
-Use `ci-maintenance` only when CI infrastructure or workflow coverage changes are triggered.
-
-Use `explain-change` after meaningful implementation or governance changes when reviewers need durable rationale.
-
-Use `verify` for final branch readiness. `verify` owns branch-ready claims.
-
-Use `pr` after verification when the change is ready for review handoff. `pr` owns PR-body and PR-open readiness.
-
-Use `learn` after incidents, repeated review findings, workflow gaps, validation gaps, or explicit owner requests to preserve lessons.
-
-## Implementation gates
-
-Implementation is allowed only when the required upstream state is present for the change size and risk.
-
-Small editorial changes may proceed directly with validation when they do not change behavior, scope, safety posture, or public contracts.
-
-Adding a skill, changing a skill output contract, changing validation behavior, changing installer behavior, adding dependencies, or repositioning the project requires written requirements first.
-
-Architecture review is required before implementation when a change adds new components, dependencies, generated assets, external services, data flow, plugin packaging behavior, or long-lived repository structure.
-
-## Review and claim routing
-
-Readiness is not Done. Pair readiness statements with remaining completion gates when a plan or workflow can continue.
-
-`verify` owns branch-ready claims. `pr` owns PR-body and PR-open readiness.
-
-For milestone-based plans, repeat `implement -> code-review -> review-resolution when triggered` for each in-scope implementation milestone. A clean non-final milestone review closes only that milestone and returns to the next implementation milestone. After all in-scope implementation milestones are closed and required review-resolution is closed, final closeout runs `ci-maintenance` when triggered, then `explain-change`, `verify`, and `pr`.
-
-Review logs must not list open material findings before review-resolution closeout is treated as closed. A stage-owned non-approval outcome that requires revision needs same-stage re-review or explicit owner closeout evidence.
-
-## Validation evidence
-
-Every workflow closeout must report:
-
-- changed files;
-- validation commands run;
-- warnings or skipped checks;
-- unresolved questions;
-- next stage or stop condition.
-
-The default validation command is:
+With nvm already installed, select the qualified Node version used for this adoption:
 
 ```bash
-python tests/validate_skills.py
+nvm install 24.22.0
+nvm use 24.22.0
+node -p 'JSON.stringify({node:process.versions.node,sqlite:process.versions.sqlite})'
+npx --yes @xiongxianfei/rigorloop@2.0.0 init codex --dry-run --json
+npx --yes @xiongxianfei/rigorloop@2.0.0 init codex
+npx --yes @xiongxianfei/rigorloop@2.0.0 capabilities --root .
 ```
 
-Targeted checks should match the change. Examples include stale-name searches after a rename, README marker checks after a vision sync, fixture checks after validator updates, and plan-index consistency checks after plan lifecycle changes.
+Preview makes no destination writes, acquires no archive and reserves no later result. Inspect conflicts before the real install. `--force` replaces whole destination skill directories and retains originals at reported private locations outside discovery; it is not a merge. Symlinks/unsafe paths or intervening changes stop affected installation. Inspect partial results before retrying. Replacing an earlier workflow is a separate explicit operation; consult installed help rather than deleting unrelated skills.
 
-## Current known gaps
+Codex adapters go into ignored `.agents/skills/`. The repository tracks `.rigorloop.json` with schema version 1 and one stable project UUID; reuse it across checkouts. `.rigorloop/` is ignored and contains operational state and selected attachments. Do not regenerate identity to bypass a missing or incompatible store.
 
-No current workflow gaps are recorded here. Add gaps only when they affect stage routing or artifact ownership.
+## Read and update current work
+
+Use the pinned command above for each CLI invocation (or an executable confirmed to be version 2.0.0). Read installed help and the packaged `targeted-recording-v2` and `rigorloop-records-v4` schemas before constructing JSON.
+
+```bash
+npx --yes @xiongxianfei/rigorloop@2.0.0 change context --root . --change CHANGE_ID --format json
+npx --yes @xiongxianfei/rigorloop@2.0.0 change update --root . --change CHANGE_ID --input - --format json < update.json
+```
+
+Creation supplies intent, request, authority, activity and next action with `expected_revision: null`. Updates use the opaque revision returned by fresh inspection. Never invent a token, edit private storage, or equate an empty comparison list with unchanged engineering files. Only actual reviewers supply judgments.
+
+On stale revision, reread context and reconcile the intended change. After interruption or lost output, inspect before retrying; the first mutation may have committed. Incompatible or unavailable storage blocks affected recording and must be reported. Do not fall back to SQL or private-file editing.
+
+## Transfer and recovery
+
+Before transfer, save necessary current evidence and unresolved issues through supported tasks. Keep a sanitized Git account in `docs/changes/<id>/handoff.md`: scope, exact basis, attributed review/verification outcomes, checks, limitations and how to obtain necessary operational continuity. Label it an inspection-time snapshot, not current authority. Do not commit secrets or the private runtime store.
+
+When continuity is needed, use `store backup` with the separately versioned `store-maintenance-v1` schema. The output path must be absent and outside the live runtime directory. Example input:
+
+```json
+{"schema_version":1,"interface":"store-maintenance-v1","input":{"scope":{"changes":"all"},"output":"../skillsmith-backup","actor":{"id":"maintainer","role":"human"}}}
+```
+
+Pass that input to `npx --yes @xiongxianfei/rigorloop@2.0.0 store backup --root . --input - --format json`. Retain its returned integrity value and access instructions privately. Restore requires the backup path and integrity, explicit observed target state, `replace`, actor and reason. Inspect installed `store restore --help` and its schema; preview before restoring an existing store. Do not copy a live WAL database manually.
+
+Restore creates a fresh store incarnation. Read context and use its new revisions before continuing; recovered storage does not renew approval or grant authority. Capabilities reports interrupted maintenance; only its supported observed-state finish/rollback procedure may resolve it. If no usable backup exists, record lost evidence as a gap instead of reconstructing approvals. The adoption's [disposable fixture](changes/2026-10-18-rigorloop-v2-adoption/cli_fixture.py) exercises preview, stale-update rejection and backup/restore without touching the project store.
+
+## Validation and handoff
+
+Run `python tests/validate_skills.py` for every change. Run targeted tests appropriate to affected behavior; use `python -m unittest discover tests` and `python tests/check_readme_sync.py` when their surfaces are affected. Report warnings, skipped checks, unresolved questions and limitations. Static fixture validation does not prove model output quality.
+
+Final completion, PR, merge and release are separate outcomes. Preserve useful selected evidence and deferred work without treating it as a waiver of mandatory acceptance.

@@ -12,8 +12,8 @@ When project artifacts conflict, agents and reviewers MUST use this order:
 
 1. `CONSTITUTION.md`
 2. `VISION.md`
-3. Approved specs under `specs/` or change-local docs under `docs/changes/`
-4. Architecture or project-map docs under `docs/`
+3. Accepted requirements and allocated obligations under `design/requirements/`
+4. Reviewed logical behavior under `design/system/` and architecture under `design/architecture/`
 5. Execution plans and test specifications
 6. Tests and CI configuration
 7. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
@@ -23,7 +23,7 @@ Chat instructions MAY clarify intent for a current task, but they MUST NOT silen
 
 ## Spec-driven rules
 
-Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST have requirements written before implementation. The requirements MAY live in a dedicated spec, a change-local document, or a clearly scoped issue when the change is small.
+Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST have requirements written before implementation. Durable requirements live under `design/requirements/`. A clearly scoped issue or change-local note MAY suffice for an isolated small change; later managed work MUST explicitly adopt relied-on output into its basis and obtain applicable review.
 
 Requirements MUST identify observable behavior: skill trigger intent, accepted input, output format, safety boundaries, compatibility expectations, and validation commands.
 
@@ -96,17 +96,13 @@ Final handoff MUST report the commands run and any warnings, skipped checks, or 
 
 ## Review rules
 
-Use proposal review when a change affects project direction, catalog scope, safety posture, or contributor policy.
+New non-trivial standard-workflow work MUST receive independent requirement review, integrated system/architecture design review and delivery review before implementation relies on those bases. Delivery review covers both plan quality and verification allocation; a renamed stage MUST NOT silently waive a material obligation. Reviews MUST identify actual subjects, reviewer, findings and current applicability. Authors MUST NOT approve their own work.
 
-Use spec review when requirements define new skill behavior, validation behavior, installer behavior, compatibility, or safety constraints.
+After all authorized milestones, one independent whole-change Code Review MUST assess the complete delivered scope. Corrections require proportionate reassessment within that gate. Optional interim advice does not approve milestones. Distinct final Verify MUST assess the current basis, applicable reviews, evidence and unresolved issues before completion is claimed.
 
-Use architecture review when a change adds new components, dependencies, generated assets, external services, data flow, plugin packaging behavior, or long-lived repository structure.
+Small editorial corrections and explicitly isolated tasks MAY use bounded review appropriate to their scope; they MUST NOT claim full-workflow completion. Publication remains separate: changes go through a PR to `main`.
 
-Use plan review for multi-step changes that touch multiple owned areas or require migration sequencing.
-
-Use code review after implementation for changes to validator logic, installer behavior, CI, templates, or high-risk skills.
-
-Small documentation-only edits MAY use direct maintainer review when the validation command passes and no contract changes are involved.
+This amendment takes effect when this adoption is accepted and merged. The adoption itself remains accountable to the prior proposal/spec/architecture/plan review obligations, mapped to attributed assessments in [its review record](docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md), plus implementation review and final verification. Local edits and tool installation alone do not adopt policy or grant approval.
 
 ## Documentation rules
 
@@ -138,17 +134,10 @@ Agents MUST NOT silently remove governance, safety boundaries, validation checks
 
 ## Standard workflow and manual skill use
 
-The standard workflow for non-trivial work is:
+After adoption, new non-trivial standard-workflow work uses RigorLoop v2.0.0: `route` → requirement analysis/review → system and architecture design/integrated review → plan/delivery review → implementation → one whole-change Code Review → distinct final Verify → separately authorized PR delivery. Supporting research, exploration and incident work enter the responsible stage; they do not waive its gate.
 
-1. Confirm fit with `VISION.md` and this constitution.
-2. Write or locate requirements.
-3. Review architecture impact when boundaries, dependencies, or compatibility change.
-4. Plan implementation when the change spans multiple files or milestones.
-5. Implement with proof first where practical.
-6. Run validation and targeted checks.
-7. Review the diff.
-8. Explain the change and hand off with verification evidence.
+Git-held definitions own engineering meaning. Supported CLI tasks own current managed Change handoffs; use explicit project/Change identity and inspected revisions. Do not edit private operational storage, invent judgments, blindly replay interrupted mutations, or copy live database files as a backup. Plans retain stable delivery intent; Git evidence snapshots retain historical assessments, not a parallel live queue.
 
-Manual invocation of individual skills is allowed for isolated tasks. The agent MUST name the skill being used, follow its artifact rules, and report enough evidence that a reviewer can see what changed and how it was checked.
+Manual invocation of individual skills is allowed for isolated tasks. Name the skill, follow its artifact rules and report the bounded outcome. Managed work that later relies on isolated output explicitly adopts and reviews it. Historical records retain original meanings and unknown status until evidence supports a disposition; there is no bulk conversion of old approvals.
 
-Workflow completion claims MUST include changed files, validation commands, unresolved questions, and any skipped or blocked checks.
+The [workflow guide](docs/workflows.md) owns setup, detailed stage routing, artifact locations and recovery instructions. It is subordinate to this constitution. Completion claims include changed subjects, actual validation, warnings, unresolved obligations and skipped checks. PR, merge and release are separate actions.

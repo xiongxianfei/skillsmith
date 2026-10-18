@@ -223,9 +223,13 @@ Best for: landlord communication, formal letters, official correspondence with R
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
 3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)
-4. Follow the canonical quality standard in [specs/skill-quality-standard.md](specs/skill-quality-standard.md)
+4. Follow the canonical quality standard in [design/requirements/skill-quality-standard.md](design/requirements/skill-quality-standard.md)
 5. Open a PR — include what the skill does, when to use it, validation output, and eval evidence for new or materially changed skills
 
 ## License
 
 MIT
+
+## Repository maintenance
+
+Maintainers use [RigorLoop v2.0.0 setup and workflow](docs/workflows.md) and the [design index](design/README.md). Maintenance tooling is separate from installing or invoking the product skills. Non-trivial changes require reviewed requirements, design and delivery intent before implementation, followed by whole-change review and final verification.

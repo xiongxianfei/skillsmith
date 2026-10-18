@@ -1,5 +1,7 @@
 # Learn Session: Editor Skill Design
 
+> Historical record: retired source paths and prior workflow judgments below identify the original change. See the [current design index](../../../design/README.md) for effective owners; this migration does not renew this record’s approval or completion status.
+
 ## Frame
 
 - Trigger: explicit maintainer `$learn` request after multiple proposal, spec, architecture, implementation, review, and verification rounds for `2026-05-26-editor-expert-quality-optimization`.

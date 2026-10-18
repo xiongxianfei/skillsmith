@@ -1,0 +1,23 @@
+{
+  "specs/editor-expert-quality-optimization.md": "design/requirements/editor.md",
+  "specs/editor-expert-quality-optimization.test.md": "docs/changes/2026-05-26-editor-expert-quality-optimization/test-spec.md",
+  "specs/editor-learning-default-optimization.md": "design/requirements/editor.md",
+  "specs/editor-learning-default-optimization.test.md": "docs/changes/2026-06-16-editor-learning-default-optimization/test-spec.md",
+  "specs/editor-skill-optimization.md": "docs/changes/2026-05-25-editor-skill-optimization/sources/editor-skill-optimization.md",
+  "specs/editor-skill-optimization.test.md": "docs/changes/2026-05-25-editor-skill-optimization/test-spec.md",
+  "specs/editor-source-plus-companion-language-optimization.md": "design/requirements/editor.md",
+  "specs/editor-source-plus-companion-language-optimization.test.md": "docs/changes/2026-06-16-editor-source-plus-companion-language-optimization/test-spec.md",
+  "specs/flashcard-and-quiz-skills.md": "design/requirements/flashcard-and-quiz-skills.md",
+  "specs/flashcard-and-quiz-skills.test.md": "docs/changes/2026-07-04-flashcard-and-quiz-skills/test-spec.md",
+  "specs/restaurant-menu-advisor.md": "design/requirements/restaurant-menu-advisor.md",
+  "specs/restaurant-menu-advisor.test.md": "docs/changes/2026-06-21-add-restaurant-menu-advisor/test-spec.md",
+  "specs/rigorloop-v2-adoption-allocation.md": "design/requirements/rigorloop-v2-adoption-allocation.md",
+  "specs/rigorloop-v2-adoption.md": "design/requirements/rigorloop-v2-adoption.md",
+  "specs/skill-quality-standard.md": "design/requirements/skill-quality-standard.md",
+  "specs/skill-quality-standard.test.md": "docs/changes/2026-05-25-rigorloop-governed-skill-quality/test-spec.md",
+  "docs/architecture/system/architecture.md": "docs/changes/2026-05-26-editor-expert-quality-optimization/sources/architecture/architecture.md",
+  "docs/architecture/system/diagrams/container-view.mmd": "docs/changes/2026-05-26-editor-expert-quality-optimization/sources/architecture/diagrams/container-view.mmd",
+  "docs/architecture/system/diagrams/editor-workflow.mmd": "docs/changes/2026-05-26-editor-expert-quality-optimization/sources/architecture/diagrams/editor-workflow.mmd",
+  "docs/architecture/system/diagrams/system-context.mmd": "docs/changes/2026-05-26-editor-expert-quality-optimization/sources/architecture/diagrams/system-context.mmd",
+  "docs/architecture/workflow.md": "design/architecture/maintenance-workflow.md"
+}

@@ -22,3 +22,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# RigorLoop local operational store and attachments
+/.rigorloop/

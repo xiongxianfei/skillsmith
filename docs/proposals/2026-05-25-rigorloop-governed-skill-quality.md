@@ -1,5 +1,7 @@
 # Proposal: RigorLoop-Governed Skill Quality System for Skillsmith
 
+> Historical record: retired source paths and prior workflow judgments below identify the original change. See the [current design index](../../design/README.md) for effective owners; this migration does not renew this record’s approval or completion status.
+
 ## Status
 
 accepted
