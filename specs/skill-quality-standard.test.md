@@ -19,6 +19,8 @@ active
 
 Use deterministic local tests only. The proof surface is a mix of unit tests for parser and validator helpers, integration tests for command behavior against temporary fixture repositories, smoke tests on the real repository, contract checks for docs and CI wiring, migration checks for omitted runtime-specific metadata and grandfathering, and manual review for subjective prompt quality and design-philosophy heuristics.
 
+Use `docs/architecture/skill-design-principles.md` as a practical review checklist for the existing manual T10/T12 design-philosophy checks. These principles add **no new automated style gates** and do not alter the requirement coverage table.
+
 No test may call a live model or require network access. The first-slice README sync helper is report-only; a `--fix` mode is not required or tested in this slice. Reserved platform words are limited to `anthropic` and `claude` for first-slice validation; additional reserved words require a later accepted spec or review-resolution decision.
 
 Expected commands after implementation:
