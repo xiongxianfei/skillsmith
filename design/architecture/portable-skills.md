@@ -6,7 +6,7 @@ Skillsmith combines practice skills with shared methods and tools for making bet
 
 The [architecture index](README.md) identifies current C4 coverage and historical sources. Subject specifications hold behavior, constraints and design decisions together. The [quality standard](../../docs/skill-quality-standard.md) owns repository-wide authoring and evidence obligations.
 
-Ordinary skill execution MUST remain a portable prompt asset. Do not introduce hidden runtime dependencies, generated prompt behavior or required external services unless an accepted specification and architecture explicitly change that boundary. Prompt behavior stays in `skills/<name>/SKILL.md`, validation in `tests/validate_skills.py`, installation in `install.sh`, and CI automation in `.github/`.
+Skill distribution uses **portable Agent Skills directory packages**. The Markdown entrypoint `skills/<name>/SKILL.md` owns behavior, with optional `references/`, `scripts/`, `assets/`, or custom directories. Explicitly documented local dependencies are allowed for optional or necessary operations when the selected host can access and execute them. Do not introduce hidden runtime dependencies, implicit permissions, generated prompt behavior, or external services. Validation remains in `tests/validate_skills.py`, installation in `install.sh`, and repository CI in `.github/`.
 
 ## Responsibility and allocation
 
@@ -15,7 +15,7 @@ The retained MOD/IF identifiers name responsibilities and contracts, not executa
 | Responsibility | Owned information and realization | Boundary |
 | --- | --- | --- |
 | MOD-PROMPT — Author portable behavior | `skills/<name>/SKILL.md` and skill-local references/schemas; the [editor](editor-c4/architecture-spec.md) and [vocabulary](vocabulary-mastery-c4/architecture-spec.md) specifications describe invocation behavior | No generated prompt behavior, implicit tool permission or shared mutable learner state |
-| MOD-QUALITY — Check required files and metadata | One Python validator for readable skill files, YAML frontmatter and non-empty string names/descriptions | Static success does not demonstrate host compatibility or model behavior |
+| MOD-QUALITY — Check required files and metadata | One Python validator for readable skill files, Agent Skills name/description constraints and supported optional metadata shape | Static success does not demonstrate host compatibility or model behavior |
 | MOD-REVIEW — Assess skill quality | Reviewer findings about behavior, safety, evidence and tradeoffs, recorded in the PR | No invented model runs or author self-approval |
 
 ## Interfaces and data flow
@@ -23,14 +23,14 @@ The retained MOD/IF identifiers name responsibilities and contracts, not executa
 | Interface | Flow and contract | Failure boundary |
 | --- | --- | --- |
 | IF-PROMPT — Skill invocation | Authored prompt plus user input → assistant host → user-visible response | Missing or unsafe input follows the skill's instructions; host capability does not grant additional permissions |
-| IF-STATIC — Validation result | Repository files → required-file and metadata checks → contributor/reviewer | Missing/unreadable files or invalid required metadata fail; body structure, optional metadata, compatibility and behavioral quality require review |
+| IF-STATIC — Validation result | Repository files → required-file and metadata checks → contributor/reviewer | Missing/unreadable files or invalid defined metadata fail; body structure, host execution compatibility and behavioral quality require review |
 | IF-SKILL-REVIEW — Behavior assessment | Changed prompt, requirements and actual evidence → reviewer findings → contributor | Unexecuted scenarios are expectations, not observed results |
 
 ## Realization and development view
 
-`install.sh` copies authored assets to the selected destination. Installed or copy-pasted skills run through the user's assistant host. Skillsmith supplies no application server, background worker, credential store or learner database. The host's implementation, privacy policies and retention are external and must not be invented by these designs.
+`install.sh` copies complete skill directories to the selected destination. Agent Skills-compatible hosts may read bundled references and assets or invoke documented local scripts. Copying `SKILL.md` into a plain chat may provide only partial functionality; this is no longer the portability guarantee. Skillsmith supplies no application server, background worker, credential store or learner database. The host's implementation, privacy policies and retention are external and must not be invented by these designs.
 
-`tests/validate_skills.py` supplies the single automated check for required files and metadata. `.github/workflows/validate.yml` runs that command. README synchronization and behavior assessment belong to review; older scenario declarations remain accessible through fixed Git references in the subject specifications. D2 is architecture tooling only; it adds no dependency to skill invocation or existing CI. Maintainers follow the [workflow guide](../../docs/workflows.md), using C4 for design.
+`tests/validate_skills.py` supplies the single automated check for required files and Agent Skills metadata. `.github/workflows/validate.yml` runs that command. README synchronization and behavior assessment belong to review; older scenario declarations remain accessible through fixed Git references in the subject specifications. D2 is architecture tooling only; it adds no dependency to skill invocation or existing CI. Maintainers follow the [workflow guide](../../docs/workflows.md), using C4 for design.
 
 ## Behavior and evidence boundaries
 

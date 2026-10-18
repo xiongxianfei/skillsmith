@@ -1,6 +1,6 @@
 # Skillsmith
 
-Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
+Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a portable directory package with a required `SKILL.md` and optional `references/`, `scripts/`, `assets/`, and other resources. Agents should read additional files only when the skill's instructions call for them.
 
 Use the owning document for each concern:
 
@@ -50,7 +50,8 @@ The body has no required placeholder or heading. Use `$ARGUMENTS` or `## Output 
 ## Key Rules
 
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
-- Include optional metadata only when useful and compatible with the intended host; the validator does not check it
+- Keep always-needed behavior in `SKILL.md`; include focused, conditionally loaded references for specialized knowledge; add scripts only for repeatable executable operations.
+- Include optional metadata only when useful and compatible with the intended host; the validator checks the format of the defined Agent Skills metadata fields
 - Describe substantive skill changes and expected behavior in the PR; see `docs/skill-quality-standard.md`
 - High-risk skills need explicit scope, refusal/escalation boundaries and reviewer-visible safety notes
 
@@ -68,7 +69,7 @@ Use [the workflow guide](docs/workflows.md) for scoped changes, validation and P
 ## Project Structure
 
 ```
-skills/*/SKILL.md          ← portable product prompts
+skills/*/SKILL.md          ← entrypoint for portable skill directory packages
 tests/validate_skills.py   ← required-file and metadata validator (errors block merge)
 install.sh                 ← one-command installer (supports --target flag)
 design/architecture/       ← C4 specifications, models, views and generated diagrams
@@ -82,6 +83,7 @@ VISION.md                  ← project identity and scope
 - Missing or unreadable `SKILL.md` → CI error
 - Missing, malformed or non-mapping YAML frontmatter → CI error
 - Missing, blank or non-string `name` or `description` → CI error
+- Invalid Agent Skills name, name/directory mismatch, or out-of-bounds metadata length → CI error
 - Descriptions that omit either the skill's function or the situations where it applies → unreliable skill selection
 
 ## Core Engineering Principles

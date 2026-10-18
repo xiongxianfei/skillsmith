@@ -1,13 +1,12 @@
-"""Check required skill files and metadata; no behavioral evaluation is performed."""
-
+"""Check each public skill entrypoint and Agent Skills frontmatter constraints."""
 import re
 import sys
 from pathlib import Path
-
 import yaml
 
 SKILLS_DIR = Path(__file__).parent.parent / "skills"
 REQUIRED_FRONTMATTER = ("name", "description")
+NAME_PATTERN = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 
 
 def validate_skill(skill_dir: Path) -> list[str]:
@@ -32,6 +31,27 @@ def validate_skill(skill_dir: Path) -> list[str]:
         value = metadata.get(field)
         if not isinstance(value, str) or not value.strip():
             errors.append(f"'{field}' must be a non-empty string")
+
+    name = metadata.get("name")
+    if isinstance(name, str) and name.strip():
+        if len(name) > 64 or not NAME_PATTERN.fullmatch(name):
+            errors.append("'name' must be 1-64 lowercase letters, digits, or single hyphens")
+        if name != skill_dir.name:
+            errors.append(f"'name' ({name}) must match directory ({skill_dir.name})")
+
+    description = metadata.get("description")
+    if isinstance(description, str) and len(description) > 1024:
+        errors.append("'description' exceeds 1024 characters")
+
+    compatibility = metadata.get("compatibility")
+    if compatibility is not None:
+        if not isinstance(compatibility, str) or not compatibility.strip() or len(compatibility) > 500:
+            errors.append("'compatibility' must be a non-empty string of at most 500 characters")
+
+    extra = metadata.get("metadata")
+    if extra is not None:
+        if not isinstance(extra, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in extra.items()):
+            errors.append("'metadata' must map string keys to string values")
     return errors
 
 
@@ -45,7 +65,7 @@ def main() -> int:
         print("No skills found — add skill directories under skills/")
         return 1
 
-    print(f"Checking required files and metadata for {len(skill_dirs)} skill(s)...\n")
+    print(f"Checking Agent Skills entrypoints for {len(skill_dirs)} skill(s)...\n")
     errors = []
     for skill_dir in skill_dirs:
         label = f"skills/{skill_dir.name}/SKILL.md"
@@ -56,7 +76,7 @@ def main() -> int:
         print(f"\n{len(errors)} error(s) found. Fix them before merging.")
         return 1
 
-    print(f"All {len(skill_dirs)} skill(s) passed required checks.")
+    print(f"All {len(skill_dirs)} skill(s) passed metadata checks.")
     return 0
 
 

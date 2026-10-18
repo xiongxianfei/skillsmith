@@ -10,6 +10,8 @@ Small editorial corrections need no formal design when behavior, scope, safety a
 
 ## 2. Design and edit
 
+Treat the entire skill directory as the distributable artifact. Start with `SKILL.md`; add `references/` for conditional domain knowledge, `assets/` for static templates/data, and `scripts/` only when tested deterministic execution materially helps. Link each reference from the skill entrypoint with a precise loading condition. Keep core invariants and safety constraints in `SKILL.md`, and document script prerequisites. Do not assume text-only copy/paste or all agents can run scripts. See the [skill quality standard](skill-quality-standard.md#full-directory-skill-design).
+
 Use a shared `model.d2` within each C4 package, context/container views and only the dynamic views needed to explain important scenarios. Keep implemented, proposed and unknown behavior distinct. Obtain human review of consequential decisions before relying on them. Optional decision records explain meaningful tradeoffs; no separate requirement, system-design or delivery-stage hierarchy is required.
 
 Edit the owning prompt, validator, installer or document. Describe the expected result of substantive skill changes in the PR; no separate test fixtures are required. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
@@ -77,13 +79,14 @@ description: >
 [Instructions for handling the user's request and producing a useful result.]
 ```
 
-No body template is required. Add headings, examples or `$ARGUMENTS` when useful for the skill and its intended host. The validator does not check body structure, naming patterns, language, length or optional metadata values.
+No body template is required. Add headings, examples or `$ARGUMENTS` when useful for the skill and its intended host. The validator checks Agent Skills naming and defined metadata constraints but does not check body structure, language, length, or actual behavior.
 
 ### 3. Checklist before opening a PR
 
-- [ ] `SKILL.md` has valid YAML frontmatter with non-empty string `name` and `description`
+- [ ] `SKILL.md` has valid YAML frontmatter, matching compliant `name`, and a non-empty `description`
 - [ ] The description explains what the skill does and when to use it
-- [ ] Input handling and any optional metadata suit the intended host
+- [ ] Input handling, declared resource paths and any optional metadata suit the intended host
+- [ ] Conditional references are loaded by explicit conditions; local scripts are documented and tested when present
 - [ ] Substantive behavior changes and their expected result are explained in the PR
 - [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes
 - [ ] CI passes locally: `python tests/validate_skills.py`

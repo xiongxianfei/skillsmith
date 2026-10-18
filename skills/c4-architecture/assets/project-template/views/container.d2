@@ -1,0 +1,17 @@
+# Container: systems, runnable applications, and their dependencies.
+...@../model
+**: suspend
+(** -> **)[*]: suspend
+
+**: unsuspend {
+  &level: 0
+}
+**: unsuspend {
+  &level: 1
+}
+(** -> **)[*]: unsuspend {
+  &src.level: 1
+}
+(** -> **)[*]: unsuspend {
+  &dst.level: 1
+}
