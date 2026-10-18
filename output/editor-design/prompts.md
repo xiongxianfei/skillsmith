@@ -65,4 +65,3 @@ Three concise columns:
 "Final checking" / "Check lessons as well as deliverables"
 Footer "Source: skills/editor/SKILL.md • Current rules are prompt instructions, not executed test results"
 Exact readable typography and logical spatial grouping are essential. Do not include automated learning claims, test pass badges, persistent profiles, or unsupported infrastructure.
-
