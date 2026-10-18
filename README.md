@@ -220,6 +220,8 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 ## Contributing
 
+See the [contribution guide](docs/workflows.md) for skill templates, eval fixtures, validation and PR expectations.
+
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
 3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)

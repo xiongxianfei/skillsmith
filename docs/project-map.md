@@ -14,7 +14,8 @@ This is an orientation map of the repository after simplifying design to C4. It 
 | `install.sh` | Clone and copy product skills into the chosen destination |
 | `.github/` | CI, issue intake and PR template |
 | `CONSTITUTION.md`, `VISION.md` | Governance and product identity |
-| `AGENTS.md`, `CLAUDE.md` | Concise agent guidance and shared engineering principles |
+| `AGENTS.md` | Concise agent guidance and shared engineering principles |
+| `docs/workflows.md` | Contributor workflow, authoring examples, eval fixtures and bug guidance |
 | `design/architecture/` | C4 specifications, models, views and generated diagrams |
 | `docs/skill-quality-standard.md` | Shared authoring, safety and evaluation obligations |
 | `docs/plans/` | Stable delivery plans |

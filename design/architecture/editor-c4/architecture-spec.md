@@ -141,4 +141,4 @@ Editor-specific outcomes can suggest reusable improvements, such as evidence req
 | ED-C4-05 | Named `dim lighting` fidelity fixture remains missing; static scenarios are not model-run evidence | Evaluation owner; preserve existing proof intent |
 | ED-C4-06 | Record actual host/model and representative results before claiming behavioral quality | Evaluation owner |
 
-No item above is marked implemented or accepted by producing these diagrams. The C4 model is a review aid; human architecture sign-off remains pending. The previous image-generation summaries are illustrative exports, not authoritative architectural definitions.
+No item above is marked implemented or accepted by producing these diagrams. The C4 model is a review aid; human architecture sign-off remains pending.

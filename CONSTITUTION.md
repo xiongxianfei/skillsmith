@@ -106,7 +106,7 @@ New workflow records under `docs/changes/` MUST remain local and ignored. Existi
 
 `README.md` MUST stay current for installation, usage, and the skills table.
 
-`CONTRIBUTING.md` MUST stay current for contributor workflow, PR expectations, and local validation.
+`docs/workflows.md` MUST stay current for contributor workflow, PR expectations, and local validation.
 
 `AGENTS.md` MUST stay concise and agent-facing. Detailed durable rules belong here, not duplicated across agent prompts.
 

@@ -97,7 +97,7 @@ R5. `effort` MUST NOT be required, and Skillsmith skills SHOULD omit it unless a
 
 <a id="r6"></a>
 
-R6. `CONSTITUTION.md`, `AGENTS.md`, `CONTRIBUTING.md`, and validator expectations MUST NOT instruct contributors to add `argument-hint`, `effort`, or `allowed-tools` by default.
+R6. `CONSTITUTION.md`, `AGENTS.md`, `docs/workflows.md`, and validator expectations MUST NOT instruct contributors to add `argument-hint`, `effort`, or `allowed-tools` by default.
 
 <a id="r7"></a>
 
@@ -275,7 +275,7 @@ Inputs:
 - `tests/evals/skills/<skill-name>/cases.yaml` or an equivalent accepted eval fixture path
 - `tests/evals/skills/grandfathered-skills.yaml`
 - README skill table, slash-command list, and install instructions
-- `CONSTITUTION.md`, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, and `.github/pull_request_template.md`
+- `CONSTITUTION.md`, `AGENTS.md`, `docs/workflows.md`, and `.github/pull_request_template.md`
 - `tests/validate_skills.py`
 - a README sync helper, expected as `tests/check_readme_sync.py` unless changed by spec review
 
@@ -465,7 +465,7 @@ Grandfathering is not tied to an accepted proposal commit. The deterministic bas
 
 - The implementation MUST update `CONSTITUTION.md` so optional frontmatter is omitted by default.
 - The implementation MUST use `tests/evals/skills/grandfathered-skills.yaml`, not a commit hash, branch name, README table, or future implementation commit, to determine grandfathered skills.
-- The implementation MUST update `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, README, and PR template guidance to align with this standard.
+- The implementation MUST update `AGENTS.md`, `docs/workflows.md`, README, and PR template guidance to align with this standard.
 - Existing skills are grandfathered for eval fixtures but not for core parseability and required structural fields already enforced by the validator.
 - The implementation MUST NOT reintroduce `.claude-plugin` or plugin metadata validation.
 - Rollback may reduce validator gating while preserving eval fixtures and the quality standard as reviewer guidance.
