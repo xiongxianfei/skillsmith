@@ -8,16 +8,16 @@
 - Trigger type: maintainer request and workflow retrospective.
 - Scope: reusable lessons about designing a good portable prompt skill, using the optimized `editor` skill as the evidence base.
 - Evidence in scope:
-  - `docs/changes/2026-05-26-editor-expert-quality-optimization/explain-change.md`
-  - `docs/changes/2026-05-26-editor-expert-quality-optimization/review-resolution.md`
+  - [explain-change.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/explain-change.md)
+  - [review-resolution.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/review-resolution.md)
   - `specs/editor-expert-quality-optimization.md`
   - `specs/editor-expert-quality-optimization.test.md`
   - `skills/editor/SKILL.md`
   - `tests/evals/skills/editor/cases.yaml`
-  - `docs/changes/2026-05-26-editor-expert-quality-optimization/post-change-evidence.md`
+  - [post-change-evidence.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/post-change-evidence.md)
   - `docs/architecture/system/architecture.md`
   - `docs/architecture/system/diagrams/editor-workflow.mmd`
-  - `docs/changes/2026-05-26-editor-expert-quality-optimization/reviews/architecture-review-r2.md`
+  - [architecture-review-r2.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/reviews/architecture-review-r2.md)
 - Explicit exclusions: no PR readiness claim, no hosted CI claim, no new workflow policy, no changes to the `editor` skill, and no topic-file update without contributor confirmation.
 - Prior learnings reviewed:
   - `docs/learn/sessions/2026-05-25-spec-review-next-stage-routing.md`
@@ -96,7 +96,7 @@ Evidence:
 - The maintainer explicitly observed that the workflow design made the editor skill clearer, easier to understand, and materially helped the editor skill design.
 - `docs/architecture/system/architecture.md` names "make the editor handling workflow explicit enough for implementation and eval design" as an architecture goal.
 - `docs/architecture/system/diagrams/editor-workflow.mmd` lays out the role split, response-language resolution, integrity gate, source-language edit, meaning resolution, target rendering, cross-check loop, and final assembly in one reviewable flow.
-- `docs/changes/2026-05-26-editor-expert-quality-optimization/reviews/architecture-review-r2.md` approved the workflow as aligned with the R4 spec and noted that runtime flow covers role separation, source-language editing, target rendering, cross-check drift repair, source-language block conditions, and integrity refusals.
+- [architecture-review-r2.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/reviews/architecture-review-r2.md) approved the workflow as aligned with the R4 spec and noted that runtime flow covers role separation, source-language editing, target rendering, cross-check drift repair, source-language block conditions, and integrity refusals.
 
 ## Classify
 

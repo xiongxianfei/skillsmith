@@ -1,6 +1,6 @@
 # Skill Design Lessons
 
-Curated lessons for designing portable prompt skills. These lessons are guidance, not policy; authoritative behavior still belongs in accepted proposals, specs, architecture docs, plans, skill files, and review records.
+Curated lessons for designing portable prompt skills. These lessons are guidance, not policy; authoritative behavior still belongs in the constitution, quality standard, accepted architecture decisions, skill files and current PR evidence.
 
 ## 2026-05-26: Design Skills As Behavior Contracts
 

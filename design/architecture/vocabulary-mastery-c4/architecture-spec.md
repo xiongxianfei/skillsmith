@@ -10,6 +10,8 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | --- | --- | --- |
 | [Vocabulary prompt](../../../skills/vocabulary-mastery/SKILL.md) | Role and Scope; Workflow; Two-Version Output Contract; Linguistic Rules; Output Format | Deterministic execution, lexical correctness, learning effectiveness |
 | [Vocabulary fixtures](../../../tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
+| [October 18 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/requirements.md) | Original two-complete-version choice, English-only skill source, behavior and evidence constraints | Current C4 approval or successful model execution |
+| [Reviewer examples](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md) | Full `record` bilingual illustration and `apple` boundary examples with pronunciation provenance | Live-model outputs or measured accuracy |
 | [Shared quality requirements](../../../docs/skill-quality-standard.md) | Repository quality/evidence obligations | A complete accepted contract for this skill |
 | [Portable-skill architecture](../portable-skills.md) | Existing pure-prompt, validation and review boundaries | Previously accepted vocabulary-specific Function allocation |
 | [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |

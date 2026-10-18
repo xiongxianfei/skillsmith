@@ -1,12 +1,14 @@
 # Learn Session: Spec Review Next-Stage Routing
 
+> Historical incident in the retired workflow. Its stage-order advice no longer applies; use the [current contributor workflow](../../workflows.md). Original evidence is linked at a fixed Git revision.
+
 ## Frame
 
 - Trigger: explicit maintainer `$learn` request after spec-review output named "architecture assessment or `test-spec`" as the next repository stage.
 - Trigger type: maintainer request and workflow-process observation.
 - Scope: the `spec-review` R2 record for `2026-05-25-rigorloop-governed-skill-quality`, the local `spec-review` skill rules, and `docs/workflows.md`.
 - Evidence in scope:
-  - `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md`
+  - [spec-review-r2.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md)
   - `.agents/skills/spec-review/SKILL.md`
   - `docs/workflows.md`
 - Explicit exclusions: no implementation code review; no change to the `spec-review` skill itself in this session.
@@ -47,7 +49,7 @@ Evidence:
 
 ## Route
 
-- Updated `docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md` so the immediate next stage is `plan` when explicitly invoked.
+- Updated [spec-review-r2.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-25-rigorloop-governed-skill-quality/reviews/spec-review-r2.md) so the immediate next stage is `plan` when explicitly invoked.
 - No topic file was created. Existing workflow and skill rules already cover the best practice; this session records the mistake and correction.
 - No new proposal, ADR, spec, or workflow change is required from this single event.
 

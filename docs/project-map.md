@@ -18,7 +18,6 @@ This is an orientation map of the repository after simplifying design to C4. It 
 | `docs/workflows.md` | Contributor workflow, authoring examples, eval fixtures and bug guidance |
 | `design/architecture/` | C4 specifications, models, views and generated diagrams |
 | `docs/skill-quality-standard.md` | Shared authoring, safety and evaluation obligations |
-| `docs/changes/` | New records remain local and ignored; pre-existing tracked history is preserved |
 | Ignored `.agents/skills/` | Locally installed maintainer skills |
 
 ## Product and maintenance flows
@@ -27,7 +26,7 @@ A user invokes an installed skill. The host assistant reads its Markdown prompt 
 
 The Bash installer uses Git to clone the catalog into a temporary directory, copies skill directories into `~/.claude/skills` or the `--target` destination, replaces existing corresponding directories and removes the temporary clone. It does not generate prompt behavior.
 
-Maintainers use `c4-architecture` for design and Git/PR review for delivery. Architecture specifications keep behavior, constraints and decisions together. RigorLoop is no longer required; existing ignored local state and tracked historical evidence are retained.
+Maintainers use `c4-architecture` for design and Git/PR review for delivery. Architecture specifications keep behavior, constraints and decisions together. RigorLoop is no longer required; historical evidence is accessible through the architecture index’s fixed Git links. Private working notes remain outside the repository.
 
 ## Validation and CI
 

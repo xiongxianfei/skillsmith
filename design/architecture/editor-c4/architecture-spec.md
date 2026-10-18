@@ -9,6 +9,7 @@ This is an implementation-grounded design for reviewing the editor's boundaries 
 | Subject | Owning artifact | Treatment here |
 | --- | --- | --- |
 | Prior editor contract | [Historical requirements](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/requirements/editor.md) | Source-qualified R/AC/EC IDs retain provenance; this layout change does not alter behavior |
+| Linguistic-learning requirement draft | [October 14 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-14-editor-linguistic-learning-notes/requirements.md) | Proposed scope for speech evidence, selective linguistic teaching and requested practice; this records provenance, not new acceptance |
 | Prior logical decomposition | [Historical system design](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/system/editor.md) | FN-ED-001–004 remain trace labels for the behavior documented below |
 | Module and Interface allocation | [Portable-skill architecture](../portable-skills.md) | All editor Functions remain MOD-PROMPT through IF-PROMPT; MOD-QUALITY and MOD-REVIEW are maintenance responsibilities |
 | Current implementation | [Editor SKILL.md](../../../skills/editor/SKILL.md) | Core Standard; Workflow; Learning Notes; Output Format |

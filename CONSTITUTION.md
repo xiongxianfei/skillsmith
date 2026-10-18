@@ -102,7 +102,7 @@ RigorLoop stage gates, CLI handoffs and operational records are no longer requir
 
 ## Documentation rules
 
-New workflow records under `docs/changes/` MUST remain local and ignored. Existing files already tracked on `main` remain historical repository material unless a separately scoped change removes them. Keep durable design in `design/architecture/` and contributor quality rules in `docs/skill-quality-standard.md`; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
+Operational change logs MUST NOT be maintained as repository documents. Keep task status and review/validation evidence in the issue or PR; any private working notes belong outside the repository. Preserve useful design decisions in their current owners and historical provenance through fixed Git revisions. Do not recreate retired workflow-record directories. Keep durable design in `design/architecture/` and contributor quality rules in `docs/skill-quality-standard.md`; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
 
 `README.md` MUST stay current for installation, usage, and the skills table.
 
@@ -136,4 +136,4 @@ Use a proportionate workflow: describe the intended behavior → design with `c4
 
 `design/architecture/` is the only design directory. Keep goals, requirements, behavior, decisions and risks together in each subject specification. Use a plan only when dependencies or risk justify it, recorded in the issue, PR or a local working note. Do not maintain separate proposal/plan directories or routing indexes. No RigorLoop installation, Node upgrade or managed Change is required for this workflow.
 
-The [workflow guide](docs/workflows.md) explains artifact locations and commands. Completion claims include changed subjects, actual validation, warnings, unresolved issues and skipped checks. New records under `docs/changes/` stay local and ignored.
+The [workflow guide](docs/workflows.md) explains artifact locations and commands. Completion claims include changed subjects, actual validation, warnings, unresolved issues and skipped checks. Operational records stay outside the repository; the PR must contain sufficient reviewable evidence.

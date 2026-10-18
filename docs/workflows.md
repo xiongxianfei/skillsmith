@@ -43,7 +43,7 @@ Inspect the rendered SVGs for readability and semantic accuracy. Python and D2 s
 
 Use a PR to `main` with the problem, resulting behavior, relevant design decisions and actual validation/evaluation results. Report warnings, failures, skipped checks and open questions. Reviewers assess the complete diff with depth appropriate to its risk; do not infer human design approval from successful commands.
 
-New `docs/changes/` records remain local and ignored. Put sufficient sanitized evidence in the PR so reviewers do not need local records. Existing tracked history stays historical. Commit, push, merge and release require the applicable user authorization.
+Put task status and sufficient sanitized review/validation evidence in the issue or PR. Keep private working notes outside the repository. Preserve historical provenance with fixed Git links and migrate durable decisions into their owning architecture or quality documents; do not recreate workflow-record directories. Commit, push, merge and release require the applicable user authorization.
 
 ## Adding a new skill
 
