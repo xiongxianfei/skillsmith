@@ -23,7 +23,7 @@ The skill supplies a passive Markdown package. An external assistant host genera
 
 ## Source and reproduction
 
-The [model](model.d2) owns diagram identities and structural relationships. Context/container views import and filter it. Dynamic views reuse those participants and show scenario-specific messages. The [prompt](../../../skills/vocabulary-mastery/SKILL.md) and [fixtures](../../../tests/evals/skills/vocabulary-mastery/cases.yaml) are the observed implementation basis; they do not become accepted requirements through reverse engineering.
+The [model](model.d2) owns diagram identities and structural relationships. Context/container views import and filter it. Dynamic views reuse those participants and show scenario-specific messages. The [prompt](../../../skills/vocabulary-mastery/SKILL.md) and [historical scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/vocabulary-mastery/cases.yaml) are the observed implementation basis; they do not become accepted requirements through reverse engineering.
 
 Generated SVGs are previews; edit D2 sources and render again. Use Python 3.9+ and D2 0.7.0+ on PATH. These views were generated with D2 0.9.0 and ELK. From the repository root:
 

@@ -2,7 +2,17 @@
 
 Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
 
-`CONSTITUTION.md` is the highest-level project governance. Follow it before README, contribution docs, code, or chat history when rules conflict.
+Use the owning document for each concern:
+
+| Concern | Owner |
+| --- | --- |
+| Project purpose and scope | [VISION.md](VISION.md) |
+| Agent conduct and engineering principles | This file |
+| Required skill metadata, safety, portability and review guidance | [Quality standard](docs/skill-quality-standard.md) |
+| Contribution, validation and PR workflow | [Workflow guide](docs/workflows.md) |
+| Intended behavior, constraints and design decisions | [C4 architecture](design/architecture/README.md) |
+
+Resolve conflicting guidance explicitly in its owner. Observed implementation and historical reviews do not silently override accepted decisions; record explicit user policy changes in the affected owner.
 
 ## Build & Validate
 
@@ -17,33 +27,32 @@ CI runs this on every push/PR to main. All errors must be fixed before merge.
 - Inspect the current repo state before editing.
 - Keep changes scoped; do not refactor unrelated files.
 - Preserve user changes and never revert work you did not make unless explicitly asked.
-- Update the owning artifact: prompt behavior in `skills/*/SKILL.md`, validation behavior in `tests/validate_skills.py`, install behavior in `install.sh`, project identity in `VISION.md`, durable governance in `CONSTITUTION.md`.
+- Update the owning artifact: prompt behavior in `skills/*/SKILL.md`, validation behavior in `tests/validate_skills.py`, install behavior in `install.sh`, project identity in `VISION.md`; use the owners above for documentation and rules.
 - Report validation commands, warnings, skipped checks, and unresolved questions before handoff.
+- State assumptions when intent is incomplete; clarify before irreversible or high-risk decisions.
+- Never invent tests, CI results, approvals, issue links, release status or external facts. Claim behavior works only with relevant evidence, or explicitly state what was not verified.
+- Do not silently remove safety boundaries, validation checks or compatibility obligations. Authors cannot claim independent approval of their own work.
 
-## Skill File Format
+## Required Skill Metadata
 
-Every skill lives at `skills/<skill-name>/SKILL.md`. Required structure:
+Every skill lives at `skills/<skill-name>/SKILL.md`. Start the file with valid YAML frontmatter containing non-empty string values for `name` and `description`:
 
 ```yaml
 ---
-name: <lowercase-hyphenated>
+name: your-skill-name
 description: >
-  English only. Describe what the skill does and when it applies.
+  Describe what the skill does and when it applies.
 ---
 ```
 
-Body must contain:
-- `$ARGUMENTS` placeholder (so slash command input flows through)
-- `## Output Format` section (enforced by CI)
+The body has no required placeholder or heading. Use `$ARGUMENTS` or `## Output Format` only when useful for the skill and its intended host. CI checks required files and metadata only; see the [quality standard](docs/skill-quality-standard.md#required-checks).
 
 ## Key Rules
 
-- Descriptions MUST be English — skill bodies can be any language
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
-- Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
-- New or materially changed skills need eval evidence as defined in `docs/skill-quality-standard.md`
-- High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
-- No emojis in Output Format headers
+- Include optional metadata only when useful and compatible with the intended host; the validator does not check it
+- Describe substantive skill changes and expected behavior in the PR; see `docs/skill-quality-standard.md`
+- High-risk skills need explicit scope, refusal/escalation boundaries and reviewer-visible safety notes
 
 ## Workflow
 
@@ -54,24 +63,25 @@ Use [the workflow guide](docs/workflows.md) for scoped changes, validation and P
 - Squash merge, delete branch after merge
 - IMPORTANT: Always branch from latest `main` — never stack PRs from the same base to avoid README conflicts
 - When adding a new skill, also add it to the README skills table
-- Non-trivial behavior changes need written requirements before implementation; see `CONSTITUTION.md`.
+- Non-trivial behavior changes need written intent and acceptance examples before implementation; see [the workflow guide](docs/workflows.md#1-define-the-change).
 
 ## Project Structure
 
 ```
 skills/*/SKILL.md          ← portable product prompts
-tests/validate_skills.py   ← CI validator (errors block merge, warnings don't)
+tests/validate_skills.py   ← required-file and metadata validator (errors block merge)
 install.sh                 ← one-command installer (supports --target flag)
 design/architecture/       ← C4 specifications, models, views and generated diagrams
-CONSTITUTION.md            ← durable governance and workflow rules
+docs/skill-quality-standard.md ← skill authoring, safety and review guidance
+docs/workflows.md          ← contribution, validation and PR workflow
 VISION.md                  ← project identity and scope
 ```
 
 ## Common Mistakes
 
-- Forgetting `$ARGUMENTS` in the body → CI error
-- Missing `## Output Format` → CI error
-- Non-English description → CI warning (CJK/Cyrillic detected)
+- Missing or unreadable `SKILL.md` → CI error
+- Missing, malformed or non-mapping YAML frontmatter → CI error
+- Missing, blank or non-string `name` or `description` → CI error
 - Descriptions that omit either the skill's function or the situations where it applies → unreliable skill selection
 
 ## Core Engineering Principles

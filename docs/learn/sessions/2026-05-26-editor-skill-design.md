@@ -13,7 +13,7 @@
   - `specs/editor-expert-quality-optimization.md`
   - `specs/editor-expert-quality-optimization.test.md`
   - `skills/editor/SKILL.md`
-  - `tests/evals/skills/editor/cases.yaml`
+  - [historical scenario file](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml)
   - [post-change-evidence.md](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-05-26-editor-expert-quality-optimization/post-change-evidence.md)
   - `docs/architecture/system/architecture.md`
   - `docs/architecture/system/diagrams/editor-workflow.mmd`
@@ -39,7 +39,7 @@ Evidence:
 
 - `specs/editor-expert-quality-optimization.md` defines instruction, source, target, response language, and target language set as separate concepts.
 - `skills/editor/SKILL.md` starts the workflow by separating instruction, source, and target before editing.
-- `tests/evals/skills/editor/cases.yaml` includes both `editor-expert-chinese-instruction-english-source` and `editor-expert-english-instruction-chinese-source`, showing that mixed-language behavior was tested in both directions after proposal review found the inverse case missing.
+- [historical scenario file](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) includes both `editor-expert-chinese-instruction-english-source` and `editor-expert-english-instruction-chinese-source`, showing that mixed-language behavior was tested in both directions after proposal review found the inverse case missing.
 
 O3. Output shape is part of skill behavior and should be intentionally small.
 
@@ -55,7 +55,7 @@ Evidence:
 
 - `explain-change.md` records the plan sequencing as M1 eval fixture and baseline evidence before prompt edits, M2 prompt and README implementation, then M3 post-change evidence.
 - `specs/editor-expert-quality-optimization.test.md` maps requirements to test cases T1-T16 and explicitly covers role separation, output size, notes gating, target override, non-Chinese/non-English source behavior, and integrity refusal.
-- `tests/evals/skills/editor/cases.yaml` contains 13 scenarios that encode normal, edge, indirect-trigger, and misuse cases instead of only happy-path examples.
+- [historical scenario file](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) contains 13 scenarios that encode normal, edge, indirect-trigger, and misuse cases instead of only happy-path examples.
 
 O5. Verification should be part of the method, while visible output should remain proportional to the request.
 
@@ -79,7 +79,7 @@ Evidence:
 
 - `specs/editor-expert-quality-optimization.md` requires refusing misleading, false, deceptive, unsupported, or falsely attributed transformations and offering accurate target-language alternatives.
 - `skills/editor/SKILL.md` checks integrity before editing and includes an integrity-boundary output template.
-- `tests/evals/skills/editor/cases.yaml` includes `editor-expert-integrity-boundary` as a misuse scenario, not merely a normal editing case.
+- [historical scenario file](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) includes `editor-expert-integrity-boundary` as a misuse scenario, not merely a normal editing case.
 
 O8. Good skill changes stay portable and scoped unless evidence proves infrastructure must change.
 
