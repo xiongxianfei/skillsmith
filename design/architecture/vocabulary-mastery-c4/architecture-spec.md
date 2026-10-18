@@ -136,7 +136,7 @@ D2 sequence self-messages represent prompt-directed logical activities inside th
 - **Quality tradeoff:** two full references favor independent usability over brevity. The prompt requires this despite possible output-budget pressure; continuation/truncation handling has not been designed.
 - **Non-functional boundary:** no measured accuracy, speed, cost, scale or learning-retention target is accepted here. D2 is documentation tooling only; product installation and invocation gain no dependency.
 
-The shared development platform supports authoring, format validation, review and distribution outside the learner's request. Cross-skill lessons about evidence quality or bilingual consistency may improve that platform after assessment. This is not an implemented telemetry/training loop, and no platform service is drawn on the invocation path.
+The shared development platform supports authoring, required-metadata validation, review and distribution outside the learner's request. Cross-skill lessons about evidence quality or bilingual consistency may improve that platform after assessment. This is not an implemented telemetry/training loop, and no platform service is drawn on the invocation path.
 
 ## Open design work
 

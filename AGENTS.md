@@ -8,7 +8,7 @@ Use the owning document for each concern:
 | --- | --- |
 | Project purpose and scope | [VISION.md](VISION.md) |
 | Agent conduct and engineering principles | This file |
-| Skill format, safety, portability and review guidance | [Quality standard](docs/skill-quality-standard.md) |
+| Required skill metadata, safety, portability and review guidance | [Quality standard](docs/skill-quality-standard.md) |
 | Contribution, validation and PR workflow | [Workflow guide](docs/workflows.md) |
 | Intended behavior, constraints and design decisions | [C4 architecture](design/architecture/README.md) |
 
@@ -33,30 +33,26 @@ CI runs this on every push/PR to main. All errors must be fixed before merge.
 - Never invent tests, CI results, approvals, issue links, release status or external facts. Claim behavior works only with relevant evidence, or explicitly state what was not verified.
 - Do not silently remove safety boundaries, validation checks or compatibility obligations. Authors cannot claim independent approval of their own work.
 
-## Skill File Format
+## Required Skill Metadata
 
-Every skill lives at `skills/<skill-name>/SKILL.md`. Required structure:
+Every skill lives at `skills/<skill-name>/SKILL.md`. Start the file with valid YAML frontmatter containing non-empty string values for `name` and `description`:
 
 ```yaml
 ---
-name: <lowercase-hyphenated>
+name: your-skill-name
 description: >
-  English only. Describe what the skill does and when it applies.
+  Describe what the skill does and when it applies.
 ---
 ```
 
-Body must contain:
-- `$ARGUMENTS` placeholder (so slash command input flows through)
-- `## Output Format` section (enforced by CI)
+The body has no required placeholder or heading. Use `$ARGUMENTS` or `## Output Format` only when useful for the skill and its intended host. CI checks required files and metadata only; see the [quality standard](docs/skill-quality-standard.md#required-checks).
 
 ## Key Rules
 
-- Descriptions MUST be English — skill bodies can be any language
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
-- Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
+- Include optional metadata only when useful and compatible with the intended host; the validator does not check it
 - Describe substantive skill changes and expected behavior in the PR; see `docs/skill-quality-standard.md`
 - High-risk skills need explicit scope, refusal/escalation boundaries and reviewer-visible safety notes
-- No emojis in Output Format headers
 
 ## Workflow
 
@@ -73,7 +69,7 @@ Use [the workflow guide](docs/workflows.md) for scoped changes, validation and P
 
 ```
 skills/*/SKILL.md          ← portable product prompts
-tests/validate_skills.py   ← CI validator (errors block merge, warnings don't)
+tests/validate_skills.py   ← required-file and metadata validator (errors block merge)
 install.sh                 ← one-command installer (supports --target flag)
 design/architecture/       ← C4 specifications, models, views and generated diagrams
 docs/skill-quality-standard.md ← skill authoring, safety and review guidance
@@ -83,9 +79,9 @@ VISION.md                  ← project identity and scope
 
 ## Common Mistakes
 
-- Forgetting `$ARGUMENTS` in the body → CI error
-- Missing `## Output Format` → CI error
-- Non-English description → CI warning (CJK/Cyrillic detected)
+- Missing or unreadable `SKILL.md` → CI error
+- Missing, malformed or non-mapping YAML frontmatter → CI error
+- Missing, blank or non-string `name` or `description` → CI error
 - Descriptions that omit either the skill's function or the situations where it applies → unreliable skill selection
 
 ## Core Engineering Principles

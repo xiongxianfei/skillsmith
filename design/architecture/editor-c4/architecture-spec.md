@@ -126,7 +126,7 @@ The original [expert-editing](https://github.com/xiongxianfei/skillsmith/blob/00
 
 ## Shared platform participation
 
-The platform supports the maintainer through authoring methods, format validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
+The platform supports the maintainer through authoring methods, required-metadata validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
 
 Editor-specific outcomes can suggest reusable improvements, such as evidence requirements for feedback. That feedback-to-platform process is a proposed project direction from the vision, not an implemented telemetry or automatic training connection. No speculative feedback server is drawn.
 

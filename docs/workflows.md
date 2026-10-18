@@ -27,9 +27,9 @@ pip install pyyaml
 python tests/validate_skills.py
 ```
 
-Run the validator before handoff. CI must run the same validator on pushes and PRs to `main`. Errors block merging; warnings must be fixed or acknowledged. Also run focused checks for affected contracts, links and documentation synchronization.
+Run the validator before handoff. CI must run the same validator on pushes and PRs to `main`. Errors block merging. It checks required files and metadata, with no style warnings. Also run focused checks for affected contracts, links and documentation synchronization.
 
-This is the only automated repository test. Check README catalog entries manually when adding, removing or renaming skills. Use focused inspection for documentation and actual model evidence for any claimed model-quality result; format validation alone proves neither.
+This is the only automated repository test. Check README catalog entries manually when adding, removing or renaming skills. Use focused inspection for documentation and actual model evidence for any claimed model-quality result; required-metadata validation alone proves neither.
 
 For changed C4 diagrams, put D2 on PATH and run the package's helper:
 
@@ -61,45 +61,29 @@ When failures recur, improve the relevant validator, template, quality rule or c
 mkdir skills/<skill-name>
 ```
 
-Use lowercase, hyphenated names such as `meal-planner` or `code-reviewer`.
+Prefer descriptive, lowercase, hyphenated names such as `meal-planner` or `code-reviewer`. Naming patterns are not enforced by the validator; check any restrictions of the intended host separately.
 
 ### 2. Write `SKILL.md`
 
-Copy the structure below and fill it in:
+Start with valid YAML frontmatter containing non-empty strings for `name` and `description`, then write instructions suited to the skill:
 
 ```markdown
 ---
 name: your-skill-name
 description: >
-  One or two sentences in English describing what the skill does and when it triggers.
-  Be specific about trigger phrases so the assistant knows when to invoke it.
+  Describe what the skill does and when to use it.
 ---
 
-**Input:**
-$ARGUMENTS
-
----
-
-# Role / Profile
-
-[Describe the persona or role the assistant should adopt]
-
-## Workflow
-
-[Step-by-step instructions]
-
-## Output Format
-
-[Exact output structure the assistant must follow]
+[Instructions for handling the user's request and producing a useful result.]
 ```
+
+No body template is required. Add headings, examples or `$ARGUMENTS` when useful for the skill and its intended host. The validator does not check body structure, naming patterns, language, length or optional metadata values.
 
 ### 3. Checklist before opening a PR
 
-- [ ] `description` is in English and under 250 characters
-- [ ] Optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` is omitted unless an accepted proposal/spec requires it
-- [ ] `$ARGUMENTS` appears in the prompt body
-- [ ] `## Output Format` section is present
-- [ ] No emojis in the Output Format section headers
+- [ ] `SKILL.md` has valid YAML frontmatter with non-empty string `name` and `description`
+- [ ] The description explains what the skill does and when to use it
+- [ ] Input handling and any optional metadata suit the intended host
 - [ ] Substantive behavior changes and their expected result are explained in the PR
 - [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes
 - [ ] CI passes locally: `python tests/validate_skills.py`

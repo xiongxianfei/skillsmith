@@ -220,11 +220,11 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 ## Contributing
 
-See the [contribution guide](docs/workflows.md) for skill templates, format validation and PR expectations.
+See the [contribution guide](docs/workflows.md) for an authoring example, required-metadata validation and PR expectations.
 
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
-3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)
+3. Add your skill under `skills/<skill-name>/SKILL.md` with the [required metadata](docs/skill-quality-standard.md#required-checks)
 4. Follow the canonical quality standard in [docs/skill-quality-standard.md](docs/skill-quality-standard.md)
 5. Open a PR — include what the skill does, when to use it, validation output, and expected behavior for substantive skill changes
 
