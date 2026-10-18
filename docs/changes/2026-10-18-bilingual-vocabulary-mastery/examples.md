@@ -1,113 +1,217 @@
-# Bilingual vocabulary mastery: worked examples
+# Bilingual vocabulary mastery: two complete reference versions
 
-This is reviewer-visible **illustrative output**, not a live-model evaluation result or a mandatory runtime reference file. All example sentences below were written for illustration, not quoted from a corpus.
+These examples are **reviewer-visible illustrations**, not live-model evaluation results or mandatory runtime prompt content. The first example demonstrates the full output contract: **one complete English reference followed by one complete, independently readable Simplified Chinese reference**. Linguistic examples are original teaching examples, not quotations from a corpus.
 
-The pronunciation and noun/verb sense distinction for `record` were checked against [Cambridge Dictionary](https://dictionary.cambridge.org/us/pronunciation/english/record) and its [definition page](https://dictionary.cambridge.org/dictionary/english/record). The complete entry below uses **British English (BrE)** IPA to keep the illustration consistent.
+The British English noun/verb pronunciations for `record` are consistent with the [Cambridge Dictionary pronunciation entry](https://dictionary.cambridge.org/pronunciation/english/record). The examples below use **British English (BrE)** IPA only.
 
-## Example 1: full entry for `record`
+## Example 1: `record`, complete two-version reference
 
 **Input:** `/vocabulary-mastery record`
 
-**Word Overview / 词汇概览**
+### Part 1: English Reference
 
-- **Headword / 词目:** record
-- **Word class and senses / 词性与义项:**
-  1. **noun:** stored information or a document of events — **名词：**记录、档案。
-  2. **verb:** capture or write down information or sounds — **动词：**记录、录制。
-  3. **noun:** the best measured achievement — **名词：**（最佳成绩）纪录。
-- **Pronunciation / 发音:** BrE noun /ˈrek.ɔːd/; BrE verb /rɪˈkɔːd/. The word class changes both lexical stress and the first unstressed/stressed vowel. / 名词与动词的词重音位置不同，首音节元音也发生变化。
-- **Context focus / 语境重点:** Primarily storing information and the related noun/verb contrast. / 重点分析“记录信息”这一义项及名词、动词的对应关系。
+**Word Overview**
 
-**1. Phonetics / 语音学**
+- **Headword:** record
+- **Word class and senses:**
+  1. **Noun:** stored information or a document of events.
+  2. **Verb:** write down, register, or capture information or sound.
+  3. **Noun:** the best measured performance or achievement.
+- **Pronunciation:** BrE noun /ˈrek.ɔːd/; BrE verb /rɪˈkɔːd/.
+- **Context focus:** The connection between storing information as an action and a record as the resulting information; the achievement sense is contrasted where useful.
 
-- **EN:** The BrE noun begins with /re/ while the verb begins with /rɪ/. Both forms end in a voiced alveolar stop /d/. Phonetics focuses on the physical sound distinctions, not on whether the learner pronounced them correctly.
-- **中文:** 在英式英语中，名词开头含 /re/，动词开头含 /rɪ/，末尾都有浊齿龈塞音 /d/。语音学描述声音本身；没有学习者录音时，不能判断其实际发音是否正确。
-- **Example / 例句:** "a record" vs. "to record" — “一份记录”和“去记录”，可对比两种参考读音。
+**1. Phonetics**
 
-**2. Phonology / 音系学**
+- **Explanation:** In the BrE noun, the first syllable contains /e/, while the verb's first syllable contains /ɪ/. The word ends in /d/, a voiced alveolar stop in both forms. These are reference sound descriptions, not a diagnosis of the learner's speech.
+- **Example:** "a record" vs. "to record": notice the vowel in the first syllable.
 
-- **EN:** Both forms have two syllables. The noun has first-syllable stress (**RE**-cord), while the verb has second-syllable stress (re-**CORD**). This is a word-class-related stress contrast, not a rule for all English noun/verb pairs.
-- **中文:** 两者都是双音节词，但名词重音在第一音节，动词重音在第二音节。这是部分英语名词／动词词形之间的重音对立，不能推广到所有词。
-- **Example / 例句:** "a **RE**cord" / "to re**CORD**" — 名词首重音、动词末重音。
+**2. Phonology**
 
-**3. Morphology / 形态学**
+- **Explanation:** Both forms have two syllables, but the noun normally stresses the first (**RE**-cord), while the verb stresses the second (re-**CORD**). This is a contrast seen in some English noun/verb pairs, not a universal rule.
+- **Example:** "a **RE**cord" vs. "to re-**CORD**."
 
-- **EN:** Verbal inflections include records, recorded, and recording; the noun has the plural records. Recorder is a related derived noun for a person or device. Do not segment `record` as a productive modern English `re-` plus `cord` combination.
-- **中文:** 动词屈折形式有 records、recorded、recording；名词复数为 records。recorder 是相关派生名词，可指记录者或录音设备。不能仅凭拼写把 record 当作现代英语里可自由组合的 re- 与 cord。
-- **Example / 例句:** "She recorded the meeting." — “她录下了会议内容。”
+**3. Morphology**
 
-**4. Lexicon / 词汇**
+- **Explanation:** The verb has inflected forms such as records, recorded, and recording; the countable noun has plural records. Recorder is a related derived noun. The spelling of record does not justify analyzing it as the productive modern prefix re- plus a free English morpheme cord.
+- **Example:** "She recorded the meeting yesterday."
 
-- **EN:** Useful conventional combinations include keep a record of, record a meeting, and break a record. The last one refers to achievement rather than information storage.
-- **中文:** 常见搭配包括 keep a record of（保留……的记录）、record a meeting（录制会议）以及 break a record（打破纪录）。最后一组属于“最佳成绩”的义项。
-- **Example / 例句:** "Keep a record of your expenses." — “把你的支出记录下来。”
+**4. Lexicon**
 
-**5. Syntax / 句法学**
+- **Explanation:** Common combinations include keep a record of, record a meeting, and break a record. The last expression invokes the achievement sense rather than stored information.
+- **Example:** "Keep a record of your expenses."
 
-- **EN:** The verb is commonly transitive: `record + object` (record the results). As a countable noun, `a record of + noun phrase` names stored information. These are different grammatical frames.
-- **中文:** 动词通常可以直接接宾语：record the results（记录结果）；可数名词则常用 a record of + 名词短语（……的一份记录）。两种词性对应不同句法结构。
-- **Example / 例句:** "They recorded the results and kept a record of each test." — “他们记录了结果，并保留了每次测试的记录。”
+**5. Syntax**
 
-**6. Semantics / 语义学**
+- **Explanation:** The verb can be transitive: `record + object` (record the results). A countable noun frame is `a record of + noun phrase`. These frames distinguish the verb from the related noun.
+- **Example:** "They recorded the results and kept a record of each test."
 
-- **EN:** A record can be stored information or an outstanding achievement, while the verb means to register, write down, or capture something. The meanings overlap in their idea of preserving information but should not be collapsed into a single Chinese gloss.
-- **中文:** record 作名词可以表示“记录/档案”，也可以表示“纪录/最佳成绩”；作动词表示“记录、登记、录制”。这些义项有关联，但不能不加区分地翻成同一个中文词。
-- **Example / 例句:** "The runner broke the national record." — “这名跑者打破了全国纪录。”
+**6. Semantics**
 
-**7. Pragmatics / 语用学**
+- **Explanation:** The noun may mean stored information or an outstanding achievement; the verb generally denotes recording, registering, or capturing something. These meanings are related in English usage but must not be treated as interchangeable in a sentence.
+- **Example:** "The runner broke the national record."
 
-- **EN:** "For the record" can explicitly place a clarification or position on the conversational record. "Off the record" expresses an expectation that a statement not be made public; the phrase alone does not guarantee confidentiality.
-- **中文:** for the record 可用于正式澄清或明确表态；off the record 表示希望某段话不被公开引用，但说出这个短语本身并不能确保保密。
-- **Example / 例句:** "For the record, I did not approve the change." — “我在此明确说明：我没有批准这项修改。”
+**7. Pragmatics**
 
-**8. Discourse / 语篇**
+- **Explanation:** "For the record" may introduce an explicit clarification. "Off the record" signals an expectation that information will not be publicly attributed; saying it alone does not guarantee confidentiality.
+- **Example:** "For the record, I did not approve the change."
 
-- **EN:** A passage can move from the verb record to the noun recording while preserving a clear topic chain. The second sentence refers back to the material captured in the first.
-- **中文:** 语篇中可以先用 record 描述动作，再用 recording 指回录制产生的内容，使前后句具有衔接关系。
-- **Example / 例句:** "We recorded the interview. The recording helped us check the quotations." — “我们录下了访谈。这份录音帮助我们核对引文。”
+**8. Discourse**
 
-**9. Information Structure / 信息结构**
+- **Explanation:** The noun recording can refer back to an event described by the verb recorded. This relationship helps link propositions across sentences coherently.
+- **Example:** "We recorded the interview. The recording helped us check the quotations."
 
-- **EN:** The question determines which part of the answer is new or contrastive. After "What did you record?", the noun phrase *the interview* supplies the focused information, not the already known action.
-- **中文:** 信息焦点由上下文问题决定。问“你们录制了什么？”时，答案中的 the interview 是新信息，而 record 所表达的动作已经出现在问题中。
-- **Example / 例句:** "What did you record?" — "We recorded the **INTERVIEW**." — “你们录制了什么？”——“我们录制了**访谈**。”
+**9. Information Structure**
 
-**10. Prosody / 韵律**
+- **Explanation:** Focus is established by the preceding question. When the question is "What did you record?", the object *the interview* supplies new information; the recording action is already available in the question.
+- **Example:** "What did you record?" — "We recorded the **INTERVIEW**."
 
-- **EN:** Sentence-level prominence can highlight the action or its object: "We **RECORDED** the interview" contrasts recording with another action; "We recorded the **INTERVIEW**" contrasts the object. This phrasal prominence is different from the verb's second-syllable lexical stress.
-- **中文:** 句子重音能突出动作或对象：强调 RECORDED，说明做的是“录制”而不是别的动作；强调 INTERVIEW，则突出录制对象。这种句子层面的突显不同于动词 record 的词内第二音节重音。
-- **Example / 例句:** "Did you just watch it?" — "No, we **RECORDED** it." — “你们只是观看了吗？”——“不是，我们把它**录**下来了。”
+**10. Prosody**
 
-**Knowledge Connections / 知识关联**
+- **Explanation:** Sentence prominence can signal what is contrasted: "**RECORDED** it" contrasts recording with merely watching, while "recorded the **INTERVIEW**" contrasts the object. This contextual prominence differs from the lexical second-syllable stress of the verb record.
+- **Example:** "Did you just watch it?" — "No, we **RECORDED** it."
 
-- **EN:** Word class links **noun /ˈrek.ɔːd/** and **verb /rɪˈkɔːd/** to different stress patterns and grammatical frames. Collocations help choose among the stored-information and outstanding-achievement senses. Focus and prosody indicate what the speaker contrasts in a particular conversation.
-- **中文:** “词性—读音—句法”彼此关联：名词、动词使用不同的词重音和句法框架；搭配帮助区分“记录”和“纪录”义项；信息焦点与韵律帮助听者理解说话者在对比什么。
+**Knowledge Connections**
 
-**Recall Prompts / 回忆练习**
+- Noun versus verb is linked to both **lexical stress** and **grammatical frame**.
+- **Collocations** help identify the sense: keep a record refers to information, whereas break a record refers to achievement.
+- **Information focus** and **sentence prominence** jointly help express what is being contrasted in context.
 
-1. Which syllable is stressed in BrE *record* when it is a verb? / record 作动词时，英式英语重音在哪一音节？
-2. Complete the collocation: "keep a ___ of expenses." / 补全搭配。
-3. In "They broke the record", does *record* mean a stored document or a best achievement? / 此处 record 表示档案还是最佳成绩？
+**Recall Prompts**
 
-**Answers / 参考答案**
+1. In BrE, which syllable is stressed when *record* is a verb?
+2. Complete this collocation: "keep a ___ of expenses."
+3. In "They broke the record", does *record* refer to stored information or an outstanding achievement?
 
-1. The second: re-**CORD**. / 第二音节。
-2. record. / record（记录）。
-3. A best achievement. / 最佳成绩，即“纪录”。
+**Answers**
 
-**Accuracy Notes / 准确性说明**
+1. The second syllable: re-**CORD**.
+2. record.
+3. An outstanding achievement.
 
-- IPA above uses BrE only. AmE has different r-colouring in the noun and a pronounced /r/ near the end of the verb. / 上面仅展示英式英语音标；美式英语在名词的卷舌元音以及动词后半部分的 /r/ 上有差异。
-- All English sentences are original illustrations, not corpus citations. / 所有英文例句均为原创示例，不是语料库引文。
+**Accuracy Notes**
 
-## Example 2: thin dimensions should remain honest
+- This worked example uses BrE pronunciation only. It makes no claim about a learner's actual pronunciation, and its example sentences are original illustrations rather than attested corpus quotations.
+
+---
+
+### 第二部分：简体中文词汇参考
+
+**词汇概览**
+
+- **词目：** record
+- **词性与义项：**
+  1. **名词：**保存下来的信息，或记载事件的文件、记录。
+  2. **动词：**写下、登记、录制信息或声音。
+  3. **名词：**某项成绩或表现达到的最佳纪录。
+- **发音：**英式英语（BrE）名词 /ˈrek.ɔːd/；动词 /rɪˈkɔːd/。
+- **语境重点：**重点理解“记录信息”这一动作与作为结果的“记录”之间的关系；在相关语境中对比“最佳成绩、纪录”这一义项。
+
+**1. 语音学**
+
+- **解析：**英式英语中，名词首音节含元音 /e/，动词首音节则含 /ɪ/。两种形式都以浊齿龈塞音 /d/ 结尾。这是对词典参考读音的描述，并非对学习者实际发音的诊断。
+- **例句：**"a record"（一份记录）与 "to record"（去记录）：注意两个表达中首音节元音的区别。
+
+**2. 音系学**
+
+- **解析：**两种词形都含两个音节，但名词通常重读第一音节（**RE**-cord），动词重读第二音节（re-**CORD**）。部分英语名词与动词存在类似的重音对立，但这不是普遍规律。
+- **例句：**"a **RE**cord"（一份记录）与 "to re-**CORD**"（去记录）：比较重音位置。
+
+**3. 形态学**
+
+- **解析：**动词的屈折形式包括 records、recorded、recording；可数名词的复数为 records。recorder 是相关派生名词。不能仅凭拼写就把 record 分析成现代英语中可自由组合的前缀 re- 加独立语素 cord。
+- **例句：**"She recorded the meeting yesterday."——“她昨天录下了会议内容。”
+
+**4. 词汇学**
+
+- **解析：**常见搭配包括 keep a record of（保留……的记录）、record a meeting（录制会议）、break a record（打破纪录）。最后一个搭配使用“最佳成绩”的义项，而非“保存的信息”。
+- **例句：**"Keep a record of your expenses."——“把你的支出记录下来。”
+
+**5. 句法学**
+
+- **解析：**record 作动词时可以直接带宾语：`record + object`，例如 record the results（记录结果）；作为可数名词时常用 `a record of + noun phrase`（关于……的一份记录）。这些句法框架体现了词性差异。
+- **例句：**"They recorded the results and kept a record of each test."——“他们记录了结果，并保留了每次测试的记录。”
+
+**6. 语义学**
+
+- **解析：**record 作名词时既可指保存的信息，也可指最佳成绩；作动词时通常表示记录、登记或录制。虽然这些义项有联系，但在具体句子中不能不加区分地互换。
+- **例句：**"The runner broke the national record."——“这名跑者打破了全国纪录。”
+
+**7. 语用学**
+
+- **解析：**for the record 可用于明确澄清或表明立场。off the record 表示希望相关信息不被公开归属或引用；仅仅说出这个短语本身并不能确保保密。
+- **例句：**"For the record, I did not approve the change."——“我在此明确说明：我没有批准这项修改。”
+
+**8. 语篇**
+
+- **解析：**recorded 描述一个录制动作，后文的 recording 可以指回这一动作产生的录音材料。这种指代关系使相邻句子之间衔接更自然。
+- **例句：**"We recorded the interview. The recording helped us check the quotations."——“我们录下了访谈。这份录音帮助我们核对引文。”
+
+**9. 信息结构**
+
+- **解析：**信息焦点取决于前面的提问。当问题是“你们录制了什么？”时，回答中的 the interview（访谈）是新信息；“录制”这一动作已在问题中出现。
+- **例句：**"What did you record?"——“你们录制了什么？” "We recorded the **INTERVIEW**."——“我们录制了**访谈**。”
+
+**10. 韵律**
+
+- **解析：**句子层面的突出重读能够表示对比：强调 "**RECORDED** it" 是为了对比“录制”与“只是观看”；强调 "recorded the **INTERVIEW**" 则突出被录制的对象。这种语境中的句子重音不同于动词 record 本身的第二音节词重音。
+- **例句：**"Did you just watch it?"——“你们只是看了吗？” "No, we **RECORDED** it."——“不是，我们把它**录**下来了。”
+
+**知识关联**
+
+- **词性**同时联系着不同的**词重音**和**句法框架**：名词与动词的读法、用法有所不同。
+- **词汇搭配**有助于识别义项：keep a record 涉及信息记录；break a record 涉及成绩纪录。
+- **信息焦点**与**句子重音**共同帮助说话者表达特定语境中的对比重点。
+
+**回忆练习**
+
+1. 在英式英语中，record 作动词时重音落在哪个音节？
+2. 补全搭配："keep a ___ of expenses."
+3. 在 "They broke the record" 中，record 指保存的信息，还是最佳成绩？
+
+**参考答案**
+
+1. 第二音节：re-**CORD**。
+2. record。
+3. 最佳成绩，即“纪录”。
+
+**准确性说明**
+
+- 本示例只使用英式英语参考读音，不评价任何学习者的实际发音。英文例句是为教学而写的原创示例，并非取自语料库的引文。
+
+## Example 2: weak dimensions without invented properties
 
 **Input:** `/vocabulary-mastery apple`
 
-The full response still has all ten sections. Its weakly distinctive domains should say, for example:
+The actual skill must still return **two full ten-domain versions**. These short paired excerpts illustrate only the honest handling of dimensions with no distinctive word-specific feature; **they are not themselves valid complete outputs**.
 
-- **Pragmatics / 语用学** — EN: *Apple* has no special speech act or politeness meaning by itself; social meaning comes from a larger utterance. 中文：*apple* 本身并不具有特殊的话语行为或礼貌功能；具体语用效果取决于整句话及情境。
-- **Information Structure / 信息结构** — EN: Focus on *apple* depends on the preceding question: "What did you buy?" — "I bought an **APPLE**." 中文：重音突显 *apple* 是因为它回答了“买了什么”，而非该词天然就是焦点。
-- **Prosody / 韵律** — EN: The word has an ordinary lexical stress pattern; sentence prominence is assigned by context, not by a unique prosody of *apple*. 中文：这个词有普通的词重音；句子中的突出重读取决于语境，而非 *apple* 自带某种特殊语调。
+### Part 1: English Reference (selected excerpts only)
 
-Never invent a distinctive idiom, etymology, cultural taboo, or pragmatic property to meet the ten-section requirement.
+**7. Pragmatics**
+
+- **Explanation:** *Apple* has no special speech act or politeness meaning by itself. Any social implication must arise from a particular utterance and situation.
+
+**9. Information Structure**
+
+- **Explanation:** The focus on *apple* depends on the preceding question, rather than on an inherent information-focus property of the noun.
+- **Example:** "What did you buy?" — "I bought an **APPLE**."
+
+**10. Prosody**
+
+- **Explanation:** *Apple* has ordinary word stress; sentence prominence is assigned according to context, not by a unique intonation pattern inherent in the word.
+
+### 第二部分：简体中文词汇参考（仅选取部分段落）
+
+**7. 语用学**
+
+- **解析：**apple 本身并没有特殊的话语行为或礼貌含义。可能产生的社会交际意味取决于具体句子和使用情境。
+
+**9. 信息结构**
+
+- **解析：**apple 是否成为信息焦点，取决于前文提出的问题，而不是因为这个名词天然具有某种特殊焦点属性。
+- **例句：**"What did you buy?"——“你买了什么？” "I bought an **APPLE**."——“我买了一个**苹果**。”
+
+**10. 韵律**
+
+- **解析：**apple 有普通的词重音；句子中的突出重读取决于语境，而不是这个词本身具有独特的语调。
+
+**Review boundary:** Neither language should invent a culturally loaded sense, phonological exception, or unusual speech act just to fill a mandatory dimension.
