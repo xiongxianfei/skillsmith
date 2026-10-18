@@ -8,7 +8,10 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 
 | Evidence | What it establishes | What it does not establish |
 | --- | --- | --- |
-| [Vocabulary prompt](../../../skills/vocabulary-mastery/SKILL.md) | Role and Scope; Workflow; Two-Version Output Contract; Linguistic Rules; Output Format | Deterministic execution, lexical correctness, learning effectiveness |
+| [Vocabulary skill entrypoint](../../../skills/vocabulary-mastery/SKILL.md) | Complete bilingual contract, ten required dimensions, source boundaries, conditional resource routing and parity workflow | Automatic execution correctness, reliable resource loading, learning effectiveness |
+| [Full reference template](../../../skills/vocabulary-mastery/assets/full-reference-template.md) | Canonical English/Chinese output layout and section field checklist | An evaluated model output or proof of bilingual parity |
+| [Conditional references](../../../skills/vocabulary-mastery/references/lexical-evidence.md) | Guidance for lexical evidence gaps; [linguistic boundaries](../../../skills/vocabulary-mastery/references/linguistic-boundaries.md) for difficult domain distinctions | A dictionary, audio or corpus verification service |
+| [Current review cases](../../../skills/vocabulary-mastery/evals/review-cases.md) | Sixteen proposed review prompts and observable assessment criteria | Observed model pass rates or human acceptance |
 | [Historical vocabulary scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 archived expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
 | [October 18 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/requirements.md) | Original two-complete-version choice, English-only skill source, behavior and evidence constraints | Current C4 approval or successful model execution |
 | [Reviewer examples](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md) | Full `record` bilingual illustration and `apple` boundary examples with pronunciation provenance | Live-model outputs or measured accuracy |
@@ -17,21 +20,21 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |
 | [D2 model](model.d2) | Diagram identities and structural relationships | A new runtime or a second normative product contract |
 
-This isolated design uses the current prompt and archived scenarios as source evidence. It neither edits the prompt nor adopts new product behavior. The contextual learner examples are fictional scenario inputs. Maintenance uses the C4 design and PR workflow, outside vocabulary invocation.
+The current refactor packages the same complete two-version/ten-dimension output contract as an entrypoint plus bundled resources. This is a proposed, behavior-affecting change to resource loading and quality procedures, not evidence of improved model behavior. The contextual learner examples are fictional scenario inputs. Maintenance uses the C4 design and PR workflow, outside vocabulary invocation.
 
 ## C4 scope and ownership
 
-C1 treats `vocabulary_package` as a **passive prompt distribution**. The learner interacts with an external assistant host; the package supplies instructions through installation or paste. C2 opens the package to one genuine file-store container, `vocabulary_package.prompt_files`, containing the authored Markdown. It is not an executing lexicography service.
+C1 treats `vocabulary_package` as a **passive skill-directory distribution**. The learner interacts with an external assistant host; the package provides its entrypoint and conditional resources through full-directory installation. Pasting the entrypoint alone does not guarantee the refactor's complete behavior. C2 still has one file-store container, `vocabulary_package.prompt_files`, containing the authored Markdown entrypoint, reference guidance, static template, and reviewer-only evaluation cases. It is not an executing lexicography service.
 
 | Stable diagram ID | C4 type / owner | Responsibility |
 | --- | --- | --- |
 | `learner` | Person outside package | Supplies target, context and preferences; reads reference and recall answers |
 | `maintainer` | Person outside invocation | Authors and reviews instructions and scenario evidence using shared methods |
 | `vocabulary_package` | Passive software distribution / Skillsmith | Distributes the vocabulary behavior contract as authored instructions |
-| `vocabulary_package.prompt_files` | File-store container / Skillsmith-authored Markdown | `skills/vocabulary-mastery/SKILL.md`; installed copy or pasted content |
+| `vocabulary_package.prompt_files` | File-store container / Skillsmith skill package | `skills/vocabulary-mastery/`: `SKILL.md`, conditional `references/`, required `assets/` template and reviewer-only `evals/` cases. No invocation-time executable component |
 | `assistant_host` | External software system / host operator | Interprets the prompt and generates the response; actual host/model topology is unknown |
 
-A filesystem store fits the [C4 container definition](https://c4model.com/diagrams/container). Treating a passive package as the system scope is an explicit modeling adaptation. No C3 components are invented for ten linguistic headings or English/Chinese rendering. These are logical concerns in one prompt, not separately implemented applications. Host UI, inference services, authentication and transport are not specified here. A deployment diagram is deferred until an actual host deployment is selected.
+A filesystem store fits the [C4 container definition](https://c4model.com/diagrams/container). Treating a passive package as the system scope is an explicit modeling adaptation. No C3 components are invented for ten linguistic headings or English/Chinese rendering. These are logical concerns in one portable directory package, not separately implemented applications. Host UI, inference services, authentication and transport are not specified here. A deployment diagram is deferred until an actual host deployment is selected.
 
 The architecture reuses the editor design's modeling convention, not its editing policy. Vocabulary-mastery always develops all ten linguistic dimensions; editor selects only useful domains for grounded learning notes. No new service, data-store technology or API decision requires an ADR in this documentation-only projection.
 
@@ -39,7 +42,7 @@ The architecture reuses the editor design's modeling convention, not its editing
 
 The implementation instructs the host to perform this logical flow:
 
-**Resolve one target → build a shared sense map and examples → complete English reference → complete Chinese reference → check each part and compare parity → return both.**
+**Resolve one target → build a shared sense map and examples (loading targeted references when needed) → load the full-reference template → complete English reference → complete Chinese reference → check each part and compare parity → return both.**
 
 The following information structure explains that flow. It is not an implemented JSON schema, persistent record, exposed reasoning transcript or new tool call.
 
@@ -52,7 +55,23 @@ The following information structure explains that flow. It is not an implemented
 | Recall alignment | Exactly three concepts, corresponding questions and matching answers | Retrieval sections in both parts |
 | Parity criteria | Same senses, IPA, observations, examples, connections, retrieval concepts and caveats | Independent completeness and cross-part checks |
 
-Only the sense map, consistent examples and output checks are explicitly named workflow steps. The remaining rows make their implied information dependencies visible; they do not assert actual materialized structures inside a model.
+The prompt explicitly directs sense mapping, conditional resource loading, a common content plan, and completeness/parity checks. The remaining rows make their information dependencies visible; they do not assert actual persisted structures inside a model.
+
+## Skill directory resources and loading boundaries
+
+This refactor preserves the **publicly selected** full bilingual ten-domain reference contract. It changes the distribution/maintenance interface from a standalone prompt to the full [Agent Skills](https://agentskills.io/specification) directory. An agent with full-directory access is needed to follow file-loading instructions reliably.
+
+| Bundled file | Load condition | Authority and limit |
+| --- | --- | --- |
+| [Entry point](../../../skills/vocabulary-mastery/SKILL.md) | Every invocation | Sole owner of required behavior, ten-domain order, source integrity and two-part output invariants |
+| [Full-reference template](../../../skills/vocabulary-mastery/assets/full-reference-template.md) | Before every complete entry | Canonical heading/field layout; extraction supports maintenance, not reduced context use |
+| [Lexical evidence](../../../skills/vocabulary-mastery/references/lexical-evidence.md) | Ambiguous pronunciation/sense, homographs, coinage, regional variation or weak morphological/attestation evidence | Additional epistemic checks, not a lookup or provenance guarantee |
+| [Linguistic boundaries](../../../skills/vocabulary-mastery/references/linguistic-boundaries.md) | Confusable linguistic dimensions or domains with weak word-specific evidence | Guidance for honest dimension-specific illustrations, not permission to invent claims |
+| [Review cases](../../../skills/vocabulary-mastery/evals/review-cases.md) | Maintainer evaluation only | Expected outcomes, not actual model test results |
+
+No `scripts/`, external lexicon, network service, persistence store, or model-level resource-read verification is introduced. The host's actual resource-loading behavior must be evaluated on a supported host; a valid Markdown link does not prove that an agent read it.
+
+The template requires all ten domains in both parts and exactly three matched recall questions/answers. The source entrypoint also requires marking an interrupted output as **incomplete** rather than silently shortening the Chinese section. Completion under output-budget limits remains to be tested, not assumed.
 
 ## Input and routing decisions
 
@@ -128,12 +147,12 @@ D2 sequence self-messages represent prompt-directed logical activities inside th
 
 ## State, trust, deployment and constraints
 
-- **Authored state:** English-only prompt instructions and templates in `SKILL.md`; historical scenario declarations are linked above. The generated Chinese reference is output, not a separately maintained Chinese prompt.
+- **Authored state:** English-only instructions in `SKILL.md` and its two conditional references; a required static layout under `assets/`, plus reviewer-only cases under `evals/`. The generated Chinese reference is output, not a separately maintained Chinese prompt.
 - **Invocation state:** target, sense map, examples, draft references and questions belong to the current host interaction. No Skillsmith learner profile, score history, spaced-repetition schedule or progress database is implemented.
-- **External execution:** installation copies prompt files or users paste them. Host capabilities, context limits, latency, inference cost, availability, authentication and retention policies are unknown. No local-only processing or privacy guarantee follows from a Markdown skill.
+- **External execution:** installation must make the full skill directory accessible; pasting `SKILL.md` alone is not equivalent. Host file-loading capabilities, context limits, latency, inference cost, availability, authentication and retention policies are unknown. No local-only processing or privacy guarantee follows from a Markdown skill.
 - **Accuracy:** preserve uncertainty and label supported variety distinctions. Reference pronunciation is not an assessment of the learner's actual speech. The skill does not establish an audio-assessment workflow merely by warning against unsupported sound claims.
 - **Trust:** user sentences and invented terms are evidence to interpret, not independent authority for established lexical facts. The prompt does not fully specify hostile embedded-instruction handling; no security enforcement claim is made.
-- **Quality tradeoff:** two full references favor independent usability over brevity. The prompt requires this despite possible output-budget pressure; continuation/truncation handling has not been designed.
+- **Quality tradeoff:** two full references favor independent usability over brevity. If output is interrupted, the prompt now requires labelling it incomplete and continuing when possible; this has not been demonstrated in a real host.
 - **Non-functional boundary:** no measured accuracy, speed, cost, scale or learning-retention target is accepted here. D2 is documentation tooling only; product installation and invocation gain no dependency.
 
 The shared development platform supports authoring, required-metadata validation, review and distribution outside the learner's request. Cross-skill lessons about evidence quality or bilingual consistency may improve that platform after assessment. This is not an implemented telemetry/training loop, and no platform service is drawn on the invocation path.
@@ -144,9 +163,9 @@ The shared development platform supports authoring, required-metadata validation
 | --- | --- | --- |
 | VM-C4-01 | Review these observations and record the accepted behavior and constraints in this specification | Maintainer and human design reviewer |
 | VM-C4-02 | Define support/confidence criteria for IPA, senses, morphology and regional claims; no source-verification mechanism exists here | Requirements and evaluation owners |
-| VM-C4-03 | Define continuation behavior when two complete references exceed available output budget | Requirement owner before prompt change |
+| VM-C4-03 | Test whether the host can identify and continue interrupted long-form bilingual output; the prompt's incomplete-output rule is not yet behaviorally verified | Evaluation owner |
 | VM-C4-04 | Specify malformed-input, ambiguous-expression and non-English-input handling and the limits of unsupported coinage profiles; missing-target behavior already asks for a target | Maintainer and human reviewer of this specification |
-| VM-C4-05 | Make a practical parity assessment rubric and collect representative model outputs | Evaluation owner; preserve exact subject/model identity |
-| VM-C4-06 | Explain fixed-format conflicts to users while preserving the chosen contract, or explicitly reconsider that contract | Requirement owner; no silent adaptive-format change |
+| VM-C4-05 | Review rubric is now drafted under `evals/`; collect baseline vs revised model outputs and expert bilingual assessments before claiming improvement | Evaluation owner; preserve exact subject/model identity |
+| VM-C4-06 | The user explicitly retained the ten-domain/two-version fixed contract for this revision; review conflicts and confirm the model follows it | Maintainer and evaluator |
 
 These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. Existing [quality criteria](../../../docs/skill-quality-standard.md) continue to apply; no catalog-wide completeness or successful learning claim is inferred from these views.
