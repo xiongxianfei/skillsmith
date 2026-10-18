@@ -1,5 +1,7 @@
 # RigorLoop v2 adoption delivery plan
 
+> Retired plan: the user chose to stop using RigorLoop and retain only `design/architecture/` for C4 design. The following records the earlier intent, not current instructions. See the [current workflow](../workflows.md) and [architecture index](../../design/architecture/README.md).
+
 ## Purpose / big picture
 
 Deliver the reviewed three-part engineering model and RigorLoop maintenance guidance without changing product prompts, installer behavior or existing validation. Work directly in the current workspace as requested. Preserve the user's committed engineering principles and existing untracked cache files.
@@ -13,7 +15,7 @@ This adoption is delivered under the pre-adoption governance. Its reviewer-facin
 - Requirement basis: `specs/rigorloop-v2-adoption.md`, SHA-256 `54162a6af84886d584f482c47cba831293769197827487d491ced583ef83188f`, approved amendment review.
 - Reviewed design: `docs/architecture/workflow.md`, SHA-256 `624e94dd6c5a396f85717befe03aa6e1951b4c8ed999956b9c2338426f6de233`.
 - Allocated requirements: `specs/rigorloop-v2-adoption-allocation.md`, SHA-256 `cd6315a7bf8ceb430e795a7fc686b6467a6cb65b756674c2a9161faff96b5b50`.
-- Review records: this change's requirement/design reviews. These old paths identify the reviewed pre-migration subjects; current navigation after migration is through `design/README.md` and the source-disposition record.
+- Review records: this change's requirement/design reviews. These old paths identify the reviewed pre-migration subjects; current navigation after migration is through `design/architecture/README.md` and the source-disposition record.
 - Proof map: this change's `test-spec.md`, reviewed with this plan under the existing plan/test-spec responsibilities.
 
 ## Context and non-goals

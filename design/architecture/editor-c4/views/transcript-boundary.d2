@@ -1,0 +1,16 @@
+# Scenario: transcript supplied without audio; intonation feedback requested.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+writer: unsuspend
+assistant_host: unsuspend
+editor_package: unsuspend
+editor_package.prompt_files: suspend
+
+editor_package -> assistant_host: "0. Make editor instructions available"
+writer -> assistant_host: "1. Correct this English transcript\nand assess intonation; no audio available"
+assistant_host -> assistant_host: "2. Text evidence is usable; sound evidence is absent\nDo not infer pronunciation, rhythm or intonation"
+assistant_host -> assistant_host: "3. Preserve spoken voice and dialect\nDistinguish register alternatives from errors"
+assistant_host -> assistant_host: "4. Render English + Chinese\nExplain only evidence-supported language choices"
+assistant_host -> writer: "5. Deliver edited text and grounded notes\nExplain audio limitation; request audio for sound feedback"

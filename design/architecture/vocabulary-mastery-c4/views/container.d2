@@ -1,0 +1,19 @@
+# C2: a real file store is the only container owned by this passive package.
+# The assistant host is external; its internals are unknown, not invented.
+...@../model
+**: suspend
+(** -> **)[*]: suspend
+**: unsuspend {
+  &level: 0
+}
+**: unsuspend {
+  &level: 1
+}
+(** -> **)[*]: unsuspend {
+  &src.level: 1
+}
+(** -> **)[*]: unsuspend {
+  &dst.level: 1
+}
+(learner -> assistant_host)[*]: unsuspend
+(assistant_host -> learner)[*]: unsuspend

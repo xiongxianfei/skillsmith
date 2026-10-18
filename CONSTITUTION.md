@@ -2,7 +2,7 @@
 
 ## Project purpose
 
-Skillsmith is a reusable prompt-skill library for people who use AI assistants to write, translate, learn, communicate, and make everyday decisions with more care.
+Skillsmith is a library that turns good practices into reusable AI skills and continually improves them through use, feedback, and evaluation.
 
 The repository serves users who install skills, contributors who author skills, and agents that maintain the catalog. A change is successful only when the skill remains portable Markdown, the expected invocation behavior is clear, and local validation can be reproduced.
 
@@ -12,22 +12,20 @@ When project artifacts conflict, agents and reviewers MUST use this order:
 
 1. `CONSTITUTION.md`
 2. `VISION.md`
-3. Accepted requirements and allocated obligations under `design/requirements/`
-4. Reviewed logical behavior under `design/system/` and architecture under `design/architecture/`
-5. Execution plans and test specifications
-6. Tests and CI configuration
-7. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
-8. README, contribution docs, and chat history
+3. Accepted behavior and architectural decisions in `design/architecture/`, and the shared quality standard in `docs/skill-quality-standard.md`
+4. Tests and CI configuration
+5. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
+6. README, contribution docs and historical plans
 
-Chat instructions MAY clarify intent for a current task, but they MUST NOT silently override durable project rules.
+Architecture specifications MUST distinguish accepted decisions, observed implementation, proposals and unknowns. Reverse engineering or drawing a diagram does not establish acceptance. Explicit user decisions that change durable policy MUST be reflected in the owning documents.
 
 ## Spec-driven rules
 
-Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST have requirements written before implementation. Durable requirements live under `design/requirements/`. A clearly scoped issue or change-local note MAY suffice for an isolated small change; later managed work MUST explicitly adopt relied-on output into its basis and obtain applicable review.
+Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST describe intended behavior before implementation. Keep design requirements, constraints and acceptance examples together in the relevant `design/architecture/<subject>/architecture-spec.md`; do not create separate requirement or system-design directories. A clearly scoped issue or PR description MAY suffice for a small change that does not need architectural design.
 
-Requirements MUST identify observable behavior: skill trigger intent, accepted input, output format, safety boundaries, compatibility expectations, and validation commands.
+Describe observable behavior: trigger intent, accepted input, output format, safety boundaries, compatibility expectations and validation commands. Use the `c4-architecture` skill for architectural design, with D2 models, focused views and generated SVGs. Keep model and behavior decisions in the same reviewable change.
 
-Small editorial corrections MAY proceed without a formal spec when they do not change behavior, scope, safety posture, or public contracts.
+Small editorial corrections MAY proceed without a formal spec when they do not change behavior, scope, safety posture or public contracts.
 
 ## Test-driven rules
 
@@ -96,17 +94,15 @@ Final handoff MUST report the commands run and any warnings, skipped checks, or 
 
 ## Review rules
 
-New non-trivial standard-workflow work MUST receive independent requirement review, integrated system/architecture design review and delivery review before implementation relies on those bases. Delivery review covers both plan quality and verification allocation; a renamed stage MUST NOT silently waive a material obligation. Reviews MUST identify actual subjects, reviewer, findings and current applicability. Authors MUST NOT approve their own work.
+Changes MUST be reviewed through a PR to `main`. Review depth should match behavior, compatibility and safety risk. Reviewers assess intended behavior, design decisions, the delivered diff and actual validation evidence. Authors MUST NOT claim independent approval of their own work.
 
-After all authorized milestones, one independent whole-change Code Review MUST assess the complete delivered scope. Corrections require proportionate reassessment within that gate. Optional interim advice does not approve milestones. Distinct final Verify MUST assess the current basis, applicable reviews, evidence and unresolved issues before completion is claimed.
+C4 designs require human review before being described as approved. Static checks and generated diagrams do not establish architectural correctness or model quality. Non-trivial design decisions should be reviewed before implementation relies on them; proposed changes and unresolved questions must remain visible.
 
-Small editorial corrections and explicitly isolated tasks MAY use bounded review appropriate to their scope; they MUST NOT claim full-workflow completion. Publication remains separate: changes go through a PR to `main`.
-
-This amendment takes effect when this adoption is accepted and merged. The adoption itself remains accountable to the prior proposal/spec/architecture/plan review obligations, mapped to attributed assessments in [its review record](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md), plus implementation review and final verification. Local edits and tool installation alone do not adopt policy or grant approval.
+RigorLoop stage gates, CLI handoffs and operational records are no longer required. Historical reviews retain their original scope; they do not approve later changes. Publication, merge and release remain separately authorized actions.
 
 ## Documentation rules
 
-New workflow records under `docs/changes/` MUST remain local and ignored. Existing files already tracked on `main` remain historical repository material unless a separately scoped change removes them. Keep durable requirements and design in their owning `design/` files; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
+New workflow records under `docs/changes/` MUST remain local and ignored. Existing files already tracked on `main` remain historical repository material unless a separately scoped change removes them. Keep durable design in `design/architecture/` and contributor quality rules in `docs/skill-quality-standard.md`; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
 
 `README.md` MUST stay current for installation, usage, and the skills table.
 
@@ -136,10 +132,8 @@ Agents MUST NOT silently remove governance, safety boundaries, validation checks
 
 ## Standard workflow and manual skill use
 
-After adoption, new non-trivial standard-workflow work uses RigorLoop v2.0.0: `route` → requirement analysis/review → system and architecture design/integrated review → plan/delivery review → implementation → one whole-change Code Review → distinct final Verify → separately authorized PR delivery. Supporting research, exploration and incident work enter the responsible stage; they do not waive its gate.
+Use a proportionate workflow: describe the intended behavior → design with `c4-architecture` when architecture is affected → edit the owning artifacts → validate and evaluate → review through a PR.
 
-Git-held definitions own engineering meaning. Supported CLI tasks own current managed Change handoffs; use explicit project/Change identity and inspected revisions. Do not edit private operational storage, invent judgments, blindly replay interrupted mutations, or copy live database files as a backup. Plans retain stable delivery intent; PR evidence summaries retain historical assessments, not a parallel live queue.
+`design/architecture/` is the only design directory. Keep goals, requirements, behavior, decisions and risks together in each subject specification. Use a plan only when dependencies or risk justify it. No RigorLoop installation, Node upgrade or managed Change is required for this workflow.
 
-Manual invocation of individual skills is allowed for isolated tasks. Name the skill, follow its artifact rules and report the bounded outcome. Managed work that later relies on isolated output explicitly adopts and reviews it. Historical records retain original meanings and unknown status until evidence supports a disposition; there is no bulk conversion of old approvals.
-
-The [workflow guide](docs/workflows.md) owns setup, detailed stage routing, artifact locations and recovery instructions. It is subordinate to this constitution. Completion claims include changed subjects, actual validation, warnings, unresolved obligations and skipped checks. PR, merge and release are separate actions.
+The [workflow guide](docs/workflows.md) explains artifact locations and commands. Completion claims include changed subjects, actual validation, warnings, unresolved issues and skipped checks. New records under `docs/changes/` stay local and ignored.

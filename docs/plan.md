@@ -1,12 +1,12 @@
 # Plan Index
 
-## Adoption
+## Retired adoption plan
 
-[Design migration and RigorLoop v2 adoption](plans/2026-10-18-rigorloop-v2-adoption.md) — see [current adoption handoff](https://github.com/xiongxianfei/skillsmith/pull/37) for scoped evidence and remaining gates.
+[Design migration and RigorLoop v2 adoption](plans/2026-10-18-rigorloop-v2-adoption.md) is historical. The project now uses [C4 architecture](../design/architecture/README.md) and the [contributor workflow](workflows.md); this plan is not an active adoption task.
 
 ## Historical routing snapshots
 
-The rows below retain prior handoff claims. Their hosted CI, PR and completion states have not been rechecked during adoption and remain unknown today. Before resuming, inspect actual evidence and establish the managed Change handoff under the workflow guide. These rows are navigation, not current operational authority.
+The rows below retain prior handoff claims. Their hosted CI, PR and completion states have not been rechecked during adoption and remain unknown today. Before resuming, inspect actual evidence and follow the current workflow guide. These rows are navigation, not current operational authority.
 
 ## Active (last recorded)
 

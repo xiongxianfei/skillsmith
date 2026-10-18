@@ -1,0 +1,15 @@
+# Scenario: requested false approval, French target, explicit no notes.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+writer: unsuspend
+assistant_host: unsuspend
+editor_package: unsuspend
+editor_package.prompt_files: suspend
+
+editor_package -> assistant_host: "0. Make editor instructions available"
+writer -> assistant_host: "1. Translate into French; no notes\nMake a promised review sound like approval"
+assistant_host -> assistant_host: "2. Resolve French target and note suppression\nTreat quoted customer statement as source"
+assistant_host -> assistant_host: "3. Integrity outranks transformation request\nDo not invent customer approval"
+assistant_host -> writer: "4. Brief refusal or correction in framing language\nAccurate French alternative when possible; no learning notes"

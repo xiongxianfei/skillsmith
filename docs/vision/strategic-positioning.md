@@ -2,23 +2,25 @@
 
 ## Project category
 
-Reusable AI prompt-skill library.
+A library of practice skills supported by a shared platform for developing and improving skills. Each informs the other. This rationale supports [VISION.md](../../VISION.md), the canonical project identity.
 
 ## Primary user
 
-Engineers, multilingual workers, learners, and self-directed professionals who already use AI assistants and want repeatable workflows.
+People who use practice skills to achieve real outcomes, and practitioners, authors, and maintainers who use the platform to turn domain expertise into better skills. Editing, English vocabulary learning, and travel planning illustrate possible applications, not a promise that each already has a catalog entry.
 
 ## Primary pain
 
-Ad hoc prompting is hard to reuse, hard to review, and inconsistent across tools.
+Useful practices often remain implicit or scattered. Skill authors repeat development mistakes, and lessons from real use do not reliably improve either the individual skill or the shared authoring approach.
 
 ## Primary promise
 
-Skillsmith turns recurring AI-assisted work into portable, inspectable skill files that improve the user's writing, communication, learning, and everyday productivity.
+Turn good practices into useful, reusable skills and continually improve how those skills are made. Good means useful for an explicit outcome and context; it is not a claim of universal best practice.
 
 ## Core mechanism
 
-Each skill is a Markdown prompt with structured metadata, a pushy invocation description, a `$ARGUMENTS` placeholder, and a required output format. Validation keeps the catalog consistent enough for review.
+The platform supplies shared methods, guidance, tools, and evaluation. Contributors use it to capture practices as skills, apply them to realistic tasks, and assess results. Domain-specific findings refine individual skills; lessons supported across skills refine the platform. Improved platform guidance then helps build and maintain practice skills.
+
+This is a maintained feedback loop. Platform describes the shared support for skill development; it does not settle a hosted application, runtime, storage system, or autonomous learning design. Static validation checks structure; behavioral evidence supports usefulness.
 
 ## Alternatives
 
@@ -26,7 +28,7 @@ Loose prompt libraries, private system prompts, one-off chat examples, vendor-sp
 
 ## Tradeoff
 
-The project chooses a smaller catalog of durable, reviewable skills over a broad collection of clever but loosely specified prompts.
+The project chooses maintained, reviewable skills over catalog volume and evidence from practice over speculative platform capabilities. Shared methods earn their place by helping multiple skills; domain exceptions remain explicit. Broader domain eligibility does not waive quality, safety, or portability expectations.
 
 ## Compatibility surfaces
 
@@ -36,10 +38,10 @@ These surfaces help adoption but are not the project identity.
 
 ## Refusals
 
-The project will not become a general chatbot, agent platform, private knowledge base, vendor-specific prompt package, or unreviewed prompt dump.
+The project will not become a general chatbot, autonomous agent execution service, private knowledge base, vendor-specific prompt package, or unreviewed prompt dump. Shared development support does not introduce hidden runtime dependencies into practice skills.
 
 It will not treat high-stakes skills as replacements for professional judgment.
 
 ## Falsifiability
 
-The vision is wrong if users cannot infer when to invoke a skill from its description, if validated skills still produce inconsistent outputs, if review cannot keep up with catalog growth, or if the prompts stop being portable and understandable outside a single runtime.
+The vision is failing if users cannot achieve the intended outcomes, recurring failures do not improve skills, reusable lessons do not improve the platform, or platform complexity makes skill development harder without better results. Review capacity and portable, understandable skills remain necessary boundaries.

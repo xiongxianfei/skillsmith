@@ -1,0 +1,18 @@
+# Scenario: English project update, requested grammar lesson and one exercise.
+# Model supplies participant identities; self-messages are logical instructions.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+writer: unsuspend
+assistant_host: unsuspend
+editor_package: unsuspend
+editor_package.prompt_files: suspend
+
+editor_package -> assistant_host: "0. Make editor instructions available\n(precondition, not a network request)"
+writer -> assistant_host: "1. Polish this formal English update\nand teach one pattern with an exercise"
+assistant_host -> assistant_host: "2. FN-ED-001: separate source and instructions\nEnglish source + English instruction => Chinese companion"
+assistant_host -> assistant_host: "3. FN-ED-002: check integrity and edit minimally\nPreserve chronology and commitment"
+assistant_host -> assistant_host: "4. FN-ED-003: render English + Chinese\nCheck both versions against the same meaning"
+assistant_host -> assistant_host: "5. FN-ED-004: explain one grounded syntax lesson\nAdd requested exercise inside learning notes"
+assistant_host -> writer: "6. English + Chinese deliverables\nEnglish learning note and one exercise"

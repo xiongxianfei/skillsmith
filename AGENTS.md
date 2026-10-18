@@ -1,6 +1,6 @@
 # Skillsmith
 
-Reusable AI prompt skills for writing, translation, and productivity. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
+Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
 
 `CONSTITUTION.md` is the highest-level project governance. Follow it before README, contribution docs, code, or chat history when rules conflict.
 
@@ -41,13 +41,13 @@ Body must contain:
 - Descriptions MUST be English — skill bodies can be any language
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
 - Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
-- New or materially changed skills need eval evidence as defined in `design/requirements/skill-quality-standard.md`
+- New or materially changed skills need eval evidence as defined in `docs/skill-quality-standard.md`
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers
 
 ## Workflow
 
-Use [the workflow guide](docs/workflows.md) for RigorLoop v2.0.0 setup, managed versus isolated work, stage gates and recovery. [The design index](design/README.md) links requirement, system and architecture owners.
+Use [the workflow guide](docs/workflows.md) for scoped changes, validation and PR review. Use `c4-architecture` for design under [design/architecture/](design/architecture/README.md); keep behavior, constraints and decisions together in the relevant architecture specification.
 
 - All changes via PR to `main` (branch protection enabled)
 - Branch naming: `feat/`, `fix/`, `docs/`, `improve/`
@@ -62,7 +62,7 @@ Use [the workflow guide](docs/workflows.md) for RigorLoop v2.0.0 setup, managed 
 skills/*/SKILL.md          ← portable product prompts
 tests/validate_skills.py   ← CI validator (errors block merge, warnings don't)
 install.sh                 ← one-command installer (supports --target flag)
-design/                    ← requirements, system behavior and architecture
+design/architecture/       ← C4 specifications, models, views and generated diagrams
 CONSTITUTION.md            ← durable governance and workflow rules
 VISION.md                  ← project identity and scope
 ```

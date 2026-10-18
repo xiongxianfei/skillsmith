@@ -162,7 +162,7 @@ Errors block merging. Warnings are non-blocking but should be reviewed.
 | Omit optional frontmatter unless the skill needs it for an accepted compatibility reason | Rely on optional metadata for portable behavior |
 | Use plain section headers | Add emojis to Output Format headers |
 
-See `design/requirements/skill-quality-standard.md` for the canonical quality standard. This guide summarizes contributor workflow and should not duplicate that standard in full.
+See `docs/skill-quality-standard.md` for the canonical quality standard. This guide summarizes contributor workflow and should not duplicate that standard in full.
 
 ---
 
@@ -172,4 +172,4 @@ Open an issue using the **Skill Request** or **Bug Report** template.
 
 ## Repository maintenance
 
-Maintainers use [RigorLoop v2.0.0 setup and workflow](docs/workflows.md) and the [design index](design/README.md). Maintenance tooling is separate from installing or invoking the product skills. Non-trivial changes require reviewed requirements, design and delivery intent before implementation, followed by whole-change review and final verification.
+Maintainers follow the [workflow guide](docs/workflows.md) and use `c4-architecture` for [architecture design](design/architecture/README.md). Keep intended behavior, constraints and design decisions in the relevant architecture specification, then implement, validate and review through a PR. RigorLoop is not required.
