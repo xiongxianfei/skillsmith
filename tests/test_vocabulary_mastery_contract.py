@@ -70,7 +70,7 @@ class VocabularyMasteryContractTest(unittest.TestCase):
         self.assertIn("Always output both full versions", self.source)
         self.assertIn("self-contained", self.source)
         self.assertIn("Do not fabricate", self.source)
-        self.assertIn("without actual audio", self.source)
+        self.assertIn("without actual audio", self.source.lower())
 
 
 if __name__ == "__main__":
