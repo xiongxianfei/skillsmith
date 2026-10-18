@@ -2,7 +2,7 @@
 
 ## Status and ownership
 
-Architecture-level obligations, amended for the selected three-part engineering layout; see the [integrated design review](../../docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md) for assessment applicability. Implementation and satisfaction remain pending. This companion belongs to the requirement model governed by [the amended adoption requirements](rigorloop-v2-adoption.md). It adds no new stakeholder need or System Requirement; AR-RL-006 and AR-RL-007 derive from the new SR-RL-006. Module and Function definitions are allocated in [the workflow design](../architecture/maintenance-workflow.md); logical meanings live in `design/system/maintenance-workflow.md`.
+Architecture-level obligations, amended for the selected three-part engineering layout; see the [integrated design review](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md) for assessment applicability. Implementation and satisfaction remain pending. This companion belongs to the requirement model governed by [the amended adoption requirements](rigorloop-v2-adoption.md). It adds no new stakeholder need or System Requirement; AR-RL-006 and AR-RL-007 derive from the new SR-RL-006. Module and Function definitions are allocated in [the workflow design](../architecture/maintenance-workflow.md); logical meanings live in `design/system/maintenance-workflow.md`.
 
 Each AR below has one parent SR and one accountable Module. The allocation is authored only here; the design refers to it rather than duplicating it. Statements and acceptance are proposed obligations, not satisfaction claims. The tables account for What, Why, Who, When, Where, How and How much for every AR.
 
@@ -58,13 +58,13 @@ Acceptance: documentation names the exact package and supported environment; the
 
 Parent: SR-RL-005. Accountable Module: MOD-RL-003.
 
-The evidence owner MUST provide a sanitized Git-held account sufficient to inspect delivered scope and judgments without the live store. When operational continuation is required, it MUST also identify a supported backup/recovery path, distinguish missing state from acceptance, and obtain fresh context after recovery.
+The evidence owner MUST provide a sanitized PR-visible account sufficient to inspect delivered scope and judgments without the live store. When operational continuation is required, it MUST also identify a supported backup/recovery path, distinguish missing state from acceptance, and obtain fresh context after recovery.
 
 | What | Why | Who | When | Where | How | How much |
 | --- | --- | --- | --- | --- | --- | --- |
-| Preserve inspectable and recoverable proof | Git does not carry ignored local state | Reviewers, verifier and successor agents | Active transfer, maintenance and completion | Selected Git evidence and private supported backup | Attributed snapshots, backup integrity and supported restore | Necessary judgments, issues and proof; no secrets or full private store in Git |
+| Preserve inspectable and recoverable proof | Git does not carry ignored local state | Reviewers, verifier and successor agents | Active transfer, maintenance and completion | Selected PR evidence and private supported backup | Attributed snapshots, backup integrity and supported restore | Necessary judgments, issues and proof; no secrets or full private store in Git |
 
-Acceptance: a Git-only reviewer can inspect scope, basis, outcomes, warnings and limitations; a disposable backup/restore exercise recovers selected context using fresh revision tokens. Missing or unusable backup is surfaced without inventing recovered approvals.
+Acceptance: a reviewer with the repository and PR can inspect scope, basis, outcomes, warnings and limitations; a disposable backup/restore exercise recovers selected context using fresh revision tokens. Missing or unusable backup is surfaced without inventing recovered approvals.
 
 ## AR-RL-006 — Reconcile current engineering owners
 
@@ -82,11 +82,11 @@ Acceptance: migration maps every source to its destinations and dispositions, re
 
 Parent: SR-RL-006. Accountable Module: MOD-RL-003.
 
-The evidence owner MUST retain original source identities, historically relied-on bytes and judgment meaning while exposing new navigation. Uncommitted reviewed drafts MUST have recoverable pre-migration snapshots. Historical proof plans and snapshots MUST be labeled non-current, and changed subjects MUST receive applicable reassessment rather than inheriting approval from a moved filename.
+The evidence owner MUST retain original source identities, historically relied-on bytes and judgment meaning while exposing new navigation. Uncommitted reviewed drafts MUST have recoverable pre-migration snapshots. New snapshots remain local; the already-pushed historical snapshots and original Git sources provide immutable reference points without adding them to the final PR diff. Historical proof plans and snapshots MUST be labeled non-current, and changed subjects MUST receive applicable reassessment rather than inheriting approval from a moved filename.
 
 | What | Why | Who | When | Where | How | How much |
 | --- | --- | --- | --- | --- | --- | --- |
-| Keep migration provenance and proof interpretable | Rewrites can invalidate hashes or make old judgments look current | Reviewers and evidence maintainers | Migration, reassessment and historical access | Change-local source snapshots, test plans and review records | Preserve original subject/hash and bytes; add current navigation separately | All evidence relied on for the migration remains attributable; no invented re-verification |
+| Keep migration provenance and proof interpretable | Rewrites can invalidate hashes or make old judgments look current | Reviewers and evidence maintainers | Migration, reassessment and historical access | Immutable Git sources, local snapshots and PR review summaries | Preserve original subject/hash and bytes; add current navigation separately | All evidence relied on for the migration remains attributable; no invented re-verification |
 
 Acceptance: a reviewer can inspect the original source supporting a retained or superseded clause, including uncommitted drafts, and distinguish current definitions from historical source/test plans. Historical subject hashes are not globally rewritten. A moved test plan is not reported as a newly executed test.
 

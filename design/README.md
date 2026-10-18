@@ -12,7 +12,7 @@ Skillsmith ships portable Markdown prompts. This design separates what the produ
 
 ## Reading and changing the model
 
-Start with the relevant requirements, then follow behavior and allocation. Original IDs remain source-qualified; for example, `editor-expert-quality-optimization:R24` is distinct from the latest editor contract's R24. The [migration dispositions](../docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) explain which clauses survive and which explicit amendments replace older behavior. Historical test plans and source snapshots stay with their original changes under `docs/changes/`; they are evidence, not duplicate current definitions.
+Start with the relevant requirements, then follow behavior and allocation. Original IDs remain source-qualified; for example, `editor-expert-quality-optimization:R24` is distinct from the latest editor contract's R24. The historical [migration dispositions](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) explain which clauses survive and which explicit amendments replace older behavior. Original test plans and sources remain accessible through immutable Git history. Additional local snapshots under ignored `docs/changes/` are evidence, not committed duplicate definitions. Existing records already tracked on `main` remain unchanged.
 
 Use [the workflow guide](../docs/workflows.md) to change these owners. Plans describe delivery intent and concrete checks; they do not define a second product contract.
 
@@ -20,4 +20,4 @@ Use [the workflow guide](../docs/workflows.md) to change these owners. Plans des
 
 The migrated inventory does not contain complete requirements or detailed system designs for communicator, doctor, email-drafter, fitness-coach, journaling, language-tutor, nvc, oscp-coach, study-planner or vocabulary-mastery. Their prompts remain the observed implementation, subject to the shared quality standard and constitution. This migration does not invent approved designs for them or claim that all catalog design work is finished. A future material change must establish the missing subject contract before implementation.
 
-The maintenance process and product design models describe accepted intent and observed boundaries; satisfaction depends on current reviews and evidence. See the [adoption handoff](../docs/changes/2026-10-18-rigorloop-v2-adoption/handoff.md) for the actual migration assessment.
+The maintenance process and product design models describe accepted intent and observed boundaries; satisfaction depends on current reviews and evidence. See the [adoption handoff](https://github.com/xiongxianfei/skillsmith/pull/37) for the actual migration assessment.

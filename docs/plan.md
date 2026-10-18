@@ -2,7 +2,7 @@
 
 ## Adoption
 
-[Design migration and RigorLoop v2 adoption](plans/2026-10-18-rigorloop-v2-adoption.md) — see [current adoption handoff](changes/2026-10-18-rigorloop-v2-adoption/handoff.md) for scoped evidence and remaining gates.
+[Design migration and RigorLoop v2 adoption](plans/2026-10-18-rigorloop-v2-adoption.md) — see [current adoption handoff](https://github.com/xiongxianfei/skillsmith/pull/37) for scoped evidence and remaining gates.
 
 ## Historical routing snapshots
 

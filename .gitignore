@@ -25,3 +25,6 @@ Thumbs.db
 
 # RigorLoop local operational store and attachments
 /.rigorloop/
+
+# Local workflow records; existing tracked history remains tracked
+/docs/changes/

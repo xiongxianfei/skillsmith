@@ -1,6 +1,6 @@
 # Editor requirements
 
-Current requirement owner, migrated from the approved source without changing product behavior. IDs R/AC/EC/E retain their source-local identity under `editor-source-plus-companion-language-optimization`. The [source dispositions](../../docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) preserve exact sources, historical delivery conditions and supersession. One-time rollout instructions are historical evidence, not new product changes.
+Current requirement owner, migrated from the approved source without changing product behavior. IDs R/AC/EC/E retain their source-local identity under `editor-source-plus-companion-language-optimization`. The [source dispositions](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) preserve exact sources, historical delivery conditions and supersession. One-time rollout instructions are historical evidence, not new product changes.
 
 ## Goal and context
 

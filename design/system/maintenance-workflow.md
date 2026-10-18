@@ -19,4 +19,4 @@ F-RL-001 is realized by FN-RL-001 through FN-RL-004. These are logical process r
 
 ## Test intent
 
-Walk managed and isolated work, legacy resumption with unknown evidence, stale updates, independent assessment, Git-only review, and recovery after local-state loss. The adoption proof map allocates concrete checks; this logical definition does not claim they have run.
+Walk managed and isolated work, legacy resumption with unknown evidence, stale updates, independent assessment, review from the repository and PR without local workflow records, and recovery after local-state loss. The adoption proof map allocates concrete checks; this logical definition does not claim they have run.

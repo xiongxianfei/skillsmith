@@ -18,7 +18,8 @@ This is an orientation map of the repository observed during the design migratio
 | `design/requirements/` | Current obligations, Scenarios and acceptance |
 | `design/system/` | Logical behavior and reusable test intent |
 | `design/architecture/` | Responsibility, Interfaces, allocation and realization |
-| `docs/plans/`, `docs/changes/` | Stable delivery plans and attributed historical evidence |
+| `docs/plans/` | Stable delivery plans |
+| `docs/changes/` | New records remain local and ignored; pre-existing tracked history is preserved |
 | `.rigorloop.json` | Stable repository identity for maintenance tooling |
 | Ignored `.agents/skills/`, `.rigorloop/` | Installed maintenance adapters and CLI-owned local operational state |
 
@@ -28,7 +29,7 @@ A user invokes an installed skill. The host assistant reads its Markdown prompt 
 
 The Bash installer uses Git to clone the catalog into a temporary directory, copies skill directories into `~/.claude/skills` or the `--target` destination, replaces existing corresponding directories and removes the temporary clone. It does not generate prompt behavior.
 
-Maintainers separately use RigorLoop v2.0.0 adapters and its CLI. Git files own engineering definitions. Supported CLI tasks own managed work state in the ignored local store; reviewed Git evidence makes selected outcomes inspectable without that store. This is maintenance infrastructure, not a product runtime requirement.
+Maintainers separately use RigorLoop v2.0.0 adapters and its CLI. Git files own engineering definitions. Supported CLI tasks own managed work state in the ignored local store; the PR evidence summary makes selected outcomes inspectable without that store or local workflow records. This is maintenance infrastructure, not a product runtime requirement.
 
 ## Validation and CI
 

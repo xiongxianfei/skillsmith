@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-Requirement basis for the reviewed three-part design migration. See the review record for exact subject applicability and historical judgments. Independent review and applicability are recorded in the [requirement review](../../docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/requirement-review.md). This is an isolated requirement-analysis output, not evidence of completed adoption. The current constitution and workflow remain governing until their amendments are reviewed and accepted through the existing process.
+Requirement basis for the reviewed three-part design migration. See the review record for exact subject applicability and historical judgments. Independent review and applicability are recorded in the [requirement review](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/requirement-review.md). This is an isolated requirement-analysis output, not evidence of completed adoption. The current constitution and workflow remain governing until their amendments are reviewed and accepted through the existing process.
 
 The requested outcome is to use RigorLoop v2.0.0 to improve Skillsmith's maintenance workflow. This change covers explicit workflow adoption, the documentation inconsistencies discovered during assessment, and the subsequently requested migration of engineering definitions from `specs/` and `docs/architecture/` into `design/requirements/`, `design/system/` and `design/architecture/`. Finish and review this migration design before moving existing artifacts. Product prompts, validation logic, installation behavior and catalog scope remain unchanged; behavioral changes need their own concrete requirements.
 
@@ -132,7 +132,9 @@ Acceptance: a contributor can distinguish preview, actual installation, adoption
 
 ### SR-RL-005 — Keep review evidence recoverable
 
-The adoption MUST define how selected operational evidence survives local-state loss and remains available to another reviewer or agent. Completion evidence MUST include the delivered scope, actual judgments, validation results, warnings, unresolved issues and applicable recovery instructions. Ignored local storage alone MUST NOT be the only accessible basis for a PR readiness claim. Credentials and private local data MUST NOT be committed as evidence.
+The adoption MUST define how selected operational evidence survives local-state loss and remains available to another reviewer or agent. Completion evidence MUST include the delivered scope, actual judgments, validation results, warnings, unresolved issues and applicable recovery instructions. Ignored local storage alone MUST NOT be the only accessible basis for a PR readiness claim. Credentials and private local data MUST NOT be committed as evidence. New workflow records under `docs/changes/` MUST remain local and ignored. The 131 files already on `main` are preserved by this correction; the 46 files added by the adoption PR are excluded from its final diff while their local bytes remain intact. PR-facing evidence MUST summarize actual review/verification outcomes, subject identities, commands, warnings and limitations, with accessible historical source references. A clean checkout MUST NOT depend on ignored local files for documentation navigation.
+
+This refines the evidence-publication boundary at the user's explicit request after PR #37 was opened. Earlier review judgments retain their original scope; this correction requires affected reassessment. It does not authorize rewriting the already-pushed branch history.
 
 | What | Why | Who | When | Where | How | How much |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -144,7 +146,7 @@ Acceptance: demonstrate SC-RL-004 with a reviewer who has the repository and dec
 
 The repository MUST use `design/requirements/` for needs, obligations, constraints, black-box Scenarios and acceptance criteria; `design/system/` for stakeholder Features, logical Functions, behavior and model-owned test intent; and `design/architecture/` for responsible Modules, Interfaces, allocation and realization. Allocated Requirements remain in the requirement model and reference their one accountable architectural Module. The `specs/` and `docs/architecture/` directories MUST be removed after their contents and references have been reconciled. No forwarding files, symlinks or duplicate current owners are introduced at the retired paths.
 
-The migration MUST preserve every substantive obligation or record an explicit source-backed supersession, historical disposition or unresolved conflict. Requirement IDs MUST remain stable where the meaning is unchanged; repeated local IDs from different old documents MUST retain source qualification. Historical review hashes, quoted source paths and judgments MUST retain their original meaning. Current navigation MUST resolve to the new owner or an explicitly historical retained artifact. Existing test plans and evidence MUST NOT be mistaken for newly executed checks or deleted because they are not current system design.
+Original source bytes may be retained in immutable Git history and local snapshots; new duplicate workflow records are not committed. The migration MUST preserve every substantive obligation or record an explicit source-backed supersession, historical disposition or unresolved conflict. Requirement IDs MUST remain stable where the meaning is unchanged; repeated local IDs from different old documents MUST retain source qualification. Historical review hashes, quoted source paths and judgments MUST retain their original meaning. Current navigation MUST resolve to the new owner or an explicitly historical retained artifact. Existing test plans and evidence MUST NOT be mistaken for newly executed checks or deleted because they are not current system design.
 
 | What | Why | Who | When | Where | How | How much |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -174,7 +176,7 @@ python tests/check_readme_sync.py
 
 Review additionally covers the SR acceptance criteria, scenario walkthroughs, current-owner consistency, historical dispositions, product diff boundaries and evidence access. Do not claim these semantic obligations pass solely because the existing Python checks pass. Node or adapter installation checks are separate setup evidence and do not prove governance adoption.
 
-Current delivery evidence and historical analysis are linked from the [adoption handoff](../../docs/changes/2026-10-18-rigorloop-v2-adoption/handoff.md).
+Current delivery evidence and historical analysis are linked from the [adoption handoff](https://github.com/xiongxianfei/skillsmith/pull/37).
 
 ## Confirmed logical behavior
 

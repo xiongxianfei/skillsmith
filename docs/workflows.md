@@ -4,7 +4,7 @@
 
 This guide tells a maintainer how to develop a reviewed change and where its knowledge belongs. [CONSTITUTION.md](../CONSTITUTION.md) owns policy; [VISION.md](../VISION.md) owns product identity. [Requirements](../design/requirements/rigorloop-v2-adoption.md), [logical behavior](../design/system/maintenance-workflow.md) and [architecture](../design/architecture/maintenance-workflow.md) explain the adopted process.
 
-The v2 policy takes effect when this adoption is accepted and merged. This adoption finishes under prior governance, with attributed reviews and evidence in [its handoff](changes/2026-10-18-rigorloop-v2-adoption/handoff.md). Installing adapters does not approve or complete a change.
+The v2 policy takes effect when this adoption is accepted and merged. This adoption finishes under prior governance, with attributed reviews and evidence in [its handoff](https://github.com/xiongxianfei/skillsmith/pull/37). Installing adapters does not approve or complete a change.
 
 ## Choose the scope
 
@@ -38,12 +38,13 @@ Reviews identify the actual reviewer, subjects, findings and applicability. The 
 | Needs, obligations, Scenarios, acceptance and allocated requirements | `design/requirements/` |
 | Features, Functions, behavior and model-owned test intent | `design/system/` |
 | Modules, Interfaces, allocation and realization | `design/architecture/` |
-| Stable delivery intent and proof allocation | `docs/plans/<date>-<slug>.md`; focused proof map may be `docs/changes/<id>/test-spec.md` |
+| Stable delivery intent and proof allocation | `docs/plans/<date>-<slug>.md`; detailed proof maps may remain in local ignored `docs/changes/` |
 | Current managed goal, authority, selected basis, work, issues, judgments and next action | Supported CLI context for the explicitly selected Change |
-| Attributed historical evidence, source snapshots and Git-visible transfer account | `docs/changes/<id>/` |
+| Local workflow records | Ignored `docs/changes/<id>/`; files already tracked on `main` remain historical |
+| Reviewer-visible acceptance/evidence account | PR description with exact subjects, actual judgments, checks, limitations and accessible source references |
 | Navigation and prior plan history | `docs/plan.md`, `docs/plan-archive.md` |
 
-Start at the [design index](../design/README.md). Amend an existing owner rather than adding a competing definition. Git snapshots support review without the operational store; they are not a second writable work queue. Historical source/test documents retain their original scope and do not certify current code.
+Start at the [design index](../design/README.md). Amend an existing owner rather than adding a competing definition. Immutable source history and PR evidence support review without local records or the operational store; they are not a second writable work queue. Historical source/test documents retain their original scope and do not certify current code.
 
 ## Maintainer setup
 
@@ -79,7 +80,7 @@ On stale revision, reread context and reconcile the intended change. After inter
 
 ## Transfer and recovery
 
-Before transfer, save necessary current evidence and unresolved issues through supported tasks. Keep a sanitized Git account in `docs/changes/<id>/handoff.md`: scope, exact basis, attributed review/verification outcomes, checks, limitations and how to obtain necessary operational continuity. Label it an inspection-time snapshot, not current authority. Do not commit secrets or the private runtime store.
+Before transfer, save necessary current evidence and unresolved issues through supported tasks. Keep new detailed workflow records local under ignored `docs/changes/`. Publish a sanitized account in the PR: scope, exact basis, attributed review/verification outcomes, checks, limitations and how to obtain necessary operational continuity. Label it an inspection-time snapshot, not current authority. Do not add new `docs/changes/` files to Git or move workflow logs into another tracked directory. Existing tracked historical records are preserved until separately scoped removal. A clean checkout must navigate durable definitions without depending on local records. Do not commit secrets or the private runtime store.
 
 When continuity is needed, use `store backup` with the separately versioned `store-maintenance-v1` schema. The output path must be absent and outside the live runtime directory. Example input:
 
@@ -89,7 +90,7 @@ When continuity is needed, use `store backup` with the separately versioned `sto
 
 Pass that input to `npx --yes @xiongxianfei/rigorloop@2.0.0 store backup --root . --input - --format json`. Retain its returned integrity value and access instructions privately. Restore requires the backup path and integrity, explicit observed target state, `replace`, actor and reason. Inspect installed `store restore --help` and its schema; preview before restoring an existing store. Do not copy a live WAL database manually.
 
-Restore creates a fresh store incarnation. Read context and use its new revisions before continuing; recovered storage does not renew approval or grant authority. Capabilities reports interrupted maintenance; only its supported observed-state finish/rollback procedure may resolve it. If no usable backup exists, record lost evidence as a gap instead of reconstructing approvals. The adoption's [disposable fixture](changes/2026-10-18-rigorloop-v2-adoption/cli_fixture.py) exercises preview, stale-update rejection and backup/restore without touching the project store.
+Restore creates a fresh store incarnation. Read context and use its new revisions before continuing; recovered storage does not renew approval or grant authority. Capabilities reports interrupted maintenance; only its supported observed-state finish/rollback procedure may resolve it. If no usable backup exists, record lost evidence as a gap instead of reconstructing approvals. The adoption's historical [disposable fixture](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/cli_fixture.py) exercises preview, stale-update rejection and backup/restore without touching the project store.
 
 ## Validation and handoff
 

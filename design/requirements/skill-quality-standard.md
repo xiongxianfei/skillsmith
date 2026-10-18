@@ -1,6 +1,6 @@
 # Skill Quality Standard requirements
 
-Current requirement owner, migrated from the approved source without changing product behavior. IDs R/AC/EC/E retain their source-local identity under `skill-quality-standard`. The [source dispositions](../../docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) preserve exact sources, historical delivery conditions and supersession. One-time rollout instructions are historical evidence, not new product changes.
+Current requirement owner, migrated from the approved source without changing product behavior. IDs R/AC/EC/E retain their source-local identity under `skill-quality-standard`. The [source dispositions](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/source-disposition.md) preserve exact sources, historical delivery conditions and supersession. One-time rollout instructions are historical evidence, not new product changes.
 
 ## Goal and context
 
@@ -290,7 +290,7 @@ Outputs:
 ## State and invariants
 
 - The canonical skill-quality standard is this spec once approved.
-- `docs/changes/2026-05-25-rigorloop-governed-skill-quality/test-spec.md` maps this spec to validation and eval checks without restating the full standard.
+- [the original quality proof map](https://github.com/xiongxianfei/skillsmith/blob/e3ab8b3f4c07d4f96a97ec69d8f73b3a92e17aa1/specs/skill-quality-standard.test.md) maps this spec to validation and eval checks without restating the full standard.
 - `tests/evals/skills/grandfathered-skills.yaml` is the only source of truth for grandfathered skill names.
 - Existing skills listed in the grandfathering baseline remain grandfathered for eval-fixture enforcement until materially changed.
 - Skills remain pure prompt assets unless a later accepted proposal and spec change that boundary.
@@ -402,7 +402,7 @@ AC1. `design/requirements/skill-quality-standard.md` exists and contains testabl
 
 <a id="ac2"></a>
 
-AC2. `docs/changes/2026-05-25-rigorloop-governed-skill-quality/test-spec.md` maps each requirement in this spec to validation, fixture review, manual review, or non-applicable coverage.
+AC2. [the original quality proof map](https://github.com/xiongxianfei/skillsmith/blob/e3ab8b3f4c07d4f96a97ec69d8f73b3a92e17aa1/specs/skill-quality-standard.test.md) maps each requirement in this spec to validation, fixture review, manual review, or non-applicable coverage.
 
 <a id="ac3"></a>
 

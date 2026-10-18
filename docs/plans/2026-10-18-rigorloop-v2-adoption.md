@@ -6,7 +6,7 @@ Deliver the reviewed three-part engineering model and RigorLoop maintenance guid
 
 ## Current Handoff Summary
 
-This adoption is delivered under the pre-adoption governance. Its current evidence and outcomes are in `docs/changes/2026-10-18-rigorloop-v2-adoption/handoff.md`; no v2 approvals are invented for preparation performed outside a managed Change. Future managed changes use the CLI handoff after adoption takes effect. The plan owns stable delivery intent, not an independently writable live status journal.
+This adoption is delivered under the pre-adoption governance. Its reviewer-facing evidence and outcomes are summarized in [PR #37](https://github.com/xiongxianfei/skillsmith/pull/37); detailed workflow records remain local under ignored `docs/changes/`; no v2 approvals are invented for preparation performed outside a managed Change. Future managed changes use the CLI handoff after adoption takes effect. The plan owns stable delivery intent, not an independently writable live status journal.
 
 ## Source artifacts
 
@@ -43,7 +43,7 @@ There are 16 spec/test-spec and five architecture source files. Seven test specs
 
 - Kind: implementation. Covers SR-RL-001/002/004/005 and applicable ARs. Dependency: M2 canonical paths.
 - Scope: update constitution, concise agent/contributor guidance, workflow guide, README and project map; correct optional argument hints and fixed skill count; retain existing engineering principles. Add tracked stable project identity and ignore local runtime state. Provide handoff and recovery instructions.
-- Proof TG-3: verify managed/isolated task routing, old-to-new review coverage, source order and navigation; unknown historical lifecycle entries remain unknown. Run the pinned installer `init codex --dry-run --json` in a disposable project and compare the destination tree before/after: require a successful preview result and no destination writes. Separately run CLI create/context/update, stale-revision rejection, backup and restore; verify restored context and fresh revisions. A Git-only reader can inspect this change's selected evidence without a live store.
+- Proof TG-3: verify managed/isolated task routing, old-to-new review coverage, source order and navigation; unknown historical lifecycle entries remain unknown. Run the pinned installer `init codex --dry-run --json` in a disposable project and compare the destination tree before/after: require a successful preview result and no destination writes. Separately run CLI create/context/update, stale-revision rejection, backup and restore; verify restored context and fresh revisions. A reader with the repository and PR can inspect this change's selected evidence without a live store.
 - Completion: coherent guidance, reproducible supported runtime exercise, no Node dependency in product execution or Python checks. Adoption rules take effect only through the accepted governance amendment; local edits do not waive this change's current gates.
 - Recovery: fixture failures remain isolated; do not restore over a live store. Revert only newly authored setup/configuration if its design is invalid. Never hand-edit private storage or invent CLI judgments.
 
@@ -59,16 +59,19 @@ TG-FINAL-1 combines TG-1/2/3: a maintainer can navigate effective editor obligat
 PYTHONDONTWRITEBYTECODE=1 python -m unittest discover tests
 PYTHONDONTWRITEBYTECODE=1 python tests/validate_skills.py
 PYTHONDONTWRITEBYTECODE=1 python tests/check_readme_sync.py
-python -B docs/changes/2026-10-18-rigorloop-v2-adoption/check_migration.py
 git diff --check
 ```
 
-Existing static eval checks do not prove model output quality. No live-model claim or test is needed when product prompts remain byte-identical. Capture exact fixture commands/results separately; qualification must be observed, not inferred from documentation. Report warnings and skipped hosted checks.
+The original migration/negative/CLI proof scripts are retained locally and available in historical commit `230c4de`; they are not clean-checkout commands. For the publication correction, export the Git index into a disposable tree and check active Markdown links, unchanged baseline records/product bytes, and zero `docs/changes/` diff against `origin/main`. Existing static eval checks do not prove model output quality. No live-model claim or test is needed when product prompts remain byte-identical. Capture exact fixture commands/results separately; qualification must be observed, not inferred from documentation. Report warnings and skipped hosted checks.
 
 ## Risks, dependencies and rationale
 
-Main risks are silently losing inherited editor obligations, making historical approvals look current, broken relative links and a database-dependent handoff inaccessible to reviewers. Source snapshots, clause dispositions, explicit review attribution, current-link auditing and a Git-held acceptance account address those risks. Missing local Node/CLI capability blocks the fixture, not permission to weaken the required proof. Review the actual remainder of unresolved evidence before claiming completion. The selected source layout and review policy come from the reviewed design, not this plan.
+Main risks are silently losing inherited editor obligations, making historical approvals look current, broken relative links and a database-dependent handoff inaccessible to reviewers. Source snapshots, clause dispositions, explicit review attribution, current-link auditing and a PR-visible acceptance account address those risks. Missing local Node/CLI capability blocks the fixture, not permission to weaken the required proof. Review the actual remainder of unresolved evidence before claiming completion. The selected source layout and review policy come from the reviewed design, not this plan.
 
 ## Readiness
 
 Delivery review is recorded in the change directory. Its exact inspected subjects and judgment determine implementation readiness; this plan does not approve itself.
+
+## Publication correction
+
+The user's follow-up instruction excludes this PR's 46 new workflow records from Git while retaining local bytes and all 131 pre-existing tracked records. Add the ignore rule, repair tracked navigation to current owners or immutable historical sources, publish actual assessment evidence in PR #37, and independently reassess the changed evidence boundary. Acceptance requires a zero diff under `docs/changes/` against the PR base and successful clean-checkout navigation. Do not rewrite branch history or claim prior approval automatically covers the correction.

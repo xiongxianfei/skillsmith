@@ -102,9 +102,11 @@ After all authorized milestones, one independent whole-change Code Review MUST a
 
 Small editorial corrections and explicitly isolated tasks MAY use bounded review appropriate to their scope; they MUST NOT claim full-workflow completion. Publication remains separate: changes go through a PR to `main`.
 
-This amendment takes effect when this adoption is accepted and merged. The adoption itself remains accountable to the prior proposal/spec/architecture/plan review obligations, mapped to attributed assessments in [its review record](docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md), plus implementation review and final verification. Local edits and tool installation alone do not adopt policy or grant approval.
+This amendment takes effect when this adoption is accepted and merged. The adoption itself remains accountable to the prior proposal/spec/architecture/plan review obligations, mapped to attributed assessments in [its review record](https://github.com/xiongxianfei/skillsmith/blob/230c4de32289abc8a883bab86ba744e9f4009d32/docs/changes/2026-10-18-rigorloop-v2-adoption/reviews/design-review.md), plus implementation review and final verification. Local edits and tool installation alone do not adopt policy or grant approval.
 
 ## Documentation rules
+
+New workflow records under `docs/changes/` MUST remain local and ignored. Existing files already tracked on `main` remain historical repository material unless a separately scoped change removes them. Keep durable requirements and design in their owning `design/` files; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
 
 `README.md` MUST stay current for installation, usage, and the skills table.
 
@@ -136,7 +138,7 @@ Agents MUST NOT silently remove governance, safety boundaries, validation checks
 
 After adoption, new non-trivial standard-workflow work uses RigorLoop v2.0.0: `route` → requirement analysis/review → system and architecture design/integrated review → plan/delivery review → implementation → one whole-change Code Review → distinct final Verify → separately authorized PR delivery. Supporting research, exploration and incident work enter the responsible stage; they do not waive its gate.
 
-Git-held definitions own engineering meaning. Supported CLI tasks own current managed Change handoffs; use explicit project/Change identity and inspected revisions. Do not edit private operational storage, invent judgments, blindly replay interrupted mutations, or copy live database files as a backup. Plans retain stable delivery intent; Git evidence snapshots retain historical assessments, not a parallel live queue.
+Git-held definitions own engineering meaning. Supported CLI tasks own current managed Change handoffs; use explicit project/Change identity and inspected revisions. Do not edit private operational storage, invent judgments, blindly replay interrupted mutations, or copy live database files as a backup. Plans retain stable delivery intent; PR evidence summaries retain historical assessments, not a parallel live queue.
 
 Manual invocation of individual skills is allowed for isolated tasks. Name the skill, follow its artifact rules and report the bounded outcome. Managed work that later relies on isolated output explicitly adopts and reviews it. Historical records retain original meanings and unknown status until evidence supports a disposition; there is no bulk conversion of old approvals.
 
