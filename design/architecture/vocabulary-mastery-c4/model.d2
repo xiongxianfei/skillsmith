@@ -1,0 +1,50 @@
+# Current implementation projection. IDs own diagram identity, not new services.
+vars: {
+  d2-config: {
+    theme-id: 0
+  }
+}
+direction: right
+
+learner: "Vocabulary learner\n[Person]" {
+  shape: c4-person
+  tooltip: Supplies one English lexical item, example context, target sense and variety preference.
+  style.fill: "#DCEAF7"
+}
+maintainer: "Skill maintainer\n[Person]" {
+  shape: c4-person
+  tooltip: Authors and reviews Markdown and evaluation scenarios using shared maintenance tooling.
+  style.fill: "#DCEAF7"
+}
+assistant_host: "Assistant host\n[External software system]\nInterprets the vocabulary prompt" {
+  tooltip: User-selected assistant and model. Application, model service, transport and persistence topology are outside the observed repository.
+  style.fill: "#EDF0F3"
+  style.stroke-dash: 4
+}
+vocabulary_package: "Vocabulary mastery\n[Software system: passive prompt package]" {
+  tooltip: Scope is the distributed vocabulary instructions. No Skillsmith-owned execution service is implied.
+  style.fill: "#E9F6F4"
+  prompt_files: "Vocabulary prompt files\n[Container: file store]\nMarkdown / YAML frontmatter\nskills/vocabulary-mastery/SKILL.md" {
+    shape: stored_data
+    tooltip: Authored file in the repository, copied to a host skill folder or pasted into a conversation. Not a database, generated prompt or learner profile.
+    style.fill: "#BCE4DE"
+  }
+}
+
+# Context-level relationships.
+maintainer -> vocabulary_package: "Authors and reviews\nversioned instructions"
+vocabulary_package -> assistant_host: "Supplies prompt instructions\ninstalled or pasted Markdown"
+learner -> assistant_host: "Requests a word reference"
+assistant_host -> learner: "Returns full EN / ZH references"
+
+# Container-level refinements of package relationships.
+maintainer -> vocabulary_package.prompt_files: "Edits the authored file\nGit working tree"
+vocabulary_package.prompt_files -> assistant_host: "Supplies SKILL.md content\ncopy / host loading / paste"
+
+# Observed interaction type for derived scenarios: host-internal interpretation.
+# Hide in structural views; ordered self-messages do not create components.
+assistant_host -> assistant_host: "Interprets prompt policies\nwithin the host"
+
+# Improve legibility without altering structural meaning.
+(** -> **)[*].style.italic: false
+(** -> **)[*].style.font-color: "#25364A"

@@ -1,0 +1,18 @@
+# Scenario grounded in vocabulary-record-two-complete-references.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+learner: unsuspend
+assistant_host: unsuspend
+vocabulary_package: unsuspend
+vocabulary_package.prompt_files: suspend
+
+vocabulary_package -> assistant_host: "0. Make prompt instructions available\nprecondition, not a network request"
+learner -> assistant_host: "1. Study record\nRequest the full English and Chinese reference"
+assistant_host -> assistant_host: "2. Identify one lexical item\nSelect supported senses and word classes"
+assistant_host -> assistant_host: "3. Build one shared sense map\nChoose consistent examples and recall concepts"
+assistant_host -> assistant_host: "4. Draft the full English reference\nOverview + 10 domains + connections + 3 Q&A"
+assistant_host -> assistant_host: "5. Draft full Simplified Chinese reference\nPreserve senses, IPA, examples and recall concepts"
+assistant_host -> assistant_host: "6. Check each part for completeness\nCompare facts, examples, answers and caveats"
+assistant_host -> learner: "7. Return English first, Chinese second\nTwo self-contained references, not alternating paragraphs"

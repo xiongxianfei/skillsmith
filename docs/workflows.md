@@ -1,191 +1,184 @@
-# Skillsmith Workflow Guide
+# Contributing to Skillsmith
 
-## Purpose
+Skillsmith uses C4 for design and ordinary Git/PR review for delivery. RigorLoop is no longer part of the active workflow. The [constitution](../CONSTITUTION.md) governs this guide; the [quality standard](skill-quality-standard.md) defines skill evidence requirements.
 
-This guide maps Skillsmith's local artifacts to the standard spec-driven, test-driven workflow. It tells agents where lifecycle evidence belongs; the specialized stage skills still own the content of proposals, specs, architecture records, plans, reviews, implementation, verification, PR handoff, and learning records.
+## 1. Define the change
 
-Treat this file as the project-local workflow contract and artifact-location map. When this guide conflicts with higher-priority governance, follow the source order below and update this guide rather than relying on chat history.
+Inspect the current prompt, tests and relevant architecture. Describe the user problem, intended behavior, safety/compatibility boundaries and observable acceptance examples. Small changes can use the issue or PR description. For architectural changes, use `c4-architecture` and keep this context in the subject's `architecture-spec.md` under [design/architecture/](../design/architecture/README.md).
 
-## Source order
+## 2. Design and edit
 
-Use this order when artifacts conflict:
+Use a shared `model.d2` within each C4 package, context/container views and only the dynamic views needed to explain important scenarios. Keep implemented, proposed and unknown behavior distinct. Obtain human review of consequential decisions before relying on them. Optional decision records explain meaningful tradeoffs; no separate requirement, system-design or delivery-stage hierarchy is required.
 
-1. `CONSTITUTION.md`
-2. `VISION.md`
-3. Approved specs under `specs/` or change-local docs under `docs/changes/`
-4. Architecture, workflow, and project-map docs under `docs/`
-5. Execution plans and test specs
-6. Tests and CI configuration
-7. Implementation files
-8. README, contribution docs, and chat history
+Edit the owning prompt, validator, installer or document. Add or update eval fixtures for new or materially changed skills. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
 
-## Standard lifecycle
+Keep current design decisions in the subject architecture specification. When delivery sequencing needs a plan, use the issue, PR description or a local working note; do not recreate a separate proposal/plan directory or an active-plan index.
 
-Non-trivial changes follow this path:
+## 3. Validate and evaluate
 
-```text
-proposal -> proposal-review -> spec -> spec-review -> architecture -> architecture-review -> plan -> plan-review -> test-spec -> implement -> code-review -> review-resolution when triggered -> ci-maintenance when triggered -> explain-change -> verify -> pr
-```
-
-Manual invocation of one skill is allowed and remains isolated unless the user explicitly asks to continue through the full workflow or an active workflow-managed context requires continuation.
-
-## Artifact locations
-
-Use existing files when they already own the topic. For new lifecycle artifacts, prefer these paths:
-
-| Artifact type | Canonical location |
-|---|---|
-| Agent guidance | `AGENTS.md` |
-| Constitution | `CONSTITUTION.md` |
-| Vision | `VISION.md` |
-| Workflow guide | `docs/workflows.md` |
-| Project map | `docs/project-map.md` |
-| Strategic positioning | `docs/vision/strategic-positioning.md` |
-| Change metadata | `docs/changes/<change-id>/change.yaml` |
-| Change-local proposal | `docs/changes/<change-id>/proposal.md` |
-| Top-level proposal | `docs/proposals/YYYY-MM-DD-slug.md` |
-| Durable product or skill spec | `specs/<slug>.md` |
-| Durable test spec | `specs/<slug>.test.md` |
-| Change-local spec | `docs/changes/<change-id>/spec.md` |
-| Change-local architecture | `docs/changes/<change-id>/architecture.md` |
-| System architecture | `docs/architecture/system/architecture.md` |
-| Plan body | `docs/plans/YYYY-MM-DD-slug.md` |
-| Plan lifecycle index | `docs/plan.md` |
-| Plan lifecycle archive | `docs/plan-archive.md` |
-| Change-local test spec | `docs/changes/<change-id>/test-spec.md` |
-| Review record | `docs/changes/<change-id>/reviews/<stage>-r<n>.md` |
-| Review log | `docs/changes/<change-id>/review-log.md` |
-| Review resolution | `docs/changes/<change-id>/review-resolution.md` |
-| Explain-change record | `docs/changes/<change-id>/explain-change.md` |
-| Verify report | `docs/changes/<change-id>/verify-report.md` |
-| PR handoff | `docs/changes/<change-id>/pr.md` |
-| Learn session | `docs/learn/sessions/YYYY-MM-DD-slug.md` |
-| Learn topic | `docs/learn/topics/<topic>.md` |
-| Cross-change follow-ups | `docs/follow-ups.md` |
-
-Use `docs/changes/<change-id>/` for workflow-managed work that needs traceability across requirements, design, plan, tests, implementation, review, verification, and PR handoff.
-
-Use top-level `specs/` for durable product or skill contracts that should outlive one change.
-
-Use `docs/plans/YYYY-MM-DD-slug.md` for detailed plan bodies. `docs/changes/<change-id>/plan.md` is non-canonical and should be treated as historical or rejected unless an older artifact explicitly explains why it exists.
-
-## Change IDs
-
-Use lowercase dated slugs:
-
-```text
-YYYY-MM-DD-short-name
-```
-
-Example:
-
-```text
-docs/changes/2026-05-25-add-skill-validator-rules/
-```
-
-## Plan Index And Archive
-
-`docs/plan.md` is lifecycle index bookkeeping, not a milestone journal. Keep it bounded:
-
-- `Active` contains active or blocked plan bodies that still own current routing.
-- `Blocked` contains plans that cannot move without a named decision, dependency, or external event.
-- `Done (recent)` contains only a short recent window of terminal plan history when that helps current routing.
-- `docs/plan-archive.md` contains older terminal plan history, including superseded, abandoned, archived, or completed plans that no longer have active routing context.
-
-Write plan references in both files as relative Markdown links such as `[Editor plan](plans/YYYY-MM-DD-slug.md)`.
-
-Move superseded entries out of `docs/plan.md` when they no longer carry active routing context. Keep superseded entries in `docs/plan.md` only while the active index genuinely needs the replacement context and the entry names both `superseded by:` and a non-empty `active-context:`.
-
-## Follow-up Routing
-
-Route future work to the artifact that can act on it:
-
-- active plan work goes in the active plan body and `docs/plan.md`;
-- review-driven work goes in `review-log.md` and, when needed, `review-resolution.md`;
-- release or PR handoff work goes in the change-local PR or verify artifacts;
-- durable lessons go in `docs/learn/sessions/` and confirmed topic files;
-- cross-change work with no better owner goes in `docs/follow-ups.md`.
-
-Do not put deferred execution work in `docs/project-map.md`; project maps orient readers and do not own future work.
-
-## Stage routing
-
-Use `explore` before proposal when the problem, user value, or option set is not stable.
-
-Use `research` before proposal, spec, architecture, or implementation when current external facts, platform behavior, standards, laws, pricing, security limits, or dependency behavior affect correctness.
-
-Use `proposal` when a direction needs decision framing before requirements.
-
-Use `proposal-review` when a proposal needs challenge before downstream reliance.
-
-Use `spec` when observable behavior, compatibility, safety, validation, or user-facing contracts need to be stated before implementation.
-
-Use `spec-review` when requirements need challenge before architecture, planning, test planning, or implementation.
-
-Use `architecture` when a change affects repository boundaries, dependencies, generated assets, plugin packaging, data flow, control flow, security, performance, migration, or long-lived design decisions.
-
-Use `architecture-review` before implementation when architecture is material or hard to reverse.
-
-Use `plan` when work spans multiple files, milestones, risky edits, migration steps, or separate reviewable slices.
-
-Use `plan-review` before implementation when the execution sequence, validation plan, or recovery path needs challenge.
-
-Use `test-spec` before implementation when requirements need traceable test coverage.
-
-Use `implement` only after the needed upstream artifacts are stable enough to code.
-
-Use `code-review` after implementation and before final closeout for validator, installer, CI, template, high-risk skill, or multi-file changes.
-
-Use `review-resolution` when a material review finding needs action, owner decision, or re-review evidence.
-
-Use `ci-maintenance` only when CI infrastructure or workflow coverage changes are triggered.
-
-Use `explain-change` after meaningful implementation or governance changes when reviewers need durable rationale.
-
-Use `verify` for final branch readiness. `verify` owns branch-ready claims.
-
-Use `pr` after verification when the change is ready for review handoff. `pr` owns PR-body and PR-open readiness.
-
-Use `learn` after incidents, repeated review findings, workflow gaps, validation gaps, or explicit owner requests to preserve lessons.
-
-## Implementation gates
-
-Implementation is allowed only when the required upstream state is present for the change size and risk.
-
-Small editorial changes may proceed directly with validation when they do not change behavior, scope, safety posture, or public contracts.
-
-Adding a skill, changing a skill output contract, changing validation behavior, changing installer behavior, adding dependencies, or repositioning the project requires written requirements first.
-
-Architecture review is required before implementation when a change adds new components, dependencies, generated assets, external services, data flow, plugin packaging behavior, or long-lived repository structure.
-
-## Review and claim routing
-
-Readiness is not Done. Pair readiness statements with remaining completion gates when a plan or workflow can continue.
-
-`verify` owns branch-ready claims. `pr` owns PR-body and PR-open readiness.
-
-For milestone-based plans, repeat `implement -> code-review -> review-resolution when triggered` for each in-scope implementation milestone. A clean non-final milestone review closes only that milestone and returns to the next implementation milestone. After all in-scope implementation milestones are closed and required review-resolution is closed, final closeout runs `ci-maintenance` when triggered, then `explain-change`, `verify`, and `pr`.
-
-Review logs must not list open material findings before review-resolution closeout is treated as closed. A stage-owned non-approval outcome that requires revision needs same-stage re-review or explicit owner closeout evidence.
-
-## Validation evidence
-
-Every workflow closeout must report:
-
-- changed files;
-- validation commands run;
-- warnings or skipped checks;
-- unresolved questions;
-- next stage or stop condition.
-
-The default validation command is:
+Install PyYAML if needed, then run the required check from the repository root:
 
 ```bash
+pip install pyyaml
 python tests/validate_skills.py
 ```
 
-Targeted checks should match the change. Examples include stale-name searches after a rename, README marker checks after a vision sync, fixture checks after validator updates, and plan-index consistency checks after plan lifecycle changes.
+Errors block merging. Warnings are non-blocking but must be reviewed.
 
-## Current known gaps
+Run `python tests/check_readme_sync.py` when changing the catalog or its documentation, and relevant unit tests when changing validation code. Static fixtures describe expected behavior; they do not replace the model evidence required by the quality standard.
 
-No current workflow gaps are recorded here. Add gaps only when they affect stage routing or artifact ownership.
+The validator discovers fixtures through existing `skills/` directories. A fixture authored before its skill directory exists needs a direct `validate_cases_file` check; the full command does not cover that orphan fixture. This limitation was observed during the menu and learning-skill work. Likewise, material-change classification is a review decision, not something the current tree alone proves.
+
+For changed C4 diagrams, put D2 on PATH and run the package's helper:
+
+```bash
+python3 design/architecture/<subject>/scripts/architecture.py format
+python3 design/architecture/<subject>/scripts/architecture.py check
+python3 design/architecture/<subject>/scripts/architecture.py render
+```
+
+Inspect the rendered SVGs for readability and semantic accuracy. Python and D2 serve architecture checks; D2 is not a product runtime dependency. If a check cannot run, report that explicitly.
+
+## 4. Review and deliver
+
+Use a PR to `main` with the problem, resulting behavior, relevant design decisions and actual validation/evaluation results. Report warnings, failures, skipped checks and open questions. Reviewers assess the complete diff with depth appropriate to its risk; do not infer human design approval from successful commands.
+
+Put task status and sufficient sanitized review/validation evidence in the issue or PR. Keep private working notes outside the repository. Preserve historical provenance with fixed Git links and migrate durable decisions into their owning architecture or quality documents; do not recreate workflow-record directories. Commit, push, merge and release require the applicable user authorization.
+
+## Adding a new skill
+
+
+### 1. Create the skill directory
+
+```bash
+mkdir skills/<skill-name>
+```
+
+Use lowercase, hyphenated names such as `meal-planner` or `code-reviewer`.
+
+### 2. Write `SKILL.md`
+
+Copy the structure below and fill it in:
+
+```markdown
+---
+name: your-skill-name
+description: >
+  One or two sentences in English describing what the skill does and when it triggers.
+  Be specific about trigger phrases so the assistant knows when to invoke it.
+---
+
+**Input:**
+$ARGUMENTS
+
+---
+
+# Role / Profile
+
+[Describe the persona or role the assistant should adopt]
+
+## Workflow
+
+[Step-by-step instructions]
+
+## Output Format
+
+[Exact output structure the assistant must follow]
+```
+
+### 3. Checklist before opening a PR
+
+- [ ] `description` is in English and under 250 characters
+- [ ] Optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` is omitted unless an accepted proposal/spec requires it
+- [ ] `$ARGUMENTS` appears in the prompt body
+- [ ] `## Output Format` section is present
+- [ ] No emojis in the Output Format section headers
+- [ ] New or materially changed skills include at least three eval scenarios: normal use, indirect trigger, and edge/safety/failure/non-trigger/misuse behavior
+- [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes, and at least one safety or misuse eval case
+- [ ] CI passes locally: `python tests/validate_skills.py`
+- [ ] Skill added to the README skills table
+- [ ] Skill added to the `cp` install commands in README
+
+### 4. Add eval fixtures for new or material changes
+
+New or materially changed skills need static eval evidence at:
+
+```text
+tests/evals/skills/<skill-name>/cases.yaml
+```
+
+Use this minimal schema:
+
+```yaml
+version: 1
+scenarios:
+  - id: normal-use
+    category: normal
+    prompt: "A realistic direct user request."
+    expected_behavior: "The observable behavior reviewers should expect."
+  - id: indirect-trigger
+    category: indirect-trigger
+    prompt: "A vague or casual request that should still trigger the skill."
+    expected_behavior: "How the skill recognizes and handles the request."
+  - id: edge-case
+    category: edge
+    prompt: "An edge, failure, non-trigger, safety, or misuse situation."
+    expected_behavior: "The safe or bounded behavior expected."
+```
+
+Allowed edge categories are `edge`, `safety`, `failure`, `non-trigger`, and `misuse`.
+
+For high-risk skills, add `high_risk: true`, `safety_notes`, and at least one `safety` or `misuse` scenario. The first slice does not require a shared domain-specific safety schema.
+
+Existing skills listed in `tests/evals/skills/grandfathered-skills.yaml` may lack `cases.yaml` until materially changed.
+
+### 5. Open a pull request
+
+The PR template will pre-fill the checklist for you. Include one or two example inputs and outputs in the PR description so reviewers can quickly understand what the skill does.
+
+---
+
+## Improving an existing skill
+
+- Keep changes focused: one concern per PR
+- If you're changing the output format, explain why the new format is better
+- Treat a change as material if it could alter what the skill does, when it triggers, or what it returns
+- Material changes need the same eval evidence as a new skill
+- Editorial changes, such as typo fixes that do not affect trigger behavior, output contract, workflow steps, referenced files, or safety behavior, may proceed without new eval fixtures
+- CI must pass after your changes
+
+---
+
+## Reporting bugs
+
+Record bugs so another contributor can reproduce them without extra back-and-forth:
+
+- Include the affected skill or repo area
+- Include the smallest reproduction you can find
+- Paste the exact input when possible
+- State expected behavior and actual behavior separately
+- Include the model used if behavior varies by model
+- Add the relevant output excerpt or screenshot if the failure is formatting-related
+
+A bug report is actionable when someone else can reproduce it from the issue alone.
+
+---
+
+## Fixing bugs
+
+When you fix a bug, capture the full trail in the PR:
+
+- Root cause: what was actually wrong
+- Fix: why the change is correct
+- Regression coverage: what check now prevents recurrence
+- Prevention artifact: which doc, template, or validator rule was updated if the bug exposed a repeatable pattern
+
+For this repo, the prevention artifact is often one of:
+
+- `tests/validate_skills.py`
+- the affected `skills/<skill-name>/SKILL.md`
+- `README.md`
+- `docs/workflows.md`
+- `.github/ISSUE_TEMPLATE/bug-report.yml`
+
+For questions or ideas, open an issue using the **Skill Request** or **Bug Report** template. The [quality standard](skill-quality-standard.md) remains the canonical source for authoring and evidence obligations.

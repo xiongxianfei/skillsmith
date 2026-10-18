@@ -1,0 +1,50 @@
+# Current implementation projection. IDs own diagram identity, not new services.
+vars: {
+  d2-config: {
+    theme-id: 0
+  }
+}
+direction: right
+
+writer: "Writer or learner\n[Person]" {
+  shape: c4-person
+  tooltip: Supplies source material, purpose, constraints and learning preferences.
+  style.fill: "#DCEAF7"
+}
+maintainer: "Skill maintainer\n[Person]" {
+  shape: c4-person
+  tooltip: Authors and reviews Markdown and evaluation scenarios using shared maintenance tooling.
+  style.fill: "#DCEAF7"
+}
+assistant_host: "Assistant host\n[External software system]\nInterprets the editor prompt" {
+  tooltip: User-selected assistant and model. Application, model service, transport and persistence topology are outside the observed repository.
+  style.fill: "#EDF0F3"
+  style.stroke-dash: 4
+}
+editor_package: "Skillsmith editor\n[Software system: passive prompt package]" {
+  tooltip: Scope is the distributed editor instructions. No Skillsmith-owned execution service is implied.
+  style.fill: "#E9F6F4"
+  prompt_files: "Editor prompt files\n[Container: file store]\nMarkdown / YAML frontmatter\nskills/editor/SKILL.md" {
+    shape: stored_data
+    tooltip: Authored file in the repository, copied to a host skill folder or pasted into a conversation. Not a database, generated prompt or learner profile.
+    style.fill: "#BCE4DE"
+  }
+}
+
+# Context-level relationships.
+maintainer -> editor_package: "Authors and reviews\nversioned instructions"
+editor_package -> assistant_host: "Supplies prompt instructions\ninstalled or pasted Markdown"
+writer -> assistant_host: "Submits source and constraints"
+assistant_host -> writer: "Returns deliverables and notes"
+
+# Container-level refinements of package relationships.
+maintainer -> editor_package.prompt_files: "Edits the authored file\nGit working tree"
+editor_package.prompt_files -> assistant_host: "Supplies SKILL.md content\ncopy / host loading / paste"
+
+# Observed interaction type for derived scenarios: host-internal interpretation.
+# Hide in structural views; ordered self-messages do not create components.
+assistant_host -> assistant_host: "Interprets prompt policies\nwithin the host"
+
+# Improve legibility without altering structural meaning.
+(** -> **)[*].style.italic: false
+(** -> **)[*].style.font-color: "#25364A"

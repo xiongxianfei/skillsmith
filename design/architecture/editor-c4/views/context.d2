@@ -1,0 +1,12 @@
+# C1: package, external host and people. No internal prompt file.
+...@../model
+**: suspend
+(** -> **)[*]: suspend
+**: unsuspend {
+  &level: 0
+}
+(** -> **)[*]: unsuspend {
+  &src.level: 0
+  &dst.level: 0
+}
+(assistant_host -> assistant_host)[*]: suspend

@@ -4,16 +4,16 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <!-- vision:start -->
-Skillsmith is a reusable prompt-skill library for people who use AI assistants to write, translate, learn, communicate, and make everyday decisions with more care.
+Skillsmith brings together a library of practice skills and a shared platform for making good skills. It turns good practices into useful, reusable AI skills and continually improves how those skills are made.
 
-Unlike loose prompt collections that optimize for quantity, Skillsmith optimizes for reusable judgment: each skill states when to invoke it, what input it expects, how it should reason, and what output shape a user can rely on.
+The platform helps contributors build better practice skills. Real use of those skills supplies feedback and evidence that improve both the skills and the platform. Skillsmith favors demonstrated improvements over catalog size or speculative platform features.
 
-It is for engineers, multilingual workers, learners, and self-directed professionals who already use AI tools and want sharper repeatable workflows instead of ad hoc prompting.
+It is for people applying useful practices with AI assistants, and practitioners, skill authors, and maintainers who want to share and improve how they work.
 
 See [VISION.md](VISION.md) for goals, non-goals, and falsifiability.
 <!-- vision:end -->
 
-A curated collection of AI prompts for writing, translation, and productivity — works with any model, installable as Claude Code skills.
+Portable Markdown skills for applying good practices, with examples across writing, translation, learning, and productivity.
 
 ## Skills
 
@@ -220,12 +220,18 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 ## Contributing
 
+See the [contribution guide](docs/workflows.md) for skill templates, eval fixtures, validation and PR expectations.
+
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
 3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)
-4. Follow the canonical quality standard in [specs/skill-quality-standard.md](specs/skill-quality-standard.md)
+4. Follow the canonical quality standard in [docs/skill-quality-standard.md](docs/skill-quality-standard.md)
 5. Open a PR — include what the skill does, when to use it, validation output, and eval evidence for new or materially changed skills
 
 ## License
 
 MIT
+
+## Repository maintenance
+
+Maintainers follow the [workflow guide](docs/workflows.md) and use `c4-architecture` for [architecture design](design/architecture/README.md). Keep intended behavior, constraints and design decisions in the relevant architecture specification, then implement, validate and review through a PR. RigorLoop is not required.

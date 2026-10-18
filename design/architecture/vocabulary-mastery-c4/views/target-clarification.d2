@@ -1,0 +1,17 @@
+# Scenario grounded in vocabulary-multiple-unrelated-targets.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+learner: unsuspend
+assistant_host: unsuspend
+vocabulary_package: unsuspend
+vocabulary_package.prompt_files: suspend
+
+vocabulary_package -> assistant_host: "0. Make prompt instructions available"
+learner -> assistant_host: "1. Study apple, bank, record and resilient"
+assistant_host -> assistant_host: "2. Detect several unrelated targets\nDo not produce shortened multiword entries"
+assistant_host -> learner: "3. Ask which single item to study"
+learner -> assistant_host: "4. Choose bank in a riverbank sentence"
+assistant_host -> assistant_host: "5. Prioritize the contextual riverbank sense\nKeep the same sense focus in both languages"
+assistant_host -> learner: "6. Return two complete references\nEnglish first, Simplified Chinese second"

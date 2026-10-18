@@ -1,0 +1,16 @@
+# Scenario grounded in vocabulary-coinage-evidence-boundary.
+...@../model
+shape: sequence_diagram
+**: suspend
+(** -> **)[*]: suspend
+learner: unsuspend
+assistant_host: unsuspend
+vocabulary_package: unsuspend
+vocabulary_package.prompt_files: suspend
+
+vocabulary_package -> assistant_host: "0. Make prompt instructions available"
+learner -> assistant_host: "1. Study flinderation\nI invented this word"
+assistant_host -> assistant_host: "2. Recognize the stated coinage\nEstablished lexical facts are unsupported"
+assistant_host -> assistant_host: "3. Keep all ten dimensions in each part\nState honest limitations instead of invented facts"
+assistant_host -> assistant_host: "4. Match caveats and recall tasks across parts\nDo not test fabricated meanings as established knowledge"
+assistant_host -> learner: "5. Return complete EN / ZH references\nExplain uncertainty independently in both parts"

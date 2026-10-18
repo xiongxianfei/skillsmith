@@ -1,6 +1,6 @@
 # Skillsmith
 
-Reusable AI prompt skills for writing, translation, and productivity. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
+Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a `SKILL.md` file with YAML frontmatter and a portable Markdown prompt.
 
 `CONSTITUTION.md` is the highest-level project governance. Follow it before README, contribution docs, code, or chat history when rules conflict.
 
@@ -41,11 +41,13 @@ Body must contain:
 - Descriptions MUST be English — skill bodies can be any language
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
 - Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
-- New or materially changed skills need eval evidence as defined in `specs/skill-quality-standard.md`
+- New or materially changed skills need eval evidence as defined in `docs/skill-quality-standard.md`
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers
 
 ## Workflow
+
+Use [the workflow guide](docs/workflows.md) for scoped changes, validation and PR review. Use `c4-architecture` for design under [design/architecture/](design/architecture/README.md); keep behavior, constraints and decisions together in the relevant architecture specification.
 
 - All changes via PR to `main` (branch protection enabled)
 - Branch naming: `feat/`, `fix/`, `docs/`, `improve/`
@@ -57,9 +59,10 @@ Body must contain:
 ## Project Structure
 
 ```
-skills/*/SKILL.md          ← the skills (10 currently)
+skills/*/SKILL.md          ← portable product prompts
 tests/validate_skills.py   ← CI validator (errors block merge, warnings don't)
 install.sh                 ← one-command installer (supports --target flag)
+design/architecture/       ← C4 specifications, models, views and generated diagrams
 CONSTITUTION.md            ← durable governance and workflow rules
 VISION.md                  ← project identity and scope
 ```
@@ -70,3 +73,23 @@ VISION.md                  ← project identity and scope
 - Missing `## Output Format` → CI error
 - Non-English description → CI warning (CJK/Cyrillic detected)
 - Descriptions that omit either the skill's function or the situations where it applies → unreliable skill selection
+
+## Core Engineering Principles
+
+1. **Self-contained knowledge.** Make each substantive document understandable on its own: explain the problem, essential terms, prerequisites, mechanisms, examples, and boundaries. Link to deeper material without requiring readers to follow links to understand the core argument. Keep canonical definitions in one place; avoid needless duplication.
+
+2. **Reader-centered quality.** Evaluate whether a reader can explain *what happens, how, why, and when*; apply the knowledge to a realistic problem; predict likely outcomes and failure modes; and recognize opportunities to improve results. Correctness and clear reasoning matter more than polished prose.
+
+3. **Goal-oriented work.** Identify the intended reader outcome before substantial work. Choose the smallest sufficient change; prioritize important knowledge gaps and useful results. Avoid speculative infrastructure, redundant research, unnecessary documentation, and rituals that do not advance the goal. Do not skip essential verification to save effort.
+
+4. **Reuse before invention.** Look for established theory, standards, sources, methods, libraries, and tools before building alternatives. Prefer suitable, proven approaches; weigh fitness, reliability, cost, maintenance, and lock-in. Create custom solutions only when a material requirement justifies them.
+
+5. **Mechanisms before memorization.** Explain causal relationships, relevant variables, assumptions, boundary conditions, and trade-offs. Show how the mechanism informs decisions and practical action. Surface possible improvements and testable hypotheses, clearly separating proposed innovations from demonstrated results.
+
+6. **Delete obsolete internal compatibility.** When replacing internal code, paths, workflows, or knowledge structures, migrate affected uses and remove superseded implementations. Do not add internal legacy shims, deprecated aliases, dual-write logic, or competing canonical documents. Assess *external* contracts separately and honor actual obligations. Preserve unique evidence, provenance, and historically useful knowledge; remove obsolete representations, not valuable facts.
+
+7. **Fix the problem class.** For defects or inconsistencies, identify the underlying cause and check for related instances. Make the smallest coherent change that addresses the confirmed class; add proportionate checks or regression coverage where useful. Do not turn isolated issues into speculative redesigns.
+
+8. **Think before acting.** Before substantive work, clarify the intended outcome, inspect relevant context, challenge important assumptions, and consider dependencies, risks, and the simplest sound approach. Scale planning to the task: small, reversible changes need no formal plan; consequential or hard-to-reverse changes deserve more analysis. Avoid analysis that does not improve the decision.
+
+9. **Test the core first; validate by risk.** First verify the main outcome: for software, the changed behavior; for knowledge, whether a reader can use it to reason through a representative problem. Expand to affected dependencies, contracts, edge cases, or regressions when the likelihood and impact of failure justify it. Prefer focused checks over redundant tests or unrelated full suites; never omit essential verification merely to save time.

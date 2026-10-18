@@ -2,7 +2,7 @@
 
 ## Project purpose
 
-Skillsmith is a reusable prompt-skill library for people who use AI assistants to write, translate, learn, communicate, and make everyday decisions with more care.
+Skillsmith is a library that turns good practices into reusable AI skills and continually improves them through use, feedback, and evaluation.
 
 The repository serves users who install skills, contributors who author skills, and agents that maintain the catalog. A change is successful only when the skill remains portable Markdown, the expected invocation behavior is clear, and local validation can be reproduced.
 
@@ -12,22 +12,20 @@ When project artifacts conflict, agents and reviewers MUST use this order:
 
 1. `CONSTITUTION.md`
 2. `VISION.md`
-3. Approved specs under `specs/` or change-local docs under `docs/changes/`
-4. Architecture or project-map docs under `docs/`
-5. Execution plans and test specifications
-6. Tests and CI configuration
-7. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
-8. README, contribution docs, and chat history
+3. Accepted behavior and architectural decisions in `design/architecture/`, and the shared quality standard in `docs/skill-quality-standard.md`
+4. Tests and CI configuration
+5. Implementation files, including `skills/*/SKILL.md`, scripts, and templates
+6. README, contribution docs and historical records
 
-Chat instructions MAY clarify intent for a current task, but they MUST NOT silently override durable project rules.
+Architecture specifications MUST distinguish accepted decisions, observed implementation, proposals and unknowns. Reverse engineering or drawing a diagram does not establish acceptance. Explicit user decisions that change durable policy MUST be reflected in the owning documents.
 
 ## Spec-driven rules
 
-Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST have requirements written before implementation. The requirements MAY live in a dedicated spec, a change-local document, or a clearly scoped issue when the change is small.
+Changes that add a new skill, change a skill's output contract, alter validation rules, change installation behavior, or reposition the project MUST describe intended behavior before implementation. Keep design requirements, constraints and acceptance examples together in the relevant `design/architecture/<subject>/architecture-spec.md`; do not create separate requirement or system-design directories. A clearly scoped issue or PR description MAY suffice for a small change that does not need architectural design.
 
-Requirements MUST identify observable behavior: skill trigger intent, accepted input, output format, safety boundaries, compatibility expectations, and validation commands.
+Describe observable behavior: trigger intent, accepted input, output format, safety boundaries, compatibility expectations and validation commands. Use the `c4-architecture` skill for architectural design, with D2 models, focused views and generated SVGs. Keep model and behavior decisions in the same reviewable change.
 
-Small editorial corrections MAY proceed without a formal spec when they do not change behavior, scope, safety posture, or public contracts.
+Small editorial corrections MAY proceed without a formal spec when they do not change behavior, scope, safety posture or public contracts.
 
 ## Test-driven rules
 
@@ -96,23 +94,19 @@ Final handoff MUST report the commands run and any warnings, skipped checks, or 
 
 ## Review rules
 
-Use proposal review when a change affects project direction, catalog scope, safety posture, or contributor policy.
+Changes MUST be reviewed through a PR to `main`. Review depth should match behavior, compatibility and safety risk. Reviewers assess intended behavior, design decisions, the delivered diff and actual validation evidence. Authors MUST NOT claim independent approval of their own work.
 
-Use spec review when requirements define new skill behavior, validation behavior, installer behavior, compatibility, or safety constraints.
+C4 designs require human review before being described as approved. Static checks and generated diagrams do not establish architectural correctness or model quality. Non-trivial design decisions should be reviewed before implementation relies on them; proposed changes and unresolved questions must remain visible.
 
-Use architecture review when a change adds new components, dependencies, generated assets, external services, data flow, plugin packaging behavior, or long-lived repository structure.
-
-Use plan review for multi-step changes that touch multiple owned areas or require migration sequencing.
-
-Use code review after implementation for changes to validator logic, installer behavior, CI, templates, or high-risk skills.
-
-Small documentation-only edits MAY use direct maintainer review when the validation command passes and no contract changes are involved.
+RigorLoop stage gates, CLI handoffs and operational records are no longer required. Historical reviews retain their original scope; they do not approve later changes. Publication, merge and release remain separately authorized actions.
 
 ## Documentation rules
 
+Operational change logs MUST NOT be maintained as repository documents. Keep task status and review/validation evidence in the issue or PR; any private working notes belong outside the repository. Preserve useful design decisions in their current owners and historical provenance through fixed Git revisions. Do not recreate retired workflow-record directories. Keep durable design in `design/architecture/` and contributor quality rules in `docs/skill-quality-standard.md`; do not relocate operational logs elsewhere merely to commit them. Publish a sufficient sanitized review/verification account in the PR, with exact subject identities, checks, limitations and accessible source references. Local-only files MUST NOT be the sole evidence supporting an external readiness claim. Use supported private backups when operational continuity is needed.
+
 `README.md` MUST stay current for installation, usage, and the skills table.
 
-`CONTRIBUTING.md` MUST stay current for contributor workflow, PR expectations, and local validation.
+`docs/workflows.md` MUST stay current for contributor workflow, PR expectations, and local validation.
 
 `AGENTS.md` MUST stay concise and agent-facing. Detailed durable rules belong here, not duplicated across agent prompts.
 
@@ -138,17 +132,8 @@ Agents MUST NOT silently remove governance, safety boundaries, validation checks
 
 ## Standard workflow and manual skill use
 
-The standard workflow for non-trivial work is:
+Use a proportionate workflow: describe the intended behavior → design with `c4-architecture` when architecture is affected → edit the owning artifacts → validate and evaluate → review through a PR.
 
-1. Confirm fit with `VISION.md` and this constitution.
-2. Write or locate requirements.
-3. Review architecture impact when boundaries, dependencies, or compatibility change.
-4. Plan implementation when the change spans multiple files or milestones.
-5. Implement with proof first where practical.
-6. Run validation and targeted checks.
-7. Review the diff.
-8. Explain the change and hand off with verification evidence.
+`design/architecture/` is the only design directory. Keep goals, requirements, behavior, decisions and risks together in each subject specification. Use a plan only when dependencies or risk justify it, recorded in the issue, PR or a local working note. Do not maintain separate proposal/plan directories or routing indexes. No RigorLoop installation, Node upgrade or managed Change is required for this workflow.
 
-Manual invocation of individual skills is allowed for isolated tasks. The agent MUST name the skill being used, follow its artifact rules, and report enough evidence that a reviewer can see what changed and how it was checked.
-
-Workflow completion claims MUST include changed files, validation commands, unresolved questions, and any skipped or blocked checks.
+The [workflow guide](docs/workflows.md) explains artifact locations and commands. Completion claims include changed subjects, actual validation, warnings, unresolved issues and skipped checks. Operational records stay outside the repository; the PR must contain sufficient reviewable evidence.
