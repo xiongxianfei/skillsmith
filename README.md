@@ -20,7 +20,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
 | [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
-| [vocabulary-mastery](skills/vocabulary-mastery/SKILL.md) | `/vocabulary-mastery` | Comprehensive English–Chinese vocabulary reference with all ten linguistic dimensions, bilingual examples, cross-domain connections, and three recall questions |
+| [vocabulary-mastery](skills/vocabulary-mastery/SKILL.md) | `/vocabulary-mastery` | English-only skill instructions generating two complete, separate ten-domain vocabulary references (English first, Simplified Chinese second), each with learning connections and recall questions |
 | [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
 | [flashcard-generator](skills/flashcard-generator/SKILL.md) | `/flashcard-generator` | Source-grounded spaced-repetition flashcard generator for Anki cards, cloze deletions, memory prompts, durable recall practice, and retention cards |
 | [quiz-generator](skills/quiz-generator/SKILL.md) | `/quiz-generator` | Source-grounded diagnostic quiz generator for quizzes, comprehension checks, MCQs, short-answer items, answer keys, rationales, feedback, and rubrics |
@@ -98,7 +98,7 @@ Invoke by slash command, passing your text as the argument:
 ```
 /editor  Please polish this text for me.
 /editor  Correct this paragraph and explain the two most useful linguistic patterns.
-/vocabulary-mastery  record — full English–Chinese reference in all ten linguistic dimensions.
+/vocabulary-mastery  record — complete English reference, then a separate complete Simplified Chinese reference, each with ten linguistic dimensions.
 /restaurant-menu-advisor  Here's the menu. What should I order if I want something filling under $25?
 /flashcard-generator  Turn this onboarding note into Anki-ready flashcards.
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
@@ -109,7 +109,7 @@ Or just describe what you want in natural language — Claude auto-invokes the r
 
 #### Learning artifact examples
 
-Use `/vocabulary-mastery` to investigate one English lexical item across all ten linguistic domains, in English and Simplified Chinese:
+Use `/vocabulary-mastery` for two full, independent references to one English lexical item: English first, Simplified Chinese second. The skill file itself uses English-only instructions:
 
 ```text
 /vocabulary-mastery  record
@@ -117,7 +117,7 @@ Context: I need to record meetings and keep a record of project decisions.
 Prefer British English pronunciation.
 ```
 
-This produces a detailed bilingual lexical reference (sound, form, word family, collocations, grammar, meaning, pragmatics, discourse, information structure, and prosody) and three recall questions. Use `/flashcard-generator` separately when you want Anki cards, TSV export, or spaced-repetition decks.
+This produces two complete ten-dimensional entries rather than alternating languages within each section. Both contain a word overview, linguistic analysis, knowledge connections, and three recall questions with answers. The Chinese version includes the same English example sentences with Chinese translations. Use `/flashcard-generator` separately for Anki cards, TSV export, or spaced-repetition decks.
 
 Use `/flashcard-generator` when the goal is durable recall and spaced repetition:
 
@@ -176,9 +176,9 @@ Best for: emails, PR descriptions, documentation, release notes, messages, acade
 
 ### `vocabulary-mastery` — Bilingual Linguistic Vocabulary Reference
 
-Accepts a single English word or fixed expression and provides a complete English + Simplified Chinese entry with all ten linguistic dimensions: phonetics, phonology, morphology, lexicon, syntax, semantics, pragmatics, discourse, information structure, and prosody. Each dimension includes an evidence-based explanation and a natural example or an explicit statement when a word has no unusual feature in that dimension.
+Accepts a single English word or fixed expression and produces two separate, complete references: an English version followed by an independently readable Simplified Chinese version. Each version covers all ten linguistic dimensions: phonetics, phonology, morphology, lexicon, syntax, semantics, pragmatics, discourse, information structure, and prosody. The skill instructions and templates themselves remain entirely in English.
 
-The output includes a sense map, pronunciation by variety where reliable, cross-domain connections, and three retrieval prompts with answers. It differentiates dictionary pronunciation from learner audio and does not invent linguistic facts to fill headings.
+Each version includes the same sense map, reliably labelled pronunciation, linguistic explanations, natural example contexts, cross-domain connections, and three recall prompts with aligned answers. The Chinese reference retains the English examples alongside their Chinese translations. It differentiates reference pronunciation from learner audio and does not invent linguistic facts to fill headings.
 
 Best for: deep study of an English word, bilingual lexical reference notes, homographs, polysemy, collocations, grammatical frames, and pronunciation-versus-word-class contrasts.
 

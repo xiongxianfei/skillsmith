@@ -2,58 +2,60 @@
 
 ## Status and rationale
 
-Design proposal for a new skill, 2026-10-18. User-selected mode: comprehensive linguistic reference (all ten domains, English plus Simplified Chinese). Existing `editor`, `language-tutor`, and `flashcard-generator` remain separate and unchanged.
+Revision of the 2026-10-18 requirements for PR #35. The user selected **Option A: two complete, separate output versions**. The reusable skill file itself must be written **entirely in English**. Existing `editor`, `language-tutor`, and `flashcard-generator` remain unchanged.
 
 ## Trigger intent and accepted input
 
 - Name: `vocabulary-mastery`; slash command: `/vocabulary-mastery`.
-- Accept one English headword (or a fixed multiword lexical expression) from `$ARGUMENTS`, optionally accompanied by an example sentence, target sense, learner goals, or British/American variety.
-- Trigger for requests for deep bilingual lexical/linguistic analysis, including indirect requests for a word's pronunciation, structure, meanings, grammar, and real usage as a complete learning reference.
-- Do not hijack generic proofreading, sentence correction, conversation tutoring, quiz-only tasks, or flashcard export.
-- With missing target, ask for the word; with multiple unrelated targets, request one term to analyze to avoid incomplete entries.
+- Accept one English headword or fixed lexical expression from `$ARGUMENTS`, optionally with a usage sentence, target sense, learner goals, or BrE/AmE preference.
+- Trigger for a comprehensive lexical/linguistic reference request, including indirect requests about the word's sounds, structure, meanings, syntax, and communicative use.
+- Do not hijack ordinary proofreading, writing correction, conversation tutoring, quiz-only tasks, or flashcard export.
+- If the target is missing, ask for the word. For several unrelated targets, request one word rather than create incomplete multiword profiles.
 
-## Output contract
+## Instruction-language constraint
 
-One portable Markdown reference, English + Simplified Chinese, with:
-1. **Word Overview / 词汇概览**: headword, POS, short sense map, pronunciation marked by variety if reliable, and sense selected from any supplied context.
-2. **Ten numbered linguistic sections**, always in this fixed order and with English and Chinese explanations and natural, bilingual example or concrete illustration when supportable:
-   1. Phonetics / 语音学
-   2. Phonology / 音系学
-   3. Morphology / 形态学
-   4. Lexicon / 词汇
-   5. Syntax / 句法学
-   6. Semantics / 语义学
-   7. Pragmatics / 语用学
-   8. Discourse / 语篇
-   9. Information Structure / 信息结构
-   10. Prosody / 韵律
-3. **Knowledge Connections / 知识关联**: compact cross-domain synthesis with a high-value contrast or usage link.
-4. **Recall Prompts / 回忆练习**: exactly three short questions testing different aspects (e.g., meaning-to-form, collocation/syntax, and pronunciation/context), with short answer key.
-5. **Accuracy Notes / 准确性说明** only when needed for uncertainty, variety variation, or absent evidence.
+- **Every line of `skills/vocabulary-mastery/SKILL.md` must be English-only**, including frontmatter, directions, headings, labels, comments, templates, and placeholder descriptions.
+- The instruction file must contain no Chinese characters. Chinese-language output is controlled by clear English instructions and English-language placeholder labels.
+- Chinese example text, Chinese headings, and Chinese translations belong in **generated output** and reviewer-facing examples, not the English-only skill source.
 
-Each domain is mandatory. For dimensions with no special or word-specific feature, explicitly describe the limitation (English and Chinese) and optionally illustrate a general sentence-level phenomenon. Never invent unusual linguistic features just to fill a section.
+## Fixed output contract
 
-## Analysis and evidence boundaries
+For any accepted lexical target, produce **two complete standalone references** in sequence, never an interleaved bilingual reference or parallel-column table:
 
-- Distinguish *a word's reference pronunciation* from *how the learner actually pronounced it*. IPA is labelled BrE or AmE; no observation of learner audio without real audio, no claims of generating/playing sound without tools.
-- Phonetics covers speech segments and articulation; phonology covers system-level syllables/stress/contrasts; prosody covers phrase-level stress, rhythm, intonation. Distinguish information focus from intonation and syntax from meaning.
-- Use genuine morphological structure; do not infer roots or etymologies by slicing spelling (`record` is not automatically `re-` + `cord`). Give inflection and related forms that are real.
-- For polysemy or homographs (e.g., `record`, `bank`, `lead`), map common senses and part-of-speech differences; prioritize a user-provided context. Avoid treating unrelated senses as identical.
-- Use natural, original example sentences with faithful Chinese translations. Never label generated examples as corpus quotations, or fabricate source, frequency, etymology, citation, historical status, or dialect authority.
-- Note pragmatic or discourse behaviours only when genuinely associated with the word or provide an accurately labelled context-level illustration; generic cultural stereotypes are disallowed.
-- Explain that coverage does not prove mastery. Recall prompts are complementary, not automatic flashcard exports or spaced-scheduling guarantees.
-- Maintain portable Markdown with only required YAML fields and `$ARGUMENTS`, `## Output Format`; no tools, dependencies, secrets, or persistent profile.
+1. **Part 1: English Reference**: complete English-only explanatory prose, heading labels, examples, recall questions, and answer key.
+2. **Part 2: Simplified Chinese Reference**: a complete, independently readable Simplified Chinese explanation with naturally translated Chinese heading labels, recall questions and answers. Original English headword, quoted target forms, IPA and original example sentences may appear as linguistic evidence, with faithful Chinese interpretation/translation beside each English example.
 
-## Compatibility and tradeoffs
+**Each part must independently include:**
+- Word Overview: headword, part of speech, up to three major senses, reliably variety-labelled IPA, context focus.
+- **Ten** numbered dimensions, always in this order: Phonetics, Phonology, Morphology, Lexicon, Syntax, Semantics, Pragmatics, Discourse, Information Structure, Prosody.
+- For every dimension, substantive explanation and an original, natural usage illustration when supportable. If no distinctive word-level phenomenon exists, explicitly say so within **that version** and optionally show a correctly labelled general illustration.
+- Knowledge Connections: two or three supported cross-domain connections.
+- Exactly three recall questions and a corresponding three-answer key.
+- Accuracy Notes only when uncertainty, pronunciation evidence, or variety caveats require them.
 
-- The chosen comprehensive profile can be long for common words; that verbosity is an intentional user-selected tradeoff. Do not switch to adaptive/quick mode implicitly.
-- No changes to existing skill contracts, install.sh, or CI validator. Adding a new skills directory integrates with the current installer.
-- Update README skill table, command enumeration, dedicated `cp` example, usage, and skill details.
-- Keep `SKILL.md` under 300 lines when feasible. Store worked examples in change-local documentation for reviewers, not as mandatory runtime prompt content.
+The Chinese part must not reference the English part ("as above"/"see Part 1") or omit sections as a shortcut. Match sense selection, part-of-speech distinctions, IPA and accent labels, morphological forms, grammatical frames, semantic nuances, examples, focus contrasts, uncertainty, and question/answer content **across both versions**. Preserve English example sentences in the Chinese part and add faithful Chinese translations. Both versions should be similarly informative, even though their wording need not be literal translations.
+
+## Linguistic evidence and boundary rules
+
+- Phonetics describes sound segments/articulation; phonology describes syllables, lexical stress and sound-system contrasts; prosody describes phrase-level rhythm, intonation, prominence. Separate lexical stress from sentence-level focus.
+- Reference pronunciation is not learner-performance evidence. Label confident IPA BrE or AmE; never infer an actual user's pronunciation from text or claim to have heard audio that is not available.
+- Morphology must use real inflection and derivation, not inferred etymologies or fabricated roots. Lexicon covers collocations and lexical relations; syntax covers grammatical frames; semantics covers distinct senses.
+- Pragmatics needs communicative context; discourse needs cross-sentence/turn linkage; information structure concerns given/new and focus. Distinctive phenomena must not be invented simply because all ten headings are mandatory.
+- All examples are original unless a real cited source is available. Do not claim corpus verification, frequency ranking, invented idioms, historical claims, accent superiority, or universal regional usage.
+- Ensure English examples are accurately translated into Chinese without collapsing important sense differences.
+- A comprehensive two-part article is intentionally long for familiar words; the user explicitly selected this tradeoff. Do not silently switch to quick/adaptive or mixed-language single-entry format.
+
+## Architecture and compatibility
+
+- Portable Markdown skill; only required YAML fields, `$ARGUMENTS`, and `## Output Format`; no new tools or runtime dependencies.
+- `/editor` remains for prose editing, `/language-tutor` for interactive practice, and `/flashcard-generator` for card or TSV export.
+- No installer changes; the existing installer copies all skill directories.
+- Update the README skill table, user-facing usage examples and skill details to describe two separate output versions.
+- A deterministic unit test guards the English-only skill source and two complete ten-dimension templates.
 
 ## Verification and evals
 
-- Add `tests/evals/skills/vocabulary-mastery/cases.yaml` with normal, indirect-trigger, and edge/failure/non-trigger cases covering all ten bilingual sections, polysemy, weak-dimension honesty, pronunciation confidence, grammatical frames, and skill routing.
-- Include a bilingual worked example for `record` and a boundary example for `apple`.
-- Verify `python -m unittest discover tests`, `python tests/validate_skills.py`, and `python tests/check_readme_sync.py`.
-- Static evals document observable expectations, **not** live-model pass rates; document any skipped live-model testing.
+- Static fixtures under `tests/evals/skills/vocabulary-mastery/cases.yaml` include normal, indirect, edge, missing-input, sense selection, homograph, morphology, separable particle, coinage, non-trigger, and two-version parity cases.
+- `docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md` demonstrates a **full English record profile followed by a full Chinese record profile**, plus honest weak-dimension handling for `apple`.
+- Run `python -m unittest discover tests`, `python tests/validate_skills.py`, and `python tests/check_readme_sync.py`; use CI where local checkout is inaccessible.
+- Static fixtures and deterministic tests are **not** evidence that a language model reliably produces accurate, equivalent bilingual explanations. Live-model testing must be reported separately.
