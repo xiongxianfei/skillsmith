@@ -56,6 +56,8 @@ Agents MUST keep behavior in the artifact that owns it. Prompt behavior belongs 
 
 Agents MUST NOT introduce hidden runtime dependencies, generated prompt behavior, or external services for ordinary skill execution. Skills are pure prompt assets unless a future spec and architecture explicitly change that boundary.
 
+For new or materially changed skills, use the [Skill Engineering Principles](docs/architecture/skill-design-principles.md) as applied design-review guidance under this Constitution and the approved [Skill Quality Standard](specs/skill-quality-standard.md). These heuristics do not replace the existing validation requirements.
+
 ## Security and privacy rules
 
 Skills MUST NOT require secrets, credentials, private local paths, or unpublished personal data.

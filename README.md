@@ -223,7 +223,7 @@ Best for: landlord communication, formal letters, official correspondence with R
 1. Fork the repo
 2. Create a branch: `git checkout -b feat/your-skill-name`
 3. Add your skill under `skills/<skill-name>/SKILL.md` following the [frontmatter schema](https://docs.anthropic.com/en/docs/claude-code/skills)
-4. Follow the canonical quality standard in [specs/skill-quality-standard.md](specs/skill-quality-standard.md)
+4. Follow the canonical quality standard in [specs/skill-quality-standard.md](specs/skill-quality-standard.md) and review the [Skill Engineering Principles](docs/architecture/skill-design-principles.md)
 5. Open a PR — include what the skill does, when to use it, validation output, and eval evidence for new or materially changed skills
 
 ## License

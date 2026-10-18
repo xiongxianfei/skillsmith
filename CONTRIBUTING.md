@@ -42,7 +42,11 @@ $ARGUMENTS
 [Exact output structure Claude must follow]
 ```
 
-### 3. Checklist before opening a PR
+### 3. Review design principles
+
+Use the [Skill Engineering Principles](docs/architecture/skill-design-principles.md) as a practical design review alongside the canonical [Skill Quality Standard](specs/skill-quality-standard.md). Explain the skill's single job, accepted inputs, output contract, neighboring skill boundaries, evidence limits, and verification plan. Reuse shared facts while keeping required deliverables independently usable; justify exceptions rather than enforcing DRY or KISS mechanically.
+
+### 4. Checklist before opening a PR
 
 - [ ] `description` is in English and under 250 characters
 - [ ] Optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` is omitted unless an accepted proposal/spec requires it
@@ -51,11 +55,12 @@ $ARGUMENTS
 - [ ] No emojis in the Output Format section headers
 - [ ] New or materially changed skills include at least three eval scenarios: normal use, indirect trigger, and edge/safety/failure/non-trigger/misuse behavior
 - [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes, and at least one safety or misuse eval case
+- [ ] Skill design principles reviewed, with intentional verbosity, duplicated output, or dependencies explained in the PR
 - [ ] CI passes locally: `python tests/validate_skills.py`
 - [ ] Skill added to the README skills table
 - [ ] Skill added to the `cp` install commands in README
 
-### 4. Add eval fixtures for new or material changes
+### 5. Add eval fixtures for new or material changes
 
 New or materially changed skills need static eval evidence at:
 
@@ -88,7 +93,7 @@ For high-risk skills, add `high_risk: true`, `safety_notes`, and at least one `s
 
 Existing skills listed in `tests/evals/skills/grandfathered-skills.yaml` may lack `cases.yaml` until materially changed.
 
-### 5. Open a pull request
+### 6. Open a pull request
 
 The PR template will pre-fill the checklist for you. Include one or two example inputs and outputs in the PR description so reviewers can quickly understand what the skill does.
 

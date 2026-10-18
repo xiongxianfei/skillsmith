@@ -42,6 +42,7 @@ Body must contain:
 - Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
 - Do not add optional frontmatter such as `argument-hint`, `effort`, or `allowed-tools` unless an accepted proposal/spec requires it
 - New or materially changed skills need eval evidence as defined in `specs/skill-quality-standard.md`
+- Apply `docs/architecture/skill-design-principles.md` when reviewing scope, input/output contracts, proportional DRY, skill boundaries, evidence, compatibility, and verification.
 - High-risk skills need reviewer-visible safety notes and at least one safety or misuse eval case
 - No emojis in Output Format headers
 

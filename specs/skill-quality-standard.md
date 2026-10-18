@@ -41,6 +41,8 @@ Structured outputs should optimize for reuse, not decoration. Prefer concise bol
 
 When a prompt reaches diminishing returns from wording review, freeze the good-enough contract and move to eval evidence. Further refinements should be driven by observed behavior, not endless polishing.
 
+The applied [Skill Engineering Principles](../docs/architecture/skill-design-principles.md) translate this philosophy into a review checklist, adapting cohesion, contracts, KISS, proportional DRY, composition, evidence, compatibility, and verification from software engineering. They are **subordinate reviewer heuristics**, not another source of mandatory metadata, runtime services, or automated style gates.
+
 ## Glossary
 
 - Skill: a directory under `skills/<skill-name>/` containing `SKILL.md`.

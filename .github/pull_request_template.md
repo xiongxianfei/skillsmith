@@ -12,6 +12,7 @@
 - [ ] `## Output Format` section is present
 - [ ] No emojis in the Output Format section
 - [ ] New or materially changed skill includes eval scenarios for normal use, indirect trigger, and edge/safety/failure/non-trigger/misuse behavior
+- [ ] Skill Engineering Principles reviewed: one job, explicit contract, simple path, justified duplication, boundaries, evidence, compatibility, and verification
 - [ ] High-risk skill changes include safety notes, scope boundaries, refusal or escalation behavior, and a safety or misuse eval case
 - [ ] CI validation passes (`python tests/validate_skills.py`)
 - [ ] Skill added to the README skills table
@@ -21,6 +22,7 @@
 - [ ] Describe what was wrong and why the fix is correct
 - [ ] Include a minimal reproduction in the PR description or linked issue
 - [ ] Classify skill prompt changes as material or editorial
+- [ ] Review the applied Skill Engineering Principles and describe any exceptions/tradeoffs
 - [ ] Add regression coverage or explain why automated coverage is not practical
 - [ ] Update docs, templates, or validator rules if this bug exposed a repeatable pattern
 - [ ] CI validation still passes
