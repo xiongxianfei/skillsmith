@@ -1,0 +1,16 @@
+# Illustrative runtime scenario; verify it against model.d2 and requirements.
+shape: sequence_diagram
+customer: Customer
+web: Web Application
+api: Order API
+database: Order Database
+payment_provider: Payment Provider
+
+customer -> web: Place order
+web -> api: Submit order request
+api -> database: Store pending order
+api -> payment_provider: Request authorization
+payment_provider -> api: Return result
+api -> database: Record status
+api -> web: Return outcome
+web -> customer: Show outcome

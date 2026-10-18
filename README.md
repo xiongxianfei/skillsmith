@@ -19,6 +19,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
+| [c4-architecture](skills/c4-architecture/SKILL.md) | `/c4-architecture` | Public D2/C4 architecture skill for AI-generated, Git-reviewed system context, container and dynamic views; includes example models and validation helpers |
 | [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
 | [vocabulary-mastery](skills/vocabulary-mastery/SKILL.md) | `/vocabulary-mastery` | English-only skill instructions generating two complete, separate ten-domain vocabulary references (English first, Simplified Chinese second), each with learning connections and recall questions |
 | [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
@@ -48,7 +49,7 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`, plus `/c4-architecture`.
 
 #### Install a specific skill only
 
@@ -56,9 +57,10 @@ Restart Claude Code after installing — skills are available immediately as `/e
 git clone https://github.com/xiongxianfei/Skillsmith
 cp -r Skillsmith/skills/editor ~/.claude/skills/editor
 cp -r Skillsmith/skills/vocabulary-mastery ~/.claude/skills/vocabulary-mastery
+cp -r Skillsmith/skills/c4-architecture ~/.claude/skills/c4-architecture
 ```
 
-Use the first `cp` command for `editor` or the second for `vocabulary-mastery`; to install another skill, replace the name in the source and destination paths.
+Install any individual skill by copying its **entire** directory. The examples above install `editor`, `vocabulary-mastery`, and `c4-architecture`.
 
 #### Project-level install — shared with your team
 
@@ -77,15 +79,13 @@ git clone https://github.com/xiongxianfei/Skillsmith
 claude --plugin-dir ./Skillsmith
 ```
 
-Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, and `/Skillsmith:communicator` for this session only.
+Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, `/Skillsmith:communicator`, and `/Skillsmith:c4-architecture` for this session only.
 
 ### Other AI models (ChatGPT, Gemini, etc.)
 
-Each skill's prompt works with any model — just copy and paste:
+Skills are portable **directory packages** following [Agent Skills](https://agentskills.io/specification). With an Agent Skills-compatible host, install the complete `skills/<skill-name>/` folder so `SKILL.md` can load bundled references, scripts, schemas, and assets. For agents supporting a conventional local skills directory, choose that agent's documented installation path.
 
-1. Open `skills/<skill-name>/SKILL.md`
-2. Copy everything **below** the `---` frontmatter block
-3. Paste as the system prompt in your AI tool of choice
+For a text-only chat without directory access, copying `SKILL.md` can provide limited guidance, but it is **not** a supported full-function replacement when the skill requires local references, resources, or scripts.
 
 ---
 
@@ -103,6 +103,7 @@ Invoke by slash command, passing your text as the argument:
 /flashcard-generator  Turn this onboarding note into Anki-ready flashcards.
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
 /communicator  我想告诉房东暖气坏了，请帮我写一条俄语消息。
+/c4-architecture  Create C1/C2 D2 views from our software requirements for a Git design review.
 ```
 
 Or just describe what you want in natural language — Claude auto-invokes the right skill based on context.
@@ -162,7 +163,7 @@ Best practices for both learning skills:
 
 ### Other models
 
-Paste the prompt as the system prompt, then send your input as the first user message.
+Install the complete skill directory in a compatible host. Where a host does not support directory access, a copied `SKILL.md` may be incomplete, especially for `c4-architecture` and skills with references or executable helpers.
 
 ---
 

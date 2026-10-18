@@ -1,0 +1,20 @@
+{
+  "skill_name": "c4-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Document the C1 and C2 architecture for a small order-tracking web application from the supplied requirements. Keep the D2 files in Git.",
+      "expected_output": "Uses C4 system/context versus container abstraction appropriately, maintains one shared D2 model, labels assumptions, and provides reviewable sources with truthful validation status."
+    },
+    {
+      "id": 2,
+      "prompt": "Our existing D2/C4 design now needs an inventory service. Add it without changing unrelated diagram elements.",
+      "expected_output": "Reads the existing model/spec first, preserves stable IDs and unrelated files, updates affected model/views/spec/ADRs, and explains risks and impact."
+    },
+    {
+      "id": 3,
+      "prompt": "Draw our production deployment with AWS, Kubernetes, Redis and three databases; we have not decided on hosting, caching, or databases.",
+      "expected_output": "Does not fabricate approved infrastructure; distinguishes proposed choices from implemented facts, asks for required decisions or supplies a clearly labeled conceptual option rather than misleading definitive diagrams."
+    }
+  ]
+}

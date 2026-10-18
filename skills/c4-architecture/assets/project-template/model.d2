@@ -1,0 +1,33 @@
+# FICTIONAL EXAMPLE. Replace before approval.
+direction: right
+
+customer: Customer {
+  shape: c4-person
+  tooltip: Person placing an order
+}
+payment_provider: Payment Provider {
+  tooltip: External payment system
+}
+order_platform: Order Platform {
+  tooltip: In-scope order management system
+  web: Web Application {
+    tooltip: User-facing browser application
+  }
+  api: Order API {
+    tooltip: Handles orders and payment requests
+  }
+  database: Order Database {
+    shape: cylinder
+    tooltip: Stores order information
+  }
+}
+
+# C1 systems and people
+customer -> order_platform: Places and checks orders (HTTPS)
+order_platform -> payment_provider: Requests payment (HTTPS)
+
+# C2 containers
+customer -> order_platform.web: Uses browser app (HTTPS)
+order_platform.web -> order_platform.api: Sends orders (HTTPS/JSON)
+order_platform.api -> order_platform.database: Reads and writes orders (SQL)
+order_platform.api -> payment_provider: Requests authorization (HTTPS/JSON)
