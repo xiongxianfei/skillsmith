@@ -1,0 +1,122 @@
+version: 1
+scenarios:
+  - id: vocabulary-record-ten-bilingual-domains
+    category: normal
+    prompt: |
+      /vocabulary-mastery record
+      Give me the full English–Chinese linguistic reference.
+    expected_behavior: >
+      Produces the Word Overview followed by all ten numbered domains in their
+      prescribed order, each with English and Simplified Chinese explanation
+      and a bilingual illustration where supportable. Distinguishes record
+      (noun) from record (verb), including stress/IPA differences by word
+      class and accent, and ends with Knowledge Connections and exactly three
+      recall questions plus answers. Does not claim to hear any audio.
+
+  - id: vocabulary-bank-context-sense
+    category: normal
+    prompt: |
+      Study "bank" in "We had lunch on the bank of the river."
+      Include Chinese in all sections.
+    expected_behavior: >
+      Prioritizes the river-edge sense rather than automatically selecting
+      the financial institution; briefly contrasts established other senses
+      without conflation. Gives ten complete bilingual sections and faithful
+      translations of illustrative sentences.
+
+  - id: vocabulary-morphology-unhappiness
+    category: normal
+    prompt: |
+      /vocabulary-mastery unhappiness
+    expected_behavior: >
+      Explains verifiable un-, happy, and -ness relationships, recognizes
+      relevant y-to-i spelling effects without fabricated etymology, and
+      supplies the entire ten-section bilingual output plus three recall
+      prompts with answers.
+
+  - id: vocabulary-indirect-deep-word-breakdown
+    category: indirect-trigger
+    prompt: |
+      Can you really take apart the word "resilient"—how it sounds, how it's
+      built, what it means, and how it works in conversation and in a paragraph?
+      Explain it in English and Chinese.
+    expected_behavior: >
+      Recognizes the indirect request for a deep lexical profile, generates
+      all ten bilingual linguistic domains, and does not substitute a generic
+      tutor lecture, proofreading, or a flashcard deck.
+
+  - id: vocabulary-homograph-lead
+    category: edge
+    prompt: |
+      /vocabulary-mastery lead
+    expected_behavior: >
+      Separates lead meaning guide (often /liːd/) from lead meaning metal
+      (/led/), accurately distinguishes the homographic senses and word
+      classes, labels reference pronunciation by variety when used, and does
+      not claim one pronunciation covers every sense.
+
+  - id: vocabulary-apple-no-fabricated-special-properties
+    category: edge
+    prompt: |
+      /vocabulary-mastery apple
+    expected_behavior: >
+      Keeps all ten numbered English-Chinese sections, including pragmatics,
+      information structure and prosody, but explicitly says when no unusual
+      word-specific effect exists. If using sentence-level focus/intonation,
+      identifies it as an illustration rather than an inherent feature of
+      the noun. Invents no idiom, culture claim, or frequency ranking.
+
+  - id: vocabulary-separable-expression
+    category: edge
+    prompt: |
+      /vocabulary-mastery look up
+      I mean search for a word in a dictionary.
+    expected_behavior: >
+      Profiles the requested fixed expression; gives valid particle-placement
+      frames such as 'look the word up' and 'look it up', and rejects
+      'look up it' for this separable sense. Does not collapse this sense
+      into unrelated expressions or omit bilingual ten-domain coverage.
+
+  - id: vocabulary-coinage-evidence-boundary
+    category: edge
+    prompt: |
+      /vocabulary-mastery flinderation
+      I made this English word up.
+    expected_behavior: >
+      Treats the input as a coinage without a verified conventional
+      pronunciation, definition, frequency, etymology, or collocational
+      pattern. Explains the lack of evidence in English and Chinese under
+      appropriate sections instead of fabricating entries.
+
+  - id: vocabulary-no-input
+    category: failure
+    prompt: |
+      /vocabulary-mastery
+    expected_behavior: >
+      Asks for one English word or lexical expression. Does not produce ten
+      empty or invented sections without a headword.
+
+  - id: vocabulary-multiple-unrelated-targets
+    category: edge
+    prompt: |
+      /vocabulary-mastery apple, bank, record, resilient
+    expected_behavior: >
+      Requests one target word rather than generating several truncated
+      reference profiles that fail the ten-domain bilingual contract.
+
+  - id: vocabulary-not-editor
+    category: non-trigger
+    prompt: |
+      Please correct my email and keep the meaning:
+      We maybe will push the rollout after the tests.
+    expected_behavior: >
+      Does not auto-route ordinary proofreading to vocabulary-mastery or
+      produce ten linguistic reference headings; treats it as editing.
+
+  - id: vocabulary-not-flashcards
+    category: non-trigger
+    prompt: |
+      Make 20 Anki cards about the words stable, resilient and robust. Export TSV.
+    expected_behavior: >
+      Respects flashcard-generator as the appropriate skill instead of
+      returning multiple full vocabulary reference entries.

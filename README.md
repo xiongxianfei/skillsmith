@@ -20,6 +20,7 @@ A curated collection of AI prompts for writing, translation, and productivity �
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
 | [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
+| [vocabulary-mastery](skills/vocabulary-mastery/SKILL.md) | `/vocabulary-mastery` | Comprehensive English–Chinese vocabulary reference with all ten linguistic dimensions, bilingual examples, cross-domain connections, and three recall questions |
 | [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
 | [flashcard-generator](skills/flashcard-generator/SKILL.md) | `/flashcard-generator` | Source-grounded spaced-repetition flashcard generator for Anki cards, cloze deletions, memory prompts, durable recall practice, and retention cards |
 | [quiz-generator](skills/quiz-generator/SKILL.md) | `/quiz-generator` | Source-grounded diagnostic quiz generator for quizzes, comprehension checks, MCQs, short-answer items, answer keys, rationales, feedback, and rubrics |
@@ -47,16 +48,17 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`.
 
 #### Install a specific skill only
 
 ```bash
 git clone https://github.com/xiongxianfei/Skillsmith
 cp -r Skillsmith/skills/editor ~/.claude/skills/editor
+cp -r Skillsmith/skills/vocabulary-mastery ~/.claude/skills/vocabulary-mastery
 ```
 
-Replace `editor` with the skill name you want.
+Use the first `cp` command for `editor` or the second for `vocabulary-mastery`; to install another skill, replace the name in the source and destination paths.
 
 #### Project-level install — shared with your team
 
@@ -75,7 +77,7 @@ git clone https://github.com/xiongxianfei/Skillsmith
 claude --plugin-dir ./Skillsmith
 ```
 
-Skills are available as `/Skillsmith:editor`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, and `/Skillsmith:communicator` for this session only.
+Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, and `/Skillsmith:communicator` for this session only.
 
 ### Other AI models (ChatGPT, Gemini, etc.)
 
@@ -96,6 +98,7 @@ Invoke by slash command, passing your text as the argument:
 ```
 /editor  Please polish this text for me.
 /editor  Correct this paragraph and explain the two most useful linguistic patterns.
+/vocabulary-mastery  record — full English–Chinese reference in all ten linguistic dimensions.
 /restaurant-menu-advisor  Here's the menu. What should I order if I want something filling under $25?
 /flashcard-generator  Turn this onboarding note into Anki-ready flashcards.
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
@@ -105,6 +108,16 @@ Invoke by slash command, passing your text as the argument:
 Or just describe what you want in natural language — Claude auto-invokes the right skill based on context.
 
 #### Learning artifact examples
+
+Use `/vocabulary-mastery` to investigate one English lexical item across all ten linguistic domains, in English and Simplified Chinese:
+
+```text
+/vocabulary-mastery  record
+Context: I need to record meetings and keep a record of project decisions.
+Prefer British English pronunciation.
+```
+
+This produces a detailed bilingual lexical reference (sound, form, word family, collocations, grammar, meaning, pragmatics, discourse, information structure, and prosody) and three recall questions. Use `/flashcard-generator` separately when you want Anki cards, TSV export, or spaced-repetition decks.
 
 Use `/flashcard-generator` when the goal is durable recall and spaced repetition:
 
@@ -160,6 +173,14 @@ Paste the prompt as the system prompt, then send your input as the first user me
 Edits writing or accessible speech in its own language with fidelity and restraint, then returns polished source-language output plus one companion language and selective, personalized linguistic learning notes by default. Notes label real changes with relevant domains, explain transferable patterns, and avoid unsupported pronunciation or intonation claims without audio. Explicit target-language and no-notes requests still override the defaults.
 
 Best for: emails, PR descriptions, documentation, release notes, messages, academic writing, and professional business communication.
+
+### `vocabulary-mastery` — Bilingual Linguistic Vocabulary Reference
+
+Accepts a single English word or fixed expression and provides a complete English + Simplified Chinese entry with all ten linguistic dimensions: phonetics, phonology, morphology, lexicon, syntax, semantics, pragmatics, discourse, information structure, and prosody. Each dimension includes an evidence-based explanation and a natural example or an explicit statement when a word has no unusual feature in that dimension.
+
+The output includes a sense map, pronunciation by variety where reliable, cross-domain connections, and three retrieval prompts with answers. It differentiates dictionary pronunciation from learner audio and does not invent linguistic facts to fill headings.
+
+Best for: deep study of an English word, bilingual lexical reference notes, homographs, polysemy, collocations, grammatical frames, and pronunciation-versus-word-class contrasts.
 
 ### `restaurant-menu-advisor` — Restaurant Menu Advisor
 
