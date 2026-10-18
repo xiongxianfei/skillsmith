@@ -65,6 +65,27 @@ class VocabularyMasteryContractTest(unittest.TestCase):
             self.assertIn("answer two", segment)
             self.assertIn("answer three", segment)
 
+    def test_canonical_analysis_plan_precedes_language_rendering(self):
+        # A single conceptual analysis must precede both full outputs.
+        workflow = self.source.split("## Workflow", 1)[1].split(
+            "## Two-Version Output Contract", 1
+        )[0]
+        steps = (
+            "internal canonical evidence plan",
+            "Render Part 1: English Reference",
+            "Render Part 2: Simplified Chinese Reference",
+            "Verify both deliverables",
+        )
+        indices = [workflow.index(step) for step in steps]
+        self.assertEqual(indices, sorted(indices))
+        self.assertIn("not a file, persistent learner profile", workflow)
+
+    def test_examples_and_recall_answers_share_one_analysis(self):
+        self.assertIn("exact English illustrative sentence", self.source)
+        self.assertIn("same plan", self.source)
+        self.assertIn("three recall answers", self.source)
+        self.assertIn("state that limitation in both versions", self.source)
+
     def test_safety_and_complete_two_version_behavior(self):
         self.assertIn("$ARGUMENTS", self.source)
         self.assertIn("Always output both full versions", self.source)

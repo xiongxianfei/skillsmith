@@ -174,3 +174,29 @@ scenarios:
       interleaved line-by-line bilingual output. The user can review
       each version independently, with parallel sense maps, examples,
       questions, and answers.
+
+  - id: vocabulary-shared-sense-and-examples-between-versions
+    category: edge
+    prompt: |
+      /vocabulary-mastery record
+      Context: We recorded the interview. The recording is stored in our archive.
+      Please explain the distinction deeply in both output versions.
+    expected_behavior: >
+      Resolves the intended verb and noun meanings once, then uses those same
+      senses and parts of speech in the complete English and Chinese references.
+      Preserves the identical original English illustrative sentences across
+      both versions, with faithful Chinese translations. Uses consistent
+      IPA/variety claims and does not let one version independently switch
+      to the achievement sense or invent alternative examples.
+
+  - id: vocabulary-honest-limitation-across-both-versions
+    category: edge
+    prompt: |
+      /vocabulary-mastery apple
+      I want all ten linguistic dimensions but do not have audio.
+    expected_behavior: >
+      Both independent versions cover all ten dimensions and describe an
+      ordinary word honestly; neither invents the learner's pronunciation,
+      unique intonation, cultural speech act, or unsupported etymology.
+      The Chinese version includes the same evidence limits as the English
+      one rather than making stronger claims to fill its sections.
