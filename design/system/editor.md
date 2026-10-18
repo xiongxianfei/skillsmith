@@ -15,6 +15,8 @@ F-ED-001 — Edit and translate supplied text while teaching from useful changes
 
 F-ED-001 is realized by all four Functions. Their primary implementation responsibility is allocated in [portable skill architecture](../architecture/portable-skills.md).
 
+The [editor architecture view](../architecture/views/editor.md) connects these Functions to shared responsibilities, implementation files and one translation scenario. This document continues to own their logical meaning and flow.
+
 ## Flow and state
 
 Resolve roles → preserve/refine meaning → render the selected visible language blocks → produce permitted learning notes → verify fidelity and presentation. Integrity and explicit constraints are applied throughout, not postponed until after generation. No persistent language preference, user profile or external service state is introduced.

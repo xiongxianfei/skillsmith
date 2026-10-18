@@ -6,6 +6,8 @@ This current architecture reconciles the preserved pure-prompt boundary with cur
 
 Normative contracts live in `design/requirements/`; logical Functions live in `design/system/`. The earlier editor architecture and diagrams remain historical source evidence under the expert-quality change, whose original bilingual-output pipeline is not the current editor contract.
 
+The [editor view](views/editor.md) presents a focused selection of these shared responsibilities and their realization. Allocation and Interface definitions remain owned here.
+
 ## Responsibility and allocation
 
 | Module | Responsibility and owned information | Primary Function allocation | Exclusions |
