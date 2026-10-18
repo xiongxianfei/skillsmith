@@ -7,17 +7,14 @@ This is an orientation map of the repository after simplifying design to C4. It 
 | Area | Responsibility |
 | --- | --- |
 | `skills/*/SKILL.md` | Portable product prompts; the README table enumerates the catalog |
-| `tests/validate_skills.py` | Structural/policy validation and static eval-fixture checks |
-| `tests/test_*.py` | Automated validator and synchronization regression checks |
-| `tests/evals/skills/` | Static expected-behavior scenarios and explicit grandfathering |
-| `tests/check_readme_sync.py` | README catalog, command and installation synchronization |
+| `tests/validate_skills.py` | The single automated skill-format and metadata check |
 | `install.sh` | Clone and copy product skills into the chosen destination |
 | `.github/` | CI, issue intake and PR template |
-| `CONSTITUTION.md`, `VISION.md` | Governance and product identity |
+| `VISION.md` | Canonical project purpose and scope |
 | `AGENTS.md` | Concise agent guidance and shared engineering principles |
-| `docs/workflows.md` | Contributor workflow, authoring examples, eval fixtures and bug guidance |
+| `docs/workflows.md` | Contributor workflow, authoring examples and bug guidance |
 | `design/architecture/` | C4 specifications, models, views and generated diagrams |
-| `docs/skill-quality-standard.md` | Shared authoring, safety and evaluation obligations |
+| `docs/skill-quality-standard.md` | Shared authoring, safety and review guidance |
 | Ignored `.agents/skills/` | Locally installed maintainer skills |
 
 ## Product and maintenance flows
@@ -30,9 +27,9 @@ Maintainers use `c4-architecture` for design and Git/PR review for delivery. Arc
 
 ## Validation and CI
 
-`python tests/validate_skills.py` parses YAML with PyYAML, checks prompt structure and policy, and validates static eval fixtures. Errors fail validation; warnings are reported separately. `python -m unittest discover tests` runs regression tests, and `python tests/check_readme_sync.py` checks README synchronization. CI uses the repository workflow under `.github/workflows/validate.yml`; inspect it for the exact commands and environment.
+`python tests/validate_skills.py` uses PyYAML to check skill-file format and metadata. It is the only file under `tests/` and the only test command in `.github/workflows/validate.yml`. Errors fail validation; warnings require review.
 
-Static eval fixtures express expected behavior; they do not demonstrate model execution. Nine grandfathered skills currently lack fixtures, a reported nonblocking warning. Material changes remove that exemption according to the quality standard. High-risk changes require safety evidence and appropriate model smoke evidence under the written standard.
+README synchronization is checked manually. Previous unit tests and scenario files are preserved in Git history, not maintained as an active suite. Passing the validator does not demonstrate model behavior or safety; review the actual prompt and evidence behind any behavioral claims.
 
 ## External boundaries and limits
 

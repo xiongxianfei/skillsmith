@@ -8,7 +8,7 @@
 | Editor | [C4 design](editor-c4/README.md) | Context, container, editing/learning and boundary scenarios; implementation-derived specification |
 | Vocabulary mastery | [C4 design](vocabulary-mastery-c4/README.md) | Context, container, bilingual reference and boundary scenarios; implementation-derived specification |
 
-The two C4 packages are prepared for human review; their existence does not establish approval or successful model evaluation. Other catalog skills do not yet have C4 packages. Consult their prompts and fixtures before proposing changes, and add design only when needed.
+The two C4 packages are prepared for human review; their existence does not establish approval or successful model evaluation. Other catalog skills do not yet have C4 packages. Consult their prompts and relevant historical examples before proposing changes, and add design only when needed.
 
 ## Maintaining a design
 

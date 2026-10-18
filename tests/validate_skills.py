@@ -1,4 +1,4 @@
-"""Validate skills in the skills/ directory against deterministic rules."""
+"""Check SKILL.md format and metadata; no behavioral evaluation is performed."""
 
 from dataclasses import dataclass, field
 import re
@@ -8,7 +8,6 @@ from pathlib import Path
 import yaml
 
 SKILLS_DIR = Path(__file__).parent.parent / "skills"
-EVALS_DIR = Path(__file__).parent / "evals" / "skills"
 
 REQUIRED_FRONTMATTER = ["name", "description"]
 ALLOWED_EFFORT = {"low", "medium", "high", "xhigh", "max"}
@@ -16,10 +15,6 @@ RESERVED_NAMES = {"anthropic", "claude"}
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SOFT_LINE_LIMIT = 300
 HARD_LINE_LIMIT = 500
-BASELINE_FILE = "grandfathered-skills.yaml"
-REQUIRED_EVAL_CATEGORIES = {"normal", "indirect-trigger"}
-EDGE_EVAL_CATEGORIES = {"edge", "safety", "failure", "non-trigger", "misuse"}
-HIGH_RISK_EVAL_CATEGORIES = {"safety", "misuse"}
 
 
 @dataclass
@@ -66,156 +61,6 @@ def parse_skill(path: Path) -> tuple[dict, str]:
         return {}, parts[2]
     body = parts[2]
     return fm, body
-
-
-def load_yaml_file(path: Path) -> tuple[dict, str | None]:
-    try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    except yaml.YAMLError as e:
-        return {}, f"invalid YAML: {e}"
-    if not isinstance(data, dict):
-        return {}, "YAML root must be a mapping"
-    return data, None
-
-
-def validate_grandfathering_baseline(skills_root: Path, evals_root: Path) -> tuple[ValidationResult, set[str]]:
-    result = ValidationResult()
-    baseline_path = evals_root / BASELINE_FILE
-    grandfathered: set[str] = set()
-
-    if not baseline_path.exists():
-        result.error("skillsmith-policy", f"{baseline_path} not found")
-        return result, grandfathered
-
-    data, yaml_error = load_yaml_file(baseline_path)
-    if yaml_error:
-        result.error("skillsmith-policy", f"{BASELINE_FILE} {yaml_error}")
-        return result, grandfathered
-
-    if data.get("version") != 1:
-        result.error("skillsmith-policy", f"{BASELINE_FILE} version must be 1")
-
-    for field in ("created_for_change", "source", "grandfathered_skills"):
-        if field not in data:
-            result.error("skillsmith-policy", f"{BASELINE_FILE} missing required field: '{field}'")
-
-    entries = data.get("grandfathered_skills", [])
-    if not isinstance(entries, list):
-        result.error("skillsmith-policy", f"{BASELINE_FILE} grandfathered_skills must be a list")
-        return result, grandfathered
-
-    valid_entries: list[str] = []
-    for index, entry in enumerate(entries):
-        if not isinstance(entry, str):
-            result.error("skillsmith-policy", f"{BASELINE_FILE} grandfathered_skills[{index}] must be a string")
-            continue
-        valid_entries.append(entry)
-
-    if valid_entries != sorted(valid_entries):
-        result.error("skillsmith-policy", f"{BASELINE_FILE} grandfathered_skills must be sorted lexicographically")
-
-    for entry in valid_entries:
-        if "/" in entry or "\\" in entry or entry.startswith("."):
-            result.error("skillsmith-policy", f"{BASELINE_FILE} entries must be bare skill directory names: '{entry}'")
-            continue
-        grandfathered.add(entry)
-
-    if len(grandfathered) != len(valid_entries):
-        result.error("skillsmith-policy", f"{BASELINE_FILE} contains duplicate grandfathered skill names")
-
-    existing_skills = {path.name for path in skills_root.iterdir() if path.is_dir()} if skills_root.exists() else set()
-    for skill_name in sorted(grandfathered - existing_skills):
-        result.error("skillsmith-policy", f"{BASELINE_FILE} lists '{skill_name}', but skills/{skill_name}/ does not exist")
-
-    return result, grandfathered
-
-
-def validate_cases_file(skill_name: str, cases_path: Path) -> ValidationResult:
-    result = ValidationResult()
-    data, yaml_error = load_yaml_file(cases_path)
-    label = f"tests/evals/skills/{skill_name}/cases.yaml"
-
-    if yaml_error:
-        result.error("skillsmith-policy", f"{label} {yaml_error}")
-        return result
-
-    if data.get("version") != 1:
-        result.error("skillsmith-policy", f"{label} version must be 1")
-
-    scenarios = data.get("scenarios")
-    if not isinstance(scenarios, list) or not scenarios:
-        result.error("skillsmith-policy", f"{label} scenarios must be a non-empty list")
-        return result
-
-    categories: set[str] = set()
-    for index, scenario in enumerate(scenarios, start=1):
-        if not isinstance(scenario, dict):
-            result.error("skillsmith-policy", f"{label} scenario {index} must be a mapping")
-            continue
-
-        scenario_id = scenario.get("id") or f"#{index}"
-        category = scenario.get("category")
-        if isinstance(category, str):
-            categories.add(category)
-        else:
-            result.error("skillsmith-policy", f"{label} scenario {scenario_id} missing category")
-
-        if not scenario.get("prompt") and not scenario.get("situation"):
-            result.error("skillsmith-policy", f"{label} scenario {scenario_id} needs prompt or situation")
-
-        expected_behavior = scenario.get("expected_behavior")
-        if not isinstance(expected_behavior, str) or not expected_behavior.strip():
-            result.error("skillsmith-policy", f"{label} scenario {scenario_id} needs expected_behavior")
-
-    missing = sorted(REQUIRED_EVAL_CATEGORIES - categories)
-    for category in missing:
-        result.error("skillsmith-policy", f"{label} missing required eval category: {category}")
-
-    if categories.isdisjoint(EDGE_EVAL_CATEGORIES):
-        result.error("skillsmith-policy", f"{label} needs one edge, safety, failure, non-trigger, or misuse scenario")
-
-    if data.get("high_risk") is True:
-        safety_notes = data.get("safety_notes")
-        if not isinstance(safety_notes, str) or not safety_notes.strip():
-            result.error("skillsmith-policy", f"{label} high_risk fixtures need safety_notes")
-        if categories.isdisjoint(HIGH_RISK_EVAL_CATEGORIES):
-            result.error("skillsmith-policy", f"{label} high_risk fixtures need a safety or misuse eval scenario")
-
-    return result
-
-
-def validate_eval_fixtures(skills_root: Path = SKILLS_DIR, evals_root: Path = EVALS_DIR) -> ValidationResult:
-    result = ValidationResult()
-    baseline_result, grandfathered = validate_grandfathering_baseline(skills_root, evals_root)
-    result.errors.extend(baseline_result.errors)
-    result.warnings.extend(baseline_result.warnings)
-
-    if not skills_root.exists():
-        result.error("compatibility", f"{skills_root} not found")
-        return result
-
-    grandfathered_without_cases = []
-    skill_names = sorted(path.name for path in skills_root.iterdir() if path.is_dir())
-    for skill_name in skill_names:
-        cases_path = evals_root / skill_name / "cases.yaml"
-        if not cases_path.exists():
-            if skill_name in grandfathered:
-                grandfathered_without_cases.append(skill_name)
-            else:
-                result.error("skillsmith-policy", f"skills/{skill_name} is not grandfathered and lacks tests/evals/skills/{skill_name}/cases.yaml")
-            continue
-
-        cases_result = validate_cases_file(skill_name, cases_path)
-        result.errors.extend(cases_result.errors)
-        result.warnings.extend(cases_result.warnings)
-
-    if grandfathered_without_cases:
-        result.warn(
-            "reviewer-heuristic",
-            "grandfathered skills without eval fixtures: " + ", ".join(grandfathered_without_cases),
-        )
-
-    return result
 
 
 def validate_skill(skill_dir: Path) -> ValidationResult:
@@ -290,10 +135,6 @@ def main():
         label = f"skills/{skill_dir.name}/SKILL.md"
         errors.extend(f"  ERROR  {label}: {msg}" for msg in result.errors)
         warnings.extend(f"  WARN   {label}: {msg}" for msg in result.warnings)
-
-    eval_result = validate_eval_fixtures(SKILLS_DIR, EVALS_DIR)
-    errors.extend(f"  ERROR  evals: {msg}" for msg in eval_result.errors)
-    warnings.extend(f"  WARN   evals: {msg}" for msg in eval_result.warnings)
 
     if warnings:
         print("Warnings:")

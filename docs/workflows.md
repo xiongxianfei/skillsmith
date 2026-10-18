@@ -1,16 +1,20 @@
 # Contributing to Skillsmith
 
-Skillsmith uses C4 for design and ordinary Git/PR review for delivery. RigorLoop is no longer part of the active workflow. The [constitution](../CONSTITUTION.md) governs this guide; the [quality standard](skill-quality-standard.md) defines skill evidence requirements.
+Skillsmith uses C4 for design and ordinary Git/PR review for delivery. RigorLoop is no longer part of the active workflow. [VISION.md](../VISION.md) owns project purpose, [AGENTS.md](../AGENTS.md) owns agent conduct and engineering principles, and the [quality standard](skill-quality-standard.md) owns skill requirements. This guide owns contribution, validation and delivery procedures.
 
 ## 1. Define the change
 
-Inspect the current prompt, tests and relevant architecture. Describe the user problem, intended behavior, safety/compatibility boundaries and observable acceptance examples. Small changes can use the issue or PR description. For architectural changes, use `c4-architecture` and keep this context in the subject's `architecture-spec.md` under [design/architecture/](../design/architecture/README.md).
+Before adding a skill, changing output or validation rules, altering installation behavior, or repositioning the project, write the intended behavior and validation commands. Inspect the current prompt, tests and relevant architecture. Describe the user problem, trigger intent, accepted input, output format, safety/compatibility boundaries and observable acceptance examples where applicable. Small changes can use the issue or PR description. For architectural changes, use `c4-architecture` and keep this context in the subject's `architecture-spec.md` under [design/architecture/](../design/architecture/README.md).
+
+Small editorial corrections need no formal design when behavior, scope, safety and public contracts stay unchanged. Where practical, capture current behavior before changing it. A bug fix needs a minimal reproduction or a written explanation of why automated reproduction is impractical.
 
 ## 2. Design and edit
 
 Use a shared `model.d2` within each C4 package, context/container views and only the dynamic views needed to explain important scenarios. Keep implemented, proposed and unknown behavior distinct. Obtain human review of consequential decisions before relying on them. Optional decision records explain meaningful tradeoffs; no separate requirement, system-design or delivery-stage hierarchy is required.
 
-Edit the owning prompt, validator, installer or document. Add or update eval fixtures for new or materially changed skills. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
+Edit the owning prompt, validator, installer or document. Describe the expected result of substantive skill changes in the PR; no separate test fixtures are required. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
+
+Review dependency changes for supply-chain risk; new runtime or CI dependencies need a concrete purpose and validation path. When changing the validator, check representative valid and invalid inputs before handoff; no separate permanent test suite is required.
 
 Keep current design decisions in the subject architecture specification. When delivery sequencing needs a plan, use the issue, PR description or a local working note; do not recreate a separate proposal/plan directory or an active-plan index.
 
@@ -23,11 +27,9 @@ pip install pyyaml
 python tests/validate_skills.py
 ```
 
-Errors block merging. Warnings are non-blocking but must be reviewed.
+Run the validator before handoff. CI must run the same validator on pushes and PRs to `main`. Errors block merging; warnings must be fixed or acknowledged. Also run focused checks for affected contracts, links and documentation synchronization.
 
-Run `python tests/check_readme_sync.py` when changing the catalog or its documentation, and relevant unit tests when changing validation code. Static fixtures describe expected behavior; they do not replace the model evidence required by the quality standard.
-
-The validator discovers fixtures through existing `skills/` directories. A fixture authored before its skill directory exists needs a direct `validate_cases_file` check; the full command does not cover that orphan fixture. This limitation was observed during the menu and learning-skill work. Likewise, material-change classification is a review decision, not something the current tree alone proves.
+This is the only automated repository test. Check README catalog entries manually when adding, removing or renaming skills. Use focused inspection for documentation and actual model evidence for any claimed model-quality result; format validation alone proves neither.
 
 For changed C4 diagrams, put D2 on PATH and run the package's helper:
 
@@ -41,12 +43,17 @@ Inspect the rendered SVGs for readability and semantic accuracy. Python and D2 s
 
 ## 4. Review and deliver
 
-Use a PR to `main` with the problem, resulting behavior, relevant design decisions and actual validation/evaluation results. Report warnings, failures, skipped checks and open questions. Reviewers assess the complete diff with depth appropriate to its risk; do not infer human design approval from successful commands.
+Use a PR to `main` with the problem, resulting behavior, relevant design decisions and actual validation/evaluation results. Identify the reviewed revision and changed subjects; include realistic input and expected behavior for substantive prompt changes. Breaking changes to skill names, output formats, installer paths or README commands need explicit migration guidance. Report warnings, failures, skipped checks and open questions. Reviewers assess the complete diff with depth appropriate to its risk; do not infer human design approval from successful commands. Historical reviews retain their original scope and do not approve later changes.
 
-Put task status and sufficient sanitized review/validation evidence in the issue or PR. Keep private working notes outside the repository. Preserve historical provenance with fixed Git links and migrate durable decisions into their owning architecture or quality documents; do not recreate workflow-record directories. Commit, push, merge and release require the applicable user authorization.
+Put task status and sufficient sanitized review/validation evidence in the issue or PR. Keep private working notes outside the repository, with a private backup when continuity requires it. Local-only files must not be the sole support for an external readiness claim. Preserve historical provenance with fixed Git links and migrate durable decisions into their owning architecture or quality documents; do not recreate workflow-record directories. Commit, push, merge and release require the applicable user authorization.
+
+## Keeping documentation current
+
+Update the owning document in the same change. `VISION.md` is the canonical identity; derive the README vision block from it. Keep README installation, usage and catalog entries current, including slash commands and any examples that enumerate skills. Maintain this guide for contributor procedures and keep `AGENTS.md` concise and agent-facing.
+
+When failures recur, improve the relevant validator, template, quality rule or contributor guidance so the lesson becomes checkable. Preserve unique evidence and provenance without adding competing copies of current rules.
 
 ## Adding a new skill
-
 
 ### 1. Create the skill directory
 
@@ -93,46 +100,13 @@ $ARGUMENTS
 - [ ] `$ARGUMENTS` appears in the prompt body
 - [ ] `## Output Format` section is present
 - [ ] No emojis in the Output Format section headers
-- [ ] New or materially changed skills include at least three eval scenarios: normal use, indirect trigger, and edge/safety/failure/non-trigger/misuse behavior
-- [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes, and at least one safety or misuse eval case
+- [ ] Substantive behavior changes and their expected result are explained in the PR
+- [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes
 - [ ] CI passes locally: `python tests/validate_skills.py`
 - [ ] Skill added to the README skills table
 - [ ] Skill added to the `cp` install commands in README
 
-### 4. Add eval fixtures for new or material changes
-
-New or materially changed skills need static eval evidence at:
-
-```text
-tests/evals/skills/<skill-name>/cases.yaml
-```
-
-Use this minimal schema:
-
-```yaml
-version: 1
-scenarios:
-  - id: normal-use
-    category: normal
-    prompt: "A realistic direct user request."
-    expected_behavior: "The observable behavior reviewers should expect."
-  - id: indirect-trigger
-    category: indirect-trigger
-    prompt: "A vague or casual request that should still trigger the skill."
-    expected_behavior: "How the skill recognizes and handles the request."
-  - id: edge-case
-    category: edge
-    prompt: "An edge, failure, non-trigger, safety, or misuse situation."
-    expected_behavior: "The safe or bounded behavior expected."
-```
-
-Allowed edge categories are `edge`, `safety`, `failure`, `non-trigger`, and `misuse`.
-
-For high-risk skills, add `high_risk: true`, `safety_notes`, and at least one `safety` or `misuse` scenario. The first slice does not require a shared domain-specific safety schema.
-
-Existing skills listed in `tests/evals/skills/grandfathered-skills.yaml` may lack `cases.yaml` until materially changed.
-
-### 5. Open a pull request
+### 4. Open a pull request
 
 The PR template will pre-fill the checklist for you. Include one or two example inputs and outputs in the PR description so reviewers can quickly understand what the skill does.
 
@@ -143,8 +117,8 @@ The PR template will pre-fill the checklist for you. Include one or two example 
 - Keep changes focused: one concern per PR
 - If you're changing the output format, explain why the new format is better
 - Treat a change as material if it could alter what the skill does, when it triggers, or what it returns
-- Material changes need the same eval evidence as a new skill
-- Editorial changes, such as typo fixes that do not affect trigger behavior, output contract, workflow steps, referenced files, or safety behavior, may proceed without new eval fixtures
+- Explain material changes with concrete expected behavior; no fixture files or fixed scenario counts are required
+- Editorial changes, such as typo fixes that do not affect trigger behavior, output contract, workflow steps, referenced files, or safety behavior, need no additional scenario documentation
 - CI must pass after your changes
 
 ---
@@ -170,7 +144,7 @@ When you fix a bug, capture the full trail in the PR:
 
 - Root cause: what was actually wrong
 - Fix: why the change is correct
-- Regression coverage: what check now prevents recurrence
+- Verification: the smallest useful check or reproduction showing the fix
 - Prevention artifact: which doc, template, or validator rule was updated if the bug exposed a repeatable pattern
 
 For this repo, the prevention artifact is often one of:

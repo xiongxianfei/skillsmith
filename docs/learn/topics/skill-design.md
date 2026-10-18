@@ -1,6 +1,6 @@
 # Skill Design Lessons
 
-Curated lessons for designing portable prompt skills. These lessons are guidance, not policy; authoritative behavior still belongs in the constitution, quality standard, accepted architecture decisions, skill files and current PR evidence.
+Curated lessons for designing portable prompt skills. These lessons are guidance, not policy; authoritative behavior still belongs in the project vision, agent principles, quality standard, accepted architecture decisions, skill files and current PR evidence.
 
 ## 2026-05-26: Design Skills As Behavior Contracts
 
@@ -28,7 +28,7 @@ Curated lessons for designing portable prompt skills. These lessons are guidance
 - Source session: `docs/learn/sessions/2026-05-26-editor-skill-design.md`
 - Primary classification: `durable-lesson`
 - Secondary routes: possible future eval-design topic
-- Lesson: Examples and eval fixtures should test the design before and after prompt edits. Include normal cases, inverse cases, edge cases, indirect triggers, and misuse cases so the prompt is tested against the places it is most likely to break.
+- Lesson: Concrete examples should help review the design before and after prompt edits; they need not live in a separate fixture suite. Include normal cases, inverse cases, edge cases, indirect triggers, and misuse cases so the prompt is tested against the places it is most likely to break.
 
 ## 2026-05-26: Keep Verification In The Method
 

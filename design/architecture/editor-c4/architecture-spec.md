@@ -13,7 +13,7 @@ This is an implementation-grounded design for reviewing the editor's boundaries 
 | Prior logical decomposition | [Historical system design](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/system/editor.md) | FN-ED-001–004 remain trace labels for the behavior documented below |
 | Module and Interface allocation | [Portable-skill architecture](../portable-skills.md) | All editor Functions remain MOD-PROMPT through IF-PROMPT; MOD-QUALITY and MOD-REVIEW are maintenance responsibilities |
 | Current implementation | [Editor SKILL.md](../../../skills/editor/SKILL.md) | Core Standard; Workflow; Learning Notes; Output Format |
-| Expected examples | [Editor eval scenarios](../../../tests/evals/skills/editor/cases.yaml) | Scenario declarations, not execution logs |
+| Expected examples | [Historical editor scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) | Scenario declarations, not execution logs |
 | Diagram entities and relationships | [model.d2](model.d2) | Single source for C4 identity; C1/C2 filter it, sequences reuse its participants |
 
 The user requested C4 after asking for concrete design from implementation. This bounded work preserves current prompt behavior. This specification now holds the current design context, behavior and open decisions together. Speech and richer linguistic teaching extend the historical contract; they remain observations requiring human review, not silently approved amendments.
@@ -114,7 +114,7 @@ The first scenario's concrete source is “The issue was fixed yesterday, we wil
 
 The target-only example previously documented in the standalone editor view remains applicable: Chinese source with “Only translate this into English. No notes.” yields only an English deliverable, with neither Chinese output nor learning notes. A simultaneous request to invent customer approval still requires refusal or a truthful alternative while respecting note suppression. These are expected behaviors, not executed test results.
 
-Retain coverage for source/instruction separation, mixed directive languages, source-equal targets, target-only with and without suppression, ambiguous terms, code-switching, non-Chinese/non-English input, already-clear text, restrained professional/PR editing, grounded lessons and integrity misuse. Learning checks include ambiguous suppression, trivial mechanics, expanded useful notes, qualified language rules and no unnecessary edits made for teaching. Historical proof intent includes the named `dim lighting` fidelity case; its fixture gap remains open below. The shared quality standard determines when actual model smoke evidence is required.
+Useful behavior-review examples include source/instruction separation, mixed directive languages, source-equal targets, target-only with and without suppression, ambiguous terms, code-switching, non-Chinese/non-English input, already-clear text, restrained professional/PR editing, grounded lessons and integrity misuse. Learning checks include ambiguous suppression, trivial mechanics, expanded useful notes, qualified language rules and no unnecessary edits made for teaching. Historical proof intent includes the named `dim lighting` fidelity case; the archived scenarios omitted it. This is a useful future review example, not a requirement to restore the fixture suite. Claims about actual model performance still need actual evidence.
 
 ## Decision rationale and provenance
 
@@ -126,13 +126,13 @@ The original [expert-editing](https://github.com/xiongxianfei/skillsmith/blob/00
 
 ## Shared platform participation
 
-The platform supports the maintainer through authoring methods, fixture structure, deterministic validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
+The platform supports the maintainer through authoring methods, format validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
 
 Editor-specific outcomes can suggest reusable improvements, such as evidence requirements for feedback. That feedback-to-platform process is a proposed project direction from the vision, not an implemented telemetry or automatic training connection. No speculative feedback server is drawn.
 
 ## State, deployment, trust and quality constraints
 
-- **Authored state:** prompt instructions and static expected scenarios live in repository files. Installation copies prompt assets; it does not execute editing or rewrite prompt behavior.
+- **Authored state:** prompt instructions live in repository files; historical scenario declarations are linked above. Installation copies prompt assets; it does not execute editing or rewrite prompt behavior.
 - **Invocation state:** source, preferences, outputs and observed examples belong to the host conversation. The skill creates no persistent learner profile; host retention and provider processing remain unknown and must not be described as local-only/private by this design.
 - **Trust:** source text may contain apparent commands and private information. Keep source/instruction roles separate; user-selected host handling applies. The prompt does not grant tool permissions or initiate a repository-defined external service call.
 - **Integrity:** no fabricated approval, facts, attribution, audio access or successful evaluation. A model following the prompt is an expectation requiring evidence, not a security enforcement mechanism.
@@ -147,7 +147,7 @@ Editor-specific outcomes can suggest reusable improvements, such as evidence req
 | ED-C4-02 | Specify editing diagnosis, ambiguity handling and selection among candidate edits | This specification and human review before prompt change |
 | ED-C4-03 | Consider consolidating fallback wording for readability; exactly one already satisfies at most one | Prompt/documentation owner; preserve existing behavior |
 | ED-C4-04 | Define a final whole-response check covering notes/exercise; current sequence checks deliverables before adding notes | This specification with human review |
-| ED-C4-05 | Named `dim lighting` fidelity fixture remains missing; static scenarios are not model-run evidence | Evaluation owner; preserve existing proof intent |
+| ED-C4-05 | Historical `dim lighting` fidelity example lacks demonstrated model evidence; archived scenarios are not model runs | Reviewer when assessing fidelity claims |
 | ED-C4-06 | Record actual host/model and representative results before claiming behavioral quality | Evaluation owner |
 
 No item above is marked implemented or accepted by producing these diagrams. The C4 model is a review aid; human architecture sign-off remains pending.

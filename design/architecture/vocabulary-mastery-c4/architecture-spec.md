@@ -9,7 +9,7 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | Evidence | What it establishes | What it does not establish |
 | --- | --- | --- |
 | [Vocabulary prompt](../../../skills/vocabulary-mastery/SKILL.md) | Role and Scope; Workflow; Two-Version Output Contract; Linguistic Rules; Output Format | Deterministic execution, lexical correctness, learning effectiveness |
-| [Vocabulary fixtures](../../../tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
+| [Historical vocabulary scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 archived expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
 | [October 18 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/requirements.md) | Original two-complete-version choice, English-only skill source, behavior and evidence constraints | Current C4 approval or successful model execution |
 | [Reviewer examples](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md) | Full `record` bilingual illustration and `apple` boundary examples with pronunciation provenance | Live-model outputs or measured accuracy |
 | [Shared quality requirements](../../../docs/skill-quality-standard.md) | Repository quality/evidence obligations | A complete accepted contract for this skill |
@@ -17,7 +17,7 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |
 | [D2 model](model.d2) | Diagram identities and structural relationships | A new runtime or a second normative product contract |
 
-This isolated design uses the current prompt and fixtures as observed evidence. It neither edits the prompt nor adopts new product behavior. The contextual learner examples are fictional fixture inputs. Maintenance uses the C4 design and PR workflow, outside vocabulary invocation.
+This isolated design uses the current prompt and archived scenarios as source evidence. It neither edits the prompt nor adopts new product behavior. The contextual learner examples are fictional scenario inputs. Maintenance uses the C4 design and PR workflow, outside vocabulary invocation.
 
 ## C4 scope and ownership
 
@@ -114,21 +114,21 @@ These are model-directed checks, not an implemented automated comparison engine.
 
 ## Scenarios and quality evidence
 
-| View / fixture | What the design demonstrates | Evidence status |
+| View / historical scenario | What the design demonstrates | Evidence status |
 | --- | --- | --- |
 | [C1 context](diagrams/context.svg) / [source](views/context.d2) | Passive instructions versus external execution | Repository-grounded boundary |
 | [C2 container](diagrams/container.svg) / [source](views/container.d2) | One authored file store; no glossary database or learning engine | Repository-grounded boundary |
-| [Complete reference](diagrams/complete-reference.svg) / [source](views/complete-reference.d2) | `record`: shared sense map, full EN/ZH outputs, parity check | Derived from `vocabulary-record-two-complete-references` and recall fixtures; not an execution log |
-| [Target clarification](diagrams/target-clarification.svg) / [source](views/target-clarification.d2) | Multiple targets → choose one → contextual `bank` reference | Composed walkthrough from multiple-target and bank fixtures; follow-up exchange is illustrative |
-| [Coinage boundary](diagrams/coinage-boundary.svg) / [source](views/coinage-boundary.d2) | `flinderation`: required structure with honest evidence limits | Coinage fixture plus shared recall/accuracy rules; exact limited-content output remains underspecified |
+| [Complete reference](diagrams/complete-reference.svg) / [source](views/complete-reference.d2) | `record`: shared sense map, full EN/ZH outputs, parity check | Derived from `vocabulary-record-two-complete-references` and archived recall scenarios; not an execution log |
+| [Target clarification](diagrams/target-clarification.svg) / [source](views/target-clarification.d2) | Multiple targets → choose one → contextual `bank` reference | Composed walkthrough from archived multiple-target and bank scenarios; follow-up exchange is illustrative |
+| [Coinage boundary](diagrams/coinage-boundary.svg) / [source](views/coinage-boundary.d2) | `flinderation`: required structure with honest evidence limits | Archived coinage scenario plus shared recall/accuracy rules; exact limited-content output remains underspecified |
 
-Additional fixtures address `lead` homographs, `unhappiness` morphology, `apple` weak word-level dimensions, `look up` syntax, indirect triggering, independently readable Chinese, text-only pronunciation boundaries and non-triggers. These are written expected behaviors, not proof of accuracy, effective retrieval practice or long-term retention.
+Additional archived scenarios address `lead` homographs, `unhappiness` morphology, `apple` weak word-level dimensions, `look up` syntax, indirect triggering, independently readable Chinese, text-only pronunciation boundaries and non-triggers. These are written expected behaviors, not proof of accuracy, effective retrieval practice or long-term retention.
 
 D2 sequence self-messages represent prompt-directed logical activities inside the external host. They do not expose model internals, create separate components or guarantee a deterministic execution order.
 
 ## State, trust, deployment and constraints
 
-- **Authored state:** English-only prompt instructions and templates in `SKILL.md`; static expected scenarios in YAML. The generated Chinese reference is output, not a separately maintained Chinese prompt.
+- **Authored state:** English-only prompt instructions and templates in `SKILL.md`; historical scenario declarations are linked above. The generated Chinese reference is output, not a separately maintained Chinese prompt.
 - **Invocation state:** target, sense map, examples, draft references and questions belong to the current host interaction. No Skillsmith learner profile, score history, spaced-repetition schedule or progress database is implemented.
 - **External execution:** installation copies prompt files or users paste them. Host capabilities, context limits, latency, inference cost, availability, authentication and retention policies are unknown. No local-only processing or privacy guarantee follows from a Markdown skill.
 - **Accuracy:** preserve uncertainty and label supported variety distinctions. Reference pronunciation is not an assessment of the learner's actual speech. The skill does not establish an audio-assessment workflow merely by warning against unsupported sound claims.
@@ -136,7 +136,7 @@ D2 sequence self-messages represent prompt-directed logical activities inside th
 - **Quality tradeoff:** two full references favor independent usability over brevity. The prompt requires this despite possible output-budget pressure; continuation/truncation handling has not been designed.
 - **Non-functional boundary:** no measured accuracy, speed, cost, scale or learning-retention target is accepted here. D2 is documentation tooling only; product installation and invocation gain no dependency.
 
-The shared development platform supports authoring, fixtures, review and distribution outside the learner's request. Cross-skill lessons about evidence quality or bilingual consistency may improve that platform after assessment. This is not an implemented telemetry/training loop, and no platform service is drawn on the invocation path.
+The shared development platform supports authoring, format validation, review and distribution outside the learner's request. Cross-skill lessons about evidence quality or bilingual consistency may improve that platform after assessment. This is not an implemented telemetry/training loop, and no platform service is drawn on the invocation path.
 
 ## Open design work
 
