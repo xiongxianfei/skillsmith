@@ -1,0 +1,75 @@
+{
+  "weights": {
+    "schedule": 25,
+    "sleep": 15,
+    "reliability": 20,
+    "comfort": 10,
+    "ground": 10,
+    "cost": 20
+  },
+  "hard_requirements": [
+    "travel_documents",
+    "safety",
+    "work_time",
+    "event_ready",
+    "airports",
+    "baggage",
+    "fare_checkout"
+  ],
+  "candidates": [
+    {
+      "id": "fictional_full_service",
+      "label": "Fictional airline itinerary A",
+      "hard_checks": {
+        "travel_documents": "pending",
+        "safety": "pending",
+        "work_time": "pending",
+        "event_ready": "pending",
+        "airports": "pass",
+        "baggage": "pending",
+        "fare_checkout": "pending"
+      },
+      "price": {
+        "amount": 44000,
+        "currency": "XYZ",
+        "status": "advertised"
+      },
+      "scores": {
+        "schedule": null,
+        "sleep": null,
+        "reliability": null,
+        "comfort": 7,
+        "ground": null,
+        "cost": null
+      },
+      "notes": "All amounts and offers are synthetic; no real checkout observation."
+    },
+    {
+      "id": "fictional_budget",
+      "label": "Fictional airline itinerary B",
+      "hard_checks": {
+        "travel_documents": "pending",
+        "safety": "pending",
+        "work_time": "pending",
+        "event_ready": "pending",
+        "airports": "pass",
+        "baggage": "pending",
+        "fare_checkout": "pending"
+      },
+      "price": {
+        "amount": 41000,
+        "currency": "XYZ",
+        "status": "advertised"
+      },
+      "scores": {
+        "schedule": null,
+        "sleep": null,
+        "reliability": null,
+        "comfort": 4,
+        "ground": null,
+        "cost": null
+      },
+      "notes": "All amounts and offers are synthetic; no real checkout observation."
+    }
+  ]
+}
