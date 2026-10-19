@@ -19,6 +19,8 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
+| [hairstyle-selection](skills/hairstyle-selection/SKILL.md) | `/hairstyle-selection` | Hairstyle consultation using visible hair and face observations, fair haircut comparisons, optional controlled previews and clear barber handoffs |
+| [eyeglasses-selection](skills/eyeglasses-selection/SKILL.md) | `/eyeglasses-selection` | Everyday prescription frame selection, shape and fit comparisons, illustrative try-ons, and optician handoff with prescription safety boundaries |
 | [c4-architecture](skills/c4-architecture/SKILL.md) | `/c4-architecture` | Public D2/C4 architecture skill for AI-generated, Git-reviewed system context, container and dynamic views; includes example models and validation helpers |
 | [travel-planner](skills/travel-planner/SKILL.md) | `/travel-planner` | Constraint-aware travel planning: cross-platform flight and hotel comparisons, MCDA scoring, transport, experiences, approval gates and predeparture audits |
 | [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
@@ -50,7 +52,7 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture` and `/travel-planner`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture`, `/hairstyle-selection`, and `/eyeglasses-selection`.
 
 #### Install a specific skill only
 
@@ -60,9 +62,11 @@ cp -r Skillsmith/skills/editor ~/.claude/skills/editor
 cp -r Skillsmith/skills/vocabulary-mastery ~/.claude/skills/vocabulary-mastery
 cp -r Skillsmith/skills/c4-architecture ~/.claude/skills/c4-architecture
 cp -r Skillsmith/skills/travel-planner ~/.claude/skills/travel-planner
+cp -r Skillsmith/skills/hairstyle-selection ~/.claude/skills/hairstyle-selection
+cp -r Skillsmith/skills/eyeglasses-selection ~/.claude/skills/eyeglasses-selection
 ```
 
-Install any individual skill by copying its **entire** directory. The examples above install `editor`, `vocabulary-mastery`, and `c4-architecture`.
+Install any individual skill by copying its **entire** directory. The examples above show how to install individual skills, including `hairstyle-selection` and `eyeglasses-selection`.
 
 #### Project-level install — shared with your team
 
@@ -81,7 +85,7 @@ git clone https://github.com/xiongxianfei/Skillsmith
 claude --plugin-dir ./Skillsmith
 ```
 
-Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, `/Skillsmith:communicator`, and `/Skillsmith:c4-architecture` for this session only.
+Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, `/Skillsmith:communicator`, `/Skillsmith:c4-architecture`, `/Skillsmith:hairstyle-selection`, and `/Skillsmith:eyeglasses-selection` for this session only.
 
 ### Other AI models (ChatGPT, Gemini, etc.)
 
@@ -107,6 +111,8 @@ Invoke by slash command, passing your text as the argument:
 /communicator  我想告诉房东暖气坏了，请帮我写一条俄语消息。
 /c4-architecture  Create C1/C2 D2 views from our software requirements for a Git design review.
 /travel-planner  Plan a long weekend with protected work commitments; compare complete itineraries, check travel documents, and create a realistic sightseeing plan.
+/hairstyle-selection  Compare short and medium hairstyles from authorised portraits and prepare a barber brief.
+/eyeglasses-selection  Compare everyday frame styles and explain which choices need in-person fitting.
 ```
 
 Or just describe what you want in natural language — Claude auto-invokes the right skill based on context.
@@ -171,6 +177,14 @@ Install the complete skill directory in a compatible host. Where a host does not
 ---
 
 ## Skill Details
+
+### `hairstyle-selection` — Hairstyle and Haircut Advisor
+
+Uses authorised photographs or descriptions to evaluate visible facial proportions and natural hair behaviour; compares distinct haircut families, offers controlled illustrative previews on request, and prepares a practical multi-angle barber handoff. Separates cutting geometry from styling and validates outcomes in person.
+
+### `eyeglasses-selection` — Prescription Eyewear Frame Advisor
+
+Compares frame shapes, construction, materials and everyday style while keeping appearance distinct from actual fit and prescription requirements. Supports consented illustrative try-ons and optician-ready fitting questions; never substitutes AI imagery for a verified prescription or dispensing assessment.
 
 ### `travel-planner` — Constraint-Aware Trip Planning
 
