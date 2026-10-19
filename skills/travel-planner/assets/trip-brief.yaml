@@ -1,0 +1,43 @@
+# Reusable trip intake; do not include passport scans, credentials or payment cards.
+trip_id: ""
+status: draft
+traveler_count: 1
+origin_city: ""
+destination_cities: []
+outbound_date: "YYYY-MM-DD"
+return_date: "YYYY-MM-DD"
+flexible_dates: false
+currency: ""
+budget:
+  preferred: null
+  hard_ceiling: null
+  includes: [airfare, baggage, fees, required_ground_transfers, extra_lodging]
+acceptable_origin_airports: []
+acceptable_return_airports: []
+disallowed_airports: []
+preferred_routes: [nonstop]
+baggage:
+  cabin_description: ""
+  checked_bags: 0
+purpose: ""
+fixed_commitments: [] # local datetime, IANA time zone, required buffer
+work_end_local: null
+travel_to_airport_minutes: null
+minimum_airport_buffer_minutes: null
+recovery_requirement: ""
+safety_acceptance_rule: "not yet defined"
+travel_document_status: pending
+mobile_device_esim: unknown
+network_and_payment_requirements: ""
+hotel_preference_or_area: ""
+experience_interests: [history, scenery, cuisine, culture]
+weighted_criteria:
+  schedule: 25
+  sleep: 15
+  reliability: 20
+  comfort: 10
+  ground: 10
+  cost: 20
+quotes_are_live: false
+assumptions: []
+open_questions: []

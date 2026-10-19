@@ -20,6 +20,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
 | [c4-architecture](skills/c4-architecture/SKILL.md) | `/c4-architecture` | Public D2/C4 architecture skill for AI-generated, Git-reviewed system context, container and dynamic views; includes example models and validation helpers |
+| [travel-planner](skills/travel-planner/SKILL.md) | `/travel-planner` | Constraint-aware travel planning: cross-platform flight and hotel comparisons, MCDA scoring, transport, experiences, approval gates and predeparture audits |
 | [editor](skills/editor/SKILL.md) | `/editor` | Faithful writing and speech editing/translation with source-language plus companion-language output and personalized linguistic learning notes; explicit target-language and no-notes overrides |
 | [vocabulary-mastery](skills/vocabulary-mastery/SKILL.md) | `/vocabulary-mastery` | English-only skill instructions generating two complete, separate ten-domain vocabulary references (English first, Simplified Chinese second), each with learning connections and recall questions |
 | [restaurant-menu-advisor](skills/restaurant-menu-advisor/SKILL.md) | `/restaurant-menu-advisor` | Restaurant menu advisor for choosing what to order from supplied menu photos, pasted menus, or readable dish evidence, with allergy-aware boundaries and illustrative visual briefs |
@@ -49,7 +50,7 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach`, plus `/c4-architecture`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture` and `/travel-planner`.
 
 #### Install a specific skill only
 
@@ -58,6 +59,7 @@ git clone https://github.com/xiongxianfei/Skillsmith
 cp -r Skillsmith/skills/editor ~/.claude/skills/editor
 cp -r Skillsmith/skills/vocabulary-mastery ~/.claude/skills/vocabulary-mastery
 cp -r Skillsmith/skills/c4-architecture ~/.claude/skills/c4-architecture
+cp -r Skillsmith/skills/travel-planner ~/.claude/skills/travel-planner
 ```
 
 Install any individual skill by copying its **entire** directory. The examples above install `editor`, `vocabulary-mastery`, and `c4-architecture`.
@@ -104,6 +106,7 @@ Invoke by slash command, passing your text as the argument:
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
 /communicator  我想告诉房东暖气坏了，请帮我写一条俄语消息。
 /c4-architecture  Create C1/C2 D2 views from our software requirements for a Git design review.
+/travel-planner  Plan a long weekend with protected work commitments; compare complete itineraries, check travel documents, and create a realistic sightseeing plan.
 ```
 
 Or just describe what you want in natural language — Claude auto-invokes the right skill based on context.
@@ -168,6 +171,11 @@ Install the complete skill directory in a compatible host. Where a host does not
 ---
 
 ## Skill Details
+
+### `travel-planner` — Constraint-Aware Trip Planning
+
+Plans multi-day travel using feasibility screening, comparable flight and hotel evidence, constrained MCDA/weighted scoring, arrival and recovery planning, local connectivity/ground transfers and geographically clustered activities. Prevents unverified prices or pending legal/safety checks from becoming purchase recommendations. Booking and payment always require available authorized tools and explicit traveler approval. The bundled Moscow–Samarkand example is fictional and illustrates how to handle missing reliability evidence and pending hard gates.
+
 
 ### `editor` — Expert Text Editing & Translation
 
