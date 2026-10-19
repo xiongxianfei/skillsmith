@@ -1,0 +1,20 @@
+# C2: three passive skill packages; no independent Skillsmith server.
+...@../model
+**: suspend
+(** -> **)[*]: suspend
+**: unsuspend {
+  &level: 0
+}
+**: unsuspend {
+  &level: 1
+}
+(** -> **)[*]: unsuspend {
+  &src.level: 1
+}
+(** -> **)[*]: unsuspend {
+  &dst.level: 1
+}
+(traveler -> host)[*]: unsuspend
+(host -> traveler)[*]: unsuspend
+(host -> providers)[*]: unsuspend
+(providers -> host)[*]: unsuspend

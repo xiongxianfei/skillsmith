@@ -17,6 +17,8 @@
 ### Venues: `venue_inventory_template.csv`
 `venue_id,city,country,name,venue_type,address,geographic_area,geo_scope,published_rating,opening_information,verification_status,source_urls,verified_date,notes`
 
+A venue may additionally include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at` after the base CSV fields. These are optional fields for geographic handoff, not authority to draw a pin without verified coordinates. Match records reference venue IDs; multiple foods can share one physical `place_id` if served at the same location.
+
 Venues are separately researched identities/profiles. Scores tied to a specific food live in the match table, never as one supposedly universal global venue score.
 
 ### Matches: `food_venue_matches_template.csv`

@@ -5,6 +5,7 @@
 | Subject | Start here | Coverage |
 | --- | --- | --- |
 | Shared platform and portable skills | [Portable skill architecture](portable-skills.md) | Prompt distribution, validation, review and ownership boundaries |
+| City experience Research → Plan workflow | [C4 design](city-experience-workflow/architecture-spec.md) | Three-skill responsibilities, location contracts and itinerary render artifacts; pending human review |
 | Editor | [C4 design](editor-c4/README.md) | Context, container, editing/learning and boundary scenarios; implementation-derived specification |
 | Vocabulary mastery | [C4 design](vocabulary-mastery-c4/README.md) | Context, container, bilingual reference and boundary scenarios; implementation-derived specification |
 

@@ -21,6 +21,10 @@
 - Blank score inputs mean not yet evaluated. Empty `weighted_score` and `priority_tier` remain blank.
 - `research_status`: `candidate`, `evaluated`, `needs_verification`, `out_of_scope`.
 
+## Optional geographic export
+
+The CSV may include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at` after existing fields. `place_id` identifies a physical place shared with the food/venue inventory when appropriate. Use `verified`, `provisional`, or `unlocated` status; verified coordinate pairs require source and date. The optional `scripts/export_pins.py` exports **all verified research candidates**, not just trip-selected stops, as GeoJSON point features in longitude/latitude order. Unknown, disputed or missing coordinates appear in an unlocated-place report rather than on the map.
+
 ## Release checklist
 
 - All primary categories match the full labels exactly; no letter codes.

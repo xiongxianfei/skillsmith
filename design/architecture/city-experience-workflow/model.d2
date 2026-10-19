@@ -1,0 +1,46 @@
+# C4 model: passive portable skill packages; no server implied.
+vars: {
+  d2-config: {
+    theme-id: 0
+  }
+}
+direction: right
+
+traveler: "Traveler\n[Person]" {
+  shape: c4-person
+  style.fill: "#DCEAF7"
+}
+host: "Assistant host\n[External software system]" {
+  tooltip: Interprets skill instructions and may optionally use connected routing providers.
+  style.fill: "#EDF0F3"
+  style.stroke-dash: 4
+}
+providers: "Research and routing providers\n[External software systems]" {
+  tooltip: External sourced maps, hours, geocoding and routing; no implicit permissions.
+  style.fill: "#EDF0F3"
+  style.stroke-dash: 4
+}
+skills: "Skillsmith city experience skill packages\n[Software system: portable files]" {
+  tooltip: Authored prompts, references, scripts and templates, not hosted services.
+  style.fill: "#E9F6F4"
+  attractions: "City Attraction Research\n[Container: skill files]" {
+    shape: stored_data
+    style.fill: "#BCE4DE"
+  }
+  food: "Local Food and Dining Research\n[Container: skill files]" {
+    shape: stored_data
+    style.fill: "#BCE4DE"
+  }
+  builder: "City Itinerary Builder\n[Container: skill files]" {
+    shape: stored_data
+    style.fill: "#BCE4DE"
+  }
+}
+traveler -> host: "Requests researched options or itinerary"
+skills -> host: "Supplies authored instructions"
+host -> traveler: "Returns ranked research and derived travel materials"
+host -> providers: "Optional geocoding / routing queries"
+providers -> host: "Returns sourced locations and route estimates"
+skills.attractions -> host: "Research workflow"
+skills.food -> host: "Food matching workflow"
+skills.builder -> host: "Scheduling and output workflow"
