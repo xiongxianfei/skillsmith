@@ -1,0 +1,1 @@
+offer_id,trip_leg,flight_number,operating_airline,depart_date,depart_time_local,depart_tz,depart_airport,arrive_date,arrive_time_local,arrive_tz,arrive_airport,stops,aircraft_scheduled,cabin,personal_item,cabin_bag,checked_bag,passenger_count,quote_total,currency,quote_status,booking_provider,source_url_or_ref,observed_at,change_terms,refund_terms,fees_included,hard_checks,notes

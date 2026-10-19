@@ -1,0 +1,136 @@
+{
+  "trip": {
+    "name": "Fictional Moscow–Samarkand weekend (illustrative only)",
+    "status": "synthetic case study — not an actual traveler or live offers",
+    "departure_date": "2027-05-13",
+    "return_date": "2027-05-17",
+    "accepted_moscow_airports": [
+      "SVO",
+      "VKO",
+      "DME"
+    ],
+    "excluded_airports": [
+      "ZIA"
+    ],
+    "work_ends_local": "2027-05-13T17:00:00+03:00",
+    "airport_transit_minutes": 90,
+    "must_be_ready_by_local_date": "2027-05-15",
+    "priorities": "Hypothetical traveler: protected work, recovery, safety/document screening"
+  },
+  "hard_requirements": [
+    "travel_documents",
+    "safety",
+    "work_and_events",
+    "airports",
+    "baggage",
+    "fare_checkout"
+  ],
+  "weights": {
+    "schedule": 25,
+    "cost": 20,
+    "comfort": 15,
+    "sleep": 15,
+    "ground": 10,
+    "reliability": 15
+  },
+  "candidates": [
+    {
+      "id": "full-service-return",
+      "label": "Fictional full-service outbound + regional return",
+      "itinerary": {
+        "outbound": "Example flight AL101: SVO Thu 2027-05-13 23:30 -> SKD Fri 2027-05-14 05:40, local times",
+        "return": "Example flight RL303: SKD Mon 2027-05-17 20:00 -> DME Mon 2027-05-17 22:20, local times; illustrative only"
+      },
+      "hard_checks": {
+        "travel_documents": {
+          "status": "pending",
+          "notes": "No real traveler documents used; eligibility requires checking for the actual traveler"
+        },
+        "safety": {
+          "status": "pending",
+          "notes": "Illustrative operators; no real aviation-regulatory assessment possible"
+        },
+        "work_and_events": {
+          "status": "pass",
+          "notes": "Illustrative schedule leaves an arrival and recovery window; timing must be reconfirmed"
+        },
+        "airports": {
+          "status": "pass",
+          "notes": "Departure and arrival examples use permitted airport codes"
+        },
+        "baggage": {
+          "status": "pending",
+          "notes": "Assumed small bag must be checked against actual operator rules"
+        },
+        "fare_checkout": {
+          "status": "pending",
+          "notes": "Synthetic price only; no real purchasable checkout"
+        }
+      },
+      "price": {
+        "amount": 44000,
+        "currency": "RUB",
+        "status": "derived",
+        "source": "Hypothetical teaching value; not an actual fare"
+      },
+      "scores": {
+        "schedule": 8,
+        "cost": 7,
+        "comfort": 8,
+        "sleep": 6,
+        "ground": 7,
+        "reliability": null
+      },
+      "notes": "Fictional example only. Scores are illustrative; reliability unknown; no purchase is authorized."
+    },
+    {
+      "id": "low-cost-return",
+      "label": "Fictional low-cost outbound + regional return",
+      "itinerary": {
+        "outbound": "Example flight BL202: VKO Thu 2027-05-13 22:45 -> SKD Fri 2027-05-14 04:55, local times",
+        "return": "Example flight RL303: SKD Mon 2027-05-17 20:00 -> DME Mon 2027-05-17 22:20, local times; illustrative only"
+      },
+      "hard_checks": {
+        "travel_documents": {
+          "status": "pending",
+          "notes": "No real traveler documents used; eligibility requires checking for the actual traveler"
+        },
+        "safety": {
+          "status": "pending",
+          "notes": "Illustrative operators; no real aviation-regulatory assessment possible"
+        },
+        "work_and_events": {
+          "status": "pass",
+          "notes": "Illustrative schedule leaves an arrival and recovery window; timing must be reconfirmed"
+        },
+        "airports": {
+          "status": "pass",
+          "notes": "Departure and arrival examples use permitted airport codes"
+        },
+        "baggage": {
+          "status": "pending",
+          "notes": "Assumed small bag must be checked against actual operator rules"
+        },
+        "fare_checkout": {
+          "status": "pending",
+          "notes": "Synthetic price only; no real purchasable checkout"
+        }
+      },
+      "price": {
+        "amount": 41000,
+        "currency": "RUB",
+        "status": "advertised",
+        "source": "Hypothetical teaching value; not an actual fare"
+      },
+      "scores": {
+        "schedule": 7.5,
+        "cost": 9,
+        "comfort": 5,
+        "sleep": 5,
+        "ground": 7,
+        "reliability": null
+      },
+      "notes": "Fictional example only. Scores are illustrative; reliability unknown; no purchase is authorized."
+    }
+  ]
+}

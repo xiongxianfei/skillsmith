@@ -1,0 +1,76 @@
+{
+  "method": "constrained weighted-sum model (WSM)",
+  "not_a_booking": true,
+  "source_data_is_not_live_verified_by_script": true,
+  "weights_total": 100,
+  "required_hard_checks": [
+    "travel_documents",
+    "safety",
+    "work_and_events",
+    "airports",
+    "baggage",
+    "fare_checkout"
+  ],
+  "candidates": [
+    {
+      "id": "full-service-return",
+      "label": "Fictional full-service outbound + regional return",
+      "eligibility": "pending",
+      "failed_checks": [],
+      "pending_checks": [
+        "travel_documents",
+        "safety",
+        "baggage",
+        "fare_checkout"
+      ],
+      "missing_score_criteria": [
+        "reliability"
+      ],
+      "evidence_completeness_pct": 85,
+      "score_0_to_10": null,
+      "score_interval_0_to_10": [
+        6.2,
+        7.7
+      ],
+      "price": {
+        "amount": 44000,
+        "currency": "RUB",
+        "status": "derived",
+        "source": "Hypothetical teaching value; not an actual fare"
+      },
+      "notes": "Fictional example only. Scores are illustrative; reliability unknown; no purchase is authorized."
+    },
+    {
+      "id": "low-cost-return",
+      "label": "Fictional low-cost outbound + regional return",
+      "eligibility": "pending",
+      "failed_checks": [],
+      "pending_checks": [
+        "travel_documents",
+        "safety",
+        "baggage",
+        "fare_checkout"
+      ],
+      "missing_score_criteria": [
+        "reliability"
+      ],
+      "evidence_completeness_pct": 85,
+      "score_0_to_10": null,
+      "score_interval_0_to_10": [
+        5.875,
+        7.375
+      ],
+      "price": {
+        "amount": 41000,
+        "currency": "RUB",
+        "status": "advertised",
+        "source": "Hypothetical teaching value; not an actual fare"
+      },
+      "notes": "Fictional example only. Scores are illustrative; reliability unknown; no purchase is authorized."
+    }
+  ],
+  "ranking_ready": false,
+  "winner_id": null,
+  "ranking_ids": [],
+  "note": "No final winner: at least one non-rejected contender has pending constraints or missing scored evidence, or all candidates are rejected."
+}
