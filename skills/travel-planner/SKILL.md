@@ -22,6 +22,8 @@ Modes:
 
 Read [references/sop.md](references/sop.md) for human operational procedure; [references/research-and-tools.md](references/research-and-tools.md) for source standards; [references/scoring.md](references/scoring.md) for decision formulas; [references/quality-gates.md](references/quality-gates.md) for release criteria; [references/data-contracts.md](references/data-contracts.md) for structured records.
 
+**Flight research & selection (internal module):** When the user asks to search, compare, validate, rank, or shortlist flights, first read [references/flight-research-selection.md](references/flight-research-selection.md). Use [assets/flight-search-brief.yaml](assets/flight-search-brief.yaml) for intake, [assets/flight-evidence-ledger.csv](assets/flight-evidence-ledger.csv) to reconcile source-specific offers, and [assets/flight-ranked-shortlist.md](assets/flight-ranked-shortlist.md) for the output. This module stops at a verified or clearly provisional shortlist for traveler review, **not booking**; reuse [references/scoring.md](references/scoring.md) and the existing evaluator, not a second scoring engine.
+
 ## Input and clarification
 
 Start from [assets/trip-brief.yaml](assets/trip-brief.yaml). Capture when known: origin/destination, depart/return dates, traveler count, budget and currency, time zone, fixed commitments, required recovery time, acceptable airports, baggage, constraints, priorities, accommodation area, payment/network needs, and intended outputs. Ask the **one most consequential missing question** if blocked; otherwise proceed with assumptions explicitly labeled. Do not demand passport numbers, identity documents, or credentials in normal planning. Ask nationality/citizenship only when entry rules depend on it.

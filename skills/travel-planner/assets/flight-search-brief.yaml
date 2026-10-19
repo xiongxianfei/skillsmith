@@ -1,0 +1,45 @@
+# Template only. Use null for unknowns. Avoid personally identifying information.
+trip_id: example-trip
+trip_type: round_trip
+origin_city: null
+destination_city: null
+outbound_dates_local: []    # e.g. ['2027-05-13']
+return_dates_local: []      # e.g. ['2027-05-17']
+traveler_count: 1
+travelers_notes: null       # e.g. adult/child counts; no names or passport numbers
+cabin: economy
+baggage:
+  personal_item_required: true
+  cabin_bag_count: 0
+  checked_bag_count: 0
+  minimum_dimensions_cm: null
+allowed_origin_airports: []
+allowed_return_airports: []
+forbidden_airports: []
+max_connections_per_direction: 0
+allow_self_transfer: false
+allow_separate_tickets: true
+work_and_appointments: []  # [{start_local, end_local, tz, commitment, must_protect}]
+ground_journeys: []         # [{from, to_airport, estimated_minutes, source, observed_at}]
+required_predeparture_buffer_minutes: null
+required_event_recovery_hours: null
+hotel_early_access_needed: null
+budget:
+  amount: null
+  currency: null
+  hard_ceiling: false
+safety_acceptance_rule: null       # user-approved criterion, not an airline rating
+travel_document_status: pending   # pass|fail|pending
+payment_and_currency_constraints: []
+weights:  # default soft-criterion weights, sum=100
+  schedule: 25
+  sleep: 15
+  reliability: 20
+  comfort: 10
+  ground: 10
+  cost: 20
+price_scoring_anchors:
+  excellent_total_trip_price: null
+  poor_but_acceptable_total_trip_price: null
+preferences: []
+assumptions_to_confirm: []
