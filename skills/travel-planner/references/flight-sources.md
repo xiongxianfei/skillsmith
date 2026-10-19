@@ -1,52 +1,45 @@
-# Flight Sources — where to search first
+# Flight Sources — global search-source ranking
 
-**Purpose:** choose a shortlist of **flight search websites** for a route. Prioritize **cheaper comparable fares and search quality**. This is a source-selection reference, **not** a ranking of tickets. For buying timing use [flight-purchase-strategy.md](flight-purchase-strategy.md); for selecting an actual itinerary use [flight-research-selection.md](flight-research-selection.md).
+**Purpose:** decide **where to search first** for flight offers. This is **source selection**, not the user's **ticket ranking**. For actual itinerary evaluation read [flight-research-selection.md](flight-research-selection.md); for buying timing read [flight-purchase-strategy.md](flight-purchase-strategy.md).
 
-## Starting source rank, region, and score
+## Global MCDA source table
 
-Scores marked **H** are **provisional editorial search-priority estimates** on a 0–10 scale, **not measured price competitiveness or a claim that a source is consistently cheapest**. They are intended to help choose the first sites to check, not determine which seller to pay. There is no cross-platform fare benchmark yet; replace these estimates with measured scores when available.
+**P = provisional editorial estimate** for **all** scores below, including the three sub-criteria. These are transparent starting assumptions—not measured worldwide price competitiveness or evidence that one website is always cheaper. Every platform uses the **same global expectations**, so region-specialized sites can score lower on worldwide coverage. One decimal shows weighted arithmetic, **not empirical precision**.
 
-| Recommended region | Rank | Source | Score / 10 | Why check it |
-|---|---:|---|---:|---|
-| **China** | 1 | [Ctrip 中国机票](https://flights.ctrip.com/online/channel/domestic) | 8.5 H | Strong China-domestic starting point; this link is **domestic only** |
-| China | 2 | [Qunar 去哪儿](https://www.qunar.com/) | 8.2 H | Alternative China flight discovery; app/login may be needed |
-| China | 3 | [Fliggy 飞猪](https://www.fliggy.com/) | 7.8 H | Compare China offers; app-centric access |
-| China | 4 | [Trip.com](https://www.trip.com/flights/) | 7.7 H | Cross-border and multilingual search alternative |
-| **Russia / CIS / Central Asia** | 1 | [Tutu.ru](https://avia.tutu.ru/) | 8.5 H | Regional flights and fares; **traveler reported a lower Moscow–Samarkand quote than Aviasales** (single case, unverified as a general trend) |
-| Russia / CIS / Central Asia | 2 | [Aviasales](https://www.aviasales.ru/) | 8.3 H | Broad regional discovery and seller comparison |
-| Russia / CIS / Central Asia | 3 | [Yandex Travel](https://travel.yandex.ru/avia/) | 7.9 H | Useful alternate search and seller offers |
-| Russia / CIS / Central Asia | 4 | [OneTwoTrip](https://www.onetwotrip.com/) | 7.5 H | Secondary regional seller check |
-| **Global** | 1 | [Google Flights](https://www.google.com/travel/flights) | 8.7 H | Explore dates and routes where supported |
-| Global | 2 | [Skyscanner](https://www.skyscanner.net/) | 8.5 H | Compare multiple flight sellers |
-| Global | 3 | [KAYAK](https://www.kayak.com/flights) | 8.1 H | Cross-check route and date alternatives |
-| Global | 4 | [Trip.com](https://www.trip.com/flights/) | 7.9 H | Additional international offers |
+| Rank | Source | Score / 10 | Price Competitiveness | Flight Coverage | Comparison Quality | Why This Score? | Recommended Region |
+|---:|---|---:|---:|---:|---:|---|---|
+| 1 | [Google Flights](https://www.google.com/travel/flights) | 8.7 P | 8 | 9 | 10 | Strong date and airport comparisons; geographic coverage varies. | Global (where available) |
+| 2 | [Skyscanner](https://www.skyscanner.net/) | 8.5 P | 8 | 9 | 9 | Broad multi-seller international search. | Global |
+| 3 | [Trip.com](https://www.trip.com/flights/) | 8.3 P | 8 | 9 | 8 | Wide international flight search and multilingual interface. | Global; Asia |
+| 4 | [KAYAK](https://www.kayak.com/flights) | 8.2 P | 8 | 8 | 9 | Global metasearch with useful itinerary filters. | Global |
+| 5 | [Ctrip 中国机票](https://flights.ctrip.com/online/channel/domestic) | 7.6 P | 8 | 6 | 9 | Strong China domestic search; linked page is domestic-only. | China |
+| 6 | [Aviasales](https://www.aviasales.ru/) | 7.4 P | 8 | 6 | 8 | Useful Russia/CIS comparison; less consistent worldwide coverage. | Russia/CIS |
+| 7 | [Tutu.ru](https://avia.tutu.ru/) | 7.2 P | 8 | 6 | 7 | Regional fares and schedules; calendar prices can be cached. | Russia/CIS; Central Asia |
+| 8 | [Qunar 去哪儿](https://www.qunar.com/) | 7.1 P | 8 | 5 | 8 | China-focused comparisons; app/login can be required. | China |
+| 9 | [Yandex Travel](https://travel.yandex.ru/avia/) | 6.9 P | 7 | 6 | 8 | Russian-market alternatives with varying ticket sellers. | Russia/CIS |
+| 10 | [Fliggy 飞猪](https://www.fliggy.com/) | 6.4 P | 7 | 5 | 7 | China-focused, app-centric experience. | China |
+| 11 | [OneTwoTrip](https://www.onetwotrip.com/) | 6.2 P | 7 | 5 | 6 | Useful secondary regional seller check. | Russia/CIS |
 
-**Airline-direct check (always):** After discovering candidates, check the **operating airline's official website** for flight schedule, airport, baggage and fare rules, and compare its *actual final payable fare*. Airline websites are not ranked alongside general metasearch sites because they have a different role.
+**Summary interpretation:** The rationale column explains the intended comparison role and most relevant limitation without listing each supporting observation. A traveler reported that Tutu offered a lower Moscow–Samarkand fare than Aviasales on one occasion: useful **route-specific search guidance**, but insufficient to infer globally lower prices. For that particular route, check both sites early regardless of their global ranks.
 
-**For Moscow–Samarkand:** Search **Tutu + Aviasales** first, then Yandex Travel and relevant operating airlines. Do **not** assume Tutu remains cheaper on every departure date or fare.
+## Source MCDA: how the scores are obtained
 
-## How to replace heuristic scores with evidence (source MCDA)
-
-Measure only accessible sources in the **relevant region**, using identical query conditions. Keep this separate from the traveler's flight-ticket MCDA:
-
-| Source criterion | Weight | Evidence |
+| Criterion | Weight | Interpretation |
 |---|---:|---|
-| **Comparable final-price competitiveness** | **50%** | Same itinerary, date, fare family, baggage, taxes, seller fees and payment currency. Compare final payable prices. |
-| **Relevant flight coverage** | **30%** | How many eligible airline/route options the site actually reveals |
-| **Search and comparison quality** | **20%** | Visible flight numbers, airports, times, fare/baggage details, filters and price context |
+| **Price competitiveness** | **50%** | Lower **final payable** quote for the *same* flights, fare conditions and currency |
+| **Flight coverage** | **30%** | Relevant carriers and itineraries available **worldwide** |
+| **Comparison quality** | **20%** | Search filters, dates, schedules, airports, baggage and fare clarity |
 
-`MeasuredSourceScore = 0.50 × PriceScore + 0.30 × CoverageScore + 0.20 × ComparisonScore`, with each input on 0–10. A **missing price observation remains unknown**, not zero or five; do not output a measured composite until the inputs are supported.
+`Score / 10 = 0.50 × Price + 0.30 × Coverage + 0.20 × Comparison`; sub-scores each range from 0–10. For now, all inputs are **P (expert working judgments)**; the total is calculated from those inputs, not from a global fare dataset.
 
-For price scoring, use a fixed rubric across sources, e.g. an equivalent observed offer matching the cheapest valid final quote scores 10; a quote 5% above that price scores 7.5; 10% above scores 5; 20% or more above scores 0. Aggregate over **at least five matched itineraries across multiple departure dates**, and record the sample size, dates and check timestamps. Fewer observations are **insufficient to promote a heuristic score to a measured rank**.
+**Measured status (M) requires a representative cross-market comparison**, not anecdotes: sample matched final fares across China, Russia/CIS and other international routes, across multiple dates and booking windows, with the same flights, travelers, fare family, baggage, taxes, payment currency and mandatory fees. Retain source links, check times, sample counts and detailed evidence in a separate benchmark record. This summary need not reproduce the raw evidence. If a criterion lacks measured data, display **unknown**, not a fabricated measured sub-score or overall score; retain P or leave the measured ranking pending.
 
-**Do not compare different fare products:** Matching airline and flight number is not enough. Check fare family, cabin, baggage, passenger count, cancellation/change terms, currency and mandatory charges. Record the **actual ticket seller**—some search engines redirect elsewhere. A cached fare or price calendar is not a final checkout offer. Booking service and refunds belong to the final ticket decision, not this search-source score.
+## Practical source selection
 
-## Operating rules
+1. **Filter by region and accessibility** before choosing the top **two or three applicable** providers. A global rank is a starting index, not a mandatory search sequence. Moscow–Samarkand: Tutu + Aviasales, then Yandex Travel. China domestic: Ctrip + Qunar, then Fliggy where accessible.
+2. Compare the **same itinerary and fare** with identical dates, cabin, baggage, refund conditions, passenger count, currency and fees. Price calendars can be stale and seller checkout may differ.
+3. **Always verify shortlisted flights with the operating airline's official website**, including schedule, airports, baggage, fare rules and direct checkout price. Airline-direct is a separate verification role, not a global multicarrier search site.
+4. Feed source-labelled actual offers to [flight-research-selection.md](flight-research-selection.md) for **hard constraints and ticket-level MCDA**. Identify the actual ticket seller (it may differ from the comparison platform).
+5. Record blocked or unsupported websites as unavailable; do not assume a listed URL grants an API, browser automation, or scraping permission.
 
-1. Choose **two complementary route-relevant search sites**; use the region list as a starting order, not an exclusive whitelist.
-2. Search equivalent flights and capture final offers **only if checkout is accessible**. Otherwise label them advertised or unknown.
-3. Compare the chosen candidate on the **operating airline website**, including the final price and rules.
-4. Send matching, source-labeled evidence to [flight-research-selection.md](flight-research-selection.md) for hard-constraint checks and **ticket-level** MCDA.
-5. If a site is blocked, missing inventory, or unsupported in a market, skip it and record the limitation; do not invent availability or scrape restricted sites.
-
-A URL does not imply API or automated access. Update regional ordering when adequate real comparable-price samples justify it; review links and applicability periodically. **Read-only: no reservations or payments.**
+**Scope:** read-only research. No reservations or payments. Maintain [flight-purchase-strategy.md](flight-purchase-strategy.md) separately.
