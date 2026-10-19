@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "trip": {
+    "id": "samarkand-illustrative",
+    "city": "Samarkand",
+    "country": "Uzbekistan",
+    "timezone": "Asia/Samarkand",
+    "start_date": "2026-11-12",
+    "end_date": "2026-11-12",
+    "status": "draft"
+  },
+  "places": [
+    {
+      "place_id": "SAM-PLACE-REGISTAN",
+      "name": "Registan Square",
+      "primary_category": "Historical Sites and Architectural Landmarks",
+      "address": null,
+      "latitude": null,
+      "longitude": null,
+      "location_status": "unlocated",
+      "location_source_url": null,
+      "location_verified_at": null
+    },
+    {
+      "place_id": "SAM-PLACE-SIYOB",
+      "name": "Siyob Bazaar",
+      "primary_category": "Local Cuisine and Food Markets",
+      "address": null,
+      "latitude": null,
+      "longitude": null,
+      "location_status": "unlocated",
+      "location_source_url": null,
+      "location_verified_at": null
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-11-12",
+      "blocks": [
+        {
+          "block_id": "S-01",
+          "kind": "attraction",
+          "title": "Registan Square (proposed)",
+          "start": "09:00",
+          "end": "10:30",
+          "place_id": "SAM-PLACE-REGISTAN",
+          "research_id": "SAM-ATTRACTION-001",
+          "state": "planned",
+          "booking_status": "unverified",
+          "notes": "Example only: no verified opening hours, reservations or routes"
+        },
+        {
+          "block_id": "S-02",
+          "kind": "food",
+          "title": "Food exploration at Siyob Bazaar (proposed)",
+          "start": "11:30",
+          "end": "12:15",
+          "place_id": "SAM-PLACE-SIYOB",
+          "research_id": "SAM-ATTRACTION-003",
+          "state": "planned",
+          "booking_status": "unverified",
+          "notes": "Not a confirmed venue booking; verify access and food availability"
+        }
+      ]
+    }
+  ],
+  "legs": [
+    {
+      "from_block_id": "S-01",
+      "to_block_id": "S-02",
+      "mode": "walking",
+      "duration_minutes": null,
+      "distance_meters": null,
+      "route_geometry": null,
+      "source_url": null,
+      "verified_at": null
+    }
+  ]
+}

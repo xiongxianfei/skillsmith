@@ -17,7 +17,9 @@ Price status must be `checkout_verified | advertised | derived | unknown`. Do no
 `{hotel_id, property, location, room_nights, checkin, checkout, early_arrival_access, total_with_taxes, currency, cancellation_terms, source_ref, observed_at, availability_status}`
 
 ## Experience / POI
-`{id,name,category:"historical"|"scenic"|"cuisine"|"cultural",address_or_coordinates,priority:"must"|"recommended"|"optional",opening_by_local_date,duration_minutes,price,reservation_requirements,source_ref,verified_at}`
+`{id,name,place_id,primary_category,secondary_tags[],location_status,address_or_coordinates,priority:"must"|"recommended"|"optional",opening_by_local_date,duration_minutes,price,reservation_requirements,source_ref,verified_at}`
+
+Use a complete descriptive `primary_category` from the eight categories in the optional [City Attraction Research taxonomy](../../city-attraction-research/references/categories-and-scoring.md) when that sibling skill is installed; otherwise retain a full descriptive human-readable label. The previous four short codes (`historical`, `scenic`, `cuisine`, `cultural`) are no longer the canonical output contract. A related destination itinerary may be supplied by `city-itinerary-builder` with separate `places`, `days`, and sourced `legs` records; see its [input contract](../../city-itinerary-builder/references/input-contract.md) when available.
 
 ## GroundTransport
 `{origin,destination,mode,journey_minutes_range,price_range,currency,payment_methods,available_hours,pickup_details,source_ref,fallback}`

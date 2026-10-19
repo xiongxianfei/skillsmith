@@ -36,6 +36,12 @@ Capture, when supplied: city/country, trip dates, full days available, first-tim
 8. **Deliver and preserve:** Provide an identity profile, a classified inventory, scored ranking with rationale, separate selection(s), and geographic clusters. Include practical uncertainty/verification reminders and sources. Produce CSV/JSON when requested using `assets/attraction_inventory_template.csv`.
 9. **Review:** After travel, retain objective historical attributes and revisit subjective scores, actual duration, closures, and enjoyment notes. Do not overwrite the research score with a traveler's post-visit taste score.
 
+## Geographic research and pin-map output
+
+Record stable `place_id`, latitude, longitude, `location_status`, `location_source_url` and `location_verified_at` when supported. A valid ranking does **not** imply a verified map point. For a request to map all researched attractions, export verified location pins separately from the candidate/checklist inventory using `python scripts/export_pins.py attraction_inventory.csv pins.geojson` where Python is available. The utility also writes `unlocated_places.csv` for unverified positions. It never guesses coordinates, creates route lines, or checks current availability. Consult [the output contract](references/output-contract.md) for exact fields. If a map renderer exists, display the sourced pin layer; otherwise return GeoJSON with an explanation of why exact pins were withheld.
+
+When a user asks to **select and schedule** from this inventory, preserve its independent scores and hand the ranked records to [City Itinerary Builder](../city-itinerary-builder/SKILL.md) if installed; it owns final daily scheduling, sourced route maps, and printable travel materials. Remain usable without that sibling skill.
+
 ## Cross-skill boundary
 
 `Local Cuisine and Food Markets` is the **attraction** category for markets, culinary walks, unusually noteworthy restaurants as visitor experiences, and food demonstrations. The attraction skill does **not** score individual dishes or maintain dish-to-venue recommendations. The food skill owns food records, venue profiles, and food-to-venue links. Share a stable `place_id` / `venue_id` where the same location appears in both inventories. If asked for both, run each workflow separately, then offer a combined itinerary without conflating their scores.

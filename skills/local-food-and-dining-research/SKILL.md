@@ -37,6 +37,12 @@ Use specified city and country, season and dates, preferred foods, dietary restr
 8. **Build selections:** Offer shortlists for 1, 2, 3 and 4+ days or dates supplied. Combine market samples and tea with meals; avoid scheduling multiple substantial meals solely to tick boxes. Consider seasonal availability, meal timing, closures, dietary safety, and geographic clusters.
 9. **Deliver and refresh:** Provide a fully categorized food inventory, transparent food scores, a separate food-to-venue match table with evidence status, and an optional practical tasting plan. Recheck current menus and access just before travel. The inventory can remain comprehensive while the visit plan is selective.
 
+## Geographic venue handoff
+
+A dish is **not a map point**. Each viable food-to-venue match must link to a real venue record, and a venue record may include a stable physical `place_id` and sourced coordinates plus `location_status`. Record the location source and verified date; never manufacture missing positions, operational status, or menu availability. The venue profile is separate from the dish-to-venue suitability score. See [the output contract](references/output-contract.md) for optional mapping fields.
+
+For a combined destination-day plan, pass the ranked food inventory, verified venue identities and food–venue matches to [City Itinerary Builder](../city-itinerary-builder/SKILL.md) if installed; it owns meal scheduling, feasible routes and travel materials. This food skill remains independently usable when that sibling skill is absent.
+
 ## Cross-skill boundary
 
 `city-attraction-research` owns the attraction category `Local Cuisine and Food Markets` for markets, food walks, and distinctive cooking experiences **as places to visit**. This skill owns individual **foods and drinks**, **venue profiles**, and **dish-to-venue suitability**. Reuse a shared place/venue identifier for overlaps, and keep food /100 scores distinct from attraction /100 scores and venue-match /100 scores. When running independently, do not require the other skill's files.
