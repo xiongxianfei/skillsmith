@@ -25,6 +25,12 @@ Keep Markdown readable and review input handling for the intended hosts and copy
 
 Prefer a small number of clear directives over accumulated branches. Use consistent terms between workflow and output instructions. Make outputs observable and copyable, and separate deliverables from commentary. Include a consistency check where meaning, intent, safety or format can silently drift. Honor deliberate tradeoffs rather than repeatedly polishing cosmetic wording.
 
+Define observable behavior beyond a role or persona: what input to use, which steps matter, what to return, and how to handle uncertainty. Separate instructions, source material and output targets before acting. For example, a Chinese request to edit an English paragraph does not make Chinese the source language; also consider the inverse case when checking the design.
+
+Treat output shape as part of the contract. Choose the smallest useful default that meets the skill's purpose, state when optional sections appear, and keep verification in the method even when the visible output is brief. A complete reference may need substantial output; concision must not silently remove promised content. Prefer explicit conditions when they capture the intended behavior, such as adding practice only when requested. When judgment is necessary, explain the relevant factors and give contrasting examples instead of leaving “when useful” undefined.
+
+For complex skills, sketch the sequence of input handling, decisions, checks and output assembly before finalizing instructions. A focused workflow view can reveal missing branches or contradictory conditions; use the [architecture guide](../design/architecture/README.md#maintaining-a-design) when a maintained design is needed. Simple skills need no diagram.
+
 Keep prompts concise. Move supporting detail into skill-local references when that improves usability; keep references shallow and make long references easy to navigate. There is no enforced line limit.
 
 ## Full-directory skill design
@@ -45,14 +51,14 @@ Medical, legal, financial, security and other high-stakes skills must state scop
 
 Do not fabricate facts, user history, tool access, corpus verification, approvals or model results. Preserve source meaning and uncertainty where the skill transforms supplied material. Ordinary skill behavior remains readable Markdown, but full functionality may depend on bundled resources and explicitly documented local scripts executed by a capable host. No hidden external services are implied; the [shared architecture](../design/architecture/portable-skills.md) owns the boundary.
 
+Where a transformation could be used deceptively, state the integrity boundary and an accurate alternative. A consistency check can catch accidental meaning drift but does not resolve a request to fabricate approval or remove a material qualification.
+
 ## Review and evidence
 
 Reviewers check purpose, trigger intent, input/output contracts, safety, clarity and appropriate scope. Describe substantive behavior changes and their expected result in the PR; use a representative example when it makes the change assessable. Editorial corrections do not need an artificial scenario pack. No fixed scenario count, YAML fixture schema or mandatory model-run gate is required.
 
+Choose examples that challenge the changed behavior: ordinary use, inverse inputs, missing information, indirect triggers, requests that should not activate the skill, and misuse where relevant. State observable expected results so reviewers can reason through the cases before and after the edit. These are design checks until actual outputs have been examined; they need not become a separate fixture suite.
+
 When making an empirical quality or model-specific claim, provide actual evidence and its limitations. Expected examples are not observed model runs. Required-metadata validation must never be presented as proof of behavioral quality. Report what was checked and what remains unknown.
 
-Maintain the README skill table, slash commands and enumerated installation examples manually when the catalog changes. The [contributor guide](workflows.md) owns change preparation, validation and PR review.
-
-## Historical evidence
-
-Earlier scenario declarations and test implementations remain in [Git history](https://github.com/xiongxianfei/skillsmith/tree/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests). They preserve useful examples and provenance but do not impose the retired fixture or test-suite requirements. Current C4 specifications link relevant historical scenarios directly.
+Maintain the README skill table manually when the catalog changes, and update usage or installation examples when affected. The [contributor guide](workflows.md) owns change preparation, validation, PR review and documentation maintenance.
