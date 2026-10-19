@@ -1,49 +1,52 @@
-# Flight Sources — region-aware search guide
+# Flight Sources — where to search first
 
-**Use when:** selecting where to research a flight, comparing search platforms, or choosing where to verify an offer. This guide selects **sources**, not tickets. For timing advice read [flight-purchase-strategy.md](flight-purchase-strategy.md). For actual itinerary evaluation follow [flight-research-selection.md](flight-research-selection.md).
+**Purpose:** choose a shortlist of **flight search websites** for a route. Prioritize **cheaper comparable fares and search quality**. This is a source-selection reference, **not** a ranking of tickets. For buying timing use [flight-purchase-strategy.md](flight-purchase-strategy.md); for selecting an actual itinerary use [flight-research-selection.md](flight-research-selection.md).
 
-## Starting search order (not a universal quality ranking)
+## Starting source rank, region, and score
 
-These are **initial route-specific search priorities**, not measured price, trust, or customer-service rankings. Reorder or omit sources according to the origin, destination, language, payment method and observed inventory. A website link does not grant automated access, API access, or permission to scrape.
+Scores marked **H** are **provisional editorial search-priority estimates** on a 0–10 scale, **not measured price competitiveness or a claim that a source is consistently cheapest**. They are intended to help choose the first sites to check, not determine which seller to pay. There is no cross-platform fare benchmark yet; replace these estimates with measured scores when available.
 
-| Search order | China routes | Russia / CIS routes | Global routes |
-|---|---|---|---|
-| 1 | [Ctrip 中国国内机票](https://flights.ctrip.com/online/channel/domestic) — China domestic | [Aviasales](https://www.aviasales.ru/) — Russia/CIS discovery | [Google Flights](https://www.google.com/travel/flights) — dates and alternatives, where supported |
-| 2 | [Qunar 去哪儿](https://www.qunar.com/) — compare domestic options; check app availability | [Tutu.ru](https://avia.tutu.ru/) — schedules, regional searches; calendar prices can be cached | [Skyscanner](https://www.skyscanner.net/) — compare sellers and dates |
-| 3 | [Fliggy 飞猪](https://www.fliggy.com/) — domestic / mobile-app alternative | [Yandex Travel](https://travel.yandex.ru/avia/) — partner offers and alternate dates | [KAYAK](https://www.kayak.com/flights) — alternative search and filters |
-| 4 | [Trip.com](https://www.trip.com/flights/) — international / multilingual alternative | [OneTwoTrip](https://www.onetwotrip.com/) — secondary seller comparison | [Trip.com](https://www.trip.com/flights/) — international OTA alternative |
+| Recommended region | Rank | Source | Score / 10 | Why check it |
+|---|---:|---|---:|---|
+| **China** | 1 | [Ctrip 中国机票](https://flights.ctrip.com/online/channel/domestic) | 8.5 H | Strong China-domestic starting point; this link is **domestic only** |
+| China | 2 | [Qunar 去哪儿](https://www.qunar.com/) | 8.2 H | Alternative China flight discovery; app/login may be needed |
+| China | 3 | [Fliggy 飞猪](https://www.fliggy.com/) | 7.8 H | Compare China offers; app-centric access |
+| China | 4 | [Trip.com](https://www.trip.com/flights/) | 7.7 H | Cross-border and multilingual search alternative |
+| **Russia / CIS / Central Asia** | 1 | [Tutu.ru](https://avia.tutu.ru/) | 8.5 H | Regional flights and fares; **traveler reported a lower Moscow–Samarkand quote than Aviasales** (single case, unverified as a general trend) |
+| Russia / CIS / Central Asia | 2 | [Aviasales](https://www.aviasales.ru/) | 8.3 H | Broad regional discovery and seller comparison |
+| Russia / CIS / Central Asia | 3 | [Yandex Travel](https://travel.yandex.ru/avia/) | 7.9 H | Useful alternate search and seller offers |
+| Russia / CIS / Central Asia | 4 | [OneTwoTrip](https://www.onetwotrip.com/) | 7.5 H | Secondary regional seller check |
+| **Global** | 1 | [Google Flights](https://www.google.com/travel/flights) | 8.7 H | Explore dates and routes where supported |
+| Global | 2 | [Skyscanner](https://www.skyscanner.net/) | 8.5 H | Compare multiple flight sellers |
+| Global | 3 | [KAYAK](https://www.kayak.com/flights) | 8.1 H | Cross-check route and date alternatives |
+| Global | 4 | [Trip.com](https://www.trip.com/flights/) | 7.9 H | Additional international offers |
 
-**Always check the operating airline's official website** for the exact flight's schedule, baggage and fare rules, and compare its *current final price* with available seller checkout prices. Airline-direct is a verification step, not a global multicarrier search tool. For a China-origin international route, start with Ctrip + Trip.com and add relevant global sources. For Moscow–Samarkand, start with Aviasales + Tutu, cross-check Yandex Travel and the operating airline.
+**Airline-direct check (always):** After discovering candidates, check the **operating airline's official website** for flight schedule, airport, baggage and fare rules, and compare its *actual final payable fare*. Airline websites are not ranked alongside general metasearch sites because they have a different role.
 
-### Practical access caveats
+**For Moscow–Samarkand:** Search **Tutu + Aviasales** first, then Yandex Travel and relevant operating airlines. Do **not** assume Tutu remains cheaper on every departure date or fare.
 
-- Ctrip's link above is **China domestic**, not an international route-search endpoint. Qunar and Fliggy may require an app/login or have limited desktop functionality. Verify what can actually be completed.
-- Google Flights and other global services may lack coverage or availability in certain markets; mark inaccessible services as **unavailable**, and switch to another route-relevant source.
-- Some platforms redirect to a distinct **ticket seller**. Record who will charge the traveler and whose support/refund terms apply; do not attribute the seller's terms to the search platform.
-- Comparison calendars and public route pages may show **cached or advertised** fares. Only an observed final, equivalent checkout quote may be called checkout-verified.
+## How to replace heuristic scores with evidence (source MCDA)
 
-## Lightweight MCDA to select sources per route
+Measure only accessible sources in the **relevant region**, using identical query conditions. Keep this separate from the traveler's flight-ticket MCDA:
 
-Score **accessible sources with actual observations**, 1–5 on each criterion; use `unknown` when a rating cannot be supported. Do not assign permanent website scores based on brand recognition.
-
-| Criterion | Weight | What to measure |
+| Source criterion | Weight | Evidence |
 |---|---:|---|
-| Route/carrier coverage | 30% | Relevant flights found on the requested dates |
-| Comparable fare information | 25% | Flight identity, exact fares, baggage, rules, source timestamps |
-| Matched final-price competitiveness | 20% | Final amount for the **same itinerary and fare**, if observable |
-| Payment/currency fit | 15% | Usable seller and payment method for this traveler |
-| Servicing clarity | 10% | Identified seller, refund/change terms and support channel |
+| **Comparable final-price competitiveness** | **50%** | Same itinerary, date, fare family, baggage, taxes, seller fees and payment currency. Compare final payable prices. |
+| **Relevant flight coverage** | **30%** | How many eligible airline/route options the site actually reveals |
+| **Search and comparison quality** | **20%** | Visible flight numbers, airports, times, fare/baggage details, filters and price context |
 
-`SourceScore = sum(weight_percent * observed_rating_1_to_5) / 100` when all weighted ratings are known. If unknown, mark the source ranking **provisional** and report what could not be checked. Do not equate this source score with flight safety, MCDA itinerary quality, or the best ticket price.
+`MeasuredSourceScore = 0.50 × PriceScore + 0.30 × CoverageScore + 0.20 × ComparisonScore`, with each input on 0–10. A **missing price observation remains unknown**, not zero or five; do not output a measured composite until the inputs are supported.
 
-**Minimum workflow:** inspect two complementary discovery sources where accessible, then verify the finalists with their **operating airlines** and actual sellers. Normalize date/time zones, flight numbers, airports, traveler count, fare family, baggage, currency, all mandatory fees, changes and refunds. Record source URL, observed time and evidence state; never invent a fare or silently merge incompatible offers. If provider access fails, use the remaining sources and disclose the gap.
+For price scoring, use a fixed rubric across sources, e.g. an equivalent observed offer matching the cheapest valid final quote scores 10; a quote 5% above that price scores 7.5; 10% above scores 5; 20% or more above scores 0. Aggregate over **at least five matched itineraries across multiple departure dates**, and record the sample size, dates and check timestamps. Fewer observations are **insufficient to promote a heuristic score to a measured rank**.
 
-**Scope:** read-only discovery and verification. Never reserve or pay. Follow the parent skill's hard-constraint and approval gates.
+**Do not compare different fare products:** Matching airline and flight number is not enough. Check fare family, cabin, baggage, passenger count, cancellation/change terms, currency and mandatory charges. Record the **actual ticket seller**—some search engines redirect elsewhere. A cached fare or price calendar is not a final checkout offer. Booking service and refunds belong to the final ticket decision, not this search-source score.
 
-## Maintenance and relevant provider pages
+## Operating rules
 
-Review routing links and capabilities periodically; static search order is a heuristic, not a benchmark.
+1. Choose **two complementary route-relevant search sites**; use the region list as a starting order, not an exclusive whitelist.
+2. Search equivalent flights and capture final offers **only if checkout is accessible**. Otherwise label them advertised or unknown.
+3. Compare the chosen candidate on the **operating airline website**, including the final price and rules.
+4. Send matching, source-labeled evidence to [flight-research-selection.md](flight-research-selection.md) for hard-constraint checks and **ticket-level** MCDA.
+5. If a site is blocked, missing inventory, or unsupported in a market, skip it and record the limitation; do not invent availability or scrape restricted sites.
 
-- [Ctrip flights](https://flights.ctrip.com/online/channel/domestic), [Qunar](https://www.qunar.com/), [Fliggy](https://www.fliggy.com/), [Trip.com flights](https://www.trip.com/flights/)
-- [Aviasales](https://www.aviasales.ru/), [Tutu](https://avia.tutu.ru/), [Yandex Travel](https://travel.yandex.ru/avia/), [OneTwoTrip](https://www.onetwotrip.com/)
-- [Google Flights](https://www.google.com/travel/flights), [Skyscanner](https://www.skyscanner.net/), [KAYAK](https://www.kayak.com/flights)
+A URL does not imply API or automated access. Update regional ordering when adequate real comparable-price samples justify it; review links and applicability periodically. **Read-only: no reservations or payments.**
