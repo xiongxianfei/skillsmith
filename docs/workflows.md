@@ -1,73 +1,20 @@
 # Contributing to Skillsmith
 
-Skillsmith uses C4 for design and ordinary Git/PR review for delivery. RigorLoop is no longer part of the active workflow. [VISION.md](../VISION.md) owns project purpose, [AGENTS.md](../AGENTS.md) owns agent conduct and engineering principles, and the [quality standard](skill-quality-standard.md) owns skill requirements. This guide owns contribution, validation and delivery procedures.
+This guide owns contribution, validation and PR procedures. Use [VISION.md](../VISION.md) for project purpose, [AGENTS.md](../AGENTS.md) for agent conduct, and the [quality standard](skill-quality-standard.md) for skill authoring, safety and evidence requirements.
 
 ## 1. Define the change
 
-Before adding a skill, changing output or validation rules, altering installation behavior, or repositioning the project, write the intended behavior and validation commands. Inspect the current prompt, tests and relevant architecture. Describe the user problem, trigger intent, accepted input, output format, safety/compatibility boundaries and observable acceptance examples where applicable. Small changes can use the issue or PR description. For architectural changes, use `c4-architecture` and keep this context in the subject's `architecture-spec.md` under [design/architecture/](../design/architecture/README.md).
+Inspect the current repository state and relevant prompt, validator, installer or design. Before a substantive change, describe the user problem, intended behavior and validation commands in the issue or PR. Include trigger intent, accepted input, expected output, safety/compatibility boundaries and observable acceptance examples where applicable. A change is substantive if it can alter activation, behavior, output, validation, installation or project scope. Small editorial corrections need no formal design when those contracts stay unchanged.
 
-Small editorial corrections need no formal design when behavior, scope, safety and public contracts stay unchanged. Where practical, capture current behavior before changing it. A bug fix needs a minimal reproduction or a written explanation of why automated reproduction is impractical.
+For a bug, capture the smallest reproduction and current behavior where practical, or explain why automated reproduction is impractical. For architectural changes, use `c4-architecture` and keep behavior, constraints and consequential decisions together in the subject's `architecture-spec.md`; follow the [architecture guide](../design/architecture/README.md#maintaining-a-design). Distinguish implemented, proposed and unknown behavior, and obtain human review of consequential decisions before relying on them.
 
 ## 2. Design and edit
 
-Treat the entire skill directory as the distributable artifact. Start with `SKILL.md`; add `references/` for conditional domain knowledge, `assets/` for static templates/data, and `scripts/` only when tested deterministic execution materially helps. Link each reference from the skill entrypoint with a precise loading condition. Keep core invariants and safety constraints in `SKILL.md`, and document script prerequisites. Do not assume text-only copy/paste or all agents can run scripts. See the [skill quality standard](skill-quality-standard.md#full-directory-skill-design).
+Start new PR branches from the latest `main`, using `feat/`, `fix/`, `docs/` or `improve/`; continue an existing authorized change in its current workspace. Keep one concern per PR, preserve unrelated work and edit the owning artifacts. Use the issue, PR or a private working note for task sequencing rather than creating another plan directory.
 
-Use a shared `model.d2` within each C4 package, context/container views and only the dynamic views needed to explain important scenarios. Keep implemented, proposed and unknown behavior distinct. Obtain human review of consequential decisions before relying on them. Optional decision records explain meaningful tradeoffs; no separate requirement, system-design or delivery-stage hierarchy is required.
+Treat the entire skill directory as the distributable artifact. Follow the [full-directory guidance](skill-quality-standard.md#full-directory-skill-design) for conditional references, assets, scripts and host prerequisites. Review changes affecting tool permissions and dependencies explicitly; new runtime or CI dependencies need a concrete purpose and validation path.
 
-Edit the owning prompt, validator, installer or document. Describe the expected result of substantive skill changes in the PR; no separate test fixtures are required. Keep changes focused and preserve unrelated work. Start new PR branches from the latest `main`; continue an existing authorized change in its current workspace.
-
-Review dependency changes for supply-chain risk; new runtime or CI dependencies need a concrete purpose and validation path. When changing the validator, check representative valid and invalid inputs before handoff; no separate permanent test suite is required.
-
-Keep current design decisions in the subject architecture specification. When delivery sequencing needs a plan, use the issue, PR description or a local working note; do not recreate a separate proposal/plan directory or an active-plan index.
-
-## 3. Validate and evaluate
-
-Install PyYAML if needed, then run the required check from the repository root:
-
-```bash
-pip install pyyaml
-python tests/validate_skills.py
-```
-
-Run the validator before handoff. CI must run the same validator on pushes and PRs to `main`. Errors block merging. It checks required files and metadata, with no style warnings. Also run focused checks for affected contracts, links and documentation synchronization.
-
-This is the only automated repository test. Check README catalog entries manually when adding, removing or renaming skills. Use focused inspection for documentation and actual model evidence for any claimed model-quality result; required-metadata validation alone proves neither.
-
-For changed C4 diagrams, put D2 on PATH and run the package's helper:
-
-```bash
-python3 design/architecture/<subject>/scripts/architecture.py format
-python3 design/architecture/<subject>/scripts/architecture.py check
-python3 design/architecture/<subject>/scripts/architecture.py render
-```
-
-Inspect the rendered SVGs for readability and semantic accuracy. Python and D2 serve architecture checks; D2 is not a product runtime dependency. If a check cannot run, report that explicitly.
-
-## 4. Review and deliver
-
-Use a PR to `main` with the problem, resulting behavior, relevant design decisions and actual validation/evaluation results. Identify the reviewed revision and changed subjects; include realistic input and expected behavior for substantive prompt changes. Breaking changes to skill names, output formats, installer paths or README commands need explicit migration guidance. Report warnings, failures, skipped checks and open questions. Reviewers assess the complete diff with depth appropriate to its risk; do not infer human design approval from successful commands. Historical reviews retain their original scope and do not approve later changes.
-
-Put task status and sufficient sanitized review/validation evidence in the issue or PR. Keep private working notes outside the repository, with a private backup when continuity requires it. Local-only files must not be the sole support for an external readiness claim. Preserve historical provenance with fixed Git links and migrate durable decisions into their owning architecture or quality documents; do not recreate workflow-record directories. Commit, push, merge and release require the applicable user authorization.
-
-## Keeping documentation current
-
-Update the owning document in the same change. `VISION.md` is the canonical identity; derive the README vision block from it. Keep README installation, usage and catalog entries current, including slash commands and any examples that enumerate skills. Maintain this guide for contributor procedures and keep `AGENTS.md` concise and agent-facing.
-
-When failures recur, improve the relevant validator, template, quality rule or contributor guidance so the lesson becomes checkable. Preserve unique evidence and provenance without adding competing copies of current rules.
-
-## Adding a new skill
-
-### 1. Create the skill directory
-
-```bash
-mkdir skills/<skill-name>
-```
-
-Prefer descriptive, lowercase, hyphenated names such as `meal-planner` or `code-reviewer`. Naming patterns are not enforced by the validator; check any restrictions of the intended host separately.
-
-### 2. Write `SKILL.md`
-
-Start with valid YAML frontmatter containing non-empty strings for `name` and `description`, then write instructions suited to the skill:
+For a new skill, create `skills/<skill-name>/SKILL.md` with this minimal structure:
 
 ```markdown
 ---
@@ -79,67 +26,41 @@ description: >
 [Instructions for handling the user's request and producing a useful result.]
 ```
 
-No body template is required. Add headings, examples or `$ARGUMENTS` when useful for the skill and its intended host. The validator checks Agent Skills naming and defined metadata constraints but does not check body structure, language, length, or actual behavior.
+The validator enforces Agent Skills naming and metadata constraints, including matching the name to the directory; see [required checks](skill-quality-standard.md#required-checks). No body template, `$ARGUMENTS` placeholder or output heading is required. Check intended-host compatibility separately.
 
-### 3. Checklist before opening a PR
+Update the README skill table when adding, removing or renaming a skill. Update installation and usage examples only when the change affects them; adding a skill does not require another `cp` example. Explain substantive behavior changes and their expected results, including why any output-format change is useful.
 
-- [ ] `SKILL.md` has valid YAML frontmatter, matching compliant `name`, and a non-empty `description`
-- [ ] The description explains what the skill does and when to use it
-- [ ] Input handling, declared resource paths and any optional metadata suit the intended host
-- [ ] Conditional references are loaded by explicit conditions; local scripts are documented and tested when present
-- [ ] Substantive behavior changes and their expected result are explained in the PR
-- [ ] High-risk skills include scope boundaries, refusal or escalation behavior, reviewer-visible safety notes
-- [ ] CI passes locally: `python tests/validate_skills.py`
-- [ ] Skill added to the README skills table
-- [ ] Skill added to the `cp` install commands in README
+## 3. Validate and evaluate
 
-### 4. Open a pull request
+Install PyYAML if needed, then run the required check from the repository root:
 
-The PR template will pre-fill the checklist for you. Include one or two example inputs and outputs in the PR description so reviewers can quickly understand what the skill does.
+```bash
+pip install pyyaml
+python tests/validate_skills.py
+```
 
----
+CI runs the same validator on pushes and PRs to `main`; errors block merging. This is the only required automated repository check. It checks required files and metadata, emits no style warnings, and does not establish model quality, safety or host compatibility. No unit-test suite, separate fixtures, fixed scenario count or live-model CI gate is required.
 
-## Improving an existing skill
+Run focused checks for affected contracts, local links and README synchronization. When changing the validator, check representative valid and invalid inputs; no permanent test suite is required. Document and test local scripts when changed. For changed C4 diagrams, use the package helper to format, check and render, then inspect the SVGs as described in the architecture guide.
 
-- Keep changes focused: one concern per PR
-- If you're changing the output format, explain why the new format is better
-- Treat a change as material if it could alter what the skill does, when it triggers, or what it returns
-- Explain material changes with concrete expected behavior; no fixture files or fixed scenario counts are required
-- Editorial changes, such as typo fixes that do not affect trigger behavior, output contract, workflow steps, referenced files, or safety behavior, need no additional scenario documentation
-- CI must pass after your changes
+Assess changed skill behavior using realistic examples and the [review and evidence guidance](skill-quality-standard.md#review-and-evidence). Support empirical or model-specific claims with actual model evidence; label expected examples separately. Report commands, results, warnings, failures, skipped checks and unresolved questions.
 
----
+## 4. Review and deliver
+
+All changes go through a PR to `main`. Describe the problem, resulting behavior, relevant decisions and actual validation/evaluation results. Identify the reviewed revision and changed subjects; include realistic input and expected behavior for substantive prompt changes. Explain high-risk safety boundaries and provide migration guidance for breaking changes to skill names, output formats, installer paths or README commands.
+
+For bug fixes, explain the root cause, why the fix addresses it, and how it was verified. If the defect exposes a recurring pattern, update the relevant prompt, validator, template or guidance to help prevent recurrence.
+
+Reviewers assess the complete diff with depth appropriate to its risk. Successful commands do not establish human approval, authors cannot claim independent approval of their own work, and prior reviews do not approve later changes. Put task status and sufficient sanitized review/validation evidence in the PR. Keep private working notes outside the repository; they must not be the sole support for an external readiness claim.
+
+Commit, push, merge and release require applicable user authorization. Use squash merge and delete the branch after merging.
+
+## Keeping documentation current
+
+Update the owning document in the same change. `VISION.md` owns project identity; derive the README introduction from it. The README provides discovery and usage, this guide owns contribution procedures, the quality standard owns authoring requirements, and architecture specifications own intended behavior and design decisions. Keep `AGENTS.md` concise and agent-facing.
+
+Move still-useful guidance into its owner before removing redundant documents. Documentation cleanup does not require preserving historical provenance, adding fixed-commit links or creating archives. Retain current requirements and evidence needed to support active claims, and repair references to removed files. Lessons from use should improve the relevant skill or shared guidance directly.
 
 ## Reporting bugs
 
-Record bugs so another contributor can reproduce them without extra back-and-forth:
-
-- Include the affected skill or repo area
-- Include the smallest reproduction you can find
-- Paste the exact input when possible
-- State expected behavior and actual behavior separately
-- Include the model used if behavior varies by model
-- Add the relevant output excerpt or screenshot if the failure is formatting-related
-
-A bug report is actionable when someone else can reproduce it from the issue alone.
-
----
-
-## Fixing bugs
-
-When you fix a bug, capture the full trail in the PR:
-
-- Root cause: what was actually wrong
-- Fix: why the change is correct
-- Verification: the smallest useful check or reproduction showing the fix
-- Prevention artifact: which doc, template, or validator rule was updated if the bug exposed a repeatable pattern
-
-For this repo, the prevention artifact is often one of:
-
-- `tests/validate_skills.py`
-- the affected `skills/<skill-name>/SKILL.md`
-- `README.md`
-- `docs/workflows.md`
-- `.github/ISSUE_TEMPLATE/bug-report.yml`
-
-For questions or ideas, open an issue using the **Skill Request** or **Bug Report** template. The [quality standard](skill-quality-standard.md) remains the canonical source for authoring and evidence obligations.
+Use the **Bug Report** issue template with the affected skill or repository area, smallest reproduction, exact input where possible, expected versus actual behavior, relevant output excerpt, and model/host when behavior depends on it. A useful report lets another contributor reproduce the problem without extra back-and-forth. Use **Skill Request** for proposed skills.

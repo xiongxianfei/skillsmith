@@ -243,18 +243,12 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 ## Contributing
 
-See the [contribution guide](docs/workflows.md) for an authoring example, required-metadata validation and PR expectations.
+Start with the [contribution guide](docs/workflows.md) to define a change, edit, validate and open a PR. It includes a minimal skill example and bug-reporting guidance.
 
-1. Fork the repo
-2. Create a branch: `git checkout -b feat/your-skill-name`
-3. Add your skill under `skills/<skill-name>/SKILL.md` with the [required metadata](docs/skill-quality-standard.md#required-checks)
-4. Follow the canonical quality standard in [docs/skill-quality-standard.md](docs/skill-quality-standard.md)
-5. Open a PR — include what the skill does, when to use it, validation output, and expected behavior for substantive skill changes
+- [Skill quality standard](docs/skill-quality-standard.md): metadata, practical design guidance, safety, portability and review expectations.
+- [Architecture guide](design/architecture/README.md): intended behavior, constraints and design decisions, maintained with `c4-architecture`.
+- [Agent instructions](AGENTS.md): repository ownership, structure and engineering principles.
 
 ## License
 
 MIT
-
-## Repository maintenance
-
-Maintainers follow the [workflow guide](docs/workflows.md) and use `c4-architecture` for [architecture design](design/architecture/README.md). Keep intended behavior, constraints and design decisions in the relevant architecture specification, then implement, validate and review through a PR. RigorLoop is not required.
