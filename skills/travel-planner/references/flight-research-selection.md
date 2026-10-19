@@ -4,6 +4,8 @@
 
 **Integration:** this is a focused extension of the existing Travel Planner `SKILL.md`, `references/scoring.md`, `references/data-contracts.md`, `references/research-and-tools.md`, `references/quality-gates.md`, and `scripts/evaluate_itineraries.py`. Read this reference when searching, comparing, ranking, or recommending flights. Reuse the existing weighted evaluator; do not establish a competing scoring implementation.
 
+For route-specific provider discovery, follow [flight-sources.md](flight-sources.md); for purchase timing and price-monitoring advice, follow [flight-purchase-strategy.md](flight-purchase-strategy.md). Keep both guidance files independent of the existing scoring engine.
+
 ## 0. End state and modes
 
 - `researching`: search ongoing; offers may be advertised, stale, or hypothetical.
