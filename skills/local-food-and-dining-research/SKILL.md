@@ -2,7 +2,7 @@
 name: local-food-and-dining-research
 description: Research and classify a city's local dishes, drinks, and culinary experiences, score foods and venue suitability separately, and link each food to evidence-backed places to try it. Use for must-try food inventories, regional specialty comparisons, food checklists, culinary itineraries, and restaurant-to-dish matching. Run independently or alongside city-attraction-research without duplicating attraction rankings.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Local Food and Dining Research
@@ -39,7 +39,7 @@ Use specified city and country, season and dates, preferred foods, dietary restr
 
 ## Geographic venue handoff
 
-A dish is **not a map point**. Each viable food-to-venue match must link to a real venue record, and a venue record may include a stable physical `place_id` and sourced coordinates plus `location_status`. Record the location source and verified date; never manufacture missing positions, operational status, or menu availability. The venue profile is separate from the dish-to-venue suitability score. See [the output contract](references/output-contract.md) for optional mapping fields.
+A dish is **not a map point**. Every map pin represents a researched physical venue and links food matches to that location. Maintain stable `place_id`, `venue_id`, sourced coordinates (when available), clean `map_address` (when using address-based Google My Maps placement), and independent location/menu/operation statuses. For map requests, read [mapping and My Maps reference](references/mapping-and-mymaps.md). Run `python scripts/export_venues_mymaps.py dining_venues.csv foods_scored.csv food_venue_matches.csv output/` when Python/file tools are available; it writes Google My Maps CSV, GeoJSON only for sourced coordinates, and a withheld-location report. **Addresses resolved by Google remain provisional until reviewed**, regardless of venue-match score. Native ChatGPT map display is optional and must never be asserted as visible when unsupported. Avoid downloadable HTML maps with public OpenStreetMap tile URLs. See [the output contract](references/output-contract.md).
 
 For a combined destination-day plan, pass the ranked food inventory, verified venue identities and food–venue matches to [City Itinerary Builder](../city-itinerary-builder/SKILL.md) if installed; it owns meal scheduling, feasible routes and travel materials. This food skill remains independently usable when that sibling skill is absent.
 
@@ -62,4 +62,6 @@ For a combined destination-day plan, pass the ranked food inventory, verified ve
 - `references/output-contract.md` — three-table data contract, matching rules, and quality checks. Read when producing tabular or machine-readable deliverables.
 - `assets/food_inventory_template.csv`, `assets/venue_inventory_template.csv`, `assets/food_venue_matches_template.csv` — blank compatible schemas.
 - `assets/samarkand_food_starter.csv` — illustrative candidate foods only, not an audited list.
+- `references/mapping-and-mymaps.md` — read for venue maps and CSV exports, address review, native-host fallback and Google My Maps import.
+- `scripts/export_venues_mymaps.py` — generates `dining_venues_mymaps.csv`, verified-only GeoJSON and review report without geocoding.
 - `scripts/score_and_validate.py` — optional CSV validation and scoring with Python standard library. Execute only if Python/file tools are available.

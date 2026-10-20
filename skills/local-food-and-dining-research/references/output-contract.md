@@ -17,7 +17,7 @@
 ### Venues: `venue_inventory_template.csv`
 `venue_id,city,country,name,venue_type,address,geographic_area,geo_scope,published_rating,opening_information,verification_status,source_urls,verified_date,notes`
 
-A venue may additionally include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at` after the base CSV fields. These are optional fields for geographic handoff, not authority to draw a pin without verified coordinates. Match records reference venue IDs; multiple foods can share one physical `place_id` if served at the same location.
+A venue may additionally include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at,map_address,coordinate_precision` after the base CSV fields. `map_address` is a clean, **manually checked candidate address** for Google My Maps, not a coordinate claim. `place_id` identifies the physical location; `venue_id` identifies a venue entity. Address-only pins remain `address_based_provisional` and need a manual visual check after My Maps geocoding. Coordinate precision, place verification, research status, operational status and menu status are separate concerns. Match records reference venue IDs; multiple foods can share one physical `place_id`.
 
 Venues are separately researched identities/profiles. Scores tied to a specific food live in the match table, never as one supposedly universal global venue score.
 
@@ -28,6 +28,16 @@ Venues are separately researched identities/profiles. Scores tied to a specific 
 - `secondary_tags`, `source_urls`, `aliases`, and `variants` use semicolons as CSV separators.
 - An unverified menu or unavailable dish must not be represented as a confirmed match.
 - An unrated food or match has blank rating fields and score; unknown is never zero.
+
+## Google My Maps dining export
+
+Run `python scripts/export_venues_mymaps.py dining_venues.csv foods_scored.csv food_venue_matches.csv output/`. This independently produces:
+
+- `dining_venues_mymaps.csv`: physical venues with `Place ID`, `Venue ID`, `Name`, `City`, `Country`, `Map Address`, full descriptive `Primary Category`, `Recommended Foods`, **pair-specific** `Food–Venue Match Score`, `Menu Verification Status`, `Geocoding Status`, source and review date. Unscored matches remain blank; an unknown dish is never marked verified.
+- `dining_venues.geojson`: precise pins **only** for verified source-backed coordinate pairs.
+- `dining_needs_location_review.csv`: missing/ambiguous/unsupported venue positions and the needed follow-up.
+
+To import, choose **`Map Address`** (not partially blank Latitude/Longitude columns) as Google My Maps location field and `Name` as label. Google geocoding is not proof of branch identity: manually review all imported venues. A native ChatGPT map can be offered if the host supports it, but is not required or guaranteed. Follow `references/mapping-and-mymaps.md`. No custom downloadable HTML map is required.
 
 ## Crosswalk and QA
 

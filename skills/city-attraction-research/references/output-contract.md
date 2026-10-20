@@ -23,7 +23,16 @@
 
 ## Optional geographic export
 
-The CSV may include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at` after existing fields. `place_id` identifies a physical place shared with the food/venue inventory when appropriate. Use `verified`, `provisional`, or `unlocated` status; verified coordinate pairs require source and date. The optional `scripts/export_pins.py` exports **all verified research candidates**, not just trip-selected stops, as GeoJSON point features in longitude/latitude order. Unknown, disputed or missing coordinates appear in an unlocated-place report rather than on the map.
+The CSV may include `place_id,latitude,longitude,location_status,location_source_url,location_verified_at,coordinate_precision` after the existing research fields. A `place_id` is a stable identity for a physical location, potentially shared with the food inventory. Location status is independent from `research_status` and uses `verified`, `provisional`, `ambiguous`, or `unlocated`. A verified coordinate pair requires a source URL and ISO date; `coordinate_precision` can be `entrance`, `building`, `site_center`, or `area`, with unknown precision left explicitly uncertain.
+
+Run `python scripts/export_pins.py attraction_inventory.csv attractions.geojson`. The exporter generates:
+
+- `attractions.geojson`: verified points only, WGS84 longitude/latitude order, without road routes.
+- `attractions_mymaps.csv`: Google My Maps layer with `Place ID`, `Name`, `City`, `Country`, `Latitude`, `Longitude`, full `Primary Category`, `Attraction Score`, `Priority Tier`, research/provenance links and location status.
+- `attractions_needs_location_review.csv`: withheld entries with concrete reason and follow-up.
+- `unlocated_places.csv`: legacy place/name/reason report (backward compatible).
+
+Import into Google My Maps selecting `Latitude` and `Longitude` for location and `Name` for marker labels. A native ChatGPT map is optional; if the host cannot render it, do not present a broken HTML stand-in or claim it was displayed. Follow `references/mapping-and-mymaps.md`. A map pin does not verify opening hours, correct entrance, or a visit booking.
 
 ## Release checklist
 

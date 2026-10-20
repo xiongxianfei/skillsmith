@@ -16,7 +16,7 @@ metadata:
 
 ## Purpose and boundaries
 
-Turn **already-researched options** and **actual travel arrangements** into a realistic, editable city itinerary. The skill operates independently: accept pasted checklists or machine-readable exports when the research skills are unavailable. The itinerary is the single source of truth for maps, timelines, infographic-style layouts, printable guides and navigation links. **Never fabricate** a road route, travel duration, hotel booking, admission ticket, venue menu or opening hours.
+Turn **already-researched options** and **actual travel arrangements** into a realistic, editable city itinerary. The skill operates independently: accept pasted checklists or machine-readable exports when the research skills are unavailable. The itinerary is the single source of truth for maps, timelines, infographic-style layouts, printable guides and navigation links. Imported Google My Maps research layers remain **discovery pins**, not validated road routes or current travel-time estimates; use independent routing evidence before building route legs. **Never fabricate** a road route, travel duration, hotel booking, admission ticket, venue menu or opening hours.
 
 This skill owns city **selection, scheduling, route feasibility and itinerary materials**. It does not redo full city attraction research (`city-attraction-research`), independently rank dishes or venue matches (`local-food-and-dining-research`), or take over broader flight, hotel, payment and trip-wide booking work (`travel-planner`). When research is absent, create a **provisional** candidate plan with explicit missing evidence, not a fabricated researched ranking.
 
