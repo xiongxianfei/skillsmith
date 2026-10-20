@@ -26,6 +26,20 @@ The traveler supplies requirements and research or checklists to an external ass
 - **Route:** provider-sourced GeoJSON `LineString`, mode, duration/distance, source URL and observation date. Unknown routes retain null geometry and metrics.
 - **Outputs:** map GeoJSON layers, unlocated CSV, timeline, infographic-style HTML, printable HTML guide, navigation links, practical checklist, validation report.
 
+## Dual-platform research mapping refinement (implementation proposed for review)
+
+The Samarkand prototype successfully imported **14 sourced coordinate-based attraction markers and five address-based dining venues into two Google My Maps layers**, as observed by the user. ChatGPT's native map failed to appear in that client. This evidence justifies a stable export-first approach, not a claim of independently verified current dining operations or a universal ChatGPT renderer.
+
+- **Owner responsibilities:** `city-attraction-research` exports sourced point GeoJSON and `attractions_mymaps.csv`; `local-food-and-dining-research` exports physical venue records, dish–venue match information and `dining_venues_mymaps.csv`. Both output explicit location-review reports. Neither needs mapping APIs or web traffic at script runtime.
+- **Optional native visualization:** a host may display a map using its own supported geographic tools; no portable skill may assume the UI exists or falsely assert successful display.
+- **Physical identity and precision:** `place_id` identifies a real-world place; source URLs, ISO observation dates, `coordinate_precision` and `location_status` control point eligibility independently of `research_status` and `menu_status`. Venue-only address geocoding is labeled provisional until visually checked.
+- **Separate exports first:** two-layer Google My Maps import preserves precise coordinates for attractions and text-address geocoding for venues. Optional combined export merges only matching place IDs and is an address-geocoded convenience requiring another placement review; no name-only identity matching.
+- **No default tiled HTML:** downloaded maps must not silently request volunteer-run public OpenStreetMap tiles. Native ChatGPT maps and Google My Maps are distinct presentation platforms, each dependent on availability and user permissions.
+- **Reimport control:** `Place ID` provides a stable matching key; reimport/update matching in My Maps can delete unmatched old features, so backup and explicit manual review are required.
+- **Travel stage unchanged:** `city-itinerary-builder` retains control of selected stops, sourced travel-time legs and printable materials; research-stage pins never imply a feasible route.
+
+This is a portable skill + data-contract change only. No automatic account access, geocoding service, cloud synchronization, routing, Google My Maps creation, or live restaurant validation is introduced.
+
 ## Consequential decisions
 
 1. **Three skills rather than one giant skill or one per output:** research remains useful alone; builder owns scheduling and materials.

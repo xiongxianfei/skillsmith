@@ -2,7 +2,7 @@
 name: city-attraction-research
 description: Research, classify, evidence-check, score, and prioritize attractions and city experiences for any destination. Use when asked for a comprehensive city must-visit inventory, ranked attractions, area-based sightseeing groups, or itineraries of different durations. Treat individual dishes and restaurant-to-dish matching as the responsibility of the separate local-food-and-dining-research skill.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # City Attraction Research and Ranking
@@ -38,7 +38,7 @@ Capture, when supplied: city/country, trip dates, full days available, first-tim
 
 ## Geographic research and pin-map output
 
-Record stable `place_id`, latitude, longitude, `location_status`, `location_source_url` and `location_verified_at` when supported. A valid ranking does **not** imply a verified map point. For a request to map all researched attractions, export verified location pins separately from the candidate/checklist inventory using `python scripts/export_pins.py attraction_inventory.csv pins.geojson` where Python is available. The utility also writes `unlocated_places.csv` for unverified positions. It never guesses coordinates, creates route lines, or checks current availability. Consult [the output contract](references/output-contract.md) for exact fields. If a map renderer exists, display the sourced pin layer; otherwise return GeoJSON with an explanation of why exact pins were withheld.
+Produce **Google My Maps-compatible CSV** as the default portable research-map output, and a native interactive map only when the current host supports and visibly renders it. Record stable `place_id`, sourced coordinates, `location_status`, `coordinate_precision`, `location_source_url`, and `location_verified_at`; research and coordinate verification are independent. The optional Python command `python scripts/export_pins.py attraction_inventory.csv attractions.geojson` now generates `attractions_mymaps.csv` plus an unlocated/review report. It retains its original GeoJSON/legacy-unlocated arguments. Never guess pins or claim the map was shown merely because a widget was requested. If native map rendering is unsupported or invisible, supply the My Maps export and a readable location list. **Do not generate downloaded HTML maps that depend on public OpenStreetMap tile servers by default.** Read [mapping and My Maps reference](references/mapping-and-mymaps.md) before any map export or native-map request; see [the output contract](references/output-contract.md) for fields and review rules.
 
 When a user asks to **select and schedule** from this inventory, preserve its independent scores and hand the ranked records to [City Itinerary Builder](../city-itinerary-builder/SKILL.md) if installed; it owns final daily scheduling, sourced route maps, and printable travel materials. Remain usable without that sibling skill.
 
@@ -61,4 +61,7 @@ When a user asks to **select and schedule** from this inventory, preserve its in
 - `references/output-contract.md` — deliverable structure, inventory fields and QA checks. Read when producing tabular or machine-readable deliverables.
 - `assets/attraction_inventory_template.csv` — research data schema.
 - `assets/samarkand_starter.csv` — example candidate entries, **not** a verified ranking.
+- `references/mapping-and-mymaps.md` — required when generating or requesting a map; My Maps import, coordinate provenance, optional native maps and combined-layer caveats.
+- `scripts/export_pins.py` — sourced GeoJSON + automatic `attractions_mymaps.csv` + review report.
+- `scripts/combine_mymaps.py` — optional shared-place merge of independently generated attraction and dining layers.
 - `scripts/score_and_validate.py` — optional standard-library CSV scorer and category validator. Execute only if Python/file tools are available.
