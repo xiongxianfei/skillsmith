@@ -15,6 +15,21 @@ The two independent research skills now default to **one canonical JSON file eac
 
 The builder may consume either file independently or both together, and it still accepts user-pasted lists. Treat checklist CSV and Google My Maps CSV as **derived review layers**, not canonical itinerary inputs. Keep trip selection, fixed reservations and route times in the builder's own plan record; never overwrite the research JSON scores.
 
+## Optional commentary input
+
+`travel-storytelling-guide` can supply `stories.json` (version 1.0) with `stories[]`
+containing `story_id`, `subject_type`, `subject_id`, evidence-linked `claims`,
+`pre_trip` and `on_location` text, and `limitations`. Match an attraction story by
+`attraction_id`; match a food story by `food_id`, then resolve the selected venue
+separately. A null subject ID requires explicit reconciliation, never name-only
+attachment to an assumed branch. One place can have multiple stories.
+
+Keep the story files as optional companions to the itinerary. Do not overwrite
+research records or silently lengthen visit blocks. The existing renderer and
+itinerary JSON are unchanged; automatic playback, GPS triggers and embedded story
+panels are not implemented. Without the storytelling skill, supplied scripts remain
+usable and ordinary itinerary generation continues unchanged.
+
 ## Canonical JSON (version 1.0)
 
 See `../assets/samarkand_itinerary_example.json`. Fields:

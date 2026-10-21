@@ -26,6 +26,15 @@ Collect what is known: city/country, local time zone, dates, exact arrival/depar
 
 The builder directly accepts `attractions.json` and `food_research.json` from the two research skills. Read [references/input-contract.md](references/input-contract.md) for their minimal JSON structure; no separately generated research handoff is needed.
 
+## Optional storytelling companion
+
+When commentary is requested, use `travel-storytelling-guide` if available, or accept
+its `stories.json` and `guided_commentary.md`. Match stories by `subject_type` and
+`subject_id`; food stories follow food IDs through the chosen venue match. Preserve
+qualifications and evidence. Return the commentary as a companion; the current HTML
+renderer does not embed or play it automatically. Stories never change bookings,
+route estimates, research rankings or time blocks without an explicit plan revision.
+
 ## Workflow
 
 1. **Protect commitments first:** Put flights/arrival transfers, hotel access, fixed bookings, required rest, and departure buffers into time constraints. Label confirmed, pending and unverified arrangements distinctly.
