@@ -49,6 +49,29 @@ The Samarkand prototype successfully imported **14 sourced coordinate-based attr
 
 This is a portable skill + data-contract change only. No automatic account access, geocoding service, cloud synchronization, routing, Google My Maps creation, or live restaurant validation is introduced.
 
+## Optional storytelling companion (new instruction-level capability)
+
+`travel-storytelling-guide` is an independently loadable writing skill: one entrypoint
+and one focused reference, with two authored Samarkand example files. It accepts
+existing attraction/food research or a named subject, verifies consequential gaps,
+and uses one claim/source ledger for pre-trip prose and on-location scripts.
+Documented history, interpretation, tradition and disputed claims remain distinct;
+source-access limits and unknown current conditions are explicit.
+
+Saved commentary consists of `stories.json` and `guided_commentary.md`. Actual
+research IDs are retained; the food subject has no invented place. The itinerary
+builder may match optional commentary by subject ID and deliver a companion file,
+but its current renderer does not automatically embed or play it. Research scoring,
+three-file research defaults, map exporters and itinerary schedules are unchanged.
+No service, Python runtime, audio engine, GPS or background dependency is added.
+The existing diagrams describe the core research/planning flow; this optional
+instruction-level companion adds no deployable container or external interface.
+
+Acceptance evidence: four actual authored English narratives with a shared ledger,
+source checks and explicit limits. Focused tests check IDs, references, word counts
+and JSON/Markdown equality; they do not establish historical truth, live conditions,
+independent approval or behavior across every host. Human content review remains due.
+
 ## Consequential decisions
 
 1. **Three skills rather than one giant skill or one per output:** research remains useful alone; builder owns scheduling and materials.
@@ -65,7 +88,7 @@ This is a portable skill + data-contract change only. No automatic account acces
 - Late arrival → no 09:00 sightseeing on a 14:00 arrival day.
 - Overlapping blocks or insufficient sourced transfer gap → validation fails.
 - No routing provider → empty route GeoJSON; no invented numeric time.
-- Revised appointment → regenerate all derived outputs from revised itinerary JSON.
+- Revised appointment → regenerate all derived outputs from revised itinerary JSON, never edit outputs separately.
 - Unverified venue menu or booking → never show it as confirmed.
 
 ## Validation and review
