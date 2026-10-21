@@ -2,7 +2,7 @@
 name: local-food-and-dining-research
 description: Research and classify a city's local dishes, drinks, and culinary experiences, score foods and venue suitability separately, and link each food to evidence-backed places to try it. Use for must-try food inventories, regional specialty comparisons, food checklists, culinary itineraries, and restaurant-to-dish matching. Run independently or alongside city-attraction-research without duplicating attraction rankings.
 metadata:
-  version: "1.1.0"
+  version: "2.0.0"
 ---
 
 # Local Food and Dining Research
@@ -25,6 +25,18 @@ Build **two connected but distinct research layers**: (1) foods and drinks, (2) 
 
 Use specified city and country, season and dates, preferred foods, dietary restrictions, allergies, alcohol preferences, budget, and meal capacity. When not given, make clear that the baseline is a *balanced, omnivorous first-time visitor* research profile, not a personalized dietary plan. Maintain nonalcoholic alternatives. Never imply a venue can accommodate an allergy without explicit evidence.
 
+## Default research files
+
+Whenever the host can create files, generate **exactly three default outputs** from researched foods, venues and food–venue matches:
+
+`python scripts/generate_research.py foods.csv venues.csv matches.csv OUTPUT_DIR`
+
+1. `food_research.json`: canonical `foods`, `venues` and `food_venue_matches` collections with stable IDs, separate food and pair-level scores, sources, and location/menu uncertainty.
+2. `foods_checklist.csv`: every researched food, ranked where rated, with blank scores for unscored candidates and `undecided` review decisions.
+3. `dining_venues_mymaps.csv`: documented physical venues and their supported food matches, with address-based locations clearly marked provisional.
+
+Use the existing CSV templates and [the output contract](references/output-contract.md) for fields and constraints. Do not create an itinerary or claim that a venue serves a dish without evidence. If file creation is unavailable, provide the structured research and disclose each missing file. `--overwrite` is required to replace outputs. The existing `score_and_validate.py` and `export_venues_mymaps.py` commands, source CSV files, GeoJSON and location-review reports remain **optional**, unchanged features. Native ChatGPT maps are conditional on host support.
+
 ## Workflow
 
 1. **Define scope and culinary identity:** Capture city, regional, national, and shared/cross-border culinary influences. Distinguish foods with a documented local preparation from foods that are broadly national; avoid unfounded exclusive-origin claims.
@@ -35,7 +47,7 @@ Use specified city and country, season and dates, preferred foods, dietary restr
 6. **Discover and verify venues:** Maintain venue profiles with names, addresses, type, location, source URLs, verification date, opening/menu uncertainty, accessibility, and status. Search independently for dish-specific evidence. Do not invent actual restaurant existence or attribute dishes on guesswork.
 7. **Evaluate food–venue matches separately:** For **each dish–venue pair**, score match quality, preparation evidence, cultural character, practicality, and evidence confidence. The resulting 0–100 **venue suitability for this food** is not a global restaurant rating. If a venue serves multiple dishes, create multiple match rows; do not copy the same score without assessment.
 8. **Build selections:** Offer shortlists for 1, 2, 3 and 4+ days or dates supplied. Combine market samples and tea with meals; avoid scheduling multiple substantial meals solely to tick boxes. Consider seasonal availability, meal timing, closures, dietary safety, and geographic clusters.
-9. **Deliver and refresh:** Provide a fully categorized food inventory, transparent food scores, a separate food-to-venue match table with evidence status, and an optional practical tasting plan. Recheck current menus and access just before travel. The inventory can remain comprehensive while the visit plan is selective.
+9. **Deliver and refresh:** Provide categorized food research and a separate venue-match table with evidence status. Generate the three default files using `scripts/generate_research.py` when file tools are available; make richer reports and GeoJSON optional. Recheck menus and access before travel. The comprehensive inventory is not a mandated eating plan.
 
 ## Geographic venue handoff
 

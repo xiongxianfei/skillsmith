@@ -1,5 +1,15 @@
 # Food and dining output contract
 
+## Default delivery contract (three files)
+
+Run `python scripts/generate_research.py foods.csv venues.csv matches.csv OUTPUT_DIR`. It uses the skill's existing CSV schemas, scoring constants, and venue map exporter. The command requires Python 3.9+ standard library only and does not geocode or check live menus.
+
+- `food_research.json`: `schema_version: "1.0"`, `dataset_type: "food_and_dining"`, `foods[]`, `venues[]`, `food_venue_matches[]`, `mapping`. Each food contains stable `food_id`, full `primary_category`, geographic identity, tags/aliases/variants, five `ratings`, computed `food_score` (number or null), priority tier, and source evidence. Each venue retains its `venue_id`, physical `place_id`, address and verification fields. Each food–venue pair retains its independent five `ratings`, `venue_suitability_score` (or null), `menu_status` and dish-specific sources. `mapping` records mapped and withheld venues and precise-coordinate count.
+- `foods_checklist.csv`: `food_id,rank,name,primary_category,geographic_identity,food_score,priority_tier,review_decision,review_notes`. All foods included; unscored items have blank rank/score/tier and all initial review decisions are `undecided`.
+- `dining_venues_mymaps.csv`: existing My Maps import format, only for documented locations. Address matches remain provisional until visually checked; no venue score is substituted for a food score, and unscored pair scores stay blank.
+
+Only the three files appear in the new default output directory. The existing `score_and_validate.py` and `export_venues_mymaps.py` commands remain optional and continue to generate their historical files. Reject duplicate IDs, invalid food categories, partial ratings, inconsistent scores, broken food–venue references, and scored matches with unsupported menu status or missing dish-specific source. Do not invent missing locations or food availability.
+
 ## Required deliverables
 
 1. Culinary identity: specific local traditions versus regional/national/shared foods.
@@ -9,7 +19,7 @@
 5. Selective 1-, 2-, 3-, and 4+-day tasting suggestions; avoid excessive meals.
 6. Seasonal, dietary, allergen, source, and opening-hours uncertainty.
 
-## Three required tables
+## Existing source CSV formats (inputs and optional legacy commands)
 
 ### Foods: `food_inventory_template.csv`
 `food_id,city,country,name,aliases,primary_category,secondary_tags,variants,geographic_identity,local_distinctiveness,cultural_significance,culinary_distinctiveness,general_traveler_relevance,availability,food_score,priority_tier,seasonality,dietary_flags,allergen_flags,evidence_confidence,source_urls,verified_date,research_status,notes`
@@ -29,7 +39,7 @@ Venues are separately researched identities/profiles. Scores tied to a specific 
 - An unverified menu or unavailable dish must not be represented as a confirmed match.
 - An unrated food or match has blank rating fields and score; unknown is never zero.
 
-## Google My Maps dining export
+## Optional direct Google My Maps dining export command
 
 Run `python scripts/export_venues_mymaps.py dining_venues.csv foods_scored.csv food_venue_matches.csv output/`. This independently produces:
 
