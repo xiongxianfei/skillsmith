@@ -24,6 +24,8 @@ This skill owns city **selection, scheduling, route feasibility and itinerary ma
 
 Collect what is known: city/country, local time zone, dates, exact arrival/departure times and terminals/locations, hotel location and check-in/out, prior tickets/reservations and fixed commitments, number of travelers, desired pace and interests, dietary/accessibility constraints, transport preferences, ranked attraction checklist, ranked food checklist and venue matches. Do not request sensitive documents or payment credentials. When unknown details are non-blocking, make the draft provisional and mark them for verification. Read [references/input-contract.md](references/input-contract.md) when converting checklists or bookings into structured records.
 
+The builder directly accepts `attractions.json` and `food_research.json` from the two research skills. Read [references/input-contract.md](references/input-contract.md) for their minimal JSON structure; no separately generated research handoff is needed.
+
 ## Workflow
 
 1. **Protect commitments first:** Put flights/arrival transfers, hotel access, fixed bookings, required rest, and departure buffers into time constraints. Label confirmed, pending and unverified arrangements distinctly.

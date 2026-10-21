@@ -13,6 +13,15 @@ Let travelers use independent city-attraction and food-research skills to build 
 
 **Not implemented:** geocoding, tile hosting, external routing providers, turn-by-turn navigation, transactions, background services, or persistent hosted state. HTML outputs are static; exported GeoJSON requires a suitable map viewer.
 
+## Simplified research delivery contract (proposed refinement)
+
+The two research skills remain independent and each produces **three default files**, replacing the previously contemplated 14/17-file package plan:
+
+- City attractions: `attractions.json`, `attractions_checklist.csv`, `attractions_mymaps.csv`.
+- Local food and dining: `food_research.json`, `foods_checklist.csv`, `dining_venues_mymaps.csv`.
+
+Each canonical JSON contains all researched candidates, numeric or null weighted scores, independent location/menu statuses, full descriptive categories, stable entity/place IDs and sources; the other two files are derived. Existing scoring CLI, direct GeoJSON/My Maps exporters and location-review reports remain available **on request**, with their established flags and output formats unchanged. The itinerary builder reads these two canonical JSONs directly; no separate research package manifests, checksums, workbook or handoff files are required. This narrows the default user experience without restricting the research inventory or retiring proven map exports. File-producing hosts should run the bundled stdlib generators; unsupported file generation must be reported as partial rather than claimed successful.
+
 ## Boundary and context
 
 The traveler supplies requirements and research or checklists to an external assistant host. The host can load any one of three passive packaged skills and may use separately connected mapping/routing providers. Skillsmith does not run a backend or grant provider permissions. The builder accepts pasted, manually verified lists if its research siblings are unavailable.

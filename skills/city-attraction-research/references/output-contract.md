@@ -1,5 +1,15 @@
 # Attraction output contract
 
+## Default delivery contract (three files)
+
+Run `python scripts/generate_research.py attraction_inventory.csv OUTPUT_DIR`. It requires Python 3.9+ standard library, the skill's existing scorer/map exporter, and the current [attraction inventory CSV template](../assets/attraction_inventory_template.csv) as input. Existing scoring and mapping commands stay available separately.
+
+- `attractions.json`: `schema_version: "1.0"`, `dataset_type: "attractions"`, `city`, `country`, `attractions[]`, `mapping`. Each attraction retains `attraction_id`, full `primary_category`, `secondary_tags[]`, `ratings` (five integers or nulls), computed `weighted_score` (number or null), `priority_tier` (or null), `place_id`, optional sourced coordinates and status, `estimated_minutes` (integer or null), `source_urls[]`, and other input research metadata. `mapping` records the mapped count, withheld count and withheld reasons.
+- `attractions_checklist.csv`: `attraction_id,rank,name,primary_category,weighted_score,priority_tier,estimated_minutes,review_decision,review_notes`. All entries included. Unscored ones have blank rank/score/tier; every initial review decision is `undecided`.
+- `attractions_mymaps.csv`: original Google My Maps coordinate export and full descriptive categories, generated only for verified source-backed pins. It may contain only headers when no locations qualify.
+
+Only these three appear in the new default output directory. The legacy `export_pins.py` command continues to generate optional GeoJSON and location-review files when invoked directly. Map warnings are also preserved in the JSON rather than hidden. Reject invalid categories, partial ratings, score mismatches, duplicate attraction IDs, and unsourced `verified` coordinates. No automated research or current map service is implied by the generator; the AI must supply evidence-backed input CSV records first.
+
 ## Required narrative outputs
 
 1. City identity (five to seven grounded dimensions).

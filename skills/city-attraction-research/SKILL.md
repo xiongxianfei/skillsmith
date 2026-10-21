@@ -2,7 +2,7 @@
 name: city-attraction-research
 description: Research, classify, evidence-check, score, and prioritize attractions and city experiences for any destination. Use when asked for a comprehensive city must-visit inventory, ranked attractions, area-based sightseeing groups, or itineraries of different durations. Treat individual dishes and restaurant-to-dish matching as the responsibility of the separate local-food-and-dining-research skill.
 metadata:
-  version: "1.1.0"
+  version: "2.0.0"
 ---
 
 # City Attraction Research and Ranking
@@ -24,6 +24,16 @@ Create an evidence-grounded *inventory first*, then a ranked shortlist and optio
 
 Capture, when supplied: city/country, trip dates, full days available, first-time or repeat visit, interests, trip pace, mobility/accessibility, budget, and geographic scope. If missing, proceed with an explicitly labeled *balanced first-time visitor* baseline and keep visit selection separate from evaluation. Do not invent travel dates or accessibility needs.
 
+## Default research files
+
+Whenever the host can create files, generate **exactly three default outputs** from the researched attraction CSV with `python scripts/generate_research.py attraction_inventory.csv OUTPUT_DIR`:
+
+1. `attractions.json`: canonical ranked or unscored candidate records, evidence, five rating dimensions, location status, and withheld-location reasons.
+2. `attractions_checklist.csv`: all candidates in score order, with blank scores for unscored entries and `undecided` review decisions.
+3. `attractions_mymaps.csv`: Google My Maps coordinates for sourced, verified places only; no invented pins.
+
+Use the existing CSV template as the generator input and see [the output contract](references/output-contract.md). Generate full output files rather than merely listing their names. If file creation is unavailable, provide the structured research in the response and name each uncreated artifact; never claim full completion. `--overwrite` is required to replace existing default files. The existing `score_and_validate.py` and `export_pins.py` commands, GeoJSON and mapping review files remain **optional** and unchanged; they are not produced by the default three-file command. Native ChatGPT maps are optional when visibly supported. The travel itinerary belongs to `city-itinerary-builder`.
+
 ## Workflow
 
 1. **Identify the city:** Summarize five to seven dimensions of its identity, including older history and modern living culture. Establish a city/near-city/regional boundary. Separate excursions from the city inventory.
@@ -33,7 +43,7 @@ Capture, when supplied: city/country, trip dates, full days available, first-tim
 5. **Evaluate independently of itinerary:** Rate five dimensions on 0–5 integer scales. Apply fixed weights and compute a /100 score. A missing rating is *unscored*, not zero. Store confidence and cited sources separately from judgment. Use the full-name category in all records, examples, and output.
 6. **Rank and group:** Make a transparent master ranking, with tiers Must-Visit Candidate (80–100), Highly Recommended (60–79), and Optional or Specialist Interest (below 60). Scores within five points are near ties; don't pretend a one-point gap is definitive. Inspect category coverage and avoid popularity bias.
 7. **Select rather than exhaust:** Build trip-specific selections for the durations requested. Apply proximity, opening days, booking, daylight, transit, weather, walking ability, and diminishing returns. Never require someone to visit all Tier A items; reserve time for meals and breaks.
-8. **Deliver and preserve:** Provide an identity profile, a classified inventory, scored ranking with rationale, separate selection(s), and geographic clusters. Include practical uncertainty/verification reminders and sources. Produce CSV/JSON when requested using `assets/attraction_inventory_template.csv`.
+8. **Deliver and preserve:** Provide an identity profile, classified inventory, scored ranking with rationale, and verification caveats. Generate the three default files using `scripts/generate_research.py` when executable file tools are available. Keep richer GeoJSON and direct map-export commands optional.
 9. **Review:** After travel, retain objective historical attributes and revisit subjective scores, actual duration, closures, and enjoyment notes. Do not overwrite the research score with a traveler's post-visit taste score.
 
 ## Geographic research and pin-map output

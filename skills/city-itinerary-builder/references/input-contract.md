@@ -6,6 +6,15 @@ The skill accepts (a) user-supplied arrival/departure/hotel/commitment details a
 
 Research records should provide **stable IDs, a full descriptive primary category, priority/score, place identity, source evidence, estimated visit duration**, and verification status. Food-to-venue records should additionally provide the food ID, venue ID and **pair-level** suitability evidence. A dish has no single coordinate; choose a mapped venue first. **Research score and trip-specific selection status remain separate.**
 
+## Minimal research JSON input (supported)
+
+The two independent research skills now default to **one canonical JSON file each** rather than a separate handoff package:
+
+- `attractions.json`: read the top-level `attractions[]` array. Every item has stable `attraction_id`, `name`, full `primary_category`, `weighted_score` (numeric or null), `priority_tier` (or null), `estimated_minutes` (numeric or null), optional `place_id`, `latitude`, `longitude`, `location_status`, `source_urls[]` and `ratings`. Do not try to fill in missing ratings, location coordinates or visit durations.
+- `food_research.json`: read top-level `foods[]`, `venues[]` and `food_venue_matches[]`. Resolve food IDs through matches to venue IDs, then venue `place_id` for the location. Food scores and venue-match suitability scores are separate; a dish is never a place pin. `menu_status` remains provisional unless explicitly supported.
+
+The builder may consume either file independently or both together, and it still accepts user-pasted lists. Treat checklist CSV and Google My Maps CSV as **derived review layers**, not canonical itinerary inputs. Keep trip selection, fixed reservations and route times in the builder's own plan record; never overwrite the research JSON scores.
+
 ## Canonical JSON (version 1.0)
 
 See `../assets/samarkand_itinerary_example.json`. Fields:
