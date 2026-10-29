@@ -19,6 +19,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
+| [city-view-model](skills/city-view-model/SKILL.md) | `/city-view-model` | Structured city profiles using Place, Taste, Culture, Space, Time and Scenarios, with linked Excel tables, priority scores, checklists and visual layouts |
 | [hairstyle-selection](skills/hairstyle-selection/SKILL.md) | `/hairstyle-selection` | Hairstyle consultation using visible hair and face observations, fair haircut comparisons, optional controlled previews and clear barber handoffs |
 | [eyeglasses-selection](skills/eyeglasses-selection/SKILL.md) | `/eyeglasses-selection` | Everyday prescription frame selection, shape and fit comparisons, illustrative try-ons, and optician handoff with prescription safety boundaries |
 | [c4-architecture](skills/c4-architecture/SKILL.md) | `/c4-architecture` | Public D2/C4 architecture skill for AI-generated, Git-reviewed system context, container and dynamic views; includes example models and validation helpers |
