@@ -1,3 +1,6 @@
+# Generated local artifacts
+/outputs/
+
 # OS
 .DS_Store
 Thumbs.db
