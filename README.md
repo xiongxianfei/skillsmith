@@ -19,6 +19,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
+| [purchase-comparison](skills/purchase-comparison/SKILL.md) | `/purchase-comparison` | Product comparisons using Must/Avoid filters, weighted preferences, visible raw facts and Excel purchase trackers |
 | [trip-expense-tracker](skills/trip-expense-tracker/SKILL.md) | `/trip-expense-tracker` | Multi-currency trip expense workbooks with separate cash and card costs, exchange fees, reimbursements and configurable base-currency summaries |
 | [city-view-model](skills/city-view-model/SKILL.md) | `/city-view-model` | Structured city profiles using Place, Taste, Culture, Space, Time and Scenarios, with linked Excel tables, priority scores, checklists and visual layouts |
 | [hairstyle-selection](skills/hairstyle-selection/SKILL.md) | `/hairstyle-selection` | Hairstyle consultation using visible hair and face observations, fair haircut comparisons, optional controlled previews and clear barber handoffs |
