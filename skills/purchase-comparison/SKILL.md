@@ -1,75 +1,58 @@
 ---
 name: purchase-comparison
-description: Compare products with a Must/Prefer weighted-scoring method and build the Excel comparison sheet. Use this skill whenever the user is deciding what to buy (suitcase, keyboard, mouse, gadgets, Black Friday purchases), wants to list selection factors, rank candidates, set attribute weights, calculate a score out of 100, or design a purchase tracker or comparison table in Excel, even if they don't say "scoring" or "comparison".
+description: Build and fill a weighted comparison sheet to choose between products (keyboard, mouse, mousepad, suitcase, or any other item type), where the user sets the scores. Use whenever the user wants to compare, shortlist, rank, score or choose between candidate products or models, asks "which one should I buy", "what attributes should I look at", or mentions the Black Friday comparison sheet, even if they never say "comparison sheet". Covers listing attributes, defining the options for each attribute, letting the user assign option scores and weights, recording candidate models, calculating totals and recommending.
 ---
 
 # Purchase comparison
 
-Help the user pick a product by filtering with Musts, then scoring the rest with weights. Keep raw facts visible next to the scores.
+Help the user choose a product by comparing candidates on a small set of attributes. The user decides what matters and how much; the skill supplies the structure, the options, the lookups and the arithmetic. **Never invent scores or weights for the user.** Suggestions are allowed only when the user asks for them, and are labelled as optional.
 
-## Method
+## Core idea
 
-1. **Define the use.** Who uses it, how often, budget, constraints (e.g. airline size limit, hand size and grip, wired or wireless).
-2. **List all candidate attributes first** and let the user pick the ones they care about. Do not decide for them.
-3. **Tag each chosen attribute:**
-   - **Must**: pass/fail. Failing one removes the model. Keep to 2-4.
-   - **Prefer**: scored 0-5 and given a weight 1-5. Avoid giving many attributes the same top weight; the weights should separate what matters most.
-   - **Nice**: tie-breaker only, not in the total.
-   - **Avoid**: reject the model if present.
-4. **Shortlist 3-5 models** that pass every Must. Record raw values, then score each Prefer attribute 0-5.
-5. **Scoring rules.**
-   - Numeric attributes (weight, price, warranty years): use a rule table that maps ranges to scores.
-   - Text attributes (wheel type, shell): use a dropdown mapped to scores.
-   - Subjective attributes (zipper quality, click feel): score by hand and explain in Notes.
-   - Range-fit attributes (capacity, size): score closeness to the target, not bigger-is-better.
-   - Missing data: leave blank and mark the model incomplete. Do not guess.
-6. **Check the 1-3 star reviews** of the top two models for recurring problems.
-7. **Fit items** (grip, hand size, shoe size) need a real measurement and an easy return policy, since specs cannot confirm comfort.
-8. **Timing.** For sales events, check price history (CamelCamelCamel, Keepa) to see whether a deal is real.
+For each attribute: (1) list the **options** that exist, (2) the user gives each option a **score**, (3) the user gives the attribute a **weight**. Each candidate model's value is matched to an option, which gives its score. Total = weights x scores.
 
-## Excel layout
+## Sheet layout (always the same)
 
-**Main tracker** (one row per purchase)
-- Item = the type name (e.g. Suitcase), not the exact model. Put the model in Spec or Notes, or add a Model column.
-- Typical columns: Item, Category, Priority, Status, Store, Quantity, target price, current price, Score, Purpose, Spec, Link, Notes.
-- When a winner is chosen, copy its price and score into the main row.
+One sheet per item type. Columns: `Model | Row | <attribute 1> | <attribute 2> | ... | Total`, then optional `Source` and `Verified`. The `Row` column lets the user filter. Three header rows, then two rows per model:
 
-**Comparison sheet** (one per compared item; sheet `Suitcase`, table `tblSuitcase`)
-- Row 1: attribute weights, above the matching columns. A blank weight means Must. These cells are outside the table.
-- Row 2: the table header: `Model | Row | attribute columns... | Total`.
-- Freeze panes below the header (cell A3).
-- Each model has two rows: a **Value** row (raw facts) and a **Score** row (Pass/Fail for Musts, 0-5 for Prefer). Fill the Model name on both rows.
-- Filter Row = Value to see the facts, Row = Score to compare.
-- Store numbers as plain numbers and put units in the header, e.g. `Weight (kg)`.
+| Model | Row | Layout | Weight (g) |
+|---|---|---|---|
+| Header | Weight | 3 | 2 |
+| Header | Options | Full / TKL / 75% / 65% | <50 / 50-60 / 61-70 / >70 |
+| Header | Option score | 1 / 5 / 5 / 3 | 2 / 5 / 4 / 0 |
+| Model A | Value | TKL | 58 |
+| Model A | Score | 5 | 5 |
 
-**Total score out of 100** (calculated column, results only on Score rows):
+(Numbers above only show the format. They are not defaults.)
 
-```
-=IF([@Row]<>"Score","",SUMPRODUCT($E$1:$K$1,[@[FirstAttr]:[LastAttr]])/(5*SUM($E$1:$K$1))*100)
-```
+- **Weight row:** importance of each attribute, set by the user. A negative weight is allowed for an attribute the user wants to avoid.
+- **Options row:** the possible choices for that attribute, separated by ` / `. Numeric attributes use non-overlapping ranges that cover every realistic value.
+- **Option score row:** the user's score for each option, in the same order as the Options row, usually 0-5. The letter `X` means reject: the model is disqualified if its value falls in that option.
+- **Value row:** the raw facts for a model, taken from official specs. Leave unknowns blank.
+- **Score row:** looked up from the Value row via the Options and Option score rows. `Total` sits only on the Score row: the sum of weight x score, with the maximum (5 x sum of weights) shown beside it as a percentage. Any `X` makes the Total show "Rejected".
 
-- The weight range and the attribute range must cover the same columns in the same order.
-- The denominator is the maximum possible score (5 x sum of weights), not a per-model value.
-- Add conditional formatting to turn a Score row red when any Must cell is "Fail".
+## Workflow
 
-## Files and folders
+1. **Item type and context.** Ask what is being bought and what matters about the user (for example hand size and grip for a mouse, usage mix, budget). Check the conversation and memory first; do not ask for things already known. If the Black Friday tracker (`tblItems`) is in use, the `Item` there is the type name (Keyboard), while this sheet's `Model` column holds exact product names.
+2. **Attributes.** Read `references/<item>.md` if one exists for the item type; otherwise propose a short list (6-10) and agree it with the user. Let them add or remove attributes.
+3. **Options.** Define the options for every attribute (from the reference file, edited as needed). Check: options are mutually exclusive, ranges do not overlap or leave gaps, and the order is consistent.
+4. **User scores.** Show the options and ask the user to fill in the Option score row and the Weight row. Offer to leave any blank for later. If the user asks for suggestions, give them as clearly optional, with a one-line reason each, and only for options the user has not scored.
+5. **Candidates.** Record exact model names (including version or size, for example "ZA12", not "ZA"). Fill the Value row from official specs; where specs are from memory or a review site, mark `Verified = No` and say so. Never guess a missing value.
+6. **Score and total.** Look up each Value in the Options row. Flag a Value that matches no option, an option with no score, or an attribute with no weight. Compute the Total.
+7. **Recommend.** Give the top one to three with the reason (which attributes drove the score), anything unverified, and what needs hands-on testing (for example shape, click feel, texture). Write the final score back to `tblItems` if that tracker exists.
 
-- One Excel file per year (e.g. `BlackFriday2026.xlsx`), copied from a clean template with headers, formulas, weights, and lookup sheet but no data.
-- Suggested folders: `Shopping/Template`, `Shopping/2026`, `Shopping/Archive`. Keep receipts and warranty PDFs in the year's folder.
-- Name sheets and tables the same way, without spaces: `Main` / `tblMain`, `Suitcase` / `tblSuitcase`, `Lists` for lookup tables.
+## Building the file
 
-## Pitfalls
+If the user wants a spreadsheet, read the xlsx skill first, then build it with the layout above: an Excel table with the `Row` column filterable, the Option score cells highlighted for the user to fill, and a lookup formula for the Score row (for example `INDEX` with `MATCH` on the Options list, using `TEXTSPLIT` or a helper range for the option lists). Put option lists in helper ranges if splitting text in one cell is unreliable. `Total =SUMPRODUCT(weights, scores)` on Score rows only.
 
-- Do not apply a plain AutoFilter to the whole sheet; use the table's filter, or the weight row will be filtered.
-- Do not make the weight row part of the table.
-- Adding an attribute means inserting a table column and filling its weight in row 1, then extending the Total formula ranges.
-- Keep column names distinct from the Row labels (use `Weight (kg)`, not `Weight`).
-- Do not use Nice items in the total.
+## Rules
 
-## Worked example (gaming mouse)
+- Do not preset Must/Prefer scores. The user's weights and option scores are the only source of truth.
+- Do not invent specifications, prices or review numbers. Blank means unknown.
+- Keep the Value row factual and the Score row numeric.
+- Record source and verified status for every spec.
+- Keep replies short and show small tables. Do not repeat the whole sheet after each edit; show only what changed.
 
-Profile: FPS, claw grip, medium hand (18.4 cm x 7.9 cm), wireless, budget $80.
-- Musts: Price (at most 80), Fits grip and size (about 110-120 mm long, 60-66 mm wide, hump toward the back).
-- Prefer weights: Sensor 5, Weight (g) 4, Click feel 4, Battery 3, Software 2.
-- Model A scores 5, 5, 4, 4, 4: 25 + 20 + 16 + 12 + 8 = 81 out of a maximum 90, which is 90/100.
-- A model that fails the price Must is out, whatever its score.
+## References
+
+- `references/keyboard.md`, `references/mouse.md`, `references/mousepad.md`: attribute lists with options only, no scores. Read the one that matches the item type. For other item types, build a new list in the same format and offer to save it as a new reference file.
