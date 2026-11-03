@@ -9,7 +9,7 @@ Help the user write emails that are short, specific, and easy to act on.
 
 ## Workflow
 
-1. **Collect the essentials.** You need: who the email is to, the main point or request, and any deadline. If one is missing, make a reasonable assumption and mark it, or ask one short question. Do not ask for more than needed.
+1. **Collect the essentials.** Use the supplied recipient, main point or request, and any deadline. For missing facts, use clear placeholders or ask one short question when the answer is needed to draft accurately. Never invent names, dates, amounts, commitments or deadlines. Omit a deadline if none is needed.
 2. **Choose the tone.** Formal (clients, executives, first contact, external parties) or casual (teammates, regular contacts). If unclear, default to polite-neutral.
 3. **Draft using the structure below.** Output the email ready to copy.
 4. **Run the pre-send checklist** silently. Fix problems before showing the draft.
@@ -21,11 +21,11 @@ If the user pastes an existing email, keep their facts and intent. Restructure a
 
 1. **Subject:** 5-10 words, topic plus action, with the deadline if there is one.
    Example: `Please approve: Q4 equipment budget (by Friday)`
-2. **Greeting:** `Dear Anna,` for formal or first contact; `Hi Anna,` for colleagues. If the name is unknown: `Dear Hiring Manager,`
+2. **Greeting:** `Dear Anna,` for formal or first contact; `Hi Anna,` for colleagues. If the name is unknown, use `Dear [Name/Team],` or a supplied role; use `Dear Hiring Manager,` only for a hiring context.
 3. **Summary:** 1-2 sentences. Why I'm writing and what I need. Conclusion first, no background. Test: if the reader stops here, can they act?
    Openers: "Please approve...", "I'm writing to ask...", "Following up on...", "Please find attached...", "I'd like to confirm..."
 4. **Details:** only what the reader needs to decide or act. Bullets for 3 or more points, most important first, short lines. Skip this part if the summary covers everything.
-5. **Closing line (the action):** state **who** does **what** by **when**. Then one polite line.
+5. **Closing line (the action):** state **who** does **what**, and **by when** if a deadline was supplied. Use `[deadline]` if one is necessary but unknown. Then one polite line.
    - Vague: "Let me know your thoughts."
    - Clear: "Could you confirm by Friday, 5 pm?"
    - With several people: "Anna, please approve. Tom, please prepare the purchase order."
@@ -53,9 +53,9 @@ When asked, or when it helps:
 ## Pre-send checklist
 
 - Can the reader understand the point from the subject and first two lines alone?
-- Is the deadline clear?
+- Is any deadline supplied by the user or clearly marked as a placeholder, and omitted when unnecessary?
 - Is it clear who must do what?
-- If an attachment is mentioned, is it noted as attached?
+- Claim an attachment is included only when the user confirms it or available tools verify it. Otherwise use `[attach file before sending]` and flag that reminder outside the email; do not assert that a file is attached.
 - Are names spelled consistently? Is the length as short as it can be?
 
 ## Templates
@@ -83,6 +83,8 @@ Dear [Name],
 ```
 
 **Worked example**
+
+Fictional example: assume the sender supplied the facts and confirmed that the quote is attached.
 
 ```
 Subject: Please approve: Q4 equipment budget (by Friday)
@@ -121,4 +123,4 @@ Best,
 
 ## Language
 
-Write the email in the language the user asks for, or the language of the email they pasted. Keep the same structure in any language, adjusting greetings and sign-offs to local business convention.
+Write the email in the language the user asks for, or the language of the email they pasted. If neither specifies a language, use the language of their request. Keep the same structure in any language, adjusting greetings and sign-offs to local business convention. Provide translations and writing-strategy notes only when requested.
