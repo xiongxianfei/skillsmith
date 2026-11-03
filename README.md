@@ -39,7 +39,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 | [doctor](skills/doctor/SKILL.md) | `/doctor` | Medical consultation — symptoms, medications, lab reports, health advice, with referral guidance and safety flags |
 | [fitness-coach](skills/fitness-coach/SKILL.md) | `/fitness-coach` | Personal fitness coach — training plans, exercise technique, nutrition, and recovery advice |
 | [nvc](skills/nvc/SKILL.md) | `/nvc` | Nonviolent Communication coach — rewrites harsh or blaming messages into NVC framework (observation, feeling, need, request) |
-| [email-drafter](skills/email-drafter/SKILL.md) | `/email-drafter` | Draft professional English emails with Chinese translation and writing strategy notes — support tickets, business, academic, complaints, follow-ups |
+| [email-writer](skills/email-writer/SKILL.md) | `/email-writer` | Draft, reply to and polish action-focused workplace emails in the requested language, with factual placeholders and adaptable tone |
 | [journaling](skills/journaling/SKILL.md) | `/journaling` | Guided daily reflection coach — turns your day into structured reflection, deep-dive prompts, an optional journal draft, and a clear intention for tomorrow |
 | [study-planner](skills/study-planner/SKILL.md) | `/study-planner` | Learning plan designer — turns any learning goal into a phased roadmap with weekly tasks, milestones, and curated resource recommendations |
 | [language-tutor](skills/language-tutor/SKILL.md) | `/language-tutor` | Language learning tutor for any language — sentence correction, grammar, vocabulary, writing feedback, and conversation practice with targeted exercises |
@@ -48,6 +48,10 @@ Portable Markdown skills for applying good practices, with examples across writi
 ---
 
 ## Installation
+
+### Email skill migration
+
+`email-writer` replaces `email-drafter`. After updating, remove the old `email-drafter` directory from your installed skills location and use `/email-writer`. The installer copies current skills but does not remove retired ones. Emails now follow the requested language; Chinese translations and writing-strategy notes are available on request rather than included by default.
 
 ### Claude Code
 
@@ -59,7 +63,7 @@ curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install
 
 This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
 
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-drafter`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture`, `/hairstyle-selection`, and `/eyeglasses-selection`.
+Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-writer`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture`, `/hairstyle-selection`, and `/eyeglasses-selection`.
 
 #### Install a specific skill only
 
