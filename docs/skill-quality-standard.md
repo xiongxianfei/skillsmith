@@ -17,11 +17,13 @@ Passing this check does not demonstrate host compatibility, model behavior, safe
 
 ## Authoring and compatibility
 
-Each skill should have one clear primary job and a useful outcome in a known context. State the skill's identity first in the description, then its direct and indirect triggering situations. Choose language appropriate to the intended users and host. Use explicit invocation guidance where useful. Put behavior in the Markdown body; metadata must not carry hidden behavioral guarantees.
+Each skill should have one clear primary job and a useful outcome in a known context. Keep descriptions concise: state the skill's identity and discriminating triggers, including indirect phrasing when it clarifies the intended workflow. Do not broaden activation to loosely related work. Choose language appropriate to the intended users and host. Use explicit invocation guidance where useful. Put behavior in the Markdown body; metadata must not carry hidden behavioral guarantees.
 
 Required frontmatter fields are `name` and `description`. Include optional fields only when useful and supported by the intended host; the validator checks `compatibility` and `metadata` shapes where present. Review changes affecting tool permissions explicitly; metadata alone does not authorize actions.
 
 Keep Markdown readable and review input handling for the intended hosts and copy-paste use. `$ARGUMENTS` is optional when useful for a host's input substitution. Choose headings and output instructions to fit the skill; no `## Output Format` heading is required. Vendor-specific guidance should preserve portable use. Keep existing skill names, output contracts and installation paths stable; describe breaking changes and migration steps in the PR.
+
+Assume the model already has general competence. Include context that changes its decisions: local knowledge, essential constraints, and non-obvious workflow details. Match specificity to risk and variability: allow judgment when several approaches work; prescribe exact sequences or deterministic helpers for fragile operations.
 
 Prefer a small number of clear directives over accumulated branches. Use consistent terms between workflow and output instructions. Make outputs observable and copyable, and separate deliverables from commentary. Include a consistency check where meaning, intent, safety or format can silently drift. Honor deliberate tradeoffs rather than repeatedly polishing cosmetic wording.
 
@@ -41,7 +43,9 @@ The **skill directory** is the portable unit. `SKILL.md` owns universal workflow
 - `scripts/` is for repeatable, deterministic work such as linting, format conversion, schema validation, and D2 rendering. Document dependencies and arguments, handle errors, avoid unrequested destructive operations, and never claim successful execution without evidence. Execution requires a host with the relevant capabilities and permissions.
 - `assets/` is for static templates, output examples, diagrams and lookup tables; do not put essential behavioral rules only in assets. Custom directories such as `schemas/` or `evals/` are allowed.
 
-Do not create these folders as scaffolding by default. Prefer a compact `SKILL.md` when the skill is simple. For longer tasks, load supplementary resources only as needed (progressive disclosure). Validate actual model behavior separately from syntax; use realistic cases and explicit limitations rather than claiming quality from metadata checks alone. The official format is [Agent Skills](https://agentskills.io/specification).
+Progressive disclosure has three stages: discovery metadata, the selected skill's core instructions, then supporting resources needed for the current situation. Keep universal constraints in the entrypoint; move conditional detail into directly linked files with explicit loading conditions. Do not require every reference to be read on every invocation. For multiple workflows, provide enough routing guidance to select only the relevant material.
+
+Choose this split by relevance, not file length. A small skill may benefit from a conditional reference; a simple skill may fit in one file. Self-contained means the directory carries its required resources, not that each file repeats the whole workflow. Avoid empty scaffolding, duplicate rules, and deep reference chains. Give long references navigable headings or a contents list. The official format is [Agent Skills](https://agentskills.io/specification).
 
 ## Safety and privacy
 
@@ -57,8 +61,22 @@ Where a transformation could be used deceptively, state the integrity boundary a
 
 Reviewers check purpose, trigger intent, input/output contracts, safety, clarity and appropriate scope. Describe substantive behavior changes and their expected result in the PR; use a representative example when it makes the change assessable. Editorial corrections do not need an artificial scenario pack. No fixed scenario count, YAML fixture schema or mandatory model-run gate is required.
 
+Before extensive prompt writing, identify representative gaps and expected outcomes. Where practical, observe the task without the skill or with its prior version, then add the smallest useful guidance and compare actual outputs. A proposed gap remains a hypothesis until observed; do not invent a baseline.
+
 Choose examples that challenge the changed behavior: ordinary use, inverse inputs, missing information, indirect triggers, requests that should not activate the skill, and misuse where relevant. State observable expected results so reviewers can reason through the cases before and after the edit. These are design checks until actual outputs have been examined; they need not become a separate fixture suite.
+
+Keep three evidence levels explicit: metadata validation establishes package syntax; author scenario review checks the intended design; observed model runs provide behavior evidence for the tested host and model. For observed runs, record the prompt, relevant inputs, model/host, outputs or artifact links, and outcome. Check whether relevant references were loaded and irrelevant ones skipped when traces are available; otherwise mark loading behavior unverified. Test intended hosts/models before claiming their compatibility.
 
 When making an empirical quality or model-specific claim, provide actual evidence and its limitations. Expected examples are not observed model runs. Required-metadata validation must never be presented as proof of behavioral quality. Report what was checked and what remains unknown.
 
 Maintain the README skill table manually when the catalog changes, and update usage or installation examples when affected. The [contributor guide](workflows.md) owns change preparation, validation, PR review and documentation maintenance.
+
+## Official guidance and local policy
+
+Sources reviewed on 2026-11-13:
+
+- [OpenAI: Build skills](https://developers.openai.com/plugins/build/skills) recommends focused workflows, clear inputs/outputs, conditional supporting resources, and tests of activation and output quality.
+- [OpenAI: Rethinking skills and prompts](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) emphasizes concise descriptions, selective loading for multiple workflows, and avoiding excessive prescriptions.
+- [Anthropic: Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) recommends concise instructions, specificity matched to task fragility, shallow references, and evaluation-driven iteration. It suggests keeping the entrypoint below 500 lines and starting with three evaluation scenarios.
+
+These recommendations inform the authoring guidance above. The line count is not a target or a reason to delay separating conditional content. Vendor examples and suggested evaluation counts are not additional Skillsmith validation gates. Required metadata checks and safety boundaries remain requirements; authoring choices and the depth of evaluation depend on the changed behavior and risk. No universal heading structure, mandatory multi-file layout, fixed scenario count, or cross-vendor test matrix is imposed.

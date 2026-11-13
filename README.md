@@ -19,6 +19,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
+| [task-writer](skills/task-writer/SKILL.md) | `/task-writer` | Seven-section task briefs with readable inputs, concrete outputs, an approach, progress tracking and execution results; follows existing repository templates |
 | [blog-publisher](skills/blog-publisher/SKILL.md) | `/blog-publisher` | Evidence-grounded posts for existing Git-backed blogs, with explicit drafts, authorized publication, repository-aware validation and live verification |
 | [purchase-comparison](skills/purchase-comparison/SKILL.md) | `/purchase-comparison` | Product comparisons with user-defined option scores and weights, rejection options, visible raw facts, Excel sheets and keyboard, mouse and mousepad references |
 | [trip-expense-tracker](skills/trip-expense-tracker/SKILL.md) | `/trip-expense-tracker` | Multi-currency trip expense workbooks with separate cash and card costs, exchange fees, reimbursements and configurable base-currency summaries |
@@ -114,6 +115,7 @@ For a text-only chat without directory access, copying `SKILL.md` can provide li
 Invoke by slash command, passing your text as the argument:
 
 ```
+/task-writer  Write a task to plan three vegetarian dinners for two, each under 30 minutes, with one shopping list.
 /editor  Please polish this text for me.
 /editor  Correct this paragraph and explain the two most useful linguistic patterns.
 /vocabulary-mastery  record — complete English reference, then a separate complete Simplified Chinese reference, each with ten linguistic dimensions.
