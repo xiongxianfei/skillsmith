@@ -49,10 +49,10 @@ The body has no required placeholder or heading. Use `$ARGUMENTS` or `## Output 
 
 ## Key Rules
 
-- Descriptions should state the skill identity first, then the triggering situations, including indirect/casual user phrasing
-- Keep always-needed behavior in `SKILL.md`; include focused, conditionally loaded references for specialized knowledge; add scripts only for repeatable executable operations.
+- Keep descriptions concise: state the skill identity and discriminating triggers; avoid loosely related activation conditions.
+- Keep essential behavior in `SKILL.md` and link conditional detail with explicit loading conditions. Choose the split by relevance, not length; follow the [full-directory guidance](docs/skill-quality-standard.md#full-directory-skill-design).
 - Include optional metadata only when useful and compatible with the intended host; the validator checks the format of the defined Agent Skills metadata fields
-- Describe substantive skill changes and expected behavior in the PR; see `docs/skill-quality-standard.md`
+- Describe substantive changes and expected behavior in the PR; distinguish syntax checks, design review, and observed model evidence under the [quality standard](docs/skill-quality-standard.md#review-and-evidence).
 - High-risk skills need explicit scope, refusal/escalation boundaries and reviewer-visible safety notes
 
 ## Workflow
@@ -88,7 +88,7 @@ VISION.md                  ← project identity and scope
 
 ## Core Engineering Principles
 
-1. **Self-contained knowledge.** Make each substantive document understandable on its own: explain the problem, essential terms, prerequisites, mechanisms, examples, and boundaries. Link to deeper material without requiring readers to follow links to understand the core argument. Keep canonical definitions in one place; avoid needless duplication.
+1. **Self-contained knowledge.** Keep core meaning understandable and canonical definitions in one place. For skills, self-containment applies to the complete directory: keep essential decisions in the entrypoint and disclose conditional detail through linked resources. Assume general model competence; add context that improves decisions rather than repeating familiar background. For human-facing documents, explain the problem, prerequisites, mechanisms, and boundaries needed by the intended reader.
 
 2. **Reader-centered quality.** Evaluate whether a reader can explain *what happens, how, why, and when*; apply the knowledge to a realistic problem; predict likely outcomes and failure modes; and recognize opportunities to improve results. Correctness and clear reasoning matter more than polished prose.
 

@@ -6,6 +6,8 @@ This guide owns contribution, validation and PR procedures. Use [VISION.md](../V
 
 Inspect the current repository state and relevant prompt, validator, installer or design. Before a substantive change, describe the user problem, intended behavior and validation commands in the issue or PR. Include trigger intent, accepted input, expected output, safety/compatibility boundaries and observable acceptance examples where applicable. A change is substantive if it can alter activation, behavior, output, validation, installation or project scope. Small editorial corrections need no formal design when those contracts stay unchanged.
 
+Before writing extensive instructions, identify the behavior gap and representative expected outcomes using the [evidence guidance](skill-quality-standard.md#review-and-evidence). Record a baseline when actually observed; label untested expectations as design assumptions.
+
 For a bug, capture the smallest reproduction and current behavior where practical, or explain why automated reproduction is impractical. For architectural changes, use `c4-architecture` and keep behavior, constraints and consequential decisions together in the subject's `architecture-spec.md`; follow the [architecture guide](../design/architecture/README.md#maintaining-a-design). Distinguish implemented, proposed and unknown behavior, and obtain human review of consequential decisions before relying on them.
 
 ## 2. Design and edit
@@ -41,9 +43,9 @@ python tests/validate_skills.py
 
 CI runs the same validator on pushes and PRs to `main`; errors block merging. This is the only required automated repository check. It checks required files and metadata, emits no style warnings, and does not establish model quality, safety or host compatibility. No unit-test suite, separate fixtures, fixed scenario count or live-model CI gate is required.
 
-Run focused checks for affected contracts, local links and README synchronization. When changing the validator, check representative valid and invalid inputs; no permanent test suite is required. Document and test local scripts when changed. For changed C4 diagrams, use the package helper to format, check and render, then inspect the SVGs as described in the architecture guide.
+Run focused checks for affected contracts, local links and README synchronization. For supporting resources, verify that links resolve, loading conditions are explicit, and essential rules remain in the entrypoint. Review one relevant and one irrelevant request for each new conditional reference; distinguish expected routing from observed file reads. When changing the validator, check representative valid and invalid inputs; no permanent test suite is required. Document and test local scripts when changed. For changed C4 diagrams, use the package helper to format, check and render, then inspect the SVGs as described in the architecture guide.
 
-Assess changed skill behavior using realistic examples and the [review and evidence guidance](skill-quality-standard.md#review-and-evidence). Support empirical or model-specific claims with actual model evidence; label expected examples separately. Report commands, results, warnings, failures, skipped checks and unresolved questions.
+Assess changed skill behavior using realistic examples and the [review and evidence guidance](skill-quality-standard.md#review-and-evidence). Support empirical or model-specific claims with actual model evidence; label expected examples separately. Report commands, results, warnings, failures, skipped checks and unresolved questions. Separate metadata results, author scenario review, and observed model evidence; include host/model and outputs for actual runs. Do not describe design review as a compatibility test.
 
 ## 4. Review and deliver
 
