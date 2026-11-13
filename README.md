@@ -19,7 +19,7 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 | Skill | Claude Command | Description |
 |-------|---------------|-------------|
-| [task-writer](skills/task-writer/SKILL.md) | `/task-writer` | Lightweight task briefs with concrete deliverables, done criteria and a short checklist; adapts to everyday work and existing repository templates |
+| [task-writer](skills/task-writer/SKILL.md) | `/task-writer` | Seven-section task briefs with readable inputs, concrete outputs, an approach, progress tracking and execution results; follows existing repository templates |
 | [blog-publisher](skills/blog-publisher/SKILL.md) | `/blog-publisher` | Evidence-grounded posts for existing Git-backed blogs, with explicit drafts, authorized publication, repository-aware validation and live verification |
 | [purchase-comparison](skills/purchase-comparison/SKILL.md) | `/purchase-comparison` | Product comparisons with user-defined option scores and weights, rejection options, visible raw facts, Excel sheets and keyboard, mouse and mousepad references |
 | [trip-expense-tracker](skills/trip-expense-tracker/SKILL.md) | `/trip-expense-tracker` | Multi-currency trip expense workbooks with separate cash and card costs, exchange fees, reimbursements and configurable base-currency summaries |

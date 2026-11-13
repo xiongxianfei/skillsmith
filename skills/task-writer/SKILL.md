@@ -21,20 +21,14 @@ help someone do the work.
   to proceed; ask the smallest useful question, not a planning questionnaire.
   State reasonable assumptions and keep consequential unknowns visible.
 - Prefer one useful task. Split only when there are independent outcomes.
-  Keep small tasks short; add detail only where it affects execution or checking
-  the result. Do not add speculative requirements, workshops, or extra artifacts.
+  Add detail only where it affects execution or verification; avoid speculative
+  requirements, workshops, or extra artifacts.
 - For repository work, read available local instructions, the task template,
   and existing numbering before choosing a format or destination. Follow those
   conventions instead of the default below; preserve existing records and edits.
-  If relevant files are inaccessible, say so rather than claiming to have read them.
-- Use linked, repository-relative paths for existing file inputs and outputs,
-  with link targets relative to the task's saved location. Label proposed new
-  paths as planned. For everyday work, use concrete information and deliverables
-  such as a comparison, message, decision, or schedule; do not invent file paths
-  to fill a section.
+- For file inputs and outputs, display repository-relative paths and link existing
+  files relative to the saved task's location.
 - Never invent deadlines, owners, sources, approvals, facts, or completed work.
-  Keep unfinished actions unchecked. If recording earlier work, mark it complete
-  only when supported by available evidence; label unperformed checks as pending.
 - Return Markdown in chat by default, in the user's requested language. Save
   only when requested and permitted. If asked to show the task first, show the
   draft before writing files or implementing it. Creating a task alone does not
@@ -42,41 +36,47 @@ help someone do the work.
 
 ## Default format
 
-Use a concrete action and intended outcome as the title, followed by:
+Use a concrete action and intended outcome as the title, followed by these seven
+sections in order. Each may be brief; do not pad small tasks to fill the format.
 
-- **Goal:** why the work matters and important supplied constraints.
-- **Input:** available information, references, or files and their purpose.
-  State any needed input that is still missing instead of inventing it.
-- **Output:** concrete deliverables and observable criteria for being done.
-- **Checklist:** a few useful actions with `- [ ]` boxes, including an appropriate
-  check of the result. Describe planned verification without claiming it passed.
+- **Background:** the originating request, problem, and intended benefit, with
+  enough context to understand the task independently.
+- **Input:** specific materials the reader can use directly: linked files or
+  document sections, direct source URLs, pasted text, or supplied data, each with
+  its purpose. Include short essential facts inline. State missing or inaccessible
+  inputs and whether they block progress; avoid vague references such as
+  “relevant documentation.”
+- **Output:** concrete deliverables and observable acceptance criteria. For file
+  work, specify **create, modify, or delete**, the exact path, and intended change.
+  Label new paths as planned; for other work, name the result without inventing files.
+- **Rules:** relevant constraints, exclusions, and behavior to preserve. Link
+  shared rules rather than repeating them. If there are no additional constraints,
+  say so briefly instead of inventing requirements.
+- **Approach:** the intended method, important decisions, dependencies, and how
+  the result will be verified. Keep actual changes and deviations in Execution
+  result; use the checklist to track actions rather than repeat the explanation.
+- **Progress checklist:** a few observable actions with `- [ ]` boxes, including
+  an appropriate check of the result. Annotate blockers with what is needed next.
+- **Execution result:** actual changes, linked deliverables when available,
+  verification evidence, deviations, failures, justified skips, and remaining work.
+
+## Lifecycle
+
+Before execution, keep actions unchecked and Execution result as “Pending
+execution and verification.” During execution, update only actions supported by
+completion evidence and annotate blockers. At completion or handoff, record actual
+results and outstanding work; leave unfinished actions unchecked. Claim completion
+only when the acceptance criteria are met and results are recorded. Do not invent
+checks or perform the underlying work merely to populate this section.
 
 Before returning, check that the deliverables meet the goal, the checklist can
 produce and verify them, and assumptions and pending work remain distinguishable
 from known facts and completed work. Remove detail that does not help execution.
 
-## Everyday example
+## Conditional example
 
-Request: “Write a task to plan three vegetarian dinners for two, each under
-30 minutes, with one shopping list.”
-
-```markdown
-# Plan three quick vegetarian dinners for two
-
-## Goal
-Make dinner easier with three vegetarian meals, each taking at most 30 minutes.
-
-## Input
-Three dinners for two people; vegetarian; 30-minute limit per dinner.
-
-## Output
-A three-meal plan and one combined shopping list with quantities for two.
-Done when each meal has preparation steps and an estimated total time within
-the limit, and the list covers the ingredients for all three dinners.
-
-## Checklist
-
-- [ ] Choose three vegetarian meals and estimate their total preparation times.
-- [ ] Combine their ingredients into one shopping list for two people.
-- [ ] Check portions, ingredient coverage, and each meal's 30-minute limit.
-```
+For everyday tasks with non-file deliverables, or an explicit request for the
+worked everyday example, read [the everyday example](references/everyday-example.md).
+Otherwise, use the core instructions and applicable local template without loading
+that reference. The example illustrates the format; its meal constraints do not
+apply to other tasks.
