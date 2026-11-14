@@ -26,7 +26,7 @@ Acceptance examples: no numbered tasks gives 001; a highest number of 009 gives 
 - [x] Update repository and installed skill guidance.
 - [x] Remove workflow documentation and repair references.
 - [x] Verify metadata, naming scenarios, links and diff.
-- [ ] Deliver through a PR and record results.
+- [x] Deliver through a PR and record results.
 
 ## Execution result
 Implemented on `improve/task-naming-and-workflow-cleanup` in the isolated `../skillsmith-task-cleanup` worktree, based on refreshed main at `c8b73b7`. Original workspace edits and the earlier unnumbered task remain untouched. Both task-writer copies now match.
@@ -39,4 +39,4 @@ Validation:
 - `git diff --check`: passed.
 - Author review of the five acceptance scenarios found the intended naming and save boundaries explicit. This is design review, not observed model behavior.
 
-No warnings or failures were observed. Functional suites, diagram rendering and live-model evaluation were skipped because executable code and diagrams were unchanged and this is a small instruction edit. PR delivery is pending; independent review and merge are not claimed.
+No warnings or failures were observed. Functional suites, diagram rendering and live-model evaluation were skipped because executable code and diagrams were unchanged and this is a small instruction edit. Delivered in [draft PR #60](https://github.com/xiongxianfei/skillsmith/pull/60). Independent review and merge remain pending.
