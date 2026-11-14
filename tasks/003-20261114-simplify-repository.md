@@ -9,7 +9,7 @@ Keep Skillsmith a straightforward collection of skills. Replace its separate qua
 - [README.md](../README.md), [AGENTS.md](../AGENTS.md), and [docs/workflows.md](../docs/workflows.md): project description, usage, agent conduct and contribution rules.
 - `VISION.md`, `docs/vision/strategic-positioning.md`, `docs/skill-quality-standard.md`, and `install.sh`: material to retire.
 - [tests/validate_skills.py](../tests/validate_skills.py) and [.github/workflows/validate.yml](../.github/workflows/validate.yml): existing metadata validation and CI.
-- [design/architecture/README.md](../design/architecture/README.md): skill designs and shared architecture references.
+- [design/architecture/README.md](../design/README.md): skill designs and shared architecture references.
 - [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices): external authoring references.
 
 ## Output

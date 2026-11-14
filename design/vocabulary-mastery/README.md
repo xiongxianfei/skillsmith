@@ -1,42 +1,8 @@
-# Vocabulary mastery: C4 architecture and implementation profile
+# Vocabulary mastery design
 
-Vocabulary-mastery turns **one English word or fixed lexical expression** into two complete linguistic references: English first, Simplified Chinese second. Both cover the same ten dimensions and the same three recall tasks. The central design problem is preserving lexical accuracy, coverage and bilingual parity across a deliberately long response.
+Operational instructions: [vocabulary-mastery](../../skills/vocabulary-mastery/SKILL.md).
 
-**Status:** implementation-derived design for human architecture review; no human approval recorded. “Implemented” means the instruction is present in the prompt, not that a model has demonstrated it. The behavior and constraints below still need human acceptance.
-
-## Basis and scope
-
-| Evidence | What it establishes | What it does not establish |
-| --- | --- | --- |
-| [Vocabulary skill entrypoint](../../../skills/vocabulary-mastery/SKILL.md) | Complete bilingual contract, ten required dimensions, source boundaries, conditional resource routing and parity workflow | Automatic execution correctness, reliable resource loading, learning effectiveness |
-| [Full reference template](../../../skills/vocabulary-mastery/assets/full-reference-template.md) | Canonical English/Chinese output layout and section field checklist | An evaluated model output or proof of bilingual parity |
-| [Conditional references](../../../skills/vocabulary-mastery/references/lexical-evidence.md) | Guidance for lexical evidence gaps; [linguistic boundaries](../../../skills/vocabulary-mastery/references/linguistic-boundaries.md) for difficult domain distinctions | A dictionary, audio or corpus verification service |
-| [Current review cases](../../../skills/vocabulary-mastery/evals/review-cases.md) | Sixteen proposed review prompts and observable assessment criteria | Observed model pass rates or human acceptance |
-| [Historical vocabulary scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 archived expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
-| [October 18 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/requirements.md) | Original two-complete-version choice, English-only skill source, behavior and evidence constraints | Current C4 approval or successful model execution |
-| [Reviewer examples](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md) | Full `record` bilingual illustration and `apple` boundary examples with pronunciation provenance | Live-model outputs or measured accuracy |
-| [Repository instructions](../../../AGENTS.md) | Repository validation and review procedures | A complete accepted contract for this skill |
-| [Shared skill architecture](../portable-skills.md) | Existing pure-prompt, validation and review boundaries | Previously accepted vocabulary-specific Function allocation |
-| [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |
-| [D2 model](model.d2) | Diagram identities and structural relationships | A new runtime or a second normative product contract |
-
-The current refactor packages the same complete two-version/ten-dimension output contract as an entrypoint plus bundled resources. This is a proposed, behavior-affecting change to resource loading and quality procedures, not evidence of improved model behavior. The contextual learner examples are fictional scenario inputs.
-
-## C4 scope and ownership
-
-C1 treats `vocabulary_package` as a **passive skill-directory distribution**. The learner interacts with an external assistant host; the package provides its entrypoint and conditional resources through full-directory installation. Pasting the entrypoint alone does not guarantee the refactor's complete behavior. C2 still has one file-store container, `vocabulary_package.prompt_files`, containing the authored Markdown entrypoint, reference guidance, static template, and reviewer-only evaluation cases. It is not an executing lexicography service.
-
-| Stable diagram ID | C4 type / owner | Responsibility |
-| --- | --- | --- |
-| `learner` | Person outside package | Supplies target, context and preferences; reads reference and recall answers |
-| `maintainer` | Person outside invocation | Authors and reviews instructions and scenario evidence using shared methods |
-| `vocabulary_package` | Passive software distribution / Skillsmith | Distributes the vocabulary behavior contract as authored instructions |
-| `vocabulary_package.prompt_files` | File-store container / Skillsmith skill package | `skills/vocabulary-mastery/`: `SKILL.md`, conditional `references/`, required `assets/` template and reviewer-only `evals/` cases. No invocation-time executable component |
-| `assistant_host` | External software system / host operator | Interprets the prompt and generates the response; actual host/model topology is unknown |
-
-A filesystem store fits the [C4 container definition](https://c4model.com/diagrams/container). Treating a passive package as the system scope is an explicit modeling adaptation. No C3 components are invented for ten linguistic headings or English/Chinese rendering. These are logical concerns in one skill directory, not separately implemented applications. Host UI, inference services, authentication and transport are not specified here. A deployment diagram is deferred until an actual host deployment is selected.
-
-The architecture reuses the editor design's modeling convention, not its editing policy. Vocabulary-mastery always develops all ten linguistic dimensions; editor selects only useful domains for grounded learning notes.
+This design explains instructed behavior and consequential decisions. Examples are expected outcomes unless explicitly identified as observations; human approval and model compliance are not established by this document.
 
 ## Concrete information flow
 
@@ -63,11 +29,11 @@ This refactor preserves the **publicly selected** full bilingual ten-domain refe
 
 | Bundled file | Load condition | Authority and limit |
 | --- | --- | --- |
-| [Entry point](../../../skills/vocabulary-mastery/SKILL.md) | Every invocation | Sole owner of required behavior, ten-domain order, source integrity and two-part output invariants |
-| [Full-reference template](../../../skills/vocabulary-mastery/assets/full-reference-template.md) | Before every complete entry | Canonical heading/field layout; extraction supports maintenance, not reduced context use |
-| [Lexical evidence](../../../skills/vocabulary-mastery/references/lexical-evidence.md) | Ambiguous pronunciation/sense, homographs, coinage, regional variation or weak morphological/attestation evidence | Additional epistemic checks, not a lookup or provenance guarantee |
-| [Linguistic boundaries](../../../skills/vocabulary-mastery/references/linguistic-boundaries.md) | Confusable linguistic dimensions or domains with weak word-specific evidence | Guidance for honest dimension-specific illustrations, not permission to invent claims |
-| [Review cases](../../../skills/vocabulary-mastery/evals/review-cases.md) | Maintainer evaluation only | Expected outcomes, not actual model test results |
+| [Entry point](../../skills/vocabulary-mastery/SKILL.md) | Every invocation | Sole owner of required behavior, ten-domain order, source integrity and two-part output invariants |
+| [Full-reference template](../../skills/vocabulary-mastery/assets/full-reference-template.md) | Before every complete entry | Canonical heading/field layout; extraction supports maintenance, not reduced context use |
+| [Lexical evidence](../../skills/vocabulary-mastery/references/lexical-evidence.md) | Ambiguous pronunciation/sense, homographs, coinage, regional variation or weak morphological/attestation evidence | Additional epistemic checks, not a lookup or provenance guarantee |
+| [Linguistic boundaries](../../skills/vocabulary-mastery/references/linguistic-boundaries.md) | Confusable linguistic dimensions or domains with weak word-specific evidence | Guidance for honest dimension-specific illustrations, not permission to invent claims |
+| [Review cases](../../skills/vocabulary-mastery/evals/review-cases.md) | Maintainer evaluation only | Expected outcomes, not actual model test results |
 
 No `scripts/`, external lexicon, network service, persistence store, or model-level resource-read verification is introduced. The host's actual resource-loading behavior must be evaluated on a supported host; a valid Markdown link does not prove that an agent read it.
 
@@ -135,15 +101,13 @@ These are model-directed checks, not an implemented automated comparison engine.
 
 | View / historical scenario | What the design demonstrates | Evidence status |
 | --- | --- | --- |
-| [C1 context](diagrams/context.svg) / [source](views/context.d2) | Passive instructions versus external execution | Repository-grounded boundary |
-| [C2 container](diagrams/container.svg) / [source](views/container.d2) | One authored file store; no glossary database or learning engine | Repository-grounded boundary |
-| [Complete reference](diagrams/complete-reference.svg) / [source](views/complete-reference.d2) | `record`: shared sense map, full EN/ZH outputs, parity check | Derived from `vocabulary-record-two-complete-references` and archived recall scenarios; not an execution log |
-| [Target clarification](diagrams/target-clarification.svg) / [source](views/target-clarification.d2) | Multiple targets → choose one → contextual `bank` reference | Composed walkthrough from archived multiple-target and bank scenarios; follow-up exchange is illustrative |
-| [Coinage boundary](diagrams/coinage-boundary.svg) / [source](views/coinage-boundary.d2) | `flinderation`: required structure with honest evidence limits | Archived coinage scenario plus shared recall/accuracy rules; exact limited-content output remains underspecified |
+| [Complete reference](#complete-reference) | `record`: shared sense map, full EN/ZH outputs, parity check | Derived from `vocabulary-record-two-complete-references` and archived recall scenarios; not an execution log |
+| [Target clarification](#target-clarification) | Multiple targets → choose one → contextual `bank` reference | Composed walkthrough from archived multiple-target and bank scenarios; follow-up exchange is illustrative |
+| [Coinage boundary](#coinage-boundary) | `flinderation`: required structure with honest evidence limits | Archived coinage scenario plus shared recall/accuracy rules; exact limited-content output remains underspecified |
 
 Additional archived scenarios address `lead` homographs, `unhappiness` morphology, `apple` weak word-level dimensions, `look up` syntax, indirect triggering, independently readable Chinese, text-only pronunciation boundaries and non-triggers. These are written expected behaviors, not proof of accuracy, effective retrieval practice or long-term retention.
 
-D2 sequence self-messages represent prompt-directed logical activities inside the external host. They do not expose model internals, create separate components or guarantee a deterministic execution order.
+Sequence self-messages represent prompt-directed logical activities inside the external host. They do not expose model internals, create separate components or guarantee a deterministic execution order.
 
 ## State, trust, deployment and constraints
 
@@ -168,4 +132,54 @@ The shared development platform supports authoring, required-metadata validation
 | VM-C4-05 | Review rubric is now drafted under `evals/`; collect baseline vs revised model outputs and expert bilingual assessments before claiming improvement | Evaluation owner; preserve exact subject/model identity |
 | VM-C4-06 | The user explicitly retained the ten-domain/two-version fixed contract for this revision; review conflicts and confirm the model follows it | Maintainer and evaluator |
 
-These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [repository instructions](../../../AGENTS.md) describe validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
+These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [repository instructions](../../AGENTS.md) describe validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
+
+## Scenario walkthroughs
+
+### Coinage boundary
+
+```mermaid
+sequenceDiagram
+    participant vocabulary_package as vocabulary package
+    participant assistant_host as assistant host
+    participant learner as learner
+    vocabulary_package->>assistant_host: 0. Make prompt instructions available
+    learner->>assistant_host: 1. Study flinderation<br/>I invented this word
+    assistant_host->>assistant_host: 2. Recognize the stated coinage<br/>Established lexical facts are unsupported
+    assistant_host->>assistant_host: 3. Keep all ten dimensions in each part<br/>State honest limitations instead of invented facts
+    assistant_host->>assistant_host: 4. Match caveats and recall tasks across parts<br/>Do not test fabricated meanings as established knowledge
+    assistant_host->>learner: 5. Return complete EN / ZH references<br/>Explain uncertainty independently in both parts
+```
+
+### Complete reference
+
+```mermaid
+sequenceDiagram
+    participant vocabulary_package as vocabulary package
+    participant assistant_host as assistant host
+    participant learner as learner
+    vocabulary_package->>assistant_host: 0. Make prompt instructions available<br/>precondition, not a network request
+    learner->>assistant_host: 1. Study record<br/>Request the full English and Chinese reference
+    assistant_host->>assistant_host: 2. Identify one lexical item<br/>Select supported senses and word classes
+    assistant_host->>assistant_host: 3. Build one shared sense map<br/>Choose consistent examples and recall concepts
+    assistant_host->>assistant_host: 4. Draft the full English reference<br/>Overview + 10 domains + connections + 3 Q&A
+    assistant_host->>assistant_host: 5. Draft full Simplified Chinese reference<br/>Preserve senses, IPA, examples and recall concepts
+    assistant_host->>assistant_host: 6. Check each part for completeness<br/>Compare facts, examples, answers and caveats
+    assistant_host->>learner: 7. Return English first, Chinese second<br/>Two self-contained references, not alternating paragraphs
+```
+
+### Target clarification
+
+```mermaid
+sequenceDiagram
+    participant vocabulary_package as vocabulary package
+    participant assistant_host as assistant host
+    participant learner as learner
+    vocabulary_package->>assistant_host: 0. Make prompt instructions available
+    learner->>assistant_host: 1. Study apple, bank, record and resilient
+    assistant_host->>assistant_host: 2. Detect several unrelated targets<br/>Do not produce shortened multiword entries
+    assistant_host->>learner: 3. Ask which single item to study
+    learner->>assistant_host: 4. Choose bank in a riverbank sentence
+    assistant_host->>assistant_host: 5. Prioritize the contextual riverbank sense<br/>Keep the same sense focus in both languages
+    assistant_host->>learner: 6. Return two complete references<br/>English first, Simplified Chinese second
+```

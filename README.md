@@ -197,7 +197,7 @@ Best for: landlord communication, formal letters, official correspondence with R
 Follow [AGENTS.md](AGENTS.md) for contribution and validation instructions. Describe the intended change, run the relevant checks, and open a PR to `main`.
 
 - [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices): skill structure and authoring practices. Apply host-specific guidance to the intended host.
-- [Architecture guide](design/architecture/README.md): intended behavior, constraints and design decisions, maintained with `c4-architecture`.
+- [Architecture guide](design/README.md): skill mechanisms, dependencies and design decisions, with inline Mermaid diagrams where useful.
 - [Agent instructions](AGENTS.md): repository ownership, structure and engineering principles.
 
 ## License

@@ -16,7 +16,7 @@ Produce **reviewable software architecture**, not merely attractive diagrams. C4
 
 ## Before editing
 
-1. Identify the correct repository and read its contribution/architecture conventions. Existing project paths take precedence; in Skillsmith, architecture subjects live under `design/architecture/<subject>/`. In other repositories, `architecture/` may be appropriate. Never create a parallel design tree.
+1. Identify the correct repository and read its contribution/architecture conventions. Existing project paths take precedence; in Skillsmith, subjects live under `design/<subject>/` and use inline Mermaid according to `design/README.md`; do not generate D2 packages there unless explicitly requested. In other repositories, `architecture/` may be appropriate. Never create a parallel design tree.
 2. Read relevant requirements, source code, existing D2 sources, specifications, and decisions. Separate **implemented**, **proposed**, and **unknown** behavior; a diagram is not proof of implementation or approval.
 3. For a new or changed C1/C2/C3 view, read [C4 conventions](references/c4-conventions.md). Identify the smallest set of views needed to answer the actual review or implementation questions.
 4. If essential facts are missing, label assumptions and questions. Do not invent services, protocols, technologies, deployment details, quality targets, or approved decisions.
@@ -44,7 +44,7 @@ Use the project's established structure. Where a new package is needed, the bund
    python3 <skill-root>/scripts/init_project.py --repo . --target architecture
    ```
 
-   Substitute `design/architecture/<subject>` for an existing project convention. The initializer only copies missing files; starter content is fictional and must be replaced before approval.
+   Follow the selected repository convention; Skillsmith uses inline Mermaid rather than this D2 starter. The initializer only copies missing files; starter content is fictional and must be replaced before approval.
 5. When D2 is available, format, check, and render the selected package:
 
    ```sh
