@@ -2,7 +2,7 @@
 
 Start with the [architecture specification](architecture-spec.md) for exact request decisions, language policy, edit/lesson behavior, trust boundaries and unresolved design questions. This is an implementation projection prepared for human review, not a claim of complete requirements alignment or executed model quality.
 
-The editor is a passive Markdown package. Its one C2 container is a file store; the assistant host executes externally. The model does not turn editing, translation or teaching into invented services.
+The editor is a passive Markdown package. Its one C2 container is a file store; the assistant host executes externally. Editing, translation and teaching are logical policies within the host.
 
 ## Context
 
@@ -23,7 +23,7 @@ The editor is a passive Markdown package. Its one C2 container is a file store; 
 
 ## Sources and reproduction
 
-[model.d2](model.d2) owns diagram entities and structural relationships. C1/C2 views import and filter the model. Dynamic views import the same participants and describe ordered interactions; they do not add services. Generated SVGs are previews and are never edited manually. The [architecture specification](architecture-spec.md) holds behavior, constraints and open decisions together, with links to historical contract provenance. The [shared architecture](../portable-skills.md) defines common responsibility boundaries.
+[model.d2](model.d2) owns diagram entities and structural relationships. C1/C2 views import and filter the model. Dynamic views reuse its participants for ordered interactions. Generated SVGs are previews and are never edited manually. The [shared architecture](../portable-skills.md) defines common responsibility boundaries.
 
 Use Python 3.9+ and D2 0.7.0+ on PATH (rendered with D2 0.9.0 and ELK). From the repository root:
 
@@ -34,6 +34,4 @@ python3 design/architecture/editor-c4/scripts/architecture.py render
 python tests/validate_skills.py
 ```
 
-The helper is adapted from the invoked `c4-architecture` skill's portable template; only its documented invocation path changes. It checks required views, basic model-import discipline, syntax, formatting and rendering. Semantic fidelity and readable layout still require inspection. No D2 dependency is added to product invocation or CI.
-
-Assumptions, known requirement/implementation drift, proposed refinements and human review status are in the specification. No architecture approval is inferred from passing commands.
+The helper checks required views, model imports, syntax, formatting and rendering. Semantic fidelity and layout require inspection; passing checks does not establish architecture approval. D2 is not a product or CI dependency.

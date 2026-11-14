@@ -8,7 +8,7 @@ This is an implementation-grounded design for reviewing the editor's boundaries 
 
 | Subject | Owning artifact | Treatment here |
 | --- | --- | --- |
-| Prior editor contract | [Historical requirements](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/requirements/editor.md) | Source-qualified R/AC/EC IDs retain provenance; this layout change does not alter behavior |
+| Prior editor contract | [Historical requirements](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/requirements/editor.md) | Source-qualified R/AC/EC IDs retain provenance |
 | Linguistic-learning requirement draft | [October 14 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-14-editor-linguistic-learning-notes/requirements.md) | Proposed scope for speech evidence, selective linguistic teaching and requested practice; this records provenance, not new acceptance |
 | Prior logical decomposition | [Historical system design](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/system/editor.md) | FN-ED-001–004 remain trace labels for the behavior documented below |
 | Module and Interface allocation | [Portable-skill architecture](../portable-skills.md) | All editor Functions remain MOD-PROMPT through IF-PROMPT; MOD-QUALITY and MOD-REVIEW are maintenance responsibilities |
@@ -16,7 +16,7 @@ This is an implementation-grounded design for reviewing the editor's boundaries 
 | Expected examples | [Historical editor scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) | Scenario declarations, not execution logs |
 | Diagram entities and relationships | [model.d2](model.d2) | Single source for C4 identity; C1/C2 filter it, sequences reuse its participants |
 
-The user requested C4 after asking for concrete design from implementation. This bounded work preserves current prompt behavior. This specification now holds the current design context, behavior and open decisions together. Speech and richer linguistic teaching extend the historical contract; they remain observations requiring human review, not silently approved amendments.
+Speech and richer linguistic teaching extend the historical contract; they remain observations requiring human review, not silently approved amendments.
 
 ## C4 interpretation and boundaries
 
@@ -32,7 +32,7 @@ C2 opens that package to show its one genuine data container, `editor_package.pr
 | `editor_package.prompt_files` | File-store container, Skillsmith-authored Markdown | Realizes editor's part of MOD-PROMPT; no mutable learner data |
 | `assistant_host` | External software system, host operator | Interprets IF-PROMPT and generates output; capabilities and execution depend on selected host |
 
-C3 is omitted: one prompt file does not establish independently implemented editor components. Self-messages in sequence views describe logical instructions inside the host, not callable functions, hidden reasoning transcripts, or an enforced program pipeline. A deployment diagram is omitted because no specific host/deployment has been selected. No impactful runtime choice is introduced, so no new ADR is needed for a service/database decision.
+C3 is omitted: one prompt file does not establish independently implemented editor components. Self-messages in sequence views describe logical instructions inside the host, not callable functions, hidden reasoning transcripts, or an enforced program pipeline. A deployment diagram is omitted because no specific host/deployment has been selected.
 
 This mapping follows the [C4 container definition](https://c4model.com/diagrams/container) and [D2 model/view selection](https://d2lang.com/tour/models/). [D2 sequences](https://d2lang.com/tour/sequence-diagrams/) supply ordered scenario views. The package boundary is an interpretation of this repository, not a claim that C4 defines a special prompt-runtime abstraction.
 
@@ -112,7 +112,7 @@ The first scenario's concrete source is “The issue was fixed yesterday, we wil
 
 ## Acceptance scenarios and retained proof intent
 
-The target-only example previously documented in the standalone editor view remains applicable: Chinese source with “Only translate this into English. No notes.” yields only an English deliverable, with neither Chinese output nor learning notes. A simultaneous request to invent customer approval still requires refusal or a truthful alternative while respecting note suppression. These are expected behaviors, not executed test results.
+Chinese source with “Only translate this into English. No notes.” yields only an English deliverable, with neither Chinese output nor learning notes. A simultaneous request to invent customer approval still requires refusal or a truthful alternative while respecting note suppression. These are expected behaviors, not executed test results.
 
 Useful behavior-review examples include source/instruction separation, mixed directive languages, source-equal targets, target-only with and without suppression, ambiguous terms, code-switching, non-Chinese/non-English input, already-clear text, restrained professional/PR editing, grounded lessons and integrity misuse. Learning checks include ambiguous suppression, trivial mechanics, expanded useful notes, qualified language rules and no unnecessary edits made for teaching. Historical proof intent includes the named `dim lighting` fidelity case; the archived scenarios omitted it. This is a useful future review example, not a requirement to restore the fixture suite. Claims about actual model performance still need actual evidence.
 
@@ -126,7 +126,7 @@ The original [expert-editing](https://github.com/xiongxianfei/skillsmith/blob/00
 
 ## Shared platform participation
 
-The platform supports the maintainer through authoring methods, required-metadata validation, independent assessment and distribution. It is not called as a service during editing. Existing MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the invocation path. The repository uses the C4 design and PR workflow; no maintenance coordinator is required at runtime.
+Authoring, required-metadata validation, review and distribution follow the [shared architecture](../portable-skills.md). MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the editing invocation path.
 
 Editor-specific outcomes can suggest reusable improvements, such as evidence requirements for feedback. That feedback-to-platform process is a proposed project direction from the vision, not an implemented telemetry or automatic training connection. No speculative feedback server is drawn.
 

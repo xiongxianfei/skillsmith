@@ -2,7 +2,7 @@
 
 Vocabulary-mastery turns **one English word or fixed lexical expression** into two complete linguistic references: English first, Simplified Chinese second. Both cover the same ten dimensions and the same three recall tasks. The central design problem is preserving lexical accuracy, coverage and bilingual parity across a deliberately long response.
 
-**Status:** implementation-derived design for human architecture review; no human approval recorded. “Implemented” means the instruction is present in the prompt, not that a model has demonstrated it. The behavior and constraints below have not yet received human acceptance. This specification keeps them together; separate requirement and system-model documents are not required.
+**Status:** implementation-derived design for human architecture review; no human approval recorded. “Implemented” means the instruction is present in the prompt, not that a model has demonstrated it. The behavior and constraints below still need human acceptance.
 
 ## Basis and scope
 
@@ -20,7 +20,7 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |
 | [D2 model](model.d2) | Diagram identities and structural relationships | A new runtime or a second normative product contract |
 
-The current refactor packages the same complete two-version/ten-dimension output contract as an entrypoint plus bundled resources. This is a proposed, behavior-affecting change to resource loading and quality procedures, not evidence of improved model behavior. The contextual learner examples are fictional scenario inputs. Maintenance uses the C4 design and PR workflow, outside vocabulary invocation.
+The current refactor packages the same complete two-version/ten-dimension output contract as an entrypoint plus bundled resources. This is a proposed, behavior-affecting change to resource loading and quality procedures, not evidence of improved model behavior. The contextual learner examples are fictional scenario inputs.
 
 ## C4 scope and ownership
 
@@ -36,7 +36,7 @@ C1 treats `vocabulary_package` as a **passive skill-directory distribution**. Th
 
 A filesystem store fits the [C4 container definition](https://c4model.com/diagrams/container). Treating a passive package as the system scope is an explicit modeling adaptation. No C3 components are invented for ten linguistic headings or English/Chinese rendering. These are logical concerns in one skill directory, not separately implemented applications. Host UI, inference services, authentication and transport are not specified here. A deployment diagram is deferred until an actual host deployment is selected.
 
-The architecture reuses the editor design's modeling convention, not its editing policy. Vocabulary-mastery always develops all ten linguistic dimensions; editor selects only useful domains for grounded learning notes. No new service, data-store technology or API decision requires an ADR in this documentation-only projection.
+The architecture reuses the editor design's modeling convention, not its editing policy. Vocabulary-mastery always develops all ten linguistic dimensions; editor selects only useful domains for grounded learning notes.
 
 ## Concrete information flow
 
@@ -168,4 +168,4 @@ The shared development platform supports authoring, required-metadata validation
 | VM-C4-05 | Review rubric is now drafted under `evals/`; collect baseline vs revised model outputs and expert bilingual assessments before claiming improvement | Evaluation owner; preserve exact subject/model identity |
 | VM-C4-06 | The user explicitly retained the ten-domain/two-version fixed contract for this revision; review conflicts and confirm the model follows it | Maintainer and evaluator |
 
-These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [repository instructions](../../../AGENTS.md) describes validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
+These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [repository instructions](../../../AGENTS.md) describe validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
