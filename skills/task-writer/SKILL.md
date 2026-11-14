@@ -29,15 +29,18 @@ help someone do the work.
 - For file inputs and outputs, display repository-relative paths and link existing
   files relative to the saved task's location.
 - Never invent deadlines, owners, sources, approvals, facts, or completed work.
-- Return Markdown in chat by default, in the user's requested language. Save
-  only when requested and permitted. If asked to show the task first, show the
-  draft before writing files or implementing it. Creating a task alone does not
-  authorize executing the underlying work; honor any separate execution request.
+- Save the task as a Markdown file by default, in the user's requested language,
+  and return a concise link to the saved file. Honor explicit “show first,”
+  “chat only,” or “do not save” requests without writing. If writing is unavailable
+  or prohibited (including Plan mode), return the draft and explain that it was
+  not saved; never claim a save succeeded without verifying it.
+- Creating a task alone does not authorize executing the underlying work;
+  honor any separate execution request.
 
 ## Task filenames
 
-For repository task drafts, suggest a filename without creating a file. Follow
-existing directory and naming conventions first; otherwise use
+Use the user's requested destination, then existing repository directory and
+naming conventions; otherwise save in the current workspace using
 `tasks/NNN-YYYYMMDD-short-name.md`, for example
 `tasks/001-20261114-task-naming.md`.
 
@@ -46,10 +49,11 @@ existing directory and naming conventions first; otherwise use
 - Use the task creation date as `YYYYMMDD` and a short lowercase, hyphenated name,
   usually two to four words. The date is not a deadline.
 - Preserve existing task filenames when updating content or status. Do not rename
-  old tasks merely to adopt this convention.
-- Before an authorized save, inspect the destination and recheck filename availability;
-  never overwrite another task. If the destination cannot be inspected, label the
-  proposed number provisional. Create `tasks/` only when saving is authorized.
+  old tasks merely to adopt this convention unless the user requests a rename.
+- Before saving, inspect the destination and recheck filename availability;
+  never overwrite another task. Create `tasks/` when needed and writing is permitted.
+  If the destination cannot be inspected, return a chat draft with a provisional
+  filename and explain that it was not saved.
 
 ## Default format
 
