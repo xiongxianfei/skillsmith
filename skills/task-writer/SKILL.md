@@ -34,6 +34,23 @@ help someone do the work.
   draft before writing files or implementing it. Creating a task alone does not
   authorize executing the underlying work; honor any separate execution request.
 
+## Task filenames
+
+For repository task drafts, suggest a filename without creating a file. Follow
+existing directory and naming conventions first; otherwise use
+`tasks/NNN-YYYYMMDD-short-name.md`, for example
+`tasks/001-20261114-task-naming.md`.
+
+- Use the next number after the highest numbered task in the destination directory,
+  starting at `001`, padded to at least three digits. Do not reset numbering by date.
+- Use the task creation date as `YYYYMMDD` and a short lowercase, hyphenated name,
+  usually two to four words. The date is not a deadline.
+- Preserve existing task filenames when updating content or status. Do not rename
+  old tasks merely to adopt this convention.
+- Before an authorized save, inspect the destination and recheck filename availability;
+  never overwrite another task. If the destination cannot be inspected, label the
+  proposed number provisional. Create `tasks/` only when saving is authorized.
+
 ## Default format
 
 Use a concrete action and intended outcome as the title, followed by these seven

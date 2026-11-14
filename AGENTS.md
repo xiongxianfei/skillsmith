@@ -9,7 +9,6 @@ Use [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [An
 - `README.md`: project description, skill catalog and usage.
 - `skills/*/SKILL.md`: skill behavior; supporting resources belong in the skill directory.
 - `tests/validate_skills.py`: required-file and metadata validation.
-- [Workflow guide](docs/workflows.md): contribution, validation and PR procedures.
 - [Architecture](design/architecture/README.md): skill-specific behavior, constraints and design decisions; use `c4-architecture` when changing designs.
 
 ## Working rules
@@ -37,6 +36,16 @@ Use [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [An
 python tests/validate_skills.py
 ```
 
-CI runs this required-file and metadata check on pushes and PRs to `main`; errors block merging. Run focused functional tests for affected scripts as described in the workflow guide.
+CI runs this required-file and metadata check on pushes and PRs to `main`; errors block merging. Install PyYAML if needed (`python -m pip install pyyaml`). Run focused functional tests for affected scripts; check representative valid and invalid inputs when changing the validator, and check affected links.
 
 Start new branches from latest `main`, using `feat/`, `fix/`, `docs/` or `improve/`. All changes go through a PR to `main`; squash merge and delete the branch after merging. Update the README catalog when adding, removing or renaming skills.
+
+Describe the problem, expected behavior, safety or compatibility changes, and actual validation results in the PR. Include reproduction and cause for bug fixes, and migration guidance for breaking changes. Commit, push, merge and release require applicable user authorization. Use the Bug Report and Skill Request issue templates as appropriate.
+
+Existing functional suites:
+
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+python -m unittest discover -s skills/city-itinerary-builder/tests -p 'test_*.py' -v
+python -m unittest discover -s skills/travel-planner/scripts -p 'test_*.py' -v
+```

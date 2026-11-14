@@ -18,7 +18,7 @@ The two C4 packages are prepared for human review; their existence does not esta
 - Keep D2 sources under `views/` and generated SVGs under `diagrams/`. Use the package's `scripts/architecture.py` to format, check and render changed diagrams, then inspect them visually.
 - Add a decision record only when a consequential tradeoff needs explanation. Human review establishes acceptance; passing diagram checks does not.
 
-The [workflow guide](../../docs/workflows.md) explains the small design, implementation, validation and PR cycle.
+The [repository instructions](../../AGENTS.md) explains the small design, implementation, validation and PR cycle.
 
 ## Historical sources
 
