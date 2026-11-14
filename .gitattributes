@@ -1,0 +1,25 @@
+
+# Detect text files and normalize them in Git
+* text=auto
+
+# Unix and PowerShell scripts
+*.sh   text eol=lf
+*.bash text eol=lf
+*.zsh  text eol=lf
+*.ps1  text eol=lf
+
+# Source and documentation
+*.md   text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.toml text eol=lf
+
+# Windows batch scripts
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# Binary assets
+*.png  binary
+*.jpg  binary
+*.pdf  binary
