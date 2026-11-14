@@ -4,7 +4,7 @@ Designs explain mechanisms, dependencies, decisions and trade-offs that are diff
 
 | Subject | Focus |
 | --- | --- |
-| [Editor](editor/README.md) · [DDD context map](editor/01-context-map.md) | Request interpretation, language decisions, editing and grounded teaching |
+| [Editor](editor/README.md) | Request interpretation, language decisions, editing and grounded teaching |
 | [Vocabulary mastery](vocabulary-mastery/README.md) | Shared lexical information, resource loading and bilingual consistency |
 | [City experience workflow](city-experience-workflow/README.md) | Research handoffs, selection, location evidence and derived materials |
 | [Email writer](email-writer/README.md) | Goal-based drafting, factual checks and output preferences |
@@ -12,7 +12,7 @@ Designs explain mechanisms, dependencies, decisions and trade-offs that are diff
 
 ## Maintaining designs
 
-Use `design/<subject>/README.md` as the entrypoint. Choose explanations, decision tables, worked cases and inline Mermaid diagrams according to what helps readers understand the subject; no fixed set of views is required. Add supporting files only when they improve navigation. Optional numbered topic pages, such as `01-context-map.md`, can provide a reading order while the subject README remains the entrypoint.
+Use `design/<subject>/README.md` as the entrypoint. Choose explanations, decision tables, worked cases and inline Mermaid diagrams according to what helps readers understand the subject; no fixed set of views is required. Add supporting files only when they improve navigation. Optional numbered topic pages, such as `02-layered-components.md`, can provide a reading order while the subject README remains the entrypoint.
 
 Keep operational instructions and schemas in their owning skill resources and link to them. Preserve consequential rationale and relevant constraints. Distinguish current instructions, proposed changes, illustrative expectations and actual observed results. Record consequential policy changes explicitly; implementation-derived descriptions do not silently override accepted decisions.
 

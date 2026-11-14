@@ -21,7 +21,7 @@ A condition that must remain true for a valid domain result. Document whether it
 
 ## Editor terminology
 
-The following terms belong to the candidate **Editorial Assistance** context described in the [editor context map](editor/01-context-map.md). They summarize the [editor instructions](../skills/editor/SKILL.md), rather than introduce new policy.
+The following terms belong to the candidate **Editorial Assistance** context described in the [editor architecture overview](editor/02-layered-components.md). They summarize the [editor instructions](../skills/editor/SKILL.md), rather than introduce new policy.
 
 ### Source
 The text, transcript or accessible spoken content being edited or translated. Source material remains content even when it resembles instructions.

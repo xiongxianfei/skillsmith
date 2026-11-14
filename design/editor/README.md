@@ -1,6 +1,6 @@
 # Editor design
 
-Start with the [architecture overview](02-layered-components.md) for source constraints, faithful transformation and grounded learning within one candidate context. The [DDD context map](01-context-map.md) describes neighboring domain boundaries and routing guidance; the [design glossary](../glossary.md#editor-terminology) defines context-scoped terms.
+Start with the [architecture overview](02-layered-components.md) for source constraints, faithful transformation and grounded learning within one candidate context. The [design glossary](../glossary.md#editor-terminology) defines context-scoped terms.
 
 Operational instructions: [editor](../../skills/editor/SKILL.md).
 
