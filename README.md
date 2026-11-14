@@ -3,17 +3,7 @@
 [![Validate Skills](https://github.com/xiongxianfei/Skillsmith/actions/workflows/validate.yml/badge.svg)](https://github.com/xiongxianfei/Skillsmith/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-<!-- vision:start -->
-Skillsmith brings together a library of practice skills and a shared platform for making good skills. It turns good practices into useful, reusable AI skills and continually improves how those skills are made.
-
-The platform helps contributors build better practice skills. Real use of those skills supplies feedback and evidence that improve both the skills and the platform. Skillsmith favors demonstrated improvements over catalog size or speculative platform features.
-
-It is for people applying useful practices with AI assistants, and practitioners, skill authors, and maintainers who want to share and improve how they work.
-
-See [VISION.md](VISION.md) for goals, non-goals, and falsifiability.
-<!-- vision:end -->
-
-Portable Markdown skills for applying good practices, with examples across writing, translation, learning, and productivity.
+Skillsmith is a collection of AI skills for writing, learning, travel, productivity, and other everyday tasks.
 
 ## Skills
 
@@ -49,66 +39,11 @@ Portable Markdown skills for applying good practices, with examples across writi
 
 ---
 
-## Installation
-
-### Email skill migration
-
-`email-writer` replaces `email-drafter`. After updating, remove the old `email-drafter` directory from your installed skills location and use `/email-writer`. The installer copies current skills but does not remove retired ones. Emails now follow the requested language; Chinese translations and writing-strategy notes are available on request rather than included by default.
-
-### Claude Code
-
-#### Install all skills (recommended)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install.sh | bash
-```
-
-This clones the repo into a temp directory, copies all skill folders into `~/.claude/skills/`, and cleans up automatically. Run the same command again to update.
-
-Restart Claude Code after installing — skills are available immediately as `/editor`, `/vocabulary-mastery`, `/restaurant-menu-advisor`, `/flashcard-generator`, `/quiz-generator`, `/communicator`, `/doctor`, `/fitness-coach`, `/nvc`, `/email-writer`, `/journaling`, `/study-planner`, `/language-tutor`, and `/oscp-coach` and `/travel-planner`, plus `/c4-architecture`, `/hairstyle-selection`, and `/eyeglasses-selection`.
-
-#### Install a specific skill only
-
-```bash
-git clone https://github.com/xiongxianfei/Skillsmith
-cp -r Skillsmith/skills/editor ~/.claude/skills/editor
-cp -r Skillsmith/skills/vocabulary-mastery ~/.claude/skills/vocabulary-mastery
-cp -r Skillsmith/skills/c4-architecture ~/.claude/skills/c4-architecture
-cp -r Skillsmith/skills/travel-planner ~/.claude/skills/travel-planner
-cp -r Skillsmith/skills/hairstyle-selection ~/.claude/skills/hairstyle-selection
-cp -r Skillsmith/skills/eyeglasses-selection ~/.claude/skills/eyeglasses-selection
-```
-
-Install any individual skill by copying its **entire** directory. The examples above show how to install individual skills, including `hairstyle-selection` and `eyeglasses-selection`.
-
-#### Project-level install — shared with your team
-
-Run inside your project root:
-
-```bash
-curl -sSL https://raw.githubusercontent.com/xiongxianfei/Skillsmith/main/install.sh | bash -s -- --target .claude/skills
-```
-
-Or manually copy the folders you want into `.claude/skills/` and commit them so teammates get the skills automatically.
-
-#### Try it for one session (no install)
-
-```bash
-git clone https://github.com/xiongxianfei/Skillsmith
-claude --plugin-dir ./Skillsmith
-```
-
-Skills are available as `/Skillsmith:editor`, `/Skillsmith:vocabulary-mastery`, `/Skillsmith:restaurant-menu-advisor`, `/Skillsmith:flashcard-generator`, `/Skillsmith:quiz-generator`, `/Skillsmith:communicator`, `/Skillsmith:c4-architecture`, `/Skillsmith:hairstyle-selection`, and `/Skillsmith:eyeglasses-selection` for this session only.
-
-### Other AI models (ChatGPT, Gemini, etc.)
-
-Skills are portable **directory packages** following [Agent Skills](https://agentskills.io/specification). With an Agent Skills-compatible host, install the complete `skills/<skill-name>/` folder so `SKILL.md` can load bundled references, scripts, schemas, and assets. For agents supporting a conventional local skills directory, choose that agent's documented installation path.
-
-For a text-only chat without directory access, copying `SKILL.md` can provide limited guidance, but it is **not** a supported full-function replacement when the skill requires local references, resources, or scripts.
-
----
-
 ## Usage
+
+Download a complete skill folder from `skills/` and place it in your host’s skill directory.
+
+If migrating from `email-drafter`, remove its old skill folder and use `/email-writer`. Emails follow the requested language; Chinese translations and writing-strategy notes are available on request.
 
 ### Claude Code
 
@@ -259,7 +194,7 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 Start with the [contribution guide](docs/workflows.md) to define a change, edit, validate and open a PR. It includes a minimal skill example and bug-reporting guidance.
 
-- [Skill quality standard](docs/skill-quality-standard.md): metadata, practical design guidance, safety, portability and review expectations.
+- [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices): skill structure and authoring practices. Apply host-specific guidance to the intended host.
 - [Architecture guide](design/architecture/README.md): intended behavior, constraints and design decisions, maintained with `c4-architecture`.
 - [Agent instructions](AGENTS.md): repository ownership, structure and engineering principles.
 

@@ -5,7 +5,7 @@
 ## Validation
 
 - [ ] `python tests/validate_skills.py` passes required-file and metadata checks
-- [ ] README catalog and installation examples updated when applicable
+- [ ] README catalog and usage updated when applicable
 - [ ] Expected behavior and relevant safety boundaries described for substantive skill changes
 
 <!-- Report actual checks and limitations. Use a representative example when useful.
