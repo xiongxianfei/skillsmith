@@ -13,11 +13,12 @@ Skillsmith is a collection of AI skills for writing, learning, travel, productiv
 | [brainstorm](skills/brainstorm/SKILL.md) | `/brainstorm` | Explore diverse approaches using complementary creativity methods; compare or recommend only when requested |
 | [task-writer](skills/task-writer/SKILL.md) | `/task-writer` | Seven-section task briefs with readable inputs, concrete outputs, an approach, progress tracking and execution results; follows existing repository templates |
 | [blog-publisher](skills/blog-publisher/SKILL.md) | `/blog-publisher` | Evidence-grounded posts for existing Git-backed blogs, with explicit drafts, authorized publication, repository-aware validation and live verification |
-| [purchase-comparison](skills/purchase-comparison/SKILL.md) | `/purchase-comparison` | Product comparisons with user-defined option scores and weights, rejection options, visible raw facts, Excel sheets and keyboard, mouse and mousepad references |
+| [purchase-comparison](skills/purchase-comparison/SKILL.md) | `/purchase-comparison` | Personalized purchase frameworks with suggested importance weights and option suitability scores, adjustable preferences, optional evidence-based product comparison and conditional spreadsheets |
 | [trip-expense-tracker](skills/trip-expense-tracker/SKILL.md) | `/trip-expense-tracker` | Multi-currency trip expense workbooks with separate cash and card costs, exchange fees, reimbursements and configurable base-currency summaries |
 | [city-view-model](skills/city-view-model/SKILL.md) | `/city-view-model` | Structured city profiles using Place, Taste, Culture, Space, Time and Scenarios, with linked Excel tables, priority scores, checklists and visual layouts |
 | [hairstyle-selection](skills/hairstyle-selection/SKILL.md) | `/hairstyle-selection` | Hairstyle consultation using visible hair and face observations, fair haircut comparisons, optional controlled previews and clear barber handoffs |
 | [eyeglasses-selection](skills/eyeglasses-selection/SKILL.md) | `/eyeglasses-selection` | Everyday prescription frame selection, shape and fit comparisons, illustrative try-ons, and optician handoff with prescription safety boundaries |
+| [architecture-overview](skills/architecture-overview/SKILL.md) | `/architecture-overview` | Architecture overviews for software, AI skills and structured projects, with a Mermaid graph and matching responsibility and component tables |
 | [c4-architecture](skills/c4-architecture/SKILL.md) | `/c4-architecture` | Public D2/C4 architecture skill for AI-generated, Git-reviewed system context, container and dynamic views; includes example models and validation helpers |
 | [travel-planner](skills/travel-planner/SKILL.md) | `/travel-planner` | Constraint-aware travel planning: cross-platform flight and hotel comparisons, MCDA scoring, transport, experiences, approval gates and predeparture audits |
 | [city-attraction-research](skills/city-attraction-research/SKILL.md) | `/city-attraction-research` | Evidence-grounded attraction rankings, comprehensive checklists, optional native pin maps, and Google My Maps CSV/GeoJSON exports |
@@ -60,6 +61,7 @@ Invoke by slash command, passing your text as the argument:
 /flashcard-generator  Turn this onboarding note into Anki-ready flashcards.
 /quiz-generator  Make a 10-question diagnostic quiz from this chapter.
 /communicator  我想告诉房东暖气坏了，请帮我写一条俄语消息。
+/architecture-overview  Explain our local CSV inventory tool: import, validation, reorder calculation and export.
 /c4-architecture  Create C1/C2 D2 views from our software requirements for a Git design review.
 /travel-planner  Plan a long weekend with protected work commitments; compare complete itineraries, check travel documents, and create a realistic sightseeing plan.
 /hairstyle-selection  Compare short and medium hairstyles from authorised portraits and prepare a barber brief.

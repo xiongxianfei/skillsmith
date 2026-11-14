@@ -1,6 +1,6 @@
 # Mousepad: attributes and options (no scores)
 
-Edit freely. The user scores each option and sets each weight. Ask about the mouse (weight, feet material), desk space, and whether play is mostly flicks or tracking.
+Use these attributes and options as starting points. Suggest importance weights and option suitability scores from the user’s context, with reasons and explicit assumptions; preserve user-provided values and distinguish suggestions from adopted preferences. These references define no universal preference defaults. Check numeric boundaries for gaps and overlaps before use. Reuse known mouse details (weight, feet material), desk space and play style (flicks or tracking); ask for material gaps before making fit-dependent suggestions.
 
 | Attribute | Options |
 |---|---|

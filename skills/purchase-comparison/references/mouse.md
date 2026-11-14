@@ -1,6 +1,6 @@
 # Mouse: attributes and options (no scores)
 
-Edit freely. The user scores each option and sets each weight. Ask for hand length, hand width, grip (palm, claw, fingertip, hybrid) and usage mix first, because size and shape options depend on them.
+Use these attributes and options as starting points. Suggest importance weights and option suitability scores from the user’s context, with reasons and explicit assumptions; preserve user-provided values and distinguish suggestions from adopted preferences. These references define no universal preference defaults. Check numeric boundaries for gaps and overlaps before use. Reuse known hand length, hand width, grip (palm, claw, fingertip, hybrid) and usage mix; ask for material gaps because fit suggestions depend on them.
 
 | Attribute | Options |
 |---|---|
