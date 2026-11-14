@@ -192,7 +192,7 @@ Best for: landlord communication, formal letters, official correspondence with R
 
 ## Contributing
 
-Start with the [contribution guide](docs/workflows.md) to define a change, edit, validate and open a PR. It includes a minimal skill example and bug-reporting guidance.
+Follow [AGENTS.md](AGENTS.md) for contribution and validation instructions. Describe the intended change, run the relevant checks, and open a PR to `main`.
 
 - [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices): skill structure and authoring practices. Apply host-specific guidance to the intended host.
 - [Architecture guide](design/architecture/README.md): intended behavior, constraints and design decisions, maintained with `c4-architecture`.

@@ -15,7 +15,7 @@ Vocabulary-mastery turns **one English word or fixed lexical expression** into t
 | [Historical vocabulary scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/vocabulary-mastery/cases.yaml) | 16 archived expected scenarios covering ordinary use, boundaries and non-triggers | Successful model runs or exhaustive coverage |
 | [October 18 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/requirements.md) | Original two-complete-version choice, English-only skill source, behavior and evidence constraints | Current C4 approval or successful model execution |
 | [Reviewer examples](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-18-bilingual-vocabulary-mastery/examples.md) | Full `record` bilingual illustration and `apple` boundary examples with pronunciation provenance | Live-model outputs or measured accuracy |
-| [Contribution workflow](../../../docs/workflows.md) | Repository validation and review procedures | A complete accepted contract for this skill |
+| [Repository instructions](../../../AGENTS.md) | Repository validation and review procedures | A complete accepted contract for this skill |
 | [Shared skill architecture](../portable-skills.md) | Existing pure-prompt, validation and review boundaries | Previously accepted vocabulary-specific Function allocation |
 | [Design index](../README.md) | Existing coverage limits | Approval created by adding a link |
 | [D2 model](model.d2) | Diagram identities and structural relationships | A new runtime or a second normative product contract |
@@ -168,4 +168,4 @@ The shared development platform supports authoring, required-metadata validation
 | VM-C4-05 | Review rubric is now drafted under `evals/`; collect baseline vs revised model outputs and expert bilingual assessments before claiming improvement | Evaluation owner; preserve exact subject/model identity |
 | VM-C4-06 | The user explicitly retained the ten-domain/two-version fixed contract for this revision; review conflicts and confirm the model follows it | Maintainer and evaluator |
 
-These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [contribution workflow](../../../docs/workflows.md) describes validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
+These are proposals or unresolved decisions, not newly accepted requirements. Human architecture sign-off remains pending. The [repository instructions](../../../AGENTS.md) describes validation and review; no catalog-wide completeness or successful learning claim is inferred from these views.
