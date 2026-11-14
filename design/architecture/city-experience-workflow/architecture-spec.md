@@ -15,7 +15,7 @@ Let travelers use independent city-attraction and food-research skills to build 
 
 ## Simplified research delivery contract (proposed refinement)
 
-The two research skills remain independent and each produces **three default files**, replacing the previously contemplated 14/17-file package plan:
+The two research skills remain independent and each produces **three default files**:
 
 - City attractions: `attractions.json`, `attractions_checklist.csv`, `attractions_mymaps.csv`.
 - Local food and dining: `food_research.json`, `foods_checklist.csv`, `dining_venues_mymaps.csv`.
