@@ -1,107 +1,42 @@
 # Skillsmith
 
-Turn good practices into reusable AI skills and continually improve them through use, feedback, and evaluation. Each skill is a portable directory package with a required `SKILL.md` and optional `references/`, `scripts/`, `assets/`, and other resources. Agents should read additional files only when the skill's instructions call for them.
+A collection of AI skills. Each skill lives in `skills/<skill-name>/` with a required `SKILL.md` and optional supporting resources.
 
-Use the owning document for each concern:
+## Guidance and ownership
 
-| Concern | Owner |
-| --- | --- |
-| Project purpose and scope | [VISION.md](VISION.md) |
-| Agent conduct and engineering principles | This file |
-| Required skill metadata, safety, portability and review guidance | [Quality standard](docs/skill-quality-standard.md) |
-| Contribution, validation and PR workflow | [Workflow guide](docs/workflows.md) |
-| Intended behavior, constraints and design decisions | [C4 architecture](design/architecture/README.md) |
+Use [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) for authoring. Apply host-specific guidance to the intended host.
 
-Resolve conflicting guidance explicitly in its owner. Observed implementation and historical reviews do not silently override accepted decisions; record explicit user policy changes in the affected owner.
+- `README.md`: project description, skill catalog and usage.
+- `skills/*/SKILL.md`: skill behavior; supporting resources belong in the skill directory.
+- `tests/validate_skills.py`: required-file and metadata validation.
+- [Workflow guide](docs/workflows.md): contribution, validation and PR procedures.
+- [Architecture](design/architecture/README.md): skill-specific behavior, constraints and design decisions; use `c4-architecture` when changing designs.
 
-## Build & Validate
+## Working rules
 
-```
+- Inspect repository state first, preserve user changes, and keep edits scoped.
+- Update the owning artifact and repair affected references. Record explicit policy changes there; implementation and historical reviews do not silently override accepted decisions.
+- Before substantive behavior changes, write the intended outcome and acceptance examples in the issue or PR. Small editorial changes need no formal design.
+- Preserve safety boundaries and actual compatibility obligations. High-risk skills must retain explicit scope and refusal or escalation boundaries; describe safety changes in the PR.
+- Never invent facts, tool access, tests, model results, approvals or release status. Authors cannot claim independent approval of their own work.
+- Keep secrets and private data out of skills and examples; use sanitized or fictional sensitive examples.
+- Report validation commands, results, skipped checks and unresolved questions. Metadata checks do not demonstrate model quality or host compatibility.
+
+## Engineering principles
+
+- Keep essential meaning understandable and canonical knowledge in one place. Add context that helps decisions; load supporting resources only when needed.
+- Prioritize useful reader outcomes and causal explanations over polish or memorization. State assumptions, mechanisms, boundaries and trade-offs.
+- Choose the smallest sufficient change. Reuse established tools and guidance before inventing alternatives.
+- Fix confirmed problem classes without speculative redesign. Remove obsolete internal implementations and migrate their uses while honoring external contracts.
+- Think before acting, scale planning to risk, and clarify before irreversible or high-risk decisions.
+- Test the core outcome first, then affected contracts and regressions as risk warrants. Do not skip essential verification.
+
+## Validation and delivery
+
+```bash
 python tests/validate_skills.py
 ```
 
-CI runs this on every push/PR to main. All errors must be fixed before merge.
+CI runs this required-file and metadata check on pushes and PRs to `main`; errors block merging. Run focused functional tests for affected scripts as described in the workflow guide.
 
-## Operating Rules
-
-- Inspect the current repo state before editing.
-- Keep changes scoped; do not refactor unrelated files.
-- Preserve user changes and never revert work you did not make unless explicitly asked.
-- Update the owning artifact: prompt behavior in `skills/*/SKILL.md`, validation behavior in `tests/validate_skills.py`, install behavior in `install.sh`, project identity in `VISION.md`; use the owners above for documentation and rules.
-- Report validation commands, warnings, skipped checks, and unresolved questions before handoff.
-- State assumptions when intent is incomplete; clarify before irreversible or high-risk decisions.
-- Never invent tests, CI results, approvals, issue links, release status or external facts. Claim behavior works only with relevant evidence, or explicitly state what was not verified.
-- Do not silently remove safety boundaries, validation checks or compatibility obligations. Authors cannot claim independent approval of their own work.
-
-## Required Skill Metadata
-
-Every skill lives at `skills/<skill-name>/SKILL.md`. Start the file with valid YAML frontmatter containing non-empty string values for `name` and `description`:
-
-```yaml
----
-name: your-skill-name
-description: >
-  Describe what the skill does and when it applies.
----
-```
-
-The body has no required placeholder or heading. Use `$ARGUMENTS` or `## Output Format` only when useful for the skill and its intended host. CI checks required files and metadata only; see the [quality standard](docs/skill-quality-standard.md#required-checks).
-
-## Key Rules
-
-- Keep descriptions concise: state the skill identity and discriminating triggers; avoid loosely related activation conditions.
-- Keep essential behavior in `SKILL.md` and link conditional detail with explicit loading conditions. Choose the split by relevance, not length; follow the [full-directory guidance](docs/skill-quality-standard.md#full-directory-skill-design).
-- Include optional metadata only when useful and compatible with the intended host; the validator checks the format of the defined Agent Skills metadata fields
-- Describe substantive changes and expected behavior in the PR; distinguish syntax checks, design review, and observed model evidence under the [quality standard](docs/skill-quality-standard.md#review-and-evidence).
-- High-risk skills need explicit scope, refusal/escalation boundaries and reviewer-visible safety notes
-
-## Workflow
-
-Use [the workflow guide](docs/workflows.md) for scoped changes, validation and PR review. Use `c4-architecture` for design under [design/architecture/](design/architecture/README.md); keep behavior, constraints and decisions together in the relevant architecture specification.
-
-- All changes via PR to `main` (branch protection enabled)
-- Branch naming: `feat/`, `fix/`, `docs/`, `improve/`
-- Squash merge, delete branch after merge
-- IMPORTANT: Always branch from latest `main` — never stack PRs from the same base to avoid README conflicts
-- When adding a new skill, also add it to the README skills table
-- Non-trivial behavior changes need written intent and acceptance examples before implementation; see [the workflow guide](docs/workflows.md#1-define-the-change).
-
-## Project Structure
-
-```
-skills/*/SKILL.md          ← entrypoint for portable skill directory packages
-tests/validate_skills.py   ← required-file and metadata validator (errors block merge)
-install.sh                 ← one-command installer (supports --target flag)
-design/architecture/       ← C4 specifications, models, views and generated diagrams
-docs/skill-quality-standard.md ← skill authoring, safety and review guidance
-docs/workflows.md          ← contribution, validation and PR workflow
-VISION.md                  ← project identity and scope
-```
-
-## Common Mistakes
-
-- Missing or unreadable `SKILL.md` → CI error
-- Missing, malformed or non-mapping YAML frontmatter → CI error
-- Missing, blank or non-string `name` or `description` → CI error
-- Invalid Agent Skills name, name/directory mismatch, or out-of-bounds metadata length → CI error
-- Descriptions that omit either the skill's function or the situations where it applies → unreliable skill selection
-
-## Core Engineering Principles
-
-1. **Self-contained knowledge.** Keep core meaning understandable and canonical definitions in one place. For skills, self-containment applies to the complete directory: keep essential decisions in the entrypoint and disclose conditional detail through linked resources. Assume general model competence; add context that improves decisions rather than repeating familiar background. For human-facing documents, explain the problem, prerequisites, mechanisms, and boundaries needed by the intended reader.
-
-2. **Reader-centered quality.** Evaluate whether a reader can explain *what happens, how, why, and when*; apply the knowledge to a realistic problem; predict likely outcomes and failure modes; and recognize opportunities to improve results. Correctness and clear reasoning matter more than polished prose.
-
-3. **Goal-oriented work.** Identify the intended reader outcome before substantial work. Choose the smallest sufficient change; prioritize important knowledge gaps and useful results. Avoid speculative infrastructure, redundant research, unnecessary documentation, and rituals that do not advance the goal. Do not skip essential verification to save effort.
-
-4. **Reuse before invention.** Look for established theory, standards, sources, methods, libraries, and tools before building alternatives. Prefer suitable, proven approaches; weigh fitness, reliability, cost, maintenance, and lock-in. Create custom solutions only when a material requirement justifies them.
-
-5. **Mechanisms before memorization.** Explain causal relationships, relevant variables, assumptions, boundary conditions, and trade-offs. Show how the mechanism informs decisions and practical action. Surface possible improvements and testable hypotheses, clearly separating proposed innovations from demonstrated results.
-
-6. **Delete obsolete internal compatibility.** When replacing internal code, paths, workflows, or knowledge structures, migrate affected uses and remove superseded implementations. Do not add internal legacy shims, deprecated aliases, dual-write logic, or competing canonical documents. Assess *external* contracts separately and honor actual obligations. Move still-useful guidance into its owner and retain evidence needed for active claims. Documentation cleanup does not require historical provenance, archives or fixed-commit links.
-
-7. **Fix the problem class.** For defects or inconsistencies, identify the underlying cause and check for related instances. Make the smallest coherent change that addresses the confirmed class; add proportionate checks or regression coverage where useful. Do not turn isolated issues into speculative redesigns.
-
-8. **Think before acting.** Before substantive work, clarify the intended outcome, inspect relevant context, challenge important assumptions, and consider dependencies, risks, and the simplest sound approach. Scale planning to the task: small, reversible changes need no formal plan; consequential or hard-to-reverse changes deserve more analysis. Avoid analysis that does not improve the decision.
-
-9. **Test the core first; validate by risk.** First verify the main outcome: for software, the changed behavior; for knowledge, whether a reader can use it to reason through a representative problem. Expand to affected dependencies, contracts, edge cases, or regressions when the likelihood and impact of failure justify it. Prefer focused checks over redundant tests or unrelated full suites; never omit essential verification merely to save time.
+Start new branches from latest `main`, using `feat/`, `fix/`, `docs/` or `improve/`. All changes go through a PR to `main`; squash merge and delete the branch after merging. Update the README catalog when adding, removing or renaming skills.
