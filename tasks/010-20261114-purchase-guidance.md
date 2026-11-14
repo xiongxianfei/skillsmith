@@ -44,11 +44,19 @@ Before substantive implementation, record the intended behavior and acceptance e
 Review representative outputs against the acceptance examples. Run `python tests/validate_skills.py` and skill-creator's validator for the changed skill; check affected links and whitespace. Record behavioral review separately from metadata validation, including any skipped checks and remaining limitations.
 
 ## Progress checklist
-- [ ] Record intended behavior and acceptance examples in the issue or PR.
-- [ ] Update instructions, references, design status and catalog descriptions.
-- [ ] Review representative outputs against the acceptance examples.
-- [ ] Run metadata and skill-creator validation; check affected links and whitespace.
-- [ ] Record actual results and remaining limitations.
+- [x] Record intended behavior and acceptance examples in the issue or PR.
+- [x] Update instructions, references, design status and catalog descriptions.
+- [x] Review representative outputs against the acceptance examples.
+- [x] Run metadata and skill-creator validation; check affected links and whitespace.
+- [x] Record actual results and remaining limitations.
 
 ## Execution result
-Pending execution and verification.
+Completed the [purchase instructions](../skills/purchase-comparison/SKILL.md), three reference introductions, both [purchase design pages](../design/purchase-comparison/README.md), and catalog descriptions. PR #66 recorded intended behavior and acceptance examples before implementation. Suggestions now cover both weights and option scores; user adoption, evidence, unknowns, rejection and conditional capabilities remain explicit.
+
+- `python tests/validate_skills.py`: all 29 skills passed metadata checks.
+- `python /home/xiongxianfei/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/purchase-comparison`: passed.
+- [Author-produced behavioral walkthrough](reviews/010-011-behavioral-review.md): keyboard without models, changed use, preserved user values, missing inputs, matched `X`, and unavailable external capabilities reviewed. Arithmetic fixtures passed.
+- Purchase graph and both tables agree on seven components and two groups; links and whitespace checked.
+- Existing normalization edge cases remain explicitly unresolved; no replacement mathematics was introduced. No live spreadsheet/tracker integration, independent model evaluation or host compatibility test was run. No functional script changed, so unrelated functional suites were skipped.
+
+Link-check limitation: the existing README link to removed `skills/brainstorm/SKILL.md` is already broken on `origin/main` and remains outside this change. All other checked local links and anchors passed (77 in the isolated PR tree).

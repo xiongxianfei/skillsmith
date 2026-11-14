@@ -7,6 +7,7 @@ Designs explain mechanisms, dependencies, decisions and trade-offs that are diff
 | [Editor](editor/README.md) | Request interpretation, language decisions, editing and grounded teaching |
 | [Vocabulary mastery](vocabulary-mastery/README.md) | Shared lexical information, resource loading and bilingual consistency |
 | [City experience workflow](city-experience-workflow/README.md) | Research handoffs, selection, location evidence and derived materials |
+| [Purchase comparison](purchase-comparison/README.md) | Personalized decision frameworks, suggested weights and scores, and optional evidence-based comparison |
 
 ## Maintaining designs
 
@@ -15,3 +16,9 @@ Use `design/<subject>/README.md` as the entrypoint. Choose explanations, decisio
 Keep operational instructions and schemas in their owning skill resources and link to them. Preserve consequential rationale and relevant constraints. Distinguish current instructions, proposed changes, illustrative expectations and actual observed results. Record consequential policy changes explicitly; implementation-derived descriptions do not silently override accepted decisions.
 
 Use Mermaid for repository design diagrams and inspect their rendered meaning and legibility when tooling is available. Diagram validity does not establish behavioral correctness. Repository contribution and validation rules remain in [AGENTS.md](../AGENTS.md). The public C4 skill remains available for work that specifically calls for C4/D2 designs.
+
+## Architecture Overview format
+
+Use the [architecture-overview skill](../skills/architecture-overview/SKILL.md) as the canonical reusable method and output contract. It defines the Mermaid graph, layer table and contexts–components table, including status, boundary and consistency checks. The [purchase comparison overview](purchase-comparison/02-layered-components.md) is a worked example.
+
+Keep repository documentation under `design/<subject>/`, with `README.md` as the entrypoint and optional numbered topic pages for navigation. Existing filenames and owning artifacts take precedence. Other design views remain optional; adopting the skill does not require migrating existing subjects. Operational behavior remains in the owning skill resources, and contribution and validation rules remain in [AGENTS.md](../AGENTS.md).

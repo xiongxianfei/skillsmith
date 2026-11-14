@@ -5,7 +5,7 @@ Capture the architecture design approach developed here as a reusable skill for 
 
 ## Input
 - [Design guide](../design/README.md): established output format and repository conventions.
-- Worked architecture examples: [purchase](../design/purchase-comparison/02-layered-components.md), [editor](../design/editor/02-layered-components.md) and [email](../design/email-writer/02-layered-components.md).
+- Worked architecture example: [purchase](../design/purchase-comparison/02-layered-components.md). Supporting source material: [editor design](../design/editor/README.md) and [email instructions](../skills/email-writer/SKILL.md). Local editor and email overview drafts also informed the layout; their separate publication is outside this task.
 - [C4 architecture skill](../skills/c4-architecture/SKILL.md): existing capability boundary.
 - [README](../README.md) and [repository rules](../AGENTS.md): catalog, usage, ownership and contribution conventions.
 - [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [Anthropic authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices): authoring references; apply host-specific guidance to the intended host.
@@ -48,12 +48,21 @@ Inspect the intended outcome, requirements and available implementation. Identif
 Render generated diagrams when tooling is available and inspect labels, boundaries and connections. Check graph/table consistency, affected links and whitespace. Run `python tests/validate_skills.py` and skill-creator's validator for both `architecture-overview` and `purchase-comparison` (coordinate with task 010). Report behavioral review separately from metadata results and record any skipped rendering or validation.
 
 ## Progress checklist
-- [ ] Record intended behavior and acceptance examples in the issue or PR.
-- [ ] Write the skill with clear discovery scope and output contract.
-- [ ] Update catalog, usage and design-guide references.
-- [ ] Exercise skill and non-skill examples; inspect rendered diagrams when tooling is available.
-- [ ] Check graph/table consistency, metadata, links and whitespace.
-- [ ] Record actual results and skipped checks.
+- [x] Record intended behavior and acceptance examples in the issue or PR.
+- [x] Write the skill with clear discovery scope and output contract.
+- [x] Update catalog, usage and design-guide references.
+- [x] Exercise skill and non-skill examples; inspect rendered diagrams when tooling is available.
+- [x] Check graph/table consistency, metadata, links and whitespace.
+- [x] Record actual results and skipped checks.
 
 ## Execution result
-Pending execution and verification.
+Created the self-contained [architecture-overview skill](../skills/architecture-overview/SKILL.md), added its README catalog entry and invocation, and made the [design guide](../design/README.md#architecture-overview-format) refer to the skill as the canonical reusable method. Repository paths and ownership rules remain in the guide. No scripts or template package were added.
+
+- `python tests/validate_skills.py`: all 29 skills passed metadata checks.
+- Skill-creator `scripts/quick_validate.py` passed for both `skills/architecture-overview` and `skills/purchase-comparison`.
+- [Author-produced walkthroughs](reviews/010-011-behavioral-review.md) cover purchase, local CSV inventory, sparse requirements and existing artifacts. Graph/table checks passed for seven purchase components in two groups and four inventory components in three groups.
+- Mermaid CLI 12.2.0 rendered both graphs to temporary PNGs using the available Chromium configuration. Visually inspected labels, boundaries and connections: all were legible; optional purchase comparison and external capabilities remained distinct. Initial rendering used obsolete `-w`; reran successfully with `--size 1800` after checking CLI help.
+- Local links and whitespace checked. Source authoring guidance was consulted. Input links now point to published editor/email source artifacts rather than unrelated uncommitted overview drafts, which were consulted locally and preserved.
+- Behavioral review is illustrative author work, not independent approval or cross-host evaluation. Metadata and rendering checks do not prove behavioral quality. Unrelated functional suites were skipped because no executable code changed.
+
+Link-check limitation: the existing README link to removed `skills/brainstorm/SKILL.md` is already broken on `origin/main` and remains outside this change. All other checked local links and anchors passed (77 in the isolated PR tree).
