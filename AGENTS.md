@@ -9,7 +9,7 @@ Use [OpenAI skill guidance](https://learn.chatgpt.com/docs/build-skills) and [An
 - `README.md`: project description, skill catalog and usage.
 - `skills/*/SKILL.md`: skill behavior; supporting resources belong in the skill directory.
 - `tests/validate_skills.py`: required-file and metadata validation.
-- [Architecture](design/architecture/README.md): skill-specific behavior, constraints and design decisions; use `c4-architecture` when changing designs.
+- [Architecture](design/README.md): skill mechanisms, constraints and design decisions; follow the design guide when changing designs.
 
 ## Working rules
 

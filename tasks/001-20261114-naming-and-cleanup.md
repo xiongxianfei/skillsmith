@@ -5,7 +5,7 @@ Recommend compact, consistent task filenames and simplify repository contributio
 
 ## Input
 - [skills/task-writer/SKILL.md](../skills/task-writer/SKILL.md) and the installed copy at `~/.codex/skills/task-writer/SKILL.md`: naming behavior.
-- [AGENTS.md](../AGENTS.md), [README.md](../README.md), and [architecture index](../design/architecture/README.md): remaining guidance and references.
+- [AGENTS.md](../AGENTS.md), [README.md](../README.md), and [architecture index](../design/README.md): remaining guidance and references.
 - `docs/workflows.md`: contribution document to retire.
 
 ## Output

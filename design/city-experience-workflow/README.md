@@ -1,4 +1,8 @@
-# City experience workflow — architecture specification (proposed for review)
+# City experience workflow design
+
+Operational instructions: [city-itinerary-builder](../../skills/city-itinerary-builder/SKILL.md).
+
+This design explains instructed behavior and consequential decisions. Examples are expected outcomes unless explicitly identified as observations; human approval and model compliance are not established by this document.
 
 ## Goal
 
@@ -93,6 +97,24 @@ independent approval or behavior across every host. Human content review remains
 
 ## Validation and review
 
-Focused builder tests address overlapping schedules, verified/unverified coordinates, unsourced route data, source-backed geometry, booking status and render consistency. Metadata validation does not establish real-world accuracy or model quality. D2 diagrams are proposed review sources; the D2 CLI was unavailable in the authoring environment, so D2 format/render validation is not claimed.
+Focused builder tests address overlapping schedules, coordinates, source-backed routes, booking status and render consistency. Metadata checks do not establish real-world accuracy or model quality.
 
 Human reviewers should assess stage boundaries, the taxonomy migration, location-source provenance, privacy implications of navigation URLs and practical value of the printable outputs before merge.
+
+## Research-to-materials flow
+
+```mermaid
+flowchart TD
+    A[Attraction research] --> C[Select feasible city activities]
+    B[Food and venue research] --> C
+    T[Arrival, commitments and preferences] --> C
+    C --> D[Check locations, opening windows and sourced transfers]
+    D --> E{Feasible with available evidence?}
+    E -->|Revise| C
+    E -->|Unresolved| P[Provisional plan with explicit blockers]
+    E -->|Yes| F[Canonical itinerary record]
+    F --> G[Validate and generate requested materials]
+    R[Changed timing or selection] --> C
+```
+
+Research rankings remain independent of itinerary selection. Maps, timelines and guides derive from the same itinerary record so revisions do not create conflicting schedules. Missing routing evidence remains explicit; the renderer does not supply a routing service.

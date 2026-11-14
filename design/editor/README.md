@@ -1,42 +1,10 @@
-# Editor C4 architecture and implementation profile
+# Editor design
 
-This is an implementation-grounded design for reviewing the editor's boundaries and behavior. The editor delivers faithful editing/translation with grounded learning notes. It is distributed as one Markdown prompt interpreted by an external assistant host. The C4 views expose that real boundary; the decision tables below explain the prompt's logical policies without inventing services.
+Operational instructions: [editor](../../skills/editor/SKILL.md).
 
-**Status:** authored for human architecture review; no human approval recorded. “Implemented” below means instructions exist in the prompt, not that a model has demonstrated compliance. Proposed corrections remain separate and do not change the prompt.
+This design explains instructed behavior and consequential decisions. Examples are expected outcomes unless explicitly identified as observations; human approval and model compliance are not established by this document.
 
-## Scope, evidence and authority
-
-| Subject | Owning artifact | Treatment here |
-| --- | --- | --- |
-| Prior editor contract | [Historical requirements](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/requirements/editor.md) | Source-qualified R/AC/EC IDs retain provenance |
-| Linguistic-learning requirement draft | [October 14 requirements](https://github.com/xiongxianfei/skillsmith/blob/1d6ce5bee418b59fcfdd4a8cc98304a491e3e49a/docs/changes/2026-10-14-editor-linguistic-learning-notes/requirements.md) | Proposed scope for speech evidence, selective linguistic teaching and requested practice; this records provenance, not new acceptance |
-| Prior logical decomposition | [Historical system design](https://github.com/xiongxianfei/skillsmith/blob/93c9bf750ceea7585c06fd93fcceecac5f7e8d26/design/system/editor.md) | FN-ED-001–004 remain trace labels for the behavior documented below |
-| Module and Interface allocation | [Portable-skill architecture](../portable-skills.md) | All editor Functions remain MOD-PROMPT through IF-PROMPT; MOD-QUALITY and MOD-REVIEW are maintenance responsibilities |
-| Current implementation | [Editor SKILL.md](../../../skills/editor/SKILL.md) | Core Standard; Workflow; Learning Notes; Output Format |
-| Expected examples | [Historical editor scenarios](https://github.com/xiongxianfei/skillsmith/blob/0abafec052bcdf9952f462fa0a872a207b5cb83c/tests/evals/skills/editor/cases.yaml) | Scenario declarations, not execution logs |
-| Diagram entities and relationships | [model.d2](model.d2) | Single source for C4 identity; C1/C2 filter it, sequences reuse its participants |
-
-Speech and richer linguistic teaching extend the historical contract; they remain observations requiring human review, not silently approved amendments.
-
-## C4 interpretation and boundaries
-
-C1 models `editor_package` as a **passive software distribution**, not an independently executing product. The writer uses `assistant_host`, an external software system; the maintainer authors the package. The package supplies instructions by installation or paste, not through a running API. This is an explicit adaptation for a prompt-only product.
-
-C2 opens that package to show its one genuine data container, `editor_package.prompt_files`: the Markdown file store. A filesystem store is a C4 container; a workflow step is not. The externally owned assistant stays opaque. Its UI, model service, authentication, network transport and storage topology are not established by this repository. The diagram neither collapses a known distributed host into one container nor invents host internals.
-
-| Stable diagram ID | Type and ownership | Responsibility / existing model relationship |
-| --- | --- | --- |
-| `writer` | Person, outside package | Supplies source, instructions and preferences; receives output |
-| `maintainer` | Person, outside invocation | Authors/reviews instructions and evidence using shared development methods |
-| `editor_package` | Passive software system scope, Skillsmith-owned instructions | Distribution boundary for editor behavior |
-| `editor_package.prompt_files` | File-store container, Skillsmith-authored Markdown | Realizes editor's part of MOD-PROMPT; no mutable learner data |
-| `assistant_host` | External software system, host operator | Interprets IF-PROMPT and generates output; capabilities and execution depend on selected host |
-
-C3 is omitted: one prompt file does not establish independently implemented editor components. Self-messages in sequence views describe logical instructions inside the host, not callable functions, hidden reasoning transcripts, or an enforced program pipeline. A deployment diagram is omitted because no specific host/deployment has been selected.
-
-This mapping follows the [C4 container definition](https://c4model.com/diagrams/container) and [D2 model/view selection](https://d2lang.com/tour/models/). [D2 sequences](https://d2lang.com/tour/sequence-diagrams/) supply ordered scenario views. The package boundary is an interpretation of this repository, not a claim that C4 defines a special prompt-runtime abstraction.
-
-## Request interpretation: FN-ED-001
+## Request interpretation
 
 The following is a documentation model of the decisions required by the prompt. There is no parser, stored request object or new schema in the implementation.
 
@@ -68,7 +36,7 @@ Apply explicit requested targets first. With no targets, non-English source gets
 
 “Keep it short” alone does not suppress notes. “Only translate into English” versus “only the translation” deliberately produces different note behavior in the current prompt. This is a wording-sensitive contract requiring evaluation, not a robust parser established by the table. Unsupported or irreconcilable directives have no fully specified conflict-resolution algorithm beyond the priority order.
 
-## Editing and rendering: FN-ED-002 and FN-ED-003
+## Editing and rendering
 
 The priority order is integrity/truthfulness, explicit constraints, source fidelity, deliverables, teaching, then brevity. Explicit constraints cannot authorize false approval, invented facts, false attribution or unsupported certainty.
 
@@ -84,7 +52,7 @@ The current instructed sequence is: check integrity; edit/preserve in the source
 
 A useful design refinement is a conceptual **change-evidence record**: source span, revised span, reason, necessary correction versus optional style choice, fidelity constraint, and lesson eligibility. This is **proposed**, not an implemented data structure. It could make edit selection and lesson grounding reviewable without creating hidden runtime state.
 
-## Teaching from evidence: FN-ED-004
+## Teaching from evidence
 
 The prompt selects useful observable changes or grounded translation choices by communication impact, repeated patterns in available samples, then explicit learner goals. Overlapping changes are grouped. Usually one to three lessons are chosen; substantial material can justify more distinct lessons.
 
@@ -97,18 +65,6 @@ Each substantive lesson contains an original-to-revised anchor (or translation c
 | Stated goals and multiple available samples | Contextual personalization and supported recurring patterns | Persistent tracking, assumed native language, unseen history or proficiency |
 
 The ten linguistic domains are a selective taxonomy, not mandatory output headings. The prompt forbids manufacturing edits or lessons. For nonsuppressed trivial/no-lesson cases, Learning Notes requires exactly one fallback. That also satisfies the broader “at most one” limit in Output Format. The differing specificity may benefit from clearer wording, but it is not a contradictory contract or evidence that zero notes is permitted by the complete prompt.
-
-## Concrete scenario views
-
-| Rendered view | Source / walkthrough basis | Decision exposed |
-| --- | --- | --- |
-| [C1 context](diagrams/context.svg) | [D2 source](views/context.d2); R2/R3 and IF-PROMPT | Who supplies instructions versus who executes |
-| [C2 container](diagrams/container.svg) | [D2 source](views/container.d2); existing prompt file | The passive file-store boundary and external host |
-| [Edit and learn](diagrams/edit-and-learn.svg) | [D2 source](views/edit-and-learn.d2); `editor-linguistic-personalized-goal-and-exercise` | English update, Chinese companion, grounded syntax note, requested exercise |
-| [Integrity with no notes](diagrams/integrity-no-notes.svg) | [D2 source](views/integrity-no-notes.d2); `editor-integrity-explicit-target-no-notes`, R51–R56 | Refuse false customer approval while honoring note suppression |
-| [Transcript boundary](diagrams/transcript-boundary.svg) | [D2 source](views/transcript-boundary.d2); `editor-linguistic-transcript-no-acoustics` | Text correction can proceed; sound-level claims lack evidence |
-
-The first scenario's concrete source is “The issue was fixed yesterday, we will release next week.” A faithful correction could connect the independent clauses with a semicolon. The lesson can explain clause connection, and the exercise can ask the learner to repair a comparable comma splice. This is an illustrative expected result, not an observed model response. The sequence maps to existing Function identities while showing newer implementation detail explicitly.
 
 ## Acceptance scenarios and retained proof intent
 
@@ -123,12 +79,6 @@ Fidelity and restraint define editing quality: an expert persona alone can encou
 Source-plus-companion output replaced a fixed Chinese/English pair to preserve the user's source language while adding useful translation. Deterministic companion selection avoids duplicate English output. One base output shape with explicit overrides reduces competing templates, and fidelity checks compare the visible versions without requiring hidden extra-language renderings.
 
 The original [expert-editing](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-05-26-editor-expert-quality-optimization.md#decision-log), [learning-default](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-06-16-editor-learning-default-optimization.md#decision-log) and [language-policy](https://github.com/xiongxianfei/skillsmith/blob/00224740db8a8e18e10579d8b38377ef0c1b04cf/docs/proposals/2026-06-16-editor-source-plus-companion-language-optimization.md#decision-log) decision logs preserve the alternatives and their reasons. Their superseded output defaults are history; the behavior tables in this specification describe the current prompt. Original review/model-run limitations remain in the historical plans and do not establish compliance with today's prompt.
-
-## Shared platform participation
-
-Authoring, required-metadata validation, review and distribution follow the [shared architecture](../portable-skills.md). MOD-QUALITY/IF-STATIC and MOD-REVIEW/IF-SKILL-REVIEW remain outside the editing invocation path.
-
-Editor-specific outcomes can suggest reusable improvements, such as evidence requirements for feedback. That feedback-to-platform process is a proposed project direction from the vision, not an implemented telemetry or automatic training connection. No speculative feedback server is drawn.
 
 ## State, deployment, trust and quality constraints
 
@@ -150,4 +100,50 @@ Editor-specific outcomes can suggest reusable improvements, such as evidence req
 | ED-C4-05 | Historical `dim lighting` fidelity example lacks demonstrated model evidence; archived scenarios are not model runs | Reviewer when assessing fidelity claims |
 | ED-C4-06 | Record actual host/model and representative results before claiming behavioral quality | Evaluation owner |
 
-No item above is marked implemented or accepted by producing these diagrams. The C4 model is a review aid; human architecture sign-off remains pending.
+
+## Scenario walkthroughs
+
+### Edit and learn
+
+```mermaid
+sequenceDiagram
+    participant editor_package as editor package
+    participant assistant_host as assistant host
+    participant writer as writer
+    editor_package->>assistant_host: 0. Make editor instructions available<br/>(precondition, not a network request)
+    writer->>assistant_host: 1. Polish this formal English update<br/>and teach one pattern with an exercise
+    assistant_host->>assistant_host: 2. separate source and instructions<br/>English source + English instruction => Chinese companion
+    assistant_host->>assistant_host: 3. check integrity and edit minimally<br/>Preserve chronology and commitment
+    assistant_host->>assistant_host: 4. render English + Chinese<br/>Check both versions against the same meaning
+    assistant_host->>assistant_host: 5. explain one grounded syntax lesson<br/>Add requested exercise inside learning notes
+    assistant_host->>writer: 6. English + Chinese deliverables<br/>English learning note and one exercise
+```
+
+### Integrity no notes
+
+```mermaid
+sequenceDiagram
+    participant editor_package as editor package
+    participant assistant_host as assistant host
+    participant writer as writer
+    editor_package->>assistant_host: 0. Make editor instructions available
+    writer->>assistant_host: 1. Translate into French; no notes<br/>Make a promised review sound like approval
+    assistant_host->>assistant_host: 2. Resolve French target and note suppression<br/>Treat quoted customer statement as source
+    assistant_host->>assistant_host: 3. Integrity outranks transformation request<br/>Do not invent customer approval
+    assistant_host->>writer: 4. Brief refusal or correction in framing language<br/>Accurate French alternative when possible; no learning notes
+```
+
+### Transcript boundary
+
+```mermaid
+sequenceDiagram
+    participant editor_package as editor package
+    participant assistant_host as assistant host
+    participant writer as writer
+    editor_package->>assistant_host: 0. Make editor instructions available
+    writer->>assistant_host: 1. Correct this English transcript<br/>and assess intonation; no audio available
+    assistant_host->>assistant_host: 2. Text evidence is usable; sound evidence is absent<br/>Do not infer pronunciation, rhythm or intonation
+    assistant_host->>assistant_host: 3. Preserve spoken voice and dialect<br/>Distinguish register alternatives from errors
+    assistant_host->>assistant_host: 4. Render English + Chinese<br/>Explain only evidence-supported language choices
+    assistant_host->>writer: 5. Deliver edited text and grounded notes<br/>Explain audio limitation; request audio for sound feedback
+```
