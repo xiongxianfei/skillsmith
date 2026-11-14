@@ -1,5 +1,7 @@
 # Editor design
 
+Start with the [architecture overview](02-layered-components.md) for source constraints, faithful transformation and grounded learning within one candidate context. The [design glossary](../glossary.md#editor-terminology) defines context-scoped terms.
+
 Operational instructions: [editor](../../skills/editor/SKILL.md).
 
 This design explains instructed behavior and consequential decisions. Examples are expected outcomes unless explicitly identified as observations; human approval and model compliance are not established by this document.

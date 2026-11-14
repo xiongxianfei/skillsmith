@@ -1,5 +1,7 @@
 # Vocabulary mastery design
 
+Start with the [architecture overview](02-layered-components.md) for lexical grounding, bilingual composition and parity review, with supporting files outside the numbered capability groups.
+
 Operational instructions: [vocabulary-mastery](../../skills/vocabulary-mastery/SKILL.md).
 
 This design explains instructed behavior and consequential decisions. Examples are expected outcomes unless explicitly identified as observations; human approval and model compliance are not established by this document.
